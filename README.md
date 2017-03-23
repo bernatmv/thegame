@@ -1,6 +1,12 @@
-thegame
+#thegame
+
+
+
 
 # Server
+
+
+
     
 # Client
 
