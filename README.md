@@ -1,4 +1,4 @@
-#thegame
+# thegame
 
 
 
@@ -7,7 +7,7 @@
 
 
 
-    
+
 # Client
 
 `git clone` with the url of this repo or your fork
