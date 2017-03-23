@@ -1,0 +1,27 @@
+# Logs
+client/logs
+client/*.log
+client/yarn-error.log
+client/npm-debug.log*
+
+# Dependencies
+client/node_modules/
+
+# Transpiled files
+client/dist/
+
+# VS Code
+.vscode
+!.vscode/tasks.js
+client/.vscode
+client/!.vscode/tasks.js
+
+# JetBrains IDEs
+.idea/
+client/.idea/
+
+# Optional npm cache directory
+client/.npm
+
+# Misc
+.DS_Store
