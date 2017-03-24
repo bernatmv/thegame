@@ -1,22 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "sourceMap": true,
+    "target": "es5",
+    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "declaration": false,
     "noImplicitAny": false,
-    "rootDir": ".",
-    "outDir": "dist",
-    "allowSyntheticDefaultImports": true,
+    "noImplicitReturns": false,
     "removeComments": true,
-    "jsx": "react",
-    "allowJs": true,
-    "importHelpers": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "strictNullChecks": false,
+    "outDir": "build",
+    "lib": [
+      "es6",
+      "es7",
+      "dom"
+    ]
   },
-  "include": [
-    "src/**/*"
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
   ]
 }
