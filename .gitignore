@@ -25,3 +25,11 @@ client/.npm
 
 # Misc
 .DS_Store
+/client/nbproject/private/
+/server/server-application/target/
+/server/server-common/target/
+/server/server-engine/target/
+/server/server-persistence/target/
+/server/server-presentation/target/
+/server/server-artifact/target/
+/server/server-client/target/

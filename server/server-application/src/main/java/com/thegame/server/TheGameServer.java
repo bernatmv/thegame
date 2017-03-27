@@ -63,7 +63,7 @@ public class TheGameServer {
 			});
 		}catch(Throwable e){
 			System.err.println("Wrong command line!");
-			System.out.println("Usage: \n\tMigrationTool startup <host>:<port>\n\tMigrationTool <action:startup/shutdown> <process:<host>:<port>>");
+			System.out.println("Usage: \n\tMigrationTool <action:[start|stop]> <host:[domain or ip]>  <port:[value]> <name:[process-name]>");
 			e.printStackTrace();
 		}
     }
