@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>thegame</artifactId>
+    <groupId>com.thegame</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>artifact</artifactId>
+  <name>TheGame Artifact</name>
+  <build>
+    <finalName>thegame-server</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <transformers>
+            <transformer>
+              <mainClass>com.thegame.server.presentation.TheGameServer</mainClass>
+              <manifestEntries>
+                <X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+                <X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
+                <Class-Path>./lib/*.jar</Class-Path>
+              </manifestEntries>
+            </transformer>
+            <transformer />
+            <transformer />
+            <transformer>
+              <addHeader>false</addHeader>
+            </transformer>
+          </transformers>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <configuration>
+          <executable>java</executable>
+          <classpathScope>system</classpathScope>
+          <workingDirectory>target</workingDirectory>
+          <arguments>
+            <argument>-jar</argument>
+            <argument>${project.build.finalName}.jar</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
