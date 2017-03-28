@@ -9,8 +9,8 @@ Are you looking for a game? This is it.
 #### Prerrequisites
 Have installed Java JDK 1.8+
 ### Procedure
-1. Download latest maven version at: _https://maven.apache.org/download.cgi
-2. Install maven following the next guide: _https://maven.apache.org/install.html
+1. Download latest maven version at: https://maven.apache.org/download.cgi
+2. Install maven following the next guide: https://maven.apache.org/install.html
 
 ## How to: Compile server side
 #### Prerrequisites
@@ -27,7 +27,7 @@ Have installed maven 3.1+ ([How to: Install maven])
 Have installed Java JVM/JDK 1.8+ 
 ### Procedure
 1. Go to folder `/thegame`
-2. Execute command `java -jar server/server/server-artifact/target/thegame-server.jar`
+2. Execute command `java -jar server/server-artifact/target/thegame-server.jar`
   * Default executing port is 8080, but if you want to change it, for example to 8081, you should execute `server/server/server-artifact/target/thegame-server.jar port:8081`
 3. Server should start and run at port showing the following log at console
 ```
