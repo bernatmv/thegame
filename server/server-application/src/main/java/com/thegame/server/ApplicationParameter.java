@@ -23,13 +23,13 @@ public enum ApplicationParameter {
 	}
 	
 	public static final Map<ApplicationParameter,Optional<String>> loadParams(final String... _args){
-		
-		return Stream.iterate(0,(counter) -> counter +1)
-			.limit(ApplicationParameter.values().length)
-			.map(counter -> new Object[]{ApplicationParameter.values()[counter],(_args.length>counter)? _args[counter] : null})
-			.map(array -> new Object[]{array[0],(array[1]!=null)? 
-													((String)array[1]).substring(((ApplicationParameter)array[0]).name().length()+1) 
-													: null})
-			.collect(Collectors.toMap(array -> (ApplicationParameter)array[0], array -> Optional.ofNullable((String)array[1])));
+
+		final Map<ApplicationParameter,String> parametersLoaded=Stream.of(_args)
+			.map(arg -> arg.split(":"))
+			.map(array -> new Object[]{ApplicationParameter.valueOf(array[0].toUpperCase()),array[1]})
+			.collect(Collectors.toMap(array -> (ApplicationParameter)array[0],array -> (String)array[1]));
+
+		return Stream.of(ApplicationParameter.values())
+			.collect(Collectors.toMap(param -> param, param -> Optional.of((parametersLoaded.containsKey(param))? parametersLoaded.get(param) : param.defaultValue)));
 	}
 }
