@@ -82,6 +82,12 @@
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/rx-core/-/rx-core-4.0.1.tgz#a1ef3a37a361d16c2f211ae1f1cd2de9efe10dcf"
 
+"@types/rx-dom@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@types/rx-dom/-/rx-dom-7.0.0.tgz#9b098a46ff7691eccaea078d04c5a2cb84ba7019"
+  dependencies:
+    "@types/rx" "*"
+
 "@types/rx-lite-aggregates@*":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/rx-lite-aggregates/-/rx-lite-aggregates-4.0.1.tgz#eaf66758510a733963a2ef78dc71272e340e3f1e"
@@ -143,7 +149,7 @@
     "@types/rx-core" "*"
     "@types/rx-core-binding" "*"
 
-"@types/rx@^4.1.1":
+"@types/rx@*", "@types/rx@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@types/rx/-/rx-4.1.1.tgz#598fc94a56baed975f194574e0f572fd8e627a48"
   dependencies:
@@ -179,6 +185,12 @@
   resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-2.6.28.tgz#1499b48ca3a44132250b318cdde25b8f45f0c616"
   dependencies:
     "@types/source-map" "*"
+
+"@types/uuid@^2.0.29":
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-2.0.29.tgz#939a198ab73567f811ab84f670d2be9c25addd41"
+  dependencies:
+    "@types/node" "*"
 
 "@types/webpack-env@^1.13.0":
   version "1.13.0"
@@ -4423,7 +4435,13 @@ ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
 
-rx@^4.1.0:
+rx-dom@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/rx-dom/-/rx-dom-7.0.3.tgz#f876f398453ffc346ac65187edd6e717ed11fe09"
+  dependencies:
+    rx "*"
+
+rx@*, rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
@@ -5112,7 +5130,7 @@ uuid@^2.0.1, uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0:
+uuid@^3.0.0, uuid@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
