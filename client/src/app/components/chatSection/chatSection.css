@@ -1,0 +1,32 @@
+.container__system__chat {
+    display: flex;
+    flex-direction: column;
+    flex: 40%;
+    height: 100%;
+    border: 1px solid #fff;
+    overflow: hidden;
+
+    & :hover {
+        background: #080808;
+    }
+}
+
+.container__system__chat__messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 2px 5px;
+}
+
+.container__system__chat__input {
+    flex: 0;
+    width: 100%;
+
+    & .container__system__chat__input__field {
+        width: 100%;
+
+        & input {
+            border-radius: 0;
+        }
+    }
+}

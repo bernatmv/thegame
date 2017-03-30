@@ -1,6 +1,7 @@
 import * as Rx from 'rx';
-import ConnectionStatus from './connectionStatus';
-import WebsocketMessage from './websocketMessage';
+import ConnectionStatus from '../models/connectionStatus';
+import WebsocketMessage from '../models/websocketMessage';
+import { log } from '../../service/models/appLogger';
 
 export default class Connection {
     private _url: string;
@@ -40,25 +41,25 @@ export default class Connection {
     }
 
     private _connect(event, onOpen: () => void): void {
-        console.log(`Connected to ${this._url} with websocket`, event);//tslint:disable-lint
+        log(`Connected to ${this._url} with websocket`, event);//tslint:disable-lint
         if (onOpen) {
             onOpen();
         }
     }
 
     private _onMessage(event, observer: Rx.Observer<WebsocketMessage>): void {
-        console.log(`New message from ${this._url} with data`, event.data);//tslint:disable-lint
+        log(`New message from ${this._url} with data`, event.data);//tslint:disable-lint
         observer.onNext(JSON.parse(event.data));
     }
 
     private _onError(event, observer: Rx.Observer<WebsocketMessage>): void {
-        console.log(`ERROR! on websocket from ${this._url} with data`, event.data);//tslint:disable-lint
+        log(`ERROR! on websocket from ${this._url} with data`, event.data);//tslint:disable-lint
         observer.onError(event.data);
     }
 
     private _onClose(event, observer: Rx.Observer<{}>): void {
         // The connection was closed or timed out. Please click the Open Connection button to reconnect
-        console.log(`Disconnected from ${this._url} with websocket`, event);//tslint:disable-lint
+        log(`Disconnected from ${this._url} with websocket`, event);//tslint:disable-lint
         observer.onCompleted();
     }
 
@@ -73,7 +74,7 @@ export default class Connection {
         if (this._websocket !== null) {
             this._websocket.send(JSON.stringify(message));
         } else {
-            console.log(`Websocket disconnected, can't send any message`, this._websocket);//tslint:disable-lint
+            log(`Websocket disconnected, can't send any message`, this._websocket);//tslint:disable-lint
         }
     }
 }
