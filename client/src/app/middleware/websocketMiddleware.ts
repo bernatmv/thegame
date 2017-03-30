@@ -21,7 +21,7 @@ const socketMiddleware = (function(){
     let chatStream: Rx.Observable<WebsocketMessage> = chatConnection.getStream();
     chatStream.subscribe(
         (message: WebsocketMessage) => { //new message received
-            if (chatStore) {
+            if (chatStore && message.sender !== me) {
                 chatStore.dispatch(ChatActions.receiveChat(message));
             }
         },
@@ -38,11 +38,13 @@ const socketMiddleware = (function(){
         switch(action.type) {
             // Intercept when we want to send a message
             case ActionsConstants.SendChat:
-                chatConnection.sendMessage({
+                let message = {
                     sender: action.payload.sender ? action.payload.sender : me,
                     message: action.payload.message
-                });
-                break;            
+                };
+                chatConnection.sendMessage(message);
+                action.payload = message;
+                return next(action);
             default: // All those actions that we don't want to intercept, pass along to the reducer
                 return next(action);
         }

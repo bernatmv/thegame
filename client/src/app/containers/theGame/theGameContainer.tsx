@@ -2,7 +2,7 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import RootState from '../../reducers/state/rootState';
-import { MainSection } from '../../components/mainSection/mainSection';
+import { ChatSection } from '../../components/chatSection/chatSection';
 import TheGameProps from './theGameProps';
 import * as ChatActions from '../../actions/chatActions';
 import * as style from './theGameContainer.css';
@@ -16,7 +16,7 @@ export class TheGame extends React.Component<TheGameProps, {}> {
         <div className={style.container__game} />
         <div className={style.container__system} >
           <div className={style.container__system__messages} />
-          <MainSection className={style.container__system__chat} chats={chats} sendChat={actions.sendChat} />
+          <ChatSection chats={chats} sendChat={actions.sendChat} />
         </div>
       </div>
     );
