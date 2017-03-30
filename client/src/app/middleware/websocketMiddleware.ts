@@ -13,21 +13,23 @@ const socketMiddleware = (function(){
 
     let chatConnection: Connection = new Connection(AppConfig.endpoints.chat, () => {
         //Websocket open and ready to send/receive
-        chatStore.dispatch(ChatActions.connectedToChat());
+        if (chatStore) {
+            chatStore.dispatch(ChatActions.connectedToChat());
+        }
     });
 
     let chatStream: Rx.Observable<WebsocketMessage> = chatConnection.getStream();
     chatStream.subscribe(
         (message: WebsocketMessage) => { //new message received
-            debug(`New message received from socket`, message);            
-            chatStore.dispatch(ChatActions.receiveChat(message));
+            if (chatStore) {
+                chatStore.dispatch(ChatActions.receiveChat(message));
+            }
         },
-        (error) => { //error
-            debug(`Error on the socket`, error);
-        },
+        (error) => {}, //error
         () => { //completed
-            debug(`Websocket closed`);
-            chatStore.dispatch(ChatActions.disconnectedFromChat());
+            if (chatStore) {
+                chatStore.dispatch(ChatActions.disconnectedFromChat());
+            }
         }
     );
 

@@ -37,13 +37,15 @@ export class MainSection extends React.Component<MainSectionProps, MainSectionSt
 
     render() {
         return (
-            <input className={style.input}
-                type='text'
-                autoFocus
-                placeholder={this.props.placeholder}
-                value={this.state.text}
-                onChange={this._handleChange}
-                onKeyDown={this._handleKeyDown} />
+            <div className={this.props.className}>
+                <input className={style.input}
+                    type='text'
+                    autoFocus
+                    placeholder={this.props.placeholder}
+                    value={this.state.text}
+                    onChange={this._handleChange}
+                    onKeyDown={this._handleKeyDown} />
+            </div>
         );
     }
 }

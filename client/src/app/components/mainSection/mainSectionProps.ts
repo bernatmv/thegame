@@ -5,5 +5,6 @@ interface MainSectionProps {
     sendChat: (chat: ChatMessage) => any;
     placeholder?: string;
     text?: string;
+    className?: string;
 }
 export default MainSectionProps;

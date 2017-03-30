@@ -75,6 +75,7 @@
     "redux": "^3.6.0",
     "redux-actions": "^2.0.1",
     "rx": "^4.1.0",
-    "rx-dom": "^7.0.3"
+    "rx-dom": "^7.0.3",
+    "semantic-ui-react": "^0.67.2"
   }
 }
