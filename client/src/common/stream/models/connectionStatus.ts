@@ -1,4 +1,4 @@
-import EnumBase from '../../service/model/enumBase';
+import EnumBase from '../../service/models/enumBase';
 
 export default class ConnectionStatus extends EnumBase {
     public static Disconnected: ConnectionStatus = new ConnectionStatus (1, 'Disconnected');

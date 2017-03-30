@@ -13,12 +13,12 @@
     "@types/react-dom": "^0.14.23",
     "@types/react-redux": "^4.4.38",
     "@types/react-router": "^4.0.1",
+    "@types/react-router-redux": "^4.0.43",
     "@types/redux-actions": "^1.2.3",
-    "@types/webpack": "^2.2.12",
-    "@types/webpack-env": "^1.13.0",
     "@types/rx": "^4.1.1",
     "@types/rx-dom": "^7.0.0",
-    "@types/uuid": "^2.0.29",
+    "@types/webpack": "^2.2.12",
+    "@types/webpack-env": "^1.13.0",
     "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -75,7 +75,6 @@
     "redux": "^3.6.0",
     "redux-actions": "^2.0.1",
     "rx": "^4.1.0",
-    "rx-dom": "^7.0.3",
-    "uuid": "^3.0.1"
+    "rx-dom": "^7.0.3"
   }
 }
