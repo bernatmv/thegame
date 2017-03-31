@@ -1,14 +1,35 @@
 enum LogLevel {
     LOG = 1,
-    DEBUG
+    DEBUG,
+    ERROR
 }
+
+const style = {
+    log: [
+        'background: #ddd',
+        'font-weight: 800',
+        'color: black'
+    ].join('; '),
+    error: [
+        'background: yellow',
+        'font-weight: 800',
+        'color: red'
+    ].join('; '),
+    debug: [
+        'background: #11a9e2',
+        'font-weight: 800',
+        'color: white'
+    ].join('; ')
+};
 
 function _print(logLevel: LogLevel, ...payload): void {
     if (logLevel === LogLevel.LOG) {
         //TODO: add log to Bunyan
-        console.log(`[${logLevel.toString()}] `, ...payload);//tslint:disable-line
+        console.log(`%c[LOG]`, style.log, ...payload);//tslint:disable-line
     } else if (logLevel === LogLevel.DEBUG) {
-        console.debug(`[${logLevel.toString()}] `, ...payload);//tslint:disable-line
+        console.debug(`%c[DEBUG]`, style.debug, ...payload);//tslint:disable-line
+    } else if (logLevel === LogLevel.ERROR) {
+        console.error(`%c[ERROR]`, style.error, ...payload);//tslint:disable-line
     }
 }
 

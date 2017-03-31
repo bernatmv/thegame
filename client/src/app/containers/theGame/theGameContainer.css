@@ -17,16 +17,13 @@
 }
 
 .container__game {
+    display: flex;
     flex: 70% ;
+    flex-direction: row;
 }
 
 .container__system {
     display: flex;
     flex: 30%;
     flex-direction: row;
-
-    & .container__system__messages {
-        flex: 60%;
-        height: 100%;
-    }
 }

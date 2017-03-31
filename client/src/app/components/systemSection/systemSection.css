@@ -1,0 +1,19 @@
+.container__system__display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    overflow: hidden;
+
+    & :hover {
+        background: #0A0A0A;
+    }
+}
+
+.container__system__display__info {
+    width: 70%;
+}
