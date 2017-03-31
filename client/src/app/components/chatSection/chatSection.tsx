@@ -50,7 +50,7 @@ export class ChatSection extends React.Component<ChatSectionProps, ChatSectionSt
     }
 
     private _renderListItem(message: ChatMessage, key: number): JSX.Element {
-        if (message.sender === SystemConstants.SystemUser) {
+        if (message.sender === SystemConstants.SystemUser) { //message from the system
             return <Message key={key.toString()} className={style.container__system__chat__messages__item_system}>
                     <Icon name='child' />
                     {message.message}
