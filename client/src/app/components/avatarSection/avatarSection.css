@@ -1,0 +1,35 @@
+.container__game__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container__game__avatar__profile {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 10px;
+
+    & .container__game__avatar__profile__image {
+        flex: 0;
+        width: 100px;
+        height: 100px;
+    }
+
+    & .container__game__avatar__profile__status {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin-left: 20px;
+        font-size: 16px;
+
+        & div {
+            width: 100%;
+        }
+    }
+}

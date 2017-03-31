@@ -10,7 +10,7 @@ interface ChatSectionState {
     text: string;
 }
 
-export class ChatSection extends React.Component<ChatSectionProps, ChatSectionState> {
+export default class ChatSection extends React.Component<ChatSectionProps, ChatSectionState> {
     static defaultProps = {
         placeholder: 'Say something...',
         text: '',

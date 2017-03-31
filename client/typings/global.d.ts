@@ -6,6 +6,11 @@ declare module '*.css' {
   export = styles;
 }
 
+declare module '*.png' {
+  const image: any;
+  export = image;
+}
+
 // for redux devtools extension
 declare interface Window {
   devToolsExtension?(): (args?: any) => any;

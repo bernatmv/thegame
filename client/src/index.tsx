@@ -82,7 +82,7 @@ console.log(//tslint:disable-line
 `
 
 
-  Developers: Albert Farre (BE) & Bernat Martinez (FE)
+  Developers: Albert Farre (BE, History, Game Design) & Bernat Martinez (BE, History, Game Design)
   Repo: https://github.com/bernatmv/thegame
   
 
