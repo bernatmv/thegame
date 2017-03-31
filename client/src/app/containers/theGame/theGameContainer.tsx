@@ -10,13 +10,16 @@ import * as style from './theGameContainer.css';
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
   render() {
-    const { chats, actions } = this.props;
+    const { chats, connectionStatus, userId, actions } = this.props;
     return (
       <div className={style.container}>
         <div className={style.container__game} />
         <div className={style.container__system} >
           <div className={style.container__system__messages} />
-          <ChatSection chats={chats} sendChat={actions.sendChat} />
+          <ChatSection chats={chats} 
+                      sendChat={actions.sendChat} 
+                      connectionStatus={connectionStatus}
+                      userId={userId} />
         </div>
       </div>
     );
@@ -25,7 +28,9 @@ export class TheGame extends React.Component<TheGameProps, {}> {
 
 function mapStateToProps(state: RootState) {
   return {
-    chats: state.chats
+    chats: state.chats,
+    connectionStatus: state.connectionStatus,
+    userId: state.userId
   };
 }
 

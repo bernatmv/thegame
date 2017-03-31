@@ -1,13 +1,14 @@
 .container__system__chat {
     display: flex;
     flex-direction: column;
-    flex: 40%;
+    flex: 1;
     height: 100%;
+    box-sizing: border-box;
     border: 1px solid #fff;
     overflow: hidden;
 
     & :hover {
-        background: #080808;
+        background: #0A0A0A;
     }
 }
 
@@ -15,7 +16,23 @@
     flex: 1;
     display: flex;
     flex-direction: column-reverse;
-    padding: 2px 5px;
+    overflow-y: scroll;
+    padding: 2px 2px 4px 5px;
+
+    & .container__system__chat__messages__item_system {
+        background: none;
+        color: yellow;
+        font-size: 16px;
+        padding: 5px 10px;
+
+        & i {
+            font-size: 20px;
+        }
+    }
+
+    & .container__system__chat__messages__item_me {
+        color: green;
+    }
 }
 
 .container__system__chat__input {

@@ -26,7 +26,7 @@
     flex-direction: row;
 
     & .container__system__messages {
-        flex: 60%;
+        flex: 1;
         height: 100%;
     }
 }
