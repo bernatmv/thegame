@@ -33,7 +33,7 @@
         }
 
         & .status__row__progress {
-            margin: 0 0 0 5px;
+            margin: 0 5px 0 5px;
             flex: 85%;
 
             & div:not(:first-child) {
@@ -41,7 +41,8 @@
                 color: #fff;
                 font-family: Arial;
                 text-align: right;
-                padding-right: 5px;
+                margin: .25em 0 0 0;
+                padding: 0 .25em 0 0;
                 text-shadow: -1px -1px 0 #000,  
                     1px -1px 0 #000,
                     -1px 1px 0 #000,
@@ -49,12 +50,4 @@
             }
         }
     }
-}
-
-.small {
-    font-size: 14px;
-    line-height: 14px;
-}
-
-.normal {
 }

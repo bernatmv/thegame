@@ -5,7 +5,7 @@ interface StatusProperty {
 }
 
 interface ProfileProps {
-    name: string;
+    name?: string;
     race: string;
     profession?: string;
     level: number;
@@ -13,6 +13,5 @@ interface ProfileProps {
     mp: StatusProperty;
     sp: StatusProperty;
     size?: 'small' | 'medium';
-    align?: 'left' | 'right';
 }
 export default ProfileProps;

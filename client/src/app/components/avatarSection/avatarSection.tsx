@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Progress } from 'semantic-ui-react';
-import * as classnames from 'classnames';
-import Profile from './components/profile';
+import Profile from '../common/profile/profile';
 import AvatarSectionProps from './avatarSectionProps';
 //import * as avatarImage from '../../../../assets/goblin_512x512_desaturated.png';
 import * as style from './avatarSection.css';
