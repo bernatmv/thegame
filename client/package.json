@@ -19,6 +19,7 @@
     "@types/rx-dom": "^7.0.0",
     "@types/webpack": "^2.2.12",
     "@types/webpack-env": "^1.13.0",
+    "classnames": "^2.2.5",
     "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -67,7 +68,6 @@
     "testRegex": "<rootDir>(__tests__/).*\\.(test|spec)\\.(ts|js)$"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
