@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Progress, Label } from 'semantic-ui-react';
+import { Progress } from 'semantic-ui-react';
 import * as classnames from 'classnames';
 import ProfileProps from './profileProps';
 import * as style from './profile.css';

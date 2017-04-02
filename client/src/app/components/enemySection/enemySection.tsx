@@ -7,19 +7,19 @@ export default class EnemySection extends React.Component<EnemySectionProps, {}>
     render(): JSX.Element {
         return (
             <div className={style.container__game__enemy}>
-                <Profile race={'Goblin'} level={4} align={'right'}
+                <Profile race={'Goblin'} level={4}
                         hp={{current: 30, total: 30}}
                         mp={{current: 10, total: 10, hide: true}}
                         sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={2} align={'right'}
+                <Profile race={'Goblin'} level={2}
                         hp={{current: 30, total: 30}}
                         mp={{current: 10, total: 10, hide: true}}
                         sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={2} align={'right'}
+                <Profile race={'Goblin'} level={2}
                         hp={{current: 30, total: 30}}
                         mp={{current: 10, total: 10, hide: true}}
                         sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={1} align={'right'}
+                <Profile race={'Goblin'} level={1}
                         hp={{current: 30, total: 30}}
                         mp={{current: 10, total: 10, hide: true}}
                         sp={{current: 20, total: 20, hide: true}}/>
