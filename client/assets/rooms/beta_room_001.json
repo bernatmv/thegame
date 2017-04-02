@@ -1,0 +1,17 @@
+{
+    "id": "beta-room-0001",
+    "title": "Un claro en el bosque",
+    "shortDescription": "Un tranquilo claro en medio de un frondoso bosque",
+    "description": "Te encuentras en un claro en medio de un frondoso bosque, un pequeño arrollo murmulla en un rincón mientras una suave brisa hace ondular varios tallos de lavanda llenando el aire de un suave aroma.\n\nAl norte los arboles se abren ligeramente a un sendero que parece poco transitado.",
+    "exits": {
+        "north": "beta-room-0002",
+        "east": null,
+        "south": null,
+        "west": null,
+        "up": null,
+        "down": null
+    },
+    "enemies": [],
+    "npc": [],
+    "items": []
+}
