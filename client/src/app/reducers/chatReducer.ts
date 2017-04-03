@@ -2,19 +2,9 @@ import { handleActions } from 'redux-actions';
 import RootState from './state/rootState';
 import ChatMessage from './models/chatMessage';
 import ConnectedModel from './models/connectedModel';
-import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import ConnectionStatus from '../../common/stream/models/connectionStatus';
-
-const initialState: RootState = {
-    chats: [{
-        sender: SystemConstants.SystemUser,
-        message: 'Welcome to TheGame!',
-        received: new Date()
-    }],
-    connectionStatus: ConnectionStatus.Connecting,
-    userId: ''
-};
+import initialState from './state/initialState';
 
 export default handleActions<RootState, ChatMessage | ConnectedModel>({
     [ActionsConstants.ReceiveChat]: (state: RootState, action: ReduxActions.Action<ChatMessage>): RootState => {

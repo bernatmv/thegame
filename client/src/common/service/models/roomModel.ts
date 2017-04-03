@@ -21,6 +21,6 @@ export default class RoomModel {
         public npc: Array<NPCModel>,
         public items: Array<ItemModel>
     ) {
-        debug(`New room created`, this);
+        //debug(`New room created`, this);
     }
 }

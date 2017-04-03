@@ -12,6 +12,7 @@ interface ChatSectionState {
 
 export default class ChatSection extends React.Component<ChatSectionProps, ChatSectionState> {
     static defaultProps = {
+        chats: [],
         placeholder: 'Say something...',
         text: '',
         connecting: false
@@ -65,6 +66,7 @@ export default class ChatSection extends React.Component<ChatSectionProps, ChatS
     }
 
     render(): JSX.Element {
+        console.log(this.props);//tslint:disable-line
         let placeholder = this._getPlaceholder(this.props.connectionStatus);
         let loading = (this.props.connectionStatus === ConnectionStatus.Connecting);
         let icon = (this.props.connectionStatus === ConnectionStatus.Connected)
