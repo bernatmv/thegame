@@ -62,7 +62,9 @@ public class LogStream{
 			.map(stacktrace -> new String[]{stacktrace.getClassName(),stacktrace.getMethodName()})
 			.findFirst()
 			.orElse(new String[]{"unknown","unknown"});
-		if((_args.length>0)&&(Throwable.class.isAssignableFrom(_args[_args.length-1].getClass()))){
+		if((_args.length>0)
+				&&(_args[_args.length-1]!=null)
+				&&(Throwable.class.isAssignableFrom(_args[_args.length-1].getClass()))){
 			this.logger.logp(_level,caller[0],caller[1],(Throwable)_args[_args.length-1],() -> buildMessage(_message, _args));
 		}else{
 			this.logger.logp(_level,caller[0],caller[1], () -> buildMessage(_message, _args));

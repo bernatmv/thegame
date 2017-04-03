@@ -2,7 +2,7 @@ package com.thegame.server.presentation;
 
 import com.thegame.server.common.IsApplication;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.presentation.endpoints.TheGameChatEndpoint;
+import com.thegame.server.presentation.endpoints.TheGameEndpoint;
 import java.util.Collection;
 import java.util.EventListener;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 	@Getter
 	private final String name="thegame";
 	@Getter
-	private final Set<Class<?>> endpoints=Stream.of(TheGameChatEndpoint.class).collect(Collectors.toSet());
+	private final Set<Class<?>> endpoints=Stream.of(TheGameEndpoint.class).collect(Collectors.toSet());
 	@Getter
 	private final Collection<Class<? extends EventListener>> listeners=Stream.of(this.getClass()).collect(Collectors.toSet());
 
