@@ -9,10 +9,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.websocket.DecodeException;
-import javax.websocket.Decoder;
 import javax.websocket.EncodeException;
-import javax.websocket.Encoder;
-import javax.websocket.EndpointConfig;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ChatMessage implements Decoder.Text<ChatMessage>, Encoder.Text<ChatMessage>{
+public class ChatMessage extends Message<ChatMessage>{
 
 	private static final LogStream log = LogStream.getLogger(ChatMessage.class);
 	
@@ -45,30 +42,18 @@ public class ChatMessage implements Decoder.Text<ChatMessage>, Encoder.Text<Chat
 
 	
 	@Override
-	public void init(EndpointConfig _config) {
-		log.finest("chat-message::init::begin");
-		log.finest("chat-message::init::end");
-	}
-	@Override
-	public void destroy() {
-		log.finest("chat-message::destroy::begin");
-		log.finest("chat-message::destroy::end");
-	}
-	
-	
-	@Override
 	public String encode(final ChatMessage _message) throws EncodeException {
 
-		String reply="ChatMessage";
+		String reply;
 		
 		try{
 			log.finest("chat-message::encode::{}::begin",_message);
-			reply=reply.concat(Json.createObjectBuilder()
+			reply=encodeBuilder(_message)
 						.add("message", _message.getMessage())
 						.add("sender", _message.getSender())
 						.add("received", DateTimeFormatter.ISO_DATE_TIME.format(_message.getReceived()))
 						.build()
-						.toString());
+						.toString();
 			log.trace("chat-message::encode::{}::end::{}",_message,reply);		
 		}catch(NullPointerException e){
 			throw new EncodeException(_message,"chat-message::encode::failed",e);
@@ -81,7 +66,7 @@ public class ChatMessage implements Decoder.Text<ChatMessage>, Encoder.Text<Chat
 		
 		ChatMessage reply;
 
-		try(JsonReader jsonReader = Json.createReader(new StringReader(_string.substring("ChatMessage".length())))){
+		try(JsonReader jsonReader = Json.createReader(new StringReader(_string))){
 			log.finest("chat-message::decode::{}::begin",_string);		
 			final JsonObject json = jsonReader.readObject();
 			reply=ChatMessage.builder()
@@ -99,19 +84,6 @@ public class ChatMessage implements Decoder.Text<ChatMessage>, Encoder.Text<Chat
 			throw new DecodeException(_string,"chat-message::decode::failed",e);
 		}
 
-		return reply;
-	}
-	
-	
-	@Override
-	public boolean willDecode(final String _string) {
-	
-		boolean reply;
-		
-		log.finest("chat-message::will-decode::{}::begin",_string);
-		reply=_string.startsWith("ChatMessage");
-		log.trace("chat-message::will-decode::{}::end::{}",_string,reply);
-		
 		return reply;
 	}
 }

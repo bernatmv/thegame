@@ -18,7 +18,7 @@
  
 	function onMessageReceived(evt) {
 		//var msg = eval('(' + evt.data + ')');
-		var msg = JSON.parse(evt.data.substring("ChatMessage".length)); // native API
+		var msg = JSON.parse(evt.data); // native API
 		var $messageLine = $('<tr><td class="received">' + msg.received
 				+ '</td><td class="user label label-info">' + msg.sender
 				+ '</td><td class="message badge">' + msg.message
@@ -26,7 +26,7 @@
 		$chatWindow.append($messageLine);
 	}
 	function sendMessage() {
-		var msg = 'ChatMessage{"message":"' + $message.val() + '", "sender":"'
+		var msg = '{"kind":"ChatMessage","message":"' + $message.val() + '", "sender":"'
 				+ $nickName.val() + '", "received":""}';
 		wsocket.send(msg);
 		$message.val('').focus();
