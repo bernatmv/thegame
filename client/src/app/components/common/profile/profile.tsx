@@ -4,6 +4,7 @@ import * as classnames from 'classnames';
 import ProfileProps from './profileProps';
 import * as style from './profile.css';
 
+/* tslint:disable */
 export default class Profile extends React.Component<ProfileProps, {}> {
     static defaultProps = {
         align: 'left',
@@ -17,7 +18,7 @@ export default class Profile extends React.Component<ProfileProps, {}> {
                                 color={color} 
                                 value={current} 
                                 total={total} 
-                                inverted={'true'}>{current} / {total}</Progress>
+                                inverted>{current} / {total}</Progress>
                 </div>;
     }
 
