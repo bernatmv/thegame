@@ -3,6 +3,7 @@ import AppConfig from '../../config/appConfig';
 import { debug } from '../../common/service/models/appLogger';
 import Connection from '../../common/stream/connection/connection';
 import WebsocketMessage from '../../common/stream/models/websocketMessage';
+import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import * as ChatActions from '../actions/chatActions';
 
@@ -25,8 +26,11 @@ const socketMiddleware = (function(){
         chatStream = chatConnection.getStream();
         chatStream.subscribe(
             (message: WebsocketMessage) => { //new message received
-                if (chatStore && message.sender !== me) {
-                    chatStore.dispatch(ChatActions.receiveChat(message));
+                debug(`New message from ${AppConfig.endpoints.chat} through websocket`, message);
+                if (chatStore && message.kind === SystemConstants.ChatMessage) {
+                    if (message.sender !== me) {
+                        chatStore.dispatch(ChatActions.receiveChat(message));
+                    }
                 }
             },
             (error) => {}, //error
@@ -46,8 +50,10 @@ const socketMiddleware = (function(){
                 // Intercept when we want to send a message
                 case ActionsConstants.SendChat:
                     let message = {
+                        kind: SystemConstants.ChatMessage,
                         sender: action.payload.sender ? action.payload.sender : me,
-                        message: action.payload.message
+                        message: action.payload.message,
+                        received: ''
                     };
                     chatConnection.sendMessage(message);
                     action.payload = message;

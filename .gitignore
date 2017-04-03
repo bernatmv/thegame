@@ -16,6 +16,10 @@ client/dist/
 client/.vscode
 client/!.vscode/tasks.js
 
+# NetBeans IDE
+/client/nbproject/
+/server/server-presentation/nbproject/
+
 # JetBrains IDEs
 .idea/
 client/.idea/
@@ -33,5 +37,3 @@ client/.npm
 /server/server-presentation/target/
 /server/server-artifact/target/
 /server/server-client/target/
-/client/nbproject/
-/server/server-presentation/nbproject/
