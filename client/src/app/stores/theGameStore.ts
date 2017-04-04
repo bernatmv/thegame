@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, Store, combineReducers } from 'redux';
 import logger from '../middleware/loggerMiddleware';
 import websocket from '../middleware/websocketMiddleware';
+import connectionReducer from '../reducers/connectionReducer';
 import chatReducer from '../reducers/chatReducer';
 import roomReducer from '../reducers/roomReducer';
 import RootState from '../reducers/state/rootState';
@@ -11,7 +12,8 @@ export function configureStore(initialState?: RootState): Store<RootState> {
     ? window.devToolsExtension()(createStore)
     : createStore;
   let reducers = {
-    chat: chatReducer,
+    chats: chatReducer,
+    connection: connectionReducer,
     room: roomReducer
   };
 

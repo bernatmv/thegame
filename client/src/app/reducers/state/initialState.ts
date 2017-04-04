@@ -8,8 +8,10 @@ let initialState: RootState = {
         message: 'Welcome to TheGame!',
         received: new Date()
     }],
-    connectionStatus: ConnectionStatus.Connecting,
-    userId: '',
+    connection: {
+        connectionStatus: ConnectionStatus.Connecting,
+        userId: ''
+    },
     room: null
 };
 export default initialState;

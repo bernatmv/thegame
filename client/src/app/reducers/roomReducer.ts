@@ -1,11 +1,11 @@
 import { handleActions } from 'redux-actions';
-import RootState from './state/rootState';
+import { debug } from '../../common/service/models/appLogger';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import RoomModel from '../../common/service/models/roomModel';
 import initialState from './state/initialState';
 
-export default handleActions<RootState, RoomModel>({
-    [ActionsConstants.LoadRoom]: (state: RootState, action: ReduxActions.Action<RoomModel>): RootState => {
-        return Object.assign({}, state, { room: action.payload });
+export default handleActions<RoomModel, RoomModel>({
+    [ActionsConstants.LoadRoom]: (state: RoomModel, action: ReduxActions.Action<RoomModel>): RoomModel => {
+        return Object.assign({}, action.payload);
     }
-}, initialState);
+}, initialState.room);

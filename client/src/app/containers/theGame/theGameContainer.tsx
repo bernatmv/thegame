@@ -14,7 +14,7 @@ import * as style from './theGameContainer.css';
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
   render() {
-    const { chats, connectionStatus, userId, actions } = this.props;
+    const { chats, connection, actions } = this.props;
     return (
       <div className={style.container}>
         <div className={style.container__game} >
@@ -25,9 +25,9 @@ export class TheGame extends React.Component<TheGameProps, {}> {
         <div className={style.container__system} >
           <ChatSection chats={chats} 
                       sendChat={actions.sendChat} 
-                      connectionStatus={connectionStatus}
-                      userId={userId} />
-          <SystemSection userId={userId} />
+                      connectionStatus={connection.connectionStatus}
+                      userId={connection.userId} />
+          <SystemSection userId={connection.userId} />
         </div>
       </div>
     );
@@ -37,8 +37,8 @@ export class TheGame extends React.Component<TheGameProps, {}> {
 function mapStateToProps(state: RootState) {
   return {
     chats: state.chats,
-    connectionStatus: state.connectionStatus,
-    userId: state.userId
+    connection: state.connection,
+    room: state.room
   };
 }
 
