@@ -6,6 +6,6 @@ import initialState from './state/initialState';
 
 export default handleActions<RoomModel, RoomModel>({
     [ActionsConstants.LoadRoom]: (state: RoomModel, action: ReduxActions.Action<RoomModel>): RoomModel => {
-        return Object.assign({}, action.payload);
+        return action.payload;
     }
 }, initialState.room);

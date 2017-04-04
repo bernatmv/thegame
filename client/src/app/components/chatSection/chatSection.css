@@ -4,7 +4,8 @@
     flex: 1;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border-top: 1px solid #333;
+    border-right: 1px solid #333;
     overflow: hidden;
 
     & :hover {
@@ -57,7 +58,7 @@
 
         & input {
             border-radius: 0;
-            border-color: white;
+            border-color: #fff;
 
             &:active,
             &:hover,

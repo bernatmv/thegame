@@ -14,12 +14,12 @@ import * as style from './theGameContainer.css';
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
   render() {
-    const { chats, connection, actions } = this.props;
+    const { chats, connection, room, actions } = this.props;
     return (
       <div className={style.container}>
         <div className={style.container__game} >
           <AvatarSection />
-          <RoomSection />
+          <RoomSection room={room} />
           <EnemySection />
         </div>
         <div className={style.container__system} >
