@@ -1,12 +1,13 @@
 import { RouteComponentProps } from 'react-router';
 import ChatMessage from '../../reducers/models/chatMessage';
-import ConnectionStatus from '../../../common/stream/models/connectionStatus';
+import ConnectionData from '../../../common/stream/models/connectionData';
+import RoomModel from '../../../common/service/models/roomModel';
 import * as ChatActions from '../../actions/chatActions';
 
 interface TheGameProps extends RouteComponentProps<void> {
     chats: ChatMessage[];
-    connectionStatus: ConnectionStatus;
-    userId: string;
+    connection: ConnectionData;
+    room: RoomModel;
     actions: typeof ChatActions;    
 }
 export default TheGameProps;

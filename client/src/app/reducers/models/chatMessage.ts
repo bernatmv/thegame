@@ -1,6 +1,6 @@
 interface ChatMessage {
     sender: string;
     message: string;
-    received?: Date;
+    received?: number;
 }
 export default ChatMessage;
