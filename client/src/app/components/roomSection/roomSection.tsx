@@ -15,15 +15,21 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
         if (room.items.length === 0) {
             items = <div>{'No hay objetos cerca'}</div>;
         } else {
-            items = <div>{'Hay ' + room.items.map((item: ItemModel) => item.id).join(', ')}</div>;
+            items = <div className={style.room__footer__positive}>
+                        {'Hay ' + room.items.map((item: ItemModel) => item.id).join(', ')}
+                    </div>;
         }
         if (room.enemies.length === 0) {
             enemies = <div>{'No ves enemigos'}</div>;
         } else {
-            enemies = <div>{'Ves ' + room.enemies.map((enemy: EnemyModel) => enemy.id).join(', ')}</div>;
+            enemies = <div className={style.room__footer__positive}>
+                            {'Ves ' + room.enemies.map((enemy: EnemyModel) => enemy.id).join(', ')}
+                        </div>;
         }
         if (room.npc.length > 0) {
-            npc = <div>{room.npc.map((npc: NPCModel) => <div>{npc.id + ' está aquí'}</div>)}</div>;
+            npc = <div className={style.room__footer__positive}>
+                        {room.npc.map((npc: NPCModel) => <div>{npc.id + ' está aquí'}</div>)}
+                    </div>;
         }
         return <div>
                     {npc}
