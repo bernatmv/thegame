@@ -35,7 +35,7 @@ const socketMiddleware = (function(){
                 debug(`New message from ${AppConfig.endpoints.chat} through websocket`, message);
                 if (_store && message.kind === SystemConstants.ChatMessage) {
                     if (message.sender !== me) {
-                        _store.dispatch(ChatActions.receiveChat(message));
+                        _store.dispatch(ChatActions.receiveChat(Object.assign({}, message, { received: Date.now() })));
                     }
                 }
             },

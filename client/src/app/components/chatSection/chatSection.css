@@ -35,6 +35,10 @@
         color: lightgreen;
     }
 
+    & .container__system__chat__messages__item_received {
+        color: #888;
+    }
+
     &::-webkit-scrollbar {
         width: 1em;
     }

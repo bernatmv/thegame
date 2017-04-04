@@ -9,16 +9,16 @@ const MAX_MESSAGES = 100;
 
 export default handleActions<ChatMessage[], ChatMessage | ConnectedModel>({
     [ActionsConstants.ReceiveChat]: (state: ChatMessage[], action: ReduxActions.Action<ChatMessage>): ChatMessage[] => {
-        return addMessageToChat(state, action);
+        return addMessageToChat(state, action.payload);
     },
     [ActionsConstants.SendChat]: (state: ChatMessage[], action: ReduxActions.Action<ChatMessage>): ChatMessage[] => {
-        return addMessageToChat(state, action);
+        return addMessageToChat(state, Object.assign({}, action.payload, { received: Date.now() }));
     }
 }, initialState.chats);
 
-function addMessageToChat(chats: Array<ChatMessage>, action: ReduxActions.Action<ChatMessage>): Array<ChatMessage> {
+function addMessageToChat(chats: Array<ChatMessage>, message: ChatMessage): Array<ChatMessage> {
     return [
         ...chats,
-        action.payload
+        message
     ].slice(-MAX_MESSAGES);
 }

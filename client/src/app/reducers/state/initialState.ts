@@ -6,7 +6,7 @@ let initialState: RootState = {
     chats: [{
         sender: SystemConstants.SystemUser,
         message: 'Welcome to TheGame!',
-        received: new Date()
+        received: Date.now()
     }],
     connection: {
         connectionStatus: ConnectionStatus.Connecting,
