@@ -1,0 +1,6 @@
+{
+    "kind": "PlayerEntersRoomMessage",
+    "time": 0,
+    "player": "bernatmv",
+    "enteringRoom": "beta-room-001"
+}

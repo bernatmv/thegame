@@ -8,9 +8,11 @@ export default class MapServiceImpl implements MapService {
         return RoomsRegistry.Instance.map.get(id);
     }
 
-    moveFrom(from: RoomModel, direction: 'north' | 'south' | 'east' | 'west' | 'up' | 'down'): RoomModel {
-        if (from && from.exits) {
+    moveFrom(from: RoomModel, direction: string): RoomModel {
+        if (from && from.exits && from.exits[direction]) {
             return RoomsRegistry.Instance.map.get(from.exits[direction]);
+        } else {
+            return from;
         }
     }    
 }

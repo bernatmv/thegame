@@ -1,0 +1,25 @@
+.room__footer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-end;
+    box-sizing: border-box;
+    border-top: 3px double #333;
+    padding: 15px;
+    color: #888;
+    width: 100%;
+
+    & .room__footer__positive {
+        color: #fff;
+    }
+
+    & .room__footer__player {
+        color: lightblue;
+    }
+
+    & .room__footer__npc {
+        color: lightgreen;
+    }
+}

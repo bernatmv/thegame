@@ -9,6 +9,7 @@
         "exits": {
             "north": "beta-room-002"
         },
+        "players": [],
         "enemies": [],
         "npc": [],
         "items": []

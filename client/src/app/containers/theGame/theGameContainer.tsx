@@ -9,6 +9,7 @@ import ChatSection from '../../components/chatSection/chatSection';
 import SystemSection from '../../components/systemSection/systemSection';
 import TheGameProps from './theGameProps';
 import * as ChatActions from '../../actions/chatActions';
+import * as PlayerActions from '../../actions/playerActions';
 import * as style from './theGameContainer.css';
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -19,12 +20,13 @@ export class TheGame extends React.Component<TheGameProps, {}> {
       <div className={style.container}>
         <div className={style.container__game} >
           <AvatarSection />
-          <RoomSection room={room} />
+          <RoomSection room={room} 
+                      move={actions.player.move} />
           <EnemySection />
         </div>
         <div className={style.container__system} >
           <ChatSection chats={chats} 
-                      sendChat={actions.sendChat} 
+                      sendChat={actions.chat.sendChat} 
                       connectionStatus={connection.connectionStatus}
                       userId={connection.userId} />
           <SystemSection userId={connection.userId} />
@@ -44,6 +46,9 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ChatActions as any, dispatch)
+    actions: {
+      chat: bindActionCreators(ChatActions as any, dispatch),
+      player: bindActionCreators(PlayerActions as any, dispatch)
+    }
   };
 }

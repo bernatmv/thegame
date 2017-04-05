@@ -1,9 +1,9 @@
 import * as React from 'react';
 import ChatMessage from '../../reducers/models/chatMessage';
 import ChatSectionProps from './chatSectionProps';
-import { Input, List, Message, Icon } from 'semantic-ui-react';
+import { Input, List } from 'semantic-ui-react';
 import ConnectionStatus from '../../../common/stream/models/connectionStatus';
-import SystemConstants from '../../../common/constants/systemConstants';
+import ChatItem from '../common/chatItem/chatItem';
 import * as style from './chatSection.css';
 
 interface ChatSectionState {
@@ -50,49 +50,6 @@ export default class ChatSection extends React.Component<ChatSectionProps, ChatS
         }
     }
 
-    private _calculateHowLongAgo(received: number): string {
-        let elapsed = Date.now() - received;
-        if (elapsed < 10 * 1000) { //less than 10 seconds ago
-            return 'a moment ago';
-        } else if (elapsed < 60 * 1000) { //less than 1 minute ago
-            let seconds = Math.floor(elapsed / (1000));
-            return seconds + ' seconds ago';
-        } else if (elapsed < 60 * 60 * 1000) { //less than 1 hour ago
-            let minutes = Math.floor(elapsed / (60 * 1000));
-            return minutes + ' minute' + ((minutes > 1) ? 's' : '') + ' ago';
-        } else { //in hours
-            let hours = Math.floor(elapsed / (60 * 60 * 1000));
-            return hours + ' hour' + ((hours > 1) ? 's' : '') + ' ago';            
-        }
-    }
-
-    private _renderListItem(message: ChatMessage, key: number, arr: ChatMessage[]): JSX.Element {
-        if (message.sender === SystemConstants.SystemUser) { //message from the system
-            return <Message key={key.toString()} className={style.container__system__chat__messages__item_system}>
-                    <Icon name='child' />
-                    {message.message}
-                </Message>;
-        } else if (message.sender === this.props.userId) { //it's me
-            let user = (key > 0 && message.sender !== arr[key - 1].sender)
-                        ? <div>
-                                <span className={style.container__system__chat__messages__item_me}>{message.sender}</span>
-                                <span className={style.container__system__chat__messages__item_received}> - {this._calculateHowLongAgo(message.received)}</span>
-                            </div>
-                        : null;
-            return <List.Item key={key.toString()}>
-                        {user} {message.message}
-                    </List.Item>;
-        } else { //it's someone else
-            let user = (key > 0 && message.sender !== arr[key - 1].sender)
-                        ? <div>
-                                <span>{message.sender}</span>
-                                <span className={style.container__system__chat__messages__item_received}> - {this._calculateHowLongAgo(message.received)}</span>
-                            </div>
-                        : null;
-            return <List.Item key={key.toString()}>{user} {message.message}</List.Item>;
-        }
-    }
-
     render(): JSX.Element {
         let placeholder = this._getPlaceholder(this.props.connectionStatus);
         let loading = (this.props.connectionStatus === ConnectionStatus.Connecting);
@@ -103,7 +60,11 @@ export default class ChatSection extends React.Component<ChatSectionProps, ChatS
             <div className={style.container__system__chat}>
                 <div className={style.container__system__chat__messages}>
                     <List>
-                        {this.props.chats.map((message: ChatMessage, index: number, arr: ChatMessage[]) => this._renderListItem(message, index, arr))}
+                        {this.props.chats.map((message: ChatMessage, index: number, arr: ChatMessage[]) => 
+                            <ChatItem message={message}
+                                        index={index} key={index} 
+                                        prevMessage={(index > 0) ? arr[index - 1] : null}
+                                        userId={this.props.userId} />)}
                     </List>
                 </div>
                 <div className={style.container__system__chat__input}>

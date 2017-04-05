@@ -1,5 +1,6 @@
 import EnemyModel from './enemyModel';
 import NPCModel from './npcModel';
+import PlayerModel from './playerModel';
 import ItemModel from './itemModel';
 import { debug } from './appLogger';
 
@@ -17,6 +18,7 @@ export default class RoomModel {
             up: string,
             down: string
         },
+        public players: Array<PlayerModel>,
         public enemies: Array<EnemyModel>,
         public npc: Array<NPCModel>,
         public items: Array<ItemModel>
