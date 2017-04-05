@@ -7,7 +7,7 @@ import RoomModel from '../../../../common/service/models/roomModel';
 import RoomFooterProps from './roomFooterProps';
 import * as style from './roomFooter.css';
 
-export default class RoomSection extends React.Component<RoomFooterProps, {}> {
+export default class RoomFooter extends React.Component<RoomFooterProps, {}> {
     _buildRoomFooter(room: RoomModel): JSX.Element {
         let players:JSX.Element = null;
         let enemies:JSX.Element = null;

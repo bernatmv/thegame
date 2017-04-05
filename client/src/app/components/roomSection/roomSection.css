@@ -38,35 +38,6 @@
     justify-content: center;
 }
 
-.tile__move {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    border: 1px solid #333;
-    border-radius: 3px;
-    width: 60%;
-    height: 60px;
-
-    & .tile__move__title {
-        display: flex;
-        flex: 1;
-        align-items: center;
-        justify-content: center;        
-        width: 100%;
-        border-bottom: 3px double #333;
-    }
-
-    & .tile__move__description {
-        display: flex;
-        flex: 1;
-        align-items: center;
-        justify-content: center;        
-        width: 100%;
-    }
-}
-
 .tile__room {
     display: flex;
     flex-direction: column;

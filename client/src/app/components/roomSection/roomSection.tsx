@@ -1,25 +1,13 @@
 import * as React from 'react';
-import EnemyModel from '../../../common/service/models/enemyModel';
-import ItemModel from '../../../common/service/models/itemModel';
-import NPCModel from '../../../common/service/models/npcModel';
 import RoomModel from '../../../common/service/models/roomModel';
 import RoomFooter from './components/roomFooter';
 import RoomSectionProps from './roomSectionProps';
+import Direction from './components/direction';
+import ActionsConstants from '../../../common/constants/actionsConstants';
 import * as classnames from 'classnames';
 import * as style from './roomSection.css';
 
 export default class RoomSection extends React.Component<RoomSectionProps, {}> {
-    _buildDirection(title: string, description: string): JSX.Element {
-        return <div className={style.tile__move}>
-                    <div className={style.tile__move__title}>
-                        North
-                    </div>
-                    <div className={style.tile__move__description}>
-                        ? ? ?
-                    </div>
-                </div>;
-    }
-
     _buildRoom(room: RoomModel): JSX.Element {
         return <div className={style.tile__room}>
                     <div className={style.room__header}>
@@ -39,12 +27,12 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
 
     render(): JSX.Element {
         let exits = this.props.room.exits;
-        let north = (exits.north) ? this._buildDirection('North', '? ? ?') : null;
-        let east = (exits.east) ? this._buildDirection('East', '? ? ?') : null;
-        let south = (exits.south) ? this._buildDirection('South', '? ? ?') : null;
-        let west = (exits.west) ? this._buildDirection('West', '? ? ?') : null;
-        let up = (exits.up) ? this._buildDirection('Up', '? ? ?') : null;
-        let down = (exits.down) ? this._buildDirection('Down', '? ? ?') : null;
+        let north = (exits.north) ? <Direction title={'North'} move={() => this.props.move(ActionsConstants.MoveNorth)} /> : null;
+        let east = (exits.east) ? <Direction title={'East'} move={() => this.props.move(ActionsConstants.MoveEast)} /> : null;
+        let south = (exits.south) ? <Direction title={'South'} move={() => this.props.move(ActionsConstants.MoveSouth)} /> : null;
+        let west = (exits.west) ? <Direction title={'West'} move={() => this.props.move(ActionsConstants.MoveWest)} /> : null;
+        let up = (exits.up) ? <Direction title={'Up'} move={() => this.props.move(ActionsConstants.MoveUp)} /> : null;
+        let down = (exits.down) ? <Direction title={'Down'} move={() => this.props.move(ActionsConstants.MoveDown)} /> : null;
 
         return (
             <div className={style.room}>
