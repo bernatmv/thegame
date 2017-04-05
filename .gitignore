@@ -9,6 +9,7 @@ client/node_modules/
 
 # Transpiled files
 client/dist/
+client/build/
 
 # VS Code
 .vscode
@@ -37,3 +38,4 @@ client/.npm
 /server/server-presentation/target/
 /server/server-artifact/target/
 /server/server-client/target/
+npm-debug.log

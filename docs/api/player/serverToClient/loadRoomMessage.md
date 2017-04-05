@@ -17,6 +17,7 @@
             up: string,
             down: string
         },
+        players: Array<PlayerModel>,
         enemies: Array<EnemyModel>,
         npc: Array<NPCModel>,
         items: Array<ItemModel>
@@ -38,6 +39,7 @@
             `room.exits.west` => _optional_ => The *id* of the room connecting to this one from the west
             `room.exits.up` => _optional_ => The *id* of the room connecting to this one from the up
             `room.exits.down` => _optional_ => The *id* of the room connecting to this one from the down
+        `room.players` => _optional_ => An array with the other online players in this room (this can change if players enter/leave the room, but that notification will use another message)
         `room.enemies` => _optional_ => An array with the enemies in the room
         `room.npc` => _optional_ => An array with the npc in the room
         `room.items` => _optional_ => An array with the items in the room

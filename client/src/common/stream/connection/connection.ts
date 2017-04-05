@@ -71,7 +71,7 @@ export default class Connection {
     }
 
     public sendMessage(message: WebsocketMessage): void {
-        if (this._websocket !== null) {
+        if (this._websocket && this._websocket.readyState === WebSocket.OPEN) {
             this._websocket.send(JSON.stringify(message));
         } else {
             log(`Websocket disconnected, can't send any message`, this._websocket);//tslint:disable-lint

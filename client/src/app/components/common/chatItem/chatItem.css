@@ -1,0 +1,18 @@
+.container__system__chat__messages__item_system {
+    background: none !important;
+    color: yellow !important;
+    font-size: 16px !important;
+    padding: 5px 10px !important;
+
+    & i {
+        font-size: 20px !important;
+    }
+}
+
+.container__system__chat__messages__item_me {
+    color: lightgreen !important;
+}
+
+.container__system__chat__messages__item_received {
+    color: #888 !important;
+}
