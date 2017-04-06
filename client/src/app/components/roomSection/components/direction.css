@@ -8,6 +8,7 @@
     border-radius: 3px;
     width: 60%;
     height: 60px;
+    cursor: pointer;
 
     & .tile__move__title {
         display: flex;
@@ -16,6 +17,10 @@
         justify-content: center;        
         width: 100%;
         border-bottom: 3px double #333;
+
+        & > div {
+            color: #fff !important;
+        }        
     }
 
     & .tile__move__description {
@@ -24,5 +29,9 @@
         align-items: center;
         justify-content: center;        
         width: 100%;
+        font-size: .8em;
+        text-align: center;
+        line-height: 1em;
+        color: #888;
     }
 }

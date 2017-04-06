@@ -8,8 +8,8 @@ import initialState from './state/initialState';
 let _mapService:MapServiceImpl = new MapServiceImpl();
 
 export default handleActions<RoomModel, RoomModel>({
-    [ActionsConstants.LoadRoom]: (state: RoomModel, action: ReduxActions.Action<RoomModel>): RoomModel => {
-        return action.payload;
+    [ActionsConstants.LoadRoom]: (state: RoomModel, action: ReduxActions.Action<string>): RoomModel => {
+        return _mapService.getRoom(action.payload);
     },
     [ActionsConstants.Move]: (state: RoomModel, action: ReduxActions.Action<string>): RoomModel => {
         return _mapService.moveFrom(state, action.payload);

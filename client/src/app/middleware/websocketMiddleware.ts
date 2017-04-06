@@ -5,7 +5,6 @@ import Connection from '../../common/stream/connection/connection';
 import WebsocketMessage from '../../common/stream/models/websocketMessage';
 import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
-import MapServiceImpl from './services/mapServiceImpl';
 import * as ChatActions from '../actions/chatActions';
 import * as SystemActions from '../actions/systemActions';
 
@@ -16,8 +15,7 @@ const socketMiddleware = (function(){
     let chatStream: Rx.Observable<WebsocketMessage> = null;
     let me = 'User' + Math.ceil(Math.random() * 1000);
     // map
-    let mapService = new MapServiceImpl();
-    let currentRoom = mapService.getRoom('beta-room-001');
+    let currentRoom = 'beta-room-001';
 
     let initialize = () => {
         _store.dispatch(SystemActions.loadRoom(currentRoom));

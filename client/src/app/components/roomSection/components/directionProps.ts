@@ -1,6 +1,8 @@
+import RoomModel from '../../../../common/service/models/roomModel';
+
 interface Direction {
     title: string;
-    description?: string;
+    nextRoom?: RoomModel;
     move: () => any;
 }
 export default Direction;

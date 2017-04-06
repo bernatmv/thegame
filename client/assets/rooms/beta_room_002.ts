@@ -2,11 +2,11 @@ import RoomModel from '../../src/common/service/models/roomModel';
 
 export default new RoomModel(
     'beta-room-002',
-    'Un claro en el bosque',
-    'Un tranquilo claro en medio de un frondoso bosque',
-    'Te encuentras en un claro en medio de un frondoso bosque, un pequeño arrollo murmulla en un rincón mientras una suave brisa hace ondular varios tallos de lavanda llenando el aire de un suave aroma.\n\nAl norte los arboles se abren ligeramente a un sendero que parece poco transitado.',//tslint:disable-line
+    'Las afueras del campamento',
+    'Entre el bosque y la pared de una colina, hay un pequeño campamento',
+    'El camino lleva hasta un espacio abierto entre el bosque y la pared de una colina.\nEn este lugar hay un pequeño asentamiento rodeado por una empalizada de algo menos de dos metros. Los troncos de la empalizada son pequeños e irregulares, y están atados con primitivas cuerdas de cáñamo.',//tslint:disable-line
     {
-        north: null,
+        north: 'beta-room-003',
         east: null,
         south: 'beta-room-001',
         west: null,

@@ -18,7 +18,7 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
                     </div>
                     <div className={style.room__description}>
                         <div className={style.room__description__body}>
-                            {room.description}
+                            {room.description.split('\n').map(fragment => <p>{fragment}</p>)}
                         </div>
                     </div>
                     <RoomFooter room={room} />
@@ -27,15 +27,15 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
 
     render(): JSX.Element {
         let exits = this.props.room.exits;
-        let north = (exits.north) ? <Direction title={'North'} move={() => this.props.move(ActionsConstants.MoveNorth)} /> : null;
-        let east = (exits.east) ? <Direction title={'East'} move={() => this.props.move(ActionsConstants.MoveEast)} /> : null;
-        let south = (exits.south) ? <Direction title={'South'} move={() => this.props.move(ActionsConstants.MoveSouth)} /> : null;
-        let west = (exits.west) ? <Direction title={'West'} move={() => this.props.move(ActionsConstants.MoveWest)} /> : null;
-        let up = (exits.up) ? <Direction title={'Up'} move={() => this.props.move(ActionsConstants.MoveUp)} /> : null;
-        let down = (exits.down) ? <Direction title={'Down'} move={() => this.props.move(ActionsConstants.MoveDown)} /> : null;
+        let north = (exits.north) ? <Direction title={'North'} move={() => this.props.move(ActionsConstants.MoveNorth)} nextRoom={exits.roomNorth} /> : null;
+        let east = (exits.east) ? <Direction title={'East'} move={() => this.props.move(ActionsConstants.MoveEast)} nextRoom={exits.roomEast} /> : null;
+        let south = (exits.south) ? <Direction title={'South'} move={() => this.props.move(ActionsConstants.MoveSouth)} nextRoom={exits.roomSouth} /> : null;
+        let west = (exits.west) ? <Direction title={'West'} move={() => this.props.move(ActionsConstants.MoveWest)} nextRoom={exits.roomWest} /> : null;
+        let up = (exits.up) ? <Direction title={'Up'} move={() => this.props.move(ActionsConstants.MoveUp)} nextRoom={exits.roomUp} /> : null;
+        let down = (exits.down) ? <Direction title={'Down'} move={() => this.props.move(ActionsConstants.MoveDown)} nextRoom={exits.roomDown} /> : null;
 
         return (
-            <div className={style.room}>
+            <div className={style.room} key={this.props.room.id}>
                 <div className={style.row}>
                     <div className={style.row__column} />
                     <div className={style.row__column} />

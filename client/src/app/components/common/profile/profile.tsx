@@ -10,7 +10,7 @@ export default class Profile extends React.Component<ProfileProps, {}> {
         align: 'left',
         size: 'medium'
     };
-    
+
     _renderStatusProperty(name: string, color: any, current: number, total: number, size: any): JSX.Element {
         return <div className={classnames(style.profile__row, size)}>
                     <div className={classnames(style.status__row__label)}>{name}</div> 

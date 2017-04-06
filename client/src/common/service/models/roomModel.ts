@@ -12,11 +12,17 @@ export default class RoomModel {
         public description: string,
         public exits: {
             north: string,
+            roomNorth?: RoomModel,
             east: string,
+            roomEast?: RoomModel,
             south: string,
+            roomSouth?: RoomModel,
             west: string,
+            roomWest?: RoomModel,
             up: string,
-            down: string
+            roomUp?: RoomModel,
+            down: string,
+            roomDown?: RoomModel
         },
         public players: Array<PlayerModel>,
         public enemies: Array<EnemyModel>,
