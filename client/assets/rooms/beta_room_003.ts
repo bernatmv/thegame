@@ -14,7 +14,12 @@ export default new RoomModel(
         down: null
     },
     [],
-    [],
+    [
+        //TODO: transform this into roomDto with id's
+        //TODO: create shared JSON with id's (dto)
+        //TODO: map dto to room with entities
+        //TODO: make registry load files automatically
+    ],
     [],
     []
 );
