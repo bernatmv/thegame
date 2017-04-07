@@ -10,7 +10,7 @@ export default class Profile extends React.Component<ProfileProps, {}> {
         align: 'left',
         size: 'medium'
     };
-    
+
     _renderStatusProperty(name: string, color: any, current: number, total: number, size: any): JSX.Element {
         return <div className={classnames(style.profile__row, size)}>
                     <div className={classnames(style.status__row__label)}>{name}</div> 
@@ -27,13 +27,13 @@ export default class Profile extends React.Component<ProfileProps, {}> {
                     ? style.small
                     : null;
         let hp = (this.props.hp && !this.props.hp.hide) 
-                    ? this._renderStatusProperty('HP', 'red', this.props.hp.current, this.props.hp.total, size)
+                    ? this._renderStatusProperty('HP', 'red', this.props.hp.current, this.props.hp.max, size)
                     : null;
         let mp = (this.props.mp && !this.props.mp.hide) 
-                    ? this._renderStatusProperty('MP', 'blue', this.props.mp.current, this.props.mp.total, size)
+                    ? this._renderStatusProperty('MP', 'blue', this.props.mp.current, this.props.mp.max, size)
                     : null;
         let sp = (this.props.sp && !this.props.sp.hide) 
-                    ? this._renderStatusProperty('SP', 'yellow', this.props.sp.current, this.props.sp.total, size)
+                    ? this._renderStatusProperty('SP', 'yellow', this.props.sp.current, this.props.sp.max, size)
                     : null;
         let name = (this.props.name)
                     ? <div className={classnames(style.profile__row, style.profile__row_title)}>

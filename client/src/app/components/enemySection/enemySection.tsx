@@ -5,24 +5,15 @@ import * as style from './enemySection.css';
 
 export default class EnemySection extends React.Component<EnemySectionProps, {}> {
     render(): JSX.Element {
+        let enemies = this.props.room.enemies;
         return (
             <div className={style.container__game__enemy}>
-                <Profile race={'Goblin'} level={4}
-                        hp={{current: 30, total: 30}}
-                        mp={{current: 10, total: 10, hide: true}}
-                        sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={2}
-                        hp={{current: 30, total: 30}}
-                        mp={{current: 10, total: 10, hide: true}}
-                        sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={2}
-                        hp={{current: 30, total: 30}}
-                        mp={{current: 10, total: 10, hide: true}}
-                        sp={{current: 20, total: 20, hide: true}}/>
-                <Profile race={'Goblin'} level={1}
-                        hp={{current: 30, total: 30}}
-                        mp={{current: 10, total: 10, hide: true}}
-                        sp={{current: 20, total: 20, hide: true}}/>
+                {enemies.map((enemy, i) => <Profile key={i}
+                                                race={enemy.profile.race} 
+                                                level={enemy.profile.level}
+                                                hp={enemy.profile.hp}
+                                                mp={enemy.profile.mp}
+                                                sp={enemy.profile.sp} />)}
             </div>
         );
     }

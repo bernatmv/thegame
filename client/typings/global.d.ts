@@ -6,6 +6,11 @@ declare module '*.css' {
   export = styles;
 }
 
+declare module '*.json' {
+  const json: any;
+  export = json;
+}
+
 declare module '*.png' {
   const image: any;
   export = image;

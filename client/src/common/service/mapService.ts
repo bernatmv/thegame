@@ -1,4 +1,4 @@
-import RoomModel from '../../../common/service/models/roomModel';
+import RoomModel from './models/roomModel';
 
 interface MapService {
     getRoom(id: string): RoomModel;

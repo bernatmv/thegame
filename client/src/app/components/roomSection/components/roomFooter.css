@@ -10,6 +10,11 @@
     padding: 15px;
     color: #888;
     width: 100%;
+    word-spacing: 2px;
+
+    & > div {
+        width: 100%;
+    }
 
     & .room__footer__positive {
         color: #fff;
