@@ -19,7 +19,7 @@
         border-bottom: 3px double #333;
 
         & > div {
-            color: #fff !important;
+            color: #888 !important;
         }        
     }
 

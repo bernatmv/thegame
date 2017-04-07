@@ -12,8 +12,10 @@
             "id": "goblin-001",
             "profile": {
                 "race": "Goblin",
+                "singular": "goblin",
+                "plural": "goblins",
                 "level": 1,
-                "hp": 20
+                "hp": { "current": 20, "max": 20 }
             },
             "chatter": [
                 "Vicavorausan or deaavh!",
@@ -27,8 +29,10 @@
             "id": "goblin-002",
             "profile": {
                 "race": "Goblin",
+                "singular": "goblin",
+                "plural": "goblins",
                 "level": 1,
-                "hp": 20
+                "hp": { "current": 20, "max": 20 }
             },
             "chatter": [
                 "Vicavorausan or deaavh!",
@@ -47,6 +51,8 @@
             "description": "Un pollo de campo común. Tiene plumas, pico y ¡una mirada maliciosa en los ojos!",
             "isAlive": true,
             "gender": "male",
+            "singular": "pollo",
+            "plural": "pollos",
             "chatter": [
                 "cooooo!"
             ]

@@ -4,6 +4,8 @@ interface ItemDto {
     decription: string;
     isAlive: boolean;
     gender: string;
+    singular: string;
+    plural: string;
     chatter: Array<string>;
 }
 export default ItemDto;

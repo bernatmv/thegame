@@ -1,5 +1,6 @@
 import RoomModel from '../service/models/roomModel';
 import RoomMapper from '../service/mappers/roomMapper';
+import StatusPropertyMapper from '../service/mappers/statusPropertyMapper';
 import ProfileMapper from '../service/mappers/profileMapper';
 import PlayerMapper from '../service/mappers/playerMapper';
 import EnemyMapper from '../service/mappers/enemyMapper';
@@ -20,7 +21,7 @@ export default class RoomsRegistry {
 
     constructor() {
         //TODO: create a container for dependency injection
-        let profileMapper = new ProfileMapper();
+        let profileMapper = new ProfileMapper(new StatusPropertyMapper());
         this._roomMapper = new RoomMapper(
             new PlayerMapper(profileMapper),
             new EnemyMapper(profileMapper),

@@ -9,6 +9,8 @@ export default class ItemMapper {
             dto.decription,
             dto.isAlive,
             dto.gender,
+            dto.singular,
+            dto.plural,
             dto.chatter
         );
     }

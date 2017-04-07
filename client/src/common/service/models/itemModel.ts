@@ -12,6 +12,8 @@ export default class ItemModel {
 //        public rarity: number,        
         public isAlive: boolean,
         public gender: string,
+        public singular: string,
+        public plural: string,
         public chatter: Array<string>
     ) {
         //debug(`New item created`, this);

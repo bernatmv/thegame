@@ -6,7 +6,7 @@ import * as style from './direction.css';
 const tooltipStyle = {
     wrapper: {
         cursor: 'pointer',
-        color: '#888'
+        color: '#fff'
     },
     gap: {},
     content: {
