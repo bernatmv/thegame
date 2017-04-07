@@ -10,17 +10,17 @@
         shortDescription: string,
         description: string,
         exits: {
-            north: string,
-            east: string,
-            south: string,
-            west: string,
-            up: string,
-            down: string
+            north?: string,
+            east?: string,
+            south?: string,
+            west?: string,
+            up?: string,
+            down?: string
         },
-        players: Array<PlayerModel>,
-        enemies: Array<EnemyModel>,
-        npc: Array<NPCModel>,
-        items: Array<ItemModel>
+        players: Array<PlayerDto>,
+        enemies: Array<EnemyDto>,
+        npc: Array<NPCDto>,
+        items: Array<ItemDto>
     }
 }
 ```
