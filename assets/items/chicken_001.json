@@ -1,0 +1,10 @@
+{
+    "id": "chicken-001",
+    "name": "pollo",
+    "description": "Un pollo de campo común. Tiene plumas, pico y ¡una mirada maliciosa en los ojos!",
+    "isAlive": true,
+    "gender": "male",
+    "chatter": [
+        "cooooo!"
+    ]
+}

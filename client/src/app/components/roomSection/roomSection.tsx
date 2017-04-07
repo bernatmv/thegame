@@ -18,7 +18,7 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
                     </div>
                     <div className={style.room__description}>
                         <div className={style.room__description__body}>
-                            {room.description.split('\n').map(fragment => <p>{fragment}</p>)}
+                            {room.description.split('\n').map((fragment, i) => <p key={i}>{fragment}</p>)}
                         </div>
                     </div>
                     <RoomFooter room={room} />

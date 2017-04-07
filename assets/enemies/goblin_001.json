@@ -1,0 +1,15 @@
+{
+    "id": "goblin-001",
+    "profile": {
+        "race": "Goblin",
+        "level": 1,
+        "hp": 20
+    },
+    "chatter": [
+        "Vicavorausan or deaavh!",
+        "Inavruderuk, drepa avhem!",
+        "Proavecav avhe milambak!",
+        "Nalkroro ayh lat doaumn avhiuk avo uuk?",
+        "Senav avhem avo avheir goddeukuk"
+    ]
+}

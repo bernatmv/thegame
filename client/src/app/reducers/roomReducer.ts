@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { debug } from '../../common/service/models/appLogger';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import RoomModel from '../../common/service/models/roomModel';
-import MapServiceImpl from '../middleware/services/mapServiceImpl';
+import MapServiceImpl from '../../common/service/mapServiceImpl';
 import initialState from './state/initialState';
 
 let _mapService:MapServiceImpl = new MapServiceImpl();

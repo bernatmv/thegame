@@ -1,7 +1,7 @@
 import MapService from './mapService';
-import RoomModel from '../../../common/service/models/roomModel';
-import RoomsRegistry from '../../../../assets/rooms/';
-import { debug } from '../../../common/service/models/appLogger';
+import RoomModel from './models/roomModel';
+import RoomsRegistry from '../helpers/roomsRegistry';
+import { debug } from './models/appLogger';
 
 export default class MapServiceImpl implements MapService {
     getRoom(id: string): RoomModel {
