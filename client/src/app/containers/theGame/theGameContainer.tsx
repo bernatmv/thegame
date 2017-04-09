@@ -19,10 +19,10 @@ export class TheGame extends React.Component<TheGameProps, {}> {
     return (
       <div className={style.container}>
         <div className={style.container__game} >
-          <AvatarSection />
+          <AvatarSection room={room} />
           <RoomSection room={room} 
                       move={actions.player.move} />
-          <EnemySection />
+          <EnemySection room={room} />
         </div>
         <div className={style.container__system} >
           <ChatSection chats={chats} 

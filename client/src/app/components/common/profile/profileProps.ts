@@ -1,17 +1,13 @@
-interface StatusProperty {
-    current: number;
-    total: number;
-    hide?: boolean;
-}
+import StatusPropertyModel from '../../../../common/service/models/statusPropertyModel';
 
 interface ProfileProps {
     name?: string;
     race: string;
     profession?: string;
     level: number;
-    hp: StatusProperty;
-    mp: StatusProperty;
-    sp: StatusProperty;
+    hp: StatusPropertyModel;
+    mp?: StatusPropertyModel;
+    sp?: StatusPropertyModel;
     size?: 'small' | 'medium';
 }
 export default ProfileProps;

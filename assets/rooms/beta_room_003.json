@@ -1,0 +1,61 @@
+{
+    "id": "beta-room-003",
+    "title": "La plaza del campamento",
+    "shortDescription": "La plaza central del campamento empalizado",
+    "description": "El campamento consiste en cuatro chozas grandes de paja que podrían alojar a cinco o seis personas cada una.\nTodas las chozas son de construcción basta y hechas con materiales de poca calidad. La plaza ocupa una extensión considerable donde cabrían sin problemas cien personas, pero en vez de eso sólo hay varios montones de suciedad y unas cuantas gallinas picoteando en ellos.",
+    "exits": {
+        "south": "beta-room-002"
+    },
+    "players": [],
+    "enemies": [
+        {
+            "id": "goblin-001",
+            "profile": {
+                "race": "Goblin",
+                "singular": "goblin",
+                "plural": "goblins",
+                "level": 1,
+                "hp": { "current": 20, "max": 20 }
+            },
+            "chatter": [
+                "Vicavorausan or deaavh!",
+                "Inavruderuk, drepa avhem!",
+                "Proavecav avhe milambak!",
+                "Nalkroro ayh lat doaumn avhiuk avo uuk?",
+                "Senav avhem avo avheir goddeukuk"
+            ]
+        },
+        {
+            "id": "goblin-002",
+            "profile": {
+                "race": "Goblin",
+                "singular": "goblin",
+                "plural": "goblins",
+                "level": 1,
+                "hp": { "current": 20, "max": 20 }
+            },
+            "chatter": [
+                "Vicavorausan or deaavh!",
+                "Inavruderuk, drepa avhem!",
+                "Proavecav avhe milambak!",
+                "Nalkroro ayh lat doaumn avhiuk avo uuk?",
+                "Senav avhem avo avheir goddeukuk"
+            ]
+        }
+    ],
+    "npc": [],
+    "items": [
+        {
+            "id": "chicken-001",
+            "name": "pollo",
+            "description": "Un pollo de campo común. Tiene plumas, pico y ¡una mirada maliciosa en los ojos!",
+            "isAlive": true,
+            "gender": "male",
+            "singular": "pollo",
+            "plural": "pollos",
+            "chatter": [
+                "cooooo!"
+            ]
+        }
+    ]
+}

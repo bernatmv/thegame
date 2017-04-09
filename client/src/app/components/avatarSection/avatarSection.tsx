@@ -6,20 +6,23 @@ import * as style from './avatarSection.css';
 
 export default class AvatarSection extends React.Component<AvatarSectionProps, {}> {
     render(): JSX.Element {
+        let players = this.props.room.players;
         return (
             <div className={style.avatar}>
                 <Profile name={'Morgobor'} race={'Human'} profession={'Ranger'} level={1}
-                        hp={{current: 100, total: 100}}
-                        mp={{current: 70, total: 100}}
-                        sp={{current: 30, total: 100}}/>
-                <Profile name={'Watarhu'} race={'Human'} profession={'Wizard'} level={1} size='small'
-                        hp={{current: 100, total: 100}}
-                        mp={{current: 100, total: 100}}
-                        sp={{current: 10, total: 100}}/>
-                <Profile name={'Saldoran'} race={'Human'} profession={'Paladin'} level={1} size='small'
-                        hp={{current: 80, total: 100}}
-                        mp={{current: 90, total: 100}}
-                        sp={{current: 90, total: 100}}/>
+                        hp={{current: 100, max: 100, hide: false}}
+                        mp={{current: 70, max: 100, hide: false}}
+                        sp={{current: 30, max: 100, hide: false}}/>
+
+                {players.map((player, i) => <Profile key={i}
+                                                name={player.profile.name} 
+                                                race={player.profile.race} 
+                                                profession={player.profile.profession} 
+                                                level={player.profile.level} 
+                                                size='small'
+                                                hp={player.profile.hp}
+                                                mp={player.profile.mp}
+                                                sp={player.profile.sp} />)}
             </div>
         );
     }
