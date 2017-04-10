@@ -1,3 +1,5 @@
+@import '../../../../theme/colors.css';
+
 .room__footer {
     display: flex;
     flex: 1;
@@ -6,9 +8,9 @@
     justify-content: center;
     align-self: flex-end;
     box-sizing: border-box;
-    border-top: 3px double #333;
+    border-top: 3px double var(--room-footer-border-color);
     padding: 15px;
-    color: #888;
+    color: var(--room-footer-text-color);
     width: 100%;
     word-spacing: 2px;
 
@@ -17,14 +19,14 @@
     }
 
     & .room__footer__positive {
-        color: #fff;
+        color: var(--room-footer-text-color--positive);
     }
 
     & .room__footer__player {
-        color: lightblue;
+        color: var(--room-footer-text-color--player);
     }
 
     & .room__footer__npc {
-        color: lightgreen;
+        color: var(--room-footer-text-color--npc);
     }
 }

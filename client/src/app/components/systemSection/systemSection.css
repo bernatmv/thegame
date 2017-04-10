@@ -1,3 +1,5 @@
+@import '../../../theme/colors.css';
+
 .container__system__display {
     display: flex;
     flex-direction: column;
@@ -6,11 +8,11 @@
     flex: 1;
     height: 100%;
     box-sizing: border-box;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--system-background-color);
     overflow: hidden;
 
     & :hover {
-        background: #0A0A0A;
+        background: var(--system-background-color--hover);
     }
 
     & .container__system__display__info {

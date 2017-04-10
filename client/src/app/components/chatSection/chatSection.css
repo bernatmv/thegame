@@ -1,15 +1,17 @@
+@import '../../../theme/colors.css';
+
 .container__system__chat {
     display: flex;
     flex-direction: column;
     flex: 1;
     height: 100%;
     box-sizing: border-box;
-    border-top: 1px solid #333;
-    border-right: 1px solid #333;
+    border-top: 1px solid var(--chat-container-border-color);
+    border-right: 1px solid var(--chat-container-border-color);
     overflow: hidden;
 
     & :hover {
-        background: #0A0A0A;
+        background: var(--chat-container-background-color--hover);
     }
 }
 
@@ -43,7 +45,7 @@
 
         & input {
             border-radius: 0;
-            border-color: #fff;
+            border-color: var(--chat-input-border-color);
 
             &:active,
             &:hover,
