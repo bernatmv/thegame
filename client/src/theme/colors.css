@@ -1,10 +1,10 @@
 :root {
     /* MAIN */
-    --main-background-color: #000;
+    --main-background-color: #000; /* #333 */
     --main-text-color: #fff;
 
     /* SYSTEM SECTION */
-    --system-background-color: #333;
+    --system-background-color: #333; /* #000 */
     --system-background-color--hover: #0A0A0A;
 
     /* ROOM */

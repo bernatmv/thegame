@@ -15,41 +15,13 @@
         display: flex;
         flex-direction: row;
         margin: 0 0 5px 0;
-
-        &.small {
-            width: 75%;
-        }
+        padding-right: 4px;
 
         &.profile__row_title {
         }
 
         &.profile__row_level {
             margin: 0 0 10px 0 ;
-        }
-
-        & .status__row__label {
-            display: flex;
-            flex: 15%;
-            align-items: center;
-            justify-content: center;
-        }
-
-        & .status__row__progress {
-            margin: 0 5px 0 5px;
-            flex: 85%;
-
-            & div:not(:first-child) {
-                top: 0;
-                color: var(--profile-bar-text-color);
-                font-family: Arial;
-                text-align: right;
-                margin: .25em 0 0 0;
-                padding: 0 .25em 0 0;
-                text-shadow: -1px -1px 0 var(--profile-bar-text-stroke-color),  
-                    1px -1px 0 var(--profile-bar-text-stroke-color),
-                    -1px 1px 0 var(--profile-bar-text-stroke-color),
-                    1px 1px 0 var(--profile-bar-text-stroke-color);
-            }
         }
     }
 }

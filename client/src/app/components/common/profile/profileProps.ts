@@ -8,6 +8,5 @@ interface ProfileProps {
     hp: StatusPropertyModel;
     mp?: StatusPropertyModel;
     sp?: StatusPropertyModel;
-    size?: 'small' | 'medium';
 }
 export default ProfileProps;
