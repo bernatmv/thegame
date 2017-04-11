@@ -12,7 +12,7 @@ export default class ChatSection extends React.Component<SystemSectionProps, {}>
                     <Message.Header>System display</Message.Header>
                     <p>Here we will be able to see the inventory and some skills and menu options</p>
                 </Message>
-                <ConnectionStatus connection={this.props.connection} />
+                <ConnectionStatus connection={this.props.connection} bottom />
             </div>
         );
     }

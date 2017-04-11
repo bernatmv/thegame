@@ -11,7 +11,7 @@ interface LoginSectionState {
 
 export default class ChatSection extends React.Component<LoginSectionProps, LoginSectionState> {
     static defaultProps = {
-        placeholder: 'Nombre de usuario...'
+        placeholder: 'Cómo te llamas?'
     };
 
     constructor(props?: LoginSectionProps, context?: any) {
@@ -36,18 +36,20 @@ export default class ChatSection extends React.Component<LoginSectionProps, Logi
     render(): JSX.Element {
         return (
             <div className={style.login}>
-                <div className={style.login__logo}>
-                    <Image src={logoImage} size={'medium'} shape={'circular'} />
+                <ConnectionStatus connection={this.props.connection} top right />
+                <div className={style.login__menu}>
+                    <div className={style.login__logo}>
+                        <Image src={logoImage} size={'medium'} />
+                    </div>
+                    <div className={style.login__input}>
+                        <Input size='medium' autoFocus
+                            className={style.login__input__field}
+                            placeholder={this.props.placeholder}
+                            value={this.state.text}
+                            onChange={this._handleChange}
+                            onKeyDown={this._handleKeyDown} />
+                    </div>
                 </div>
-                <div className={style.login__input}>
-                    <Input size='medium' autoFocus
-                        className={style.login__input__field}
-                        placeholder={this.props.placeholder}
-                        value={this.state.text}
-                        onChange={this._handleChange}
-                        onKeyDown={this._handleKeyDown} />
-                </div>
-                <ConnectionStatus connection={this.props.connection} />
             </div>
         );
     }

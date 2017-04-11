@@ -1,4 +1,10 @@
 :root {
+    /* LOGIN */
+    --login-background-color: #333;
+    --login-text-color: #fff;
+    --login-border-color: #111;
+    --login-shadow-color: #777;
+
     /* MAIN */
     --main-background-color: #000; /* #333 */
     --main-text-color: #fff;

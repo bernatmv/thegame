@@ -1,8 +1,29 @@
 @import '../../../../theme/colors.css';
 
 .connectionStatus {
-    bottom: 0 !important;
     position: absolute !important;
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
+
+    &.top {
+        top: 0 !important;
+        border-top-right-radius: 0 !important;        
+        border-top-left-radius: 0 !important;        
+    }
+
+    &.bottom {
+        bottom: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
+
+    &.left {
+        left: 0 !important;
+        border-top-left-radius: 0 !important;        
+        border-bottom-left-radius: 0 !important;        
+    }
+
+    &.right {
+        right: 0 !important;
+        border-top-right-radius: 0 !important;        
+        border-bottom-right-radius: 0 !important;        
+    }
 }

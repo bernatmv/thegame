@@ -2,10 +2,17 @@ import * as React from 'react';
 import { Label, Icon } from 'semantic-ui-react';
 import ConnectionStatus from '../../../../common/stream/models/connectionStatus';
 import ConnectionStatusProps from './connectionStatusProps';
+import * as classnames from 'classnames';
 import * as style from './connectionStatus.css';
 
 export default class ChatSection extends React.Component<ConnectionStatusProps, {}> {
     render(): JSX.Element {
+        let classes = classnames(
+            this.props.top ? 'top' : null,
+            this.props.bottom ? 'bottom' : null,
+            this.props.left ? 'left' : null,
+            this.props.right ? 'right' : null,
+            style.connectionStatus);
         let connectionStatus = this.props.connection.connectionStatus;
         let color, label, icon;
         let loading = false;
@@ -23,7 +30,7 @@ export default class ChatSection extends React.Component<ConnectionStatusProps, 
             icon = 'thumbs outline down';
             label = 'Desconectado';
         }
-        return <Label color={color} image className={style.connectionStatus}>
+        return <Label color={color} image className={classes}>
                     <Icon name={icon} loading={loading} />
                     {'Servidor'}
                     <Label.Detail>{label}</Label.Detail>
