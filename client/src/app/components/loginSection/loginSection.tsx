@@ -1,8 +1,9 @@
 import * as React from 'react';
 import LoginSectionProps from './loginSectionProps';
-import { Input } from 'semantic-ui-react';
-import ConnectionStatus from '../../../common/stream/models/connectionStatus';
+import { Input, Image } from 'semantic-ui-react';
+import ConnectionStatus from '../common/connectionStatus/connectionStatus';
 import * as style from './loginSection.css';
+import * as logoImage from '../../../../assets/images/spider-alt.svg';
 
 interface LoginSectionState {
     text: string;
@@ -35,7 +36,10 @@ export default class ChatSection extends React.Component<LoginSectionProps, Logi
     render(): JSX.Element {
         return (
             <div className={style.login}>
-                <div className={style.container__system__chat__input}>
+                <div className={style.login__logo}>
+                    <Image src={logoImage} size={'medium'} shape={'circular'} />
+                </div>
+                <div className={style.login__input}>
                     <Input size='medium' autoFocus
                         className={style.login__input__field}
                         placeholder={this.props.placeholder}
@@ -43,6 +47,7 @@ export default class ChatSection extends React.Component<LoginSectionProps, Logi
                         onChange={this._handleChange}
                         onKeyDown={this._handleKeyDown} />
                 </div>
+                <ConnectionStatus connection={this.props.connection} />
             </div>
         );
     }

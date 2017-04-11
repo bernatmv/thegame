@@ -3,8 +3,6 @@ import ProfileModel from './profileModel';
 import { debug } from './appLogger';
 
 export default class PlayerModel {
-    public isAuthenticated: boolean;
-
     constructor(
         public id: string,
         public profile: ProfileModel
@@ -12,7 +10,6 @@ export default class PlayerModel {
 //        public items: Array<ItemModel>,
 //        public money: number
     ) {
-        this.isAuthenticated = false;
         //debug(`New player created`, this);
     };
 }

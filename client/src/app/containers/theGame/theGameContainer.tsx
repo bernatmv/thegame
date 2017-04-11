@@ -42,7 +42,7 @@ export class TheGame extends React.Component<TheGameProps, {}> {
 
   render() {
     const { chats, connection, room, player, actions } = this.props;
-    if (player.isAuthenticated) {
+    if (player) {
       return (
         <div className={style.container}>
           {this._getBody(room, actions)}

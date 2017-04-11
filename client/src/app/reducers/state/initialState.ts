@@ -12,6 +12,7 @@ let initialState: RootState = {
         connectionStatus: ConnectionStatus.Connecting,
         userId: ''
     },
-    room: null
+    room: null,
+    player: null
 };
 export default initialState;

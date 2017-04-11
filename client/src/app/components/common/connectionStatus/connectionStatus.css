@@ -1,0 +1,8 @@
+@import '../../../../theme/colors.css';
+
+.connectionStatus {
+    bottom: 0 !important;
+    position: absolute !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
