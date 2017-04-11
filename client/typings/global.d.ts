@@ -16,6 +16,11 @@ declare module '*.png' {
   export = image;
 }
 
+declare module '*.svg' {
+  const image: any;
+  export = image;
+}
+
 // for redux devtools extension
 declare interface Window {
   devToolsExtension?(): (args?: any) => any;

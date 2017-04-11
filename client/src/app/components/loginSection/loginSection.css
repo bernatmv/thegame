@@ -1,0 +1,42 @@
+@import '../../../theme/colors.css';
+
+.login {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    background: var(--login-background-color);
+    width: 100%;
+}
+
+.login__menu {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+
+    & .login__logo {
+        margin-bottom: 100px;
+    }
+
+    & .login__input {
+        text-align: center;
+
+        & .login__input__field input {
+            border: 1px solid var(--login-border-color);
+            padding: 0.5em;
+            font-size: 15px;
+            line-height: 1.2em;
+            width: 80%;
+            background: #444;
+            color: var(--login-text-color);
+            font-family: helvetica, sans-serif;
+            background: linear-gradient(to bottom, #222, #444);
+        }
+
+        &:hover {
+
+        }
+    }
+}

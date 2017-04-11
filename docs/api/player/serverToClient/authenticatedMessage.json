@@ -1,0 +1,22 @@
+{
+    "kind": "AuthenticatedMessage",
+    "time": 0,
+    "userId": "bernatmv",
+    "profile": {
+        "race": "Humano",
+        "profession": "Mago",
+        "level": 1,
+        "hp": {
+            "actual": 100,
+            "max": 100
+        },
+        "mp": {
+            "actual": 100,
+            "max": 100
+        },
+        "sp": {
+            "actual": 100,
+            "max": 100
+        }
+    }
+}

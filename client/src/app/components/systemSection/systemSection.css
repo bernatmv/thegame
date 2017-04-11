@@ -15,11 +15,6 @@
         background: var(--system-background-color--hover);
     }
 
-    & .container__system__display__info {
-        flex: 1;
-        width: 70%;
-    }
-
     & .container__system__connectionStatus {
         bottom: 0;
         position: absolute;
