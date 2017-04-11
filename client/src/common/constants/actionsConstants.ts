@@ -11,6 +11,7 @@ const MoveWest = 'west';
 const MoveUp = 'up';
 const MoveDown = 'down';
 const LoadRoom = 'LoadRoom';
+const Login = 'Login';
 
 export default class ActionsConstants {
     // CHAT
@@ -29,4 +30,6 @@ export default class ActionsConstants {
     public static MoveDown: string = MoveDown;
     // SYSTEM
     public static LoadRoom: string = LoadRoom;
+    // AUTH
+    public static Login: string = Login;
 }

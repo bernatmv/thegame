@@ -2,6 +2,7 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import RootState from '../../reducers/state/rootState';
+import LoginSection from '../../components/loginSection/loginSection';
 import AvatarSection from '../../components/avatarSection/avatarSection';
 import RoomSection from '../../components/roomSection/roomSection';
 import EnemySection from '../../components/enemySection/enemySection';
@@ -10,29 +11,51 @@ import SystemSection from '../../components/systemSection/systemSection';
 import TheGameProps from './theGameProps';
 import * as ChatActions from '../../actions/chatActions';
 import * as PlayerActions from '../../actions/playerActions';
+import * as AuthActions from '../../actions/authActions';
 import * as style from './theGameContainer.css';
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
+  private _getLogin(connection, actions): JSX.Element {
+    return <LoginSection connection={connection}
+                        login={actions.auth.login} />;
+  }
+
+  private _getBody(room, actions): JSX.Element {
+    return <div className={style.container__game} >
+      <AvatarSection room={room} />
+      <RoomSection room={room} 
+                  move={actions.player.move} />
+      <EnemySection room={room} />
+    </div>;
+  }
+
+  private _getFooter(chats, actions, connection): JSX.Element {
+    return <div className={style.container__system} >
+      <ChatSection chats={chats} 
+                  sendChat={actions.chat.sendChat} 
+                  connectionStatus={connection.connectionStatus}
+                  userId={connection.userId} />
+      <SystemSection connection={connection} />
+    </div>;
+  }
+
   render() {
-    const { chats, connection, room, actions } = this.props;
-    return (
-      <div className={style.container}>
-        <div className={style.container__game} >
-          <AvatarSection room={room} />
-          <RoomSection room={room} 
-                      move={actions.player.move} />
-          <EnemySection room={room} />
+    const { chats, connection, room, player, actions } = this.props;
+    if (player.isAuthenticated) {
+      return (
+        <div className={style.container}>
+          {this._getBody(room, actions)}
+          {this._getFooter(chats, actions, connection)}
         </div>
-        <div className={style.container__system} >
-          <ChatSection chats={chats} 
-                      sendChat={actions.chat.sendChat} 
-                      connectionStatus={connection.connectionStatus}
-                      userId={connection.userId} />
-          <SystemSection connection={connection} />
+      );
+    } else {
+      return (
+        <div className={style.container}>
+          {this._getLogin(connection, actions)}
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
@@ -40,7 +63,8 @@ function mapStateToProps(state: RootState) {
   return {
     chats: state.chats,
     connection: state.connection,
-    room: state.room
+    room: state.room,
+    player: state.player
   };
 }
 
@@ -48,7 +72,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       chat: bindActionCreators(ChatActions as any, dispatch),
-      player: bindActionCreators(PlayerActions as any, dispatch)
+      player: bindActionCreators(PlayerActions as any, dispatch),
+      auth: bindActionCreators(AuthActions as any, dispatch)
     }
   };
 }
