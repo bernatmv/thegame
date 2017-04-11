@@ -8,10 +8,10 @@ import * as style from './connectionStatus.css';
 export default class ChatSection extends React.Component<ConnectionStatusProps, {}> {
     render(): JSX.Element {
         let classes = classnames(
-            this.props.top ? 'top' : null,
-            this.props.bottom ? 'bottom' : null,
-            this.props.left ? 'left' : null,
-            this.props.right ? 'right' : null,
+            this.props.top ? style.top : null,
+            this.props.bottom ? style.bottom : null,
+            this.props.left ? style.left : null,
+            this.props.right ? style.right : null,
             style.connectionStatus);
         let connectionStatus = this.props.connection.connectionStatus;
         let color, label, icon;

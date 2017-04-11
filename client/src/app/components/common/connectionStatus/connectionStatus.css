@@ -2,6 +2,7 @@
 
 .connectionStatus {
     position: absolute !important;
+    margin: 0 !important;
 
     &.top {
         top: 0 !important;

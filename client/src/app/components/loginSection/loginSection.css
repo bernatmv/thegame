@@ -23,7 +23,7 @@
     & .login__input {
         text-align: center;
 
-        & .login__input__field {
+        & .login__input__field input {
             border: 1px solid var(--login-border-color);
             padding: 0.5em;
             font-size: 15px;
@@ -33,7 +33,6 @@
             color: var(--login-text-color);
             font-family: helvetica, sans-serif;
             background: linear-gradient(to bottom, #222, #444);
-            box-shadow: 1px 1px 1px var(--login-border-color);
         }
 
         &:hover {

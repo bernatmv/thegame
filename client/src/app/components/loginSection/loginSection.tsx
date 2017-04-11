@@ -11,7 +11,7 @@ interface LoginSectionState {
 
 export default class ChatSection extends React.Component<LoginSectionProps, LoginSectionState> {
     static defaultProps = {
-        placeholder: 'Cómo te llamas?'
+        placeholder: '¿Cómo te llamas?'
     };
 
     constructor(props?: LoginSectionProps, context?: any) {

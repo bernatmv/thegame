@@ -21,16 +21,17 @@ export class TheGame extends React.Component<TheGameProps, {}> {
                         login={actions.auth.login} />;
   }
 
-  private _getBody(room, actions): JSX.Element {
+  private _getBody(room, player, actions): JSX.Element {
     return <div className={style.container__game} >
-      <AvatarSection room={room} />
+      <AvatarSection room={room}
+                  player={player} />
       <RoomSection room={room} 
                   move={actions.player.move} />
       <EnemySection room={room} />
     </div>;
   }
 
-  private _getFooter(chats, actions, connection): JSX.Element {
+  private _getFooter(chats, connection, actions): JSX.Element {
     return <div className={style.container__system} >
       <ChatSection chats={chats} 
                   sendChat={actions.chat.sendChat} 
@@ -45,8 +46,8 @@ export class TheGame extends React.Component<TheGameProps, {}> {
     if (player) {
       return (
         <div className={style.container}>
-          {this._getBody(room, actions)}
-          {this._getFooter(chats, actions, connection)}
+          {this._getBody(room, player, actions)}
+          {this._getFooter(chats, connection, actions)}
         </div>
       );
     } else {
