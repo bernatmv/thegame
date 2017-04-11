@@ -19,7 +19,6 @@ export default class AvatarSection extends React.Component<AvatarSectionProps, {
                                                 race={player.profile.race} 
                                                 profession={player.profile.profession} 
                                                 level={player.profile.level} 
-                                                size='small'
                                                 hp={player.profile.hp}
                                                 mp={player.profile.mp}
                                                 sp={player.profile.sp} />)}

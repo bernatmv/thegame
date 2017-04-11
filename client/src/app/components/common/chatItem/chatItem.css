@@ -1,6 +1,8 @@
+@import '../../../../theme/colors.css';
+
 .container__system__chat__messages__item_system {
     background: none !important;
-    color: yellow !important;
+    color: var(--chat-message-text-color--system) !important;
     font-size: 16px !important;
     padding: 5px 10px !important;
 
@@ -10,9 +12,9 @@
 }
 
 .container__system__chat__messages__item_me {
-    color: lightgreen !important;
+    color: var(--chat-message-text-color--me) !important;
 }
 
 .container__system__chat__messages__item_received {
-    color: #888 !important;
+    color: var(--chat-message-text-color--received) !important;
 }

@@ -29,7 +29,7 @@ export class TheGame extends React.Component<TheGameProps, {}> {
                       sendChat={actions.chat.sendChat} 
                       connectionStatus={connection.connectionStatus}
                       userId={connection.userId} />
-          <SystemSection userId={connection.userId} />
+          <SystemSection connection={connection} />
         </div>
       </div>
     );

@@ -1,0 +1,33 @@
+:root {
+    /* MAIN */
+    --main-background-color: #000; /* #333 */
+    --main-text-color: #fff;
+
+    /* SYSTEM SECTION */
+    --system-background-color: #333; /* #000 */
+    --system-background-color--hover: #0A0A0A;
+
+    /* ROOM */
+    --room-border-color: #888;
+    --room-header-border-color: #333;
+    --room-header-text-color: #888;
+    --room-footer-border-color: #333;
+    --room-footer-text-color: #888;
+    --room-footer-text-color--positive: #fff;
+    --room-footer-text-color--player: lightblue;
+    --room-footer-text-color--npc: lightgreen;
+    --room-direction-border-color: #333;
+    --room-direction-text-color: #888;
+
+    /* CHAT */
+   --chat-container-border-color: #333;
+   --chat-container-background-color--hover: #0A0A0A;
+   --chat-input-border-color: #fff;
+   --chat-message-text-color--system: yellow;
+   --chat-message-text-color--me: lightgreen;
+   --chat-message-text-color--received: #888;
+
+   /* AVATAR */
+   --profile-bar-text-color: #fff;
+   --profile-bar-text-stroke-color: #000;
+}
