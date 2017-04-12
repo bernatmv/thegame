@@ -3,6 +3,8 @@ import ChatMessage from '../../reducers/models/chatMessage';
 import ChatSectionProps from './chatSectionProps';
 import { Input, List } from 'semantic-ui-react';
 import ConnectionStatus from '../../../common/stream/models/connectionStatus';
+import TranslationConstants from '../../../common/constants/translationConstants';
+import i18nService from '../../../common/service/i18nServiceImpl';
 import ChatItem from '../common/chatItem/chatItem';
 import * as style from './chatSection.css';
 
@@ -13,7 +15,7 @@ interface ChatSectionState {
 export default class ChatSection extends React.Component<ChatSectionProps, ChatSectionState> {
     static defaultProps = {
         chats: [],
-        placeholder: 'Say something...',
+        placeholder: i18nService.Instance.translate(TranslationConstants.saySomething),
         text: '',
         connecting: false
     };
@@ -42,9 +44,9 @@ export default class ChatSection extends React.Component<ChatSectionProps, ChatS
 
     private _getPlaceholder(status: ConnectionStatus): string {
         if (this.props.connectionStatus === ConnectionStatus.Connecting) {
-            return 'Connecting...';
+            return i18nService.Instance.translate(TranslationConstants.connecting);
         } else if (this.props.connectionStatus === ConnectionStatus.Disconnected) {
-            return 'Offline';
+            return i18nService.Instance.translate(TranslationConstants.offline);
         } else {
             return this.props.placeholder;
         }
