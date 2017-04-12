@@ -81,6 +81,8 @@ module.exports = {
         postcss: [
           require('postcss-import')({ addDependencyTo: webpack }),
           require('postcss-url')(),
+          require('postcss-for')(),
+          require('postcss-random')(),
           require('postcss-cssnext')(),
           require('postcss-reporter')(),
           require('postcss-browser-reporter')({ disabled: isProduction }),

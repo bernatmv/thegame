@@ -1,11 +1,11 @@
 {
     "id": "chicken-001",
-    "name": "Pascual",
-    "description": "Un pollo de campo común. Tiene plumas, pico y ¡una mirada maliciosa en los ojos!",
+    "name": null,
+    "description": "itemChickenDescription",
     "isAlive": true,
     "gender": "male",
-    "singular": "pollo",
-    "plural": "pollos",
+    "singular": "itemChickenSingular",
+    "plural": "itemChickenPlural",
     "chatter": [
         "cooooo!"
     ]

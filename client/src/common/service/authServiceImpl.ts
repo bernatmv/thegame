@@ -2,7 +2,6 @@ import AuthService from './authService';
 import PlayerModel from './models/playerModel';
 import ProfileModel from './models/profileModel';
 import StatusPropertyModel from './models/statusPropertyModel';
-import RaceConstants from '../constants/raceConstants';
 import { debug } from './models/appLogger';
 
 export default class AuthServiceImpl implements AuthService {
@@ -12,7 +11,7 @@ export default class AuthServiceImpl implements AuthService {
             id,
             new ProfileModel(
                 id,
-                RaceConstants.Human,
+                'Humano',
                 'humano',
                 'humanos',
                 null,

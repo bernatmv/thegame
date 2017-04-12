@@ -4,6 +4,8 @@ import RoomFooter from './components/roomFooter';
 import RoomSectionProps from './roomSectionProps';
 import Direction from './components/direction';
 import ActionsConstants from '../../../common/constants/actionsConstants';
+import TranslationConstants from '../../../common/constants/translationConstants';
+import i18nService from '../../../common/service/i18nServiceImpl';
 import * as classnames from 'classnames';
 import * as style from './roomSection.css';
 
@@ -27,12 +29,36 @@ export default class RoomSection extends React.Component<RoomSectionProps, {}> {
 
     render(): JSX.Element {
         let exits = this.props.room.exits;
-        let north = (exits.north) ? <Direction title={'North'} move={() => this.props.move(ActionsConstants.MoveNorth)} nextRoom={exits.roomNorth} /> : null;
-        let east = (exits.east) ? <Direction title={'East'} move={() => this.props.move(ActionsConstants.MoveEast)} nextRoom={exits.roomEast} /> : null;
-        let south = (exits.south) ? <Direction title={'South'} move={() => this.props.move(ActionsConstants.MoveSouth)} nextRoom={exits.roomSouth} /> : null;
-        let west = (exits.west) ? <Direction title={'West'} move={() => this.props.move(ActionsConstants.MoveWest)} nextRoom={exits.roomWest} /> : null;
-        let up = (exits.up) ? <Direction title={'Up'} move={() => this.props.move(ActionsConstants.MoveUp)} nextRoom={exits.roomUp} /> : null;
-        let down = (exits.down) ? <Direction title={'Down'} move={() => this.props.move(ActionsConstants.MoveDown)} nextRoom={exits.roomDown} /> : null;
+        let north = (exits.north) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.north)} 
+                                move={() => this.props.move(ActionsConstants.MoveNorth)} 
+                                nextRoom={exits.roomNorth} /> 
+                    : null;
+        let east = (exits.east) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.east)} 
+                                move={() => this.props.move(ActionsConstants.MoveEast)} 
+                                nextRoom={exits.roomEast} /> 
+                    : null;
+        let south = (exits.south) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.south)} 
+                                move={() => this.props.move(ActionsConstants.MoveSouth)} 
+                                nextRoom={exits.roomSouth} /> 
+                    : null;
+        let west = (exits.west) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.west)} 
+                                move={() => this.props.move(ActionsConstants.MoveWest)} 
+                                nextRoom={exits.roomWest} /> 
+                    : null;
+        let up = (exits.up) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.up)} 
+                                move={() => this.props.move(ActionsConstants.MoveUp)} 
+                                nextRoom={exits.roomUp} /> 
+                    : null;
+        let down = (exits.down) 
+                    ? <Direction title={i18nService.Instance.translate(TranslationConstants.down)} 
+                                move={() => this.props.move(ActionsConstants.MoveDown)} 
+                                nextRoom={exits.roomDown} /> 
+                    : null;
 
         return (
             <div className={style.room} key={this.props.room.id}>

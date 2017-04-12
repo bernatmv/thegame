@@ -8,7 +8,7 @@
     box-sizing: border-box;
     border: 1px solid var(--room-direction-border-color);
     border-radius: 3px;
-    width: 60%;
+    width: 75%;
     height: 60px;
     cursor: pointer;
 

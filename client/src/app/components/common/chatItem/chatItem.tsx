@@ -2,6 +2,8 @@ import * as React from 'react';
 import ChatItemProps from './chatItemProps';
 import { List, Message, Icon } from 'semantic-ui-react';
 import SystemConstants from '../../../../common/constants/systemConstants';
+import TranslationConstants from '../../../../common/constants/translationConstants';
+import i18nService from '../../../../common/service/i18nServiceImpl';
 import * as style from './chatItem.css';
 
 export default class ChatItem extends React.Component<ChatItemProps, {}> {
@@ -13,16 +15,16 @@ export default class ChatItem extends React.Component<ChatItemProps, {}> {
     private _calculateHowLongAgo(received: number): string {
         let elapsed = Date.now() - received;
         if (elapsed < 10 * 1000) { //less than 10 seconds ago
-            return 'a moment ago';
+            return i18nService.Instance.translate(TranslationConstants.aMomentAgo);
         } else if (elapsed < 60 * 1000) { //less than 1 minute ago
             let seconds = Math.floor(elapsed / (1000));
-            return seconds + ' seconds ago';
+            return seconds + i18nService.Instance.translate(TranslationConstants.secondsAgo);
         } else if (elapsed < 60 * 60 * 1000) { //less than 1 hour ago
             let minutes = Math.floor(elapsed / (60 * 1000));
-            return minutes + ' minute' + ((minutes > 1) ? 's' : '') + ' ago';
+            return minutes + i18nService.Instance.translate(TranslationConstants.minute) + ((minutes > 1) ? 's' : '') + i18nService.Instance.translate(TranslationConstants.ago);
         } else { // everything in hours
             let hours = Math.floor(elapsed / (60 * 60 * 1000));
-            return hours + ' hour' + ((hours > 1) ? 's' : '') + ' ago';            
+            return hours + i18nService.Instance.translate(TranslationConstants.hour) + ((hours > 1) ? 's' : '') + i18nService.Instance.translate(TranslationConstants.ago);
         }
     }
 

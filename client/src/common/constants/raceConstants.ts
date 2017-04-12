@@ -1,5 +1,5 @@
-const Human = 'Human';
-const Goblin = 'Goblin';
+const Human = 'raceHuman';
+const Goblin = 'raceGoblin';
 
 export default class RaceConstants {
     // Human-like

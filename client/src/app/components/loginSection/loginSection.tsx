@@ -2,6 +2,8 @@ import * as React from 'react';
 import LoginSectionProps from './loginSectionProps';
 import { Input, Image } from 'semantic-ui-react';
 import ConnectionStatus from '../common/connectionStatus/connectionStatus';
+import TranslationConstants from '../../../common/constants/translationConstants';
+import i18nService from '../../../common/service/i18nServiceImpl';
 import * as style from './loginSection.css';
 import * as logoImage from '../../../../assets/images/spider-alt.svg';
 
@@ -11,7 +13,7 @@ interface LoginSectionState {
 
 export default class ChatSection extends React.Component<LoginSectionProps, LoginSectionState> {
     static defaultProps = {
-        placeholder: '¿Cómo te llamas?'
+        placeholder: i18nService.Instance.translate(TranslationConstants.loginInputPlaceholder)
     };
 
     constructor(props?: LoginSectionProps, context?: any) {
@@ -39,7 +41,9 @@ export default class ChatSection extends React.Component<LoginSectionProps, Logi
                 <ConnectionStatus connection={this.props.connection} top right />
                 <div className={style.login__menu}>
                     <div className={style.login__logo}>
-                        <Image src={logoImage} size={'medium'} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__main} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__before} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__after} />
                     </div>
                     <div className={style.login__input}>
                         <Input size='medium' autoFocus

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Tooltip} from 'react-lightweight-tooltip';
 import DirectionProps from './directionProps';
+import TranslationConstants from '../../../../common/constants/translationConstants';
+import i18nService from '../../../../common/service/i18nServiceImpl';
 import * as style from './direction.css';
 
 const tooltipStyle = {
@@ -27,8 +29,8 @@ const tooltipStyle = {
 export default class Direction extends React.Component<DirectionProps, {}> {
     static defaultProps = {
         nextRoom: {
-            title: '? ? ?',
-            shortDescription: 'Aún no has visitado esta ubicación!'
+            title: i18nService.Instance.translate(TranslationConstants.unvisitedDirection),
+            shortDescription: i18nService.Instance.translate(TranslationConstants.unvisitedLocation)
         }
     };
 
