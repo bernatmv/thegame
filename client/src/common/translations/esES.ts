@@ -56,7 +56,7 @@ export const esES: {locale: string, translations: Translations} = {
         ['raceGoblinSingular']: 'goblin',
         ['raceGoblinPlural']: 'goblins',
         // ITEMS
-        ['itemChickenDescription']: 'Un pollo de campo común. Tiene plumas, pico y ¡una mirada maliciosa en los ojos!',
+        ['itemChickenDescription']: 'Un pollo de campo común.\nTiene plumas, pico y ¡una mirada maliciosa en los ojos!',
         ['itemChickenSingular']: 'pollo',
         ['itemChickenPlural']: 'pollos',
     }

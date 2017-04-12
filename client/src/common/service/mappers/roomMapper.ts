@@ -1,6 +1,5 @@
 import RoomDto from '../dtos/roomDto';
 import RoomModel from '../models/roomModel';
-import EnemyModel from '../models/enemyModel';
 import PlayerMapper from './playerMapper';
 import EnemyMapper from './enemyMapper';
 import NPCMapper from './npcMapper';
