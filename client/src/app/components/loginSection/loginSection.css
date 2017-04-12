@@ -34,7 +34,7 @@
         height: 100%;
         background: #333;
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-        animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        animation: glitch-anim-1 1s infinite linear alternate-reverse;
     }
 
     & .login__logo__after {
@@ -46,7 +46,7 @@
         height: 100%;
         background: #333;
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-        animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        animation: glitch-anim-2 1s infinite linear alternate-reverse;
     }
 
     & .login__input {

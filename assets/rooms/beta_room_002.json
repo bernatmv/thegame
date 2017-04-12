@@ -1,8 +1,8 @@
 {
     "id": "beta-room-002",
-    "title": "Las afueras del campamento",
-    "shortDescription": "Entre el bosque y la pared de una colina, hay un pequeño campamento",
-    "description": "El camino lleva hasta un espacio abierto entre el bosque y la pared de una colina.\nEn este lugar hay un pequeño asentamiento rodeado por una empalizada de algo menos de dos metros. Los troncos de la empalizada son pequeños e irregulares, y están atados con primitivas cuerdas de cáñamo.",
+    "title": "roomBeta002Title",
+    "shortDescription": "roomBeta002ShortDescription",
+    "description": "roomBeta002Description",
     "exits": {
         "north": "beta-room-003",
         "south": "beta-room-001"

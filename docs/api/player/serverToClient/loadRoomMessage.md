@@ -6,9 +6,6 @@
     time: number;
     room: {
         id: string,
-        title: string,
-        shortDescription: string,
-        description: string,
         exits: {
             north?: string,
             east?: string,
@@ -29,9 +26,6 @@
     `time` => *required* => The time when the message have been sent (in milliseconds from 1 Jan 1970)
     `room` => *required* => A full definition of the room
         `room.id` => *required* => The id of the room
-        `room.title` => *required* => The title of the room
-        `room.shortDescription` => *required* => The short description of the room
-        `room.description` => *required* => The description of the room
         `room.exits` => *required* => All the available exits from this room
             `room.exits.north` => _optional_ => The *id* of the room connecting to this one from the north
             `room.exits.east` => _optional_ => The *id* of the room connecting to this one from the east

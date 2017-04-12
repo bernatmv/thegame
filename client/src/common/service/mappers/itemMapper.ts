@@ -1,16 +1,17 @@
 import ItemDto from '../dtos/itemDto';
 import ItemModel from '../models/itemModel';
+import i18nService from '../i18nServiceImpl';
 
 export default class ItemMapper {
     public map(dto: ItemDto): ItemModel {
         return new ItemModel(
             dto.id,
-            dto.name,
-            dto.decription,
+            i18nService.Instance.translate(dto.name),
+            i18nService.Instance.translate(dto.description),
             dto.isAlive,
             dto.gender,
-            dto.singular,
-            dto.plural,
+            i18nService.Instance.translate(dto.singular),
+            i18nService.Instance.translate(dto.plural),
             dto.chatter
         );
     }

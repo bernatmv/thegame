@@ -3,7 +3,7 @@ import i18nService from './i18nService';
 import I18N from '../helpers/i18n';
 import { debug } from './models/appLogger';
 
-export default class i18nServiceImpl implements i18nService {    
+export default class i18nServiceImpl implements i18nService {//tslint:disable-line
     private static _instance: i18nServiceImpl;
     private _locale: string;
 
@@ -16,6 +16,9 @@ export default class i18nServiceImpl implements i18nService {
     }
 
     translate(id: string): string {
+        if (!id) {
+            return null;
+        }
         return I18N.translate(id, this._locale);
     }
 
