@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Label, Icon } from 'semantic-ui-react';
 import ConnectionStatus from '../../../../common/stream/models/connectionStatus';
 import ConnectionStatusProps from './connectionStatusProps';
+import TranslationConstants from '../../../../common/constants/translationConstants';
+import i18nService from '../../../../common/service/i18nServiceImpl';
 import * as classnames from 'classnames';
 import * as style from './connectionStatus.css';
 
@@ -19,20 +21,20 @@ export default class ChatSection extends React.Component<ConnectionStatusProps, 
         if (connectionStatus === ConnectionStatus.Connected) {
             color = 'teal';
             icon = 'thumbs outline up';
-            label = 'Conectado';
+            label = i18nService.Instance.translate(TranslationConstants.online);
         } else if (connectionStatus === ConnectionStatus.Connecting) {
             color = 'yellow';
             icon = 'circle notched';
-            label = 'Conectando...';
+            label = i18nService.Instance.translate(TranslationConstants.connecting);
             loading = true;
         } else if (connectionStatus === ConnectionStatus.Disconnected) {
             color = 'red';
             icon = 'thumbs outline down';
-            label = 'Desconectado';
+            label = i18nService.Instance.translate(TranslationConstants.offline);
         }
         return <Label color={color} image className={classes}>
                     <Icon name={icon} loading={loading} />
-                    {'Servidor'}
+                    {i18nService.Instance.translate(TranslationConstants.server)}
                     <Label.Detail>{label}</Label.Detail>
                 </Label>;
     }
