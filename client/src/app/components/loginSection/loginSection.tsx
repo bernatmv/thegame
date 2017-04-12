@@ -39,7 +39,9 @@ export default class ChatSection extends React.Component<LoginSectionProps, Logi
                 <ConnectionStatus connection={this.props.connection} top right />
                 <div className={style.login__menu}>
                     <div className={style.login__logo}>
-                        <Image src={logoImage} size={'medium'} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__main} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__before} />
+                        <Image src={logoImage} size={'medium'} className={style.login__logo__after} />
                     </div>
                     <div className={style.login__input}>
                         <Input size='medium' autoFocus
