@@ -1,4 +1,4 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.engine.messages;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,21 +12,29 @@ import lombok.ToString;
  * @author afarre
  */
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @EqualsAndHashCode
-@ToString(exclude={"stacktrace"})
-public class ErrorMessage implements IsMessage<ErrorMessage>{
+public class ChatMessageBean implements IsMessageBean{
 
+	public enum MessageType{
+		SAY,WHISPER,YELL;
+	}
+	
 	@Setter
 	@Getter
-	private String code;
-
+	private MessageType type;
+	
 	@Setter
 	@Getter
 	private String message;
 
 	@Setter
 	@Getter
-	private String stacktrace;
+	private String sender;
+
+	@Setter
+	@Getter
+	private String recipient;
 }

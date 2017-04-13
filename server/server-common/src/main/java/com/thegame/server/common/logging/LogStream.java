@@ -1,10 +1,8 @@
 package com.thegame.server.common.logging;
 
-import java.util.Optional;
-import java.util.function.Function;
+import com.thegame.server.common.utils.StringUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -31,29 +29,6 @@ public class LogStream{
 	}
 
 	
-	protected String buildMessage(final String _message,final Object... _args){
-		
-		return Optional.of(_message)
-					.filter(message -> message.contains("{"))
-					.filter(message -> _args.length>0)
-					.map(message -> Stream.of(message.split("\\{\\}"))
-										.flatMap(new Function<String,Stream<String>>() {
-
-											private int ic1=0;
-
-											@Override
-											public Stream<String> apply(final String _segment) {
-												return Stream.of(_segment,Optional.of(ic1++)
-																				.filter(counter -> counter<_args.length)
-																				.map(counter -> _args[counter])
-																				.map(object -> String.valueOf(object))
-																				.orElse(""));
-											}
-										})
-										.collect(Collectors.joining("")))
-					.orElse(_message);
-	}
-	
 	
 	public LogStream log(final Level _level,final String _message,final Object... _args){
 		final String[] caller=Stream.of(Thread.currentThread().getStackTrace())
@@ -65,9 +40,9 @@ public class LogStream{
 		if((_args.length>0)
 				&&(_args[_args.length-1]!=null)
 				&&(Throwable.class.isAssignableFrom(_args[_args.length-1].getClass()))){
-			this.logger.logp(_level,caller[0],caller[1],(Throwable)_args[_args.length-1],() -> buildMessage(_message, _args));
+			this.logger.logp(_level,caller[0],caller[1],(Throwable)_args[_args.length-1],() -> StringUtils.format(_message, _args));
 		}else{
-			this.logger.logp(_level,caller[0],caller[1], () -> buildMessage(_message, _args));
+			this.logger.logp(_level,caller[0],caller[1], () -> StringUtils.format(_message, _args));
 		}
 		return this;
 	}

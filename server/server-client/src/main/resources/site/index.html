@@ -10,7 +10,7 @@
 
 <script>
 	var wsocket;
-	var serviceLocation = "ws://localhost:8080/chat/";
+	var serviceLocation = "ws://localhost:8080/thegame/channel";
 	var $nickName;
 	var $message;
 	var $chatWindow;
@@ -34,7 +34,7 @@
  
 	function connectToChatserver() {
 		room = $('#chatroom option:selected').val();
-		wsocket = new WebSocket(serviceLocation + room);
+		wsocket = new WebSocket(serviceLocation);
 		wsocket.onmessage = onMessageReceived;
 	}
  

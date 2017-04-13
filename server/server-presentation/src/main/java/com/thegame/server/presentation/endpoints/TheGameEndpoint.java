@@ -1,88 +1,88 @@
 package com.thegame.server.presentation.endpoints;
 
-import com.thegame.server.common.StringUtils;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.presentation.messages.ChatMessage;
+import com.thegame.server.common.utils.StringUtils;
+import com.thegame.server.engine.TheGameMessageProcessor;
+import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
 import com.thegame.server.presentation.messages.ErrorMessage;
+import com.thegame.server.presentation.messages.IsMessage;
+import com.thegame.server.presentation.messages.MessageFactory;
 import java.io.IOException;
 import javax.websocket.EncodeException;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 /**
  * @author afarre
  */
-@ServerEndpoint(value = "/chat/{room}"
-	, encoders = {ChatMessage.class,ErrorMessage.class}
-	, decoders = {ChatMessage.class,ErrorMessage.class})
+@ServerEndpoint(value = "/thegame/channel")
 public class TheGameEndpoint {
 
 	private static final LogStream log = LogStream.getLogger(TheGameEndpoint.class);
 
 	
 	@OnOpen
-	public void open(final Session _session, @PathParam("room") final String _room) {
+	public void open(final Session _session) {
 
 		try {
-			log.finest("thegame-endpoint::session::{}::open::{}::begin",_session.getId(),_room);
-			_session.getUserProperties().put("room", _room);
-			log.info("thegame-endpoint::session::{}::open::{}::open",_session.getId(),_room);
-			log.trace("thegame-endpoint::session::{}::open::{}::end",_session.getId(),_room);
+			log.finest("thegame-endpoint::session::{}::open::begin",_session.getId());
+			TheGameMessageProcessor.getInstance()
+				.process(RegisterPlayerMessageBean.builder()
+						.name(_session.getId())
+						.channel(messageBean -> {
+													final IsMessage bean=MessageFactory.getInstance(messageBean);
+													try {
+														_session
+															.getBasicRemote()
+															.sendText(bean
+																		.encode(bean));
+													} catch (IOException|EncodeException e) {
+														throw new RuntimeException(e);
+													}
+												})
+						.build());			
+			log.info("thegame-endpoint::session::{}::open::open",_session.getId());
+			log.trace("thegame-endpoint::session::{}::open::end",_session.getId());
 		}catch(Throwable e){
-			log.error("thegame-endpoint::session::{}::open::{}::fail",_session.getId(),_room,e);
+			log.error("thegame-endpoint::session::{}::open::fail",_session.getId(),e);
 		}
 	}
  
 	@OnMessage
-	public void onChatMessage(final Session _session, final ChatMessage _chatMessage) {
+	public void onMessage(final Session _session, final String _message) {
 
 		try {
-			log.finest("thegame-endpoint::session::{}::chat-message::begin",_session.getId());
-			final String room = (String) _session.getUserProperties().get("room");
-			log.trace("thegame-endpoint::session::{}::chat-message::room::{}",_session.getId(),room);
-			_session.getOpenSessions().stream()
-				.peek(session -> log.trace("thegame-endpoint::session::{}::chat-message::room::{}::check::{}",_session.getId(),room,session.getId()))
-				.filter(session -> session.isOpen())
-				.peek(session -> log.trace("thegame-endpoint::session::{}::chat-message::room::{}::check::{}::open",_session.getId(),room,session.getId()))
-				.filter(session -> room.equals(session.getUserProperties().get("room")))
-				.peek(session -> log.trace("thegame-endpoint::session::{}::chat-message::room::{}::deliver::{}",_session.getId(),room,session.getId()))
-				.map(session ->  session.getBasicRemote())
-				.forEach(basicConnection -> {
-												try {
-													log.finest("thegame-endpoint::session::{}::chat-message::room::{}::deliver::begin",_session.getId(),room);
-													basicConnection.sendObject(_chatMessage);
-													log.finest("thegame-endpoint::session::{}::chat-message::room::{}::deliver::end",_session.getId(),room);
-												} catch (Throwable e) {
-													log.error("thegame-endpoint::session::{}::chat-message::room::{}::deliver::failed",_session.getId(),room,e);
-													throw new RuntimeException(e);
-												}
-											});
-			log.trace("thegame-endpoint::session::{}::chat-message::end",_session.getId());
+			log.finest("thegame-endpoint::session::{}::message::begin",_session.getId());
+			TheGameMessageProcessor.getInstance()
+				.process(
+					MessageFactory.getInstance(
+						MessageFactory.getInstance(_message)));
+			log.trace("thegame-endpoint::session::{}::message::end",_session.getId());
 		}catch(Throwable e){
-			log.error("thegame-endpoint::session::{}::chat-message::fail",_session.getId(),e);
+			log.error("thegame-endpoint::session::{}::message::fail",_session.getId(),e);
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+		
 	@OnError
+	@SuppressWarnings("UseSpecificCatch")
 	public void onError(final Session _session, final Throwable _error) {
 		
 		try {
 			log.finest("thegame-endpoint::session::{}::error-message::begin",_session.getId());
 			_session.getBasicRemote()
-					.sendObject(
+					.sendText(
 						ErrorMessage.builder()
 									.code(_error.getClass().getSimpleName())
 									.message(_error.getMessage())
 									.stacktrace(StringUtils.toString(_error))
-									.build());
+									.build()
+									.encode());
 			log.warning("thegame-endpoint::session::{}::error-message::end::{}",_session.getId(),_error);
-		} catch (IOException | EncodeException e) {
+		} catch (Throwable e) {
 			log.error("thegame-endpoint::session::{}::error-message::failed",_session.getId(),e);
 		}
 	}

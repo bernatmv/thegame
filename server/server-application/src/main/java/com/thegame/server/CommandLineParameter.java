@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 /**
  * @author E103880
  */
-public enum ApplicationParameter {
+public enum CommandLineParameter {
 
 	ACTION("start"),
 	HOST("localhost"),
@@ -18,18 +18,18 @@ public enum ApplicationParameter {
 	
 	public final String defaultValue;
 	
-	ApplicationParameter(final String _default){
+	CommandLineParameter(final String _default){
 		this.defaultValue=_default;
 	}
 	
-	public static final Map<ApplicationParameter,Optional<String>> loadParams(final String... _args){
+	public static final Map<CommandLineParameter,Optional<String>> loadParams(final String... _args){
 
-		final Map<ApplicationParameter,String> parametersLoaded=Stream.of(_args)
+		final Map<CommandLineParameter,String> parametersLoaded=Stream.of(_args)
 			.map(arg -> arg.split(":"))
-			.map(array -> new Object[]{ApplicationParameter.valueOf(array[0].toUpperCase()),array[1]})
-			.collect(Collectors.toMap(array -> (ApplicationParameter)array[0],array -> (String)array[1]));
+			.map(array -> new Object[]{CommandLineParameter.valueOf(array[0].toUpperCase()),array[1]})
+			.collect(Collectors.toMap(array -> (CommandLineParameter)array[0],array -> (String)array[1]));
 
-		return Stream.of(ApplicationParameter.values())
+		return Stream.of(CommandLineParameter.values())
 			.collect(Collectors.toMap(param -> param, param -> Optional.of((parametersLoaded.containsKey(param))? parametersLoaded.get(param) : param.defaultValue)));
 	}
 }
