@@ -10,7 +10,7 @@ import java.time.ZoneOffset;
 /**
  * @author afarre
  */
-public class LocalDateTimeConverter implements Converter<LocalDateTime> {
+public class LocalDateTimeJSONConverter implements Converter<LocalDateTime> {
 
 	@Override
 	public void serialize(final LocalDateTime _t,final ObjectWriter _writer,final Context _cntxt) throws Exception {

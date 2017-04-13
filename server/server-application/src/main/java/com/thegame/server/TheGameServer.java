@@ -17,16 +17,19 @@ public class TheGameServer {
 	enum Actions{
 		START{
 			@Override
-			public void execute(final Map<ApplicationParameter,Optional<String>> _params){
+			@SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
+			public void execute(final Map<CommandLineParameter,Optional<String>> _params){
 				
 				try{
-					final String host=_params.get(ApplicationParameter.HOST).orElse(ApplicationParameter.HOST.defaultValue);
-					final int port=Integer.valueOf(_params.get(ApplicationParameter.PORT).orElse(ApplicationParameter.PORT.defaultValue));
-					final String name=_params.get(ApplicationParameter.NAME).orElse(ApplicationParameter.NAME.defaultValue);
+					final String host=_params.get(CommandLineParameter.HOST).orElse(CommandLineParameter.HOST.defaultValue);
+					final int port=Integer.valueOf(_params.get(CommandLineParameter.PORT).orElse(CommandLineParameter.PORT.defaultValue));
+					final String name=_params.get(CommandLineParameter.NAME).orElse(CommandLineParameter.NAME.defaultValue);
 					TheGameServer.daemon=Optional.of(new HTTPDaemon(host,port,name)
-												.start()
-												.deployApplication(new TheGameApplication()));
+												.start());
+					TheGameServer.daemon
+						.ifPresent(httpDaemon -> httpDaemon.deployApplication(new TheGameApplication()));;
 				}catch(Throwable e){
+					e.printStackTrace();
 					TheGameServer.daemon
 						.ifPresent(httpDaemon -> httpDaemon.stop());
 				}
@@ -34,30 +37,32 @@ public class TheGameServer {
 		},
 		SHUTDOWN{
 			@Override
-			public void execute(final Map<ApplicationParameter,Optional<String>> _params){
+			public void execute(final Map<CommandLineParameter,Optional<String>> _params){
 				TheGameServer.daemon
 					.ifPresent(httpDaemon -> httpDaemon.stop());
 			}
 		},
 		;
 		
-		public abstract void execute(final Map<ApplicationParameter,Optional<String>> _params);
+		public abstract void execute(final Map<CommandLineParameter,Optional<String>> _params);
 	}
 	
 	public static void configureLogs() throws SecurityException, UnsupportedEncodingException{
-		System.setProperty("java.util.logging.SimpleFormatter.format","%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %2$s %5$s%6$s%n");
+		//System.setProperty("java.util.logging.SimpleFormatter.format","%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %2$s %5$s%6$s%n");
+		System.setProperty("java.util.logging.SimpleFormatter.format","%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %5$s%6$s%n");
 		Stream.of(Logger.getLogger("").getHandlers())
 			.forEach(handler -> handler.setLevel(Level.FINEST));
 		Logger.getLogger("com.thegame").setLevel(Level.FINEST);
+		Logger.getLogger("com.thegame.server.common").setLevel(Level.INFO);
 	}
 	
-	@SuppressWarnings("CallToPrintStackTrace")
+	@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
     public static void main(final String[] _args)  {
 
 		try{			
 			configureLogs();
-			final Map<ApplicationParameter,Optional<String>> params=ApplicationParameter.loadParams(_args);
-			Actions.valueOf(params.get(ApplicationParameter.ACTION).orElse(ApplicationParameter.ACTION.defaultValue).toUpperCase())
+			final Map<CommandLineParameter,Optional<String>> params=CommandLineParameter.loadParams(_args);
+			Actions.valueOf(params.get(CommandLineParameter.ACTION).orElse(CommandLineParameter.ACTION.defaultValue).toUpperCase())
 				.execute(params);
 			
 			Runtime.getRuntime().addShutdownHook(new Thread() {

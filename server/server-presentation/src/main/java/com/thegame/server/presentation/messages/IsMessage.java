@@ -3,7 +3,7 @@ package com.thegame.server.presentation.messages;
 import com.owlike.genson.GensonBuilder;
 import com.owlike.genson.annotation.HandleNull;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.presentation.messages.support.LocalDateTimeConverter;
+import com.thegame.server.presentation.messages.support.LocalDateTimeJSONConverter;
 import java.time.LocalDateTime;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
@@ -14,13 +14,14 @@ import javax.websocket.EndpointConfig;
 /**
  *
  * @author afarre
+ * @param <T>
  */
 @HandleNull
 public interface IsMessage<T> extends Decoder.Text<T>, Encoder.Text<T> {
 
 	public static final GensonBuilder JsonBuilder=new GensonBuilder()
 										.setSkipNull(true)
-										.withConverter(new LocalDateTimeConverter(), LocalDateTime.class);
+										.withConverter(new LocalDateTimeJSONConverter(), LocalDateTime.class);
 
 
 	public default String getKind(){
@@ -60,6 +61,9 @@ public interface IsMessage<T> extends Decoder.Text<T>, Encoder.Text<T> {
 		return reply;
 	}
 
+	public default String encode() throws EncodeException{
+		return encode((T)this);
+	}
 	
 	@Override
 	public default String encode(final T _message) throws EncodeException{

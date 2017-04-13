@@ -1,4 +1,4 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.engine.messages;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,21 +16,25 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class ChatMessage implements IsMessage<ChatMessage>{
+public class ChatMessageBean implements IsMessageBean{
 
-	@Setter
-	@Getter
-	public String type="SAY";
+	public enum MessageType{
+		SAY,WHISPER,YELL;
+	}
 	
 	@Setter
 	@Getter
-	public String message;
+	private MessageType type;
+	
+	@Setter
+	@Getter
+	private String message;
 
 	@Setter
 	@Getter
-	public String sender;
+	private String sender;
 
 	@Setter
 	@Getter
-	public String recipient;
+	private String recipient;
 }

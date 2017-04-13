@@ -61,6 +61,6 @@ public abstract class MessageBaseTest<T extends IsMessage> {
 	protected void testEncode(final String _expected,final T _object) throws InstantiationException, IllegalAccessException, EncodeException{
 		String result=getMessageClass().newInstance().encode(_object);
 		System.out.println(result);
-		Assert.assertEquals(_expected.replaceFirst("\"time\":\\d*",""), result.replaceFirst("\"time\":\\d*",""));
+		Assert.assertEquals(_expected.replaceFirst(",\"time\":\\d*",""), result.replaceFirst(",\"time\":\\d*",""));
 	}
 }

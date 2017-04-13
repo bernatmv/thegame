@@ -1,5 +1,6 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.engine.messages;
 
+import java.util.function.Consumer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -16,13 +17,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class MoveMessage implements IsMessage<MoveMessage>{
-
-	@Setter
-	@Getter
-	public String sender;
+public class RegisterPlayerMessageBean implements IsMessageBean{
 	
 	@Setter
 	@Getter
-	public String direction;
+	private String name;
+
+	@Setter
+	@Getter
+	private Consumer<IsMessageBean> channel;
 }
