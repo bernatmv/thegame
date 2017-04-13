@@ -4,11 +4,15 @@ import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.utils.StringUtils;
 import com.thegame.server.engine.TheGameMessageProcessor;
 import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
+import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
 import com.thegame.server.presentation.messages.ErrorMessage;
 import com.thegame.server.presentation.messages.IsMessage;
 import com.thegame.server.presentation.messages.MessageFactory;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import javax.websocket.CloseReason;
 import javax.websocket.EncodeException;
+import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -34,11 +38,14 @@ public class TheGameEndpoint {
 						.name(_session.getId())
 						.channel(messageBean -> {
 													final IsMessage bean=MessageFactory.getInstance(messageBean);
+													bean.setTime(LocalDateTime.now());
 													try {
+														final String jsonMessage=bean
+																		.encode(bean);
+														log.debug("thegame-endpoint::session::{}::send::{}",_session.getId(),jsonMessage);
 														_session
 															.getBasicRemote()
-															.sendText(bean
-																		.encode(bean));
+															.sendText(jsonMessage);
 													} catch (IOException|EncodeException e) {
 														throw new RuntimeException(e);
 													}
@@ -56,6 +63,7 @@ public class TheGameEndpoint {
 
 		try {
 			log.finest("thegame-endpoint::session::{}::message::begin",_session.getId());
+			log.debug("thegame-endpoint::session::{}::receive::{}",_session.getId(),_message);
 			TheGameMessageProcessor.getInstance()
 				.process(
 					MessageFactory.getInstance(
@@ -66,7 +74,24 @@ public class TheGameEndpoint {
 			throw new RuntimeException(e);
 		}
 	}
-		
+
+	@OnClose
+	public void onClose(final Session _session, final CloseReason _reason) {
+
+		try {
+			log.finest("thegame-endpoint::session::{}::close::{}-{}::begin",_session.getId(),_reason.getCloseCode(),_reason.getReasonPhrase());
+			TheGameMessageProcessor.getInstance()
+				.process(
+					UnregisterPlayerMessageBean.builder()
+						.name(_session.getId())
+						.build());
+			log.trace("thegame-endpoint::session::{}::close::{}-{}::end",_session.getId(),_reason.getCloseCode(),_reason.getReasonPhrase());
+		}catch(Throwable e){
+			log.error("thegame-endpoint::session::{}::close::{}-{}::fail",_session.getId(),_reason.getCloseCode(),_reason.getReasonPhrase(),e);
+			throw new RuntimeException(e);
+		}
+	}
+	
 	@OnError
 	@SuppressWarnings("UseSpecificCatch")
 	public void onError(final Session _session, final Throwable _error) {
@@ -76,6 +101,7 @@ public class TheGameEndpoint {
 			_session.getBasicRemote()
 					.sendText(
 						ErrorMessage.builder()
+									.time(LocalDateTime.now())
 									.code(_error.getClass().getSimpleName())
 									.message(_error.getMessage())
 									.stacktrace(StringUtils.toString(_error))

@@ -11,14 +11,14 @@ import org.mapstruct.Mapper;
  */
 @Mapper
 public interface MessageMapper {
- 
-	@Converter(ChatMessageBean.class)
-    public ChatMessageBean chatMessateToBean(final ChatMessage _chatMessage);
-	@Converter(ChatMessage.class)
+
+	@Converter
+	public ChatMessageBean chatMessateToBean(final ChatMessage _chatMessage);
+	@Converter
 	public ChatMessage beanToChatMessateMessage(final ChatMessageBean _chatMessage);
 
-	@Converter(MoveMessageBean.class)
+	@Converter
 	public MoveMessageBean moveMessateToBean(final MoveMessage _chatMessage);
-	@Converter(MoveMessage.class)
+	@Converter
 	public MoveMessage beanToMoveMessateMessage(final MoveMessageBean _chatMessage);
 }

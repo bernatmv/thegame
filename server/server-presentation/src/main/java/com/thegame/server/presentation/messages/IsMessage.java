@@ -27,9 +27,8 @@ public interface IsMessage<T> extends Decoder.Text<T>, Encoder.Text<T> {
 	public default String getKind(){
 		return this.getClass().getSimpleName();
 	}
-	public default LocalDateTime getTime(){
-		return LocalDateTime.now();
-	}
+	public LocalDateTime getTime();
+	public void setTime(final LocalDateTime _timestamp);
 	
 	
 	@Override
