@@ -1,9 +1,9 @@
-package com.thegame.server.engine.services.impl;
+package com.thegame.server.engine.intern.services.impl;
 
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.engine.configuration.Configuration;
-import com.thegame.server.engine.services.BusinessServiceFactory;
-import com.thegame.server.engine.services.ConfigurationService;
+import com.thegame.server.engine.intern.configuration.Configuration;
+import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.services.ConfigurationService;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;

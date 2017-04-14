@@ -1,4 +1,4 @@
-package com.thegame.server.engine.services;
+package com.thegame.server.engine.intern.services;
 
 /**
  * @author afarre

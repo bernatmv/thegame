@@ -1,11 +1,11 @@
-package com.thegame.server.engine.services;
+package com.thegame.server.engine.intern;
 
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
-import com.thegame.server.engine.services.impl.ChatServiceImpl;
-import com.thegame.server.engine.services.impl.ConfigurationServiceImpl;
-import com.thegame.server.engine.services.impl.PlayerServiceImpl;
+import com.thegame.server.engine.intern.services.impl.ChatServiceImpl;
+import com.thegame.server.engine.intern.services.impl.ConfigurationServiceImpl;
+import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.stream.Stream;

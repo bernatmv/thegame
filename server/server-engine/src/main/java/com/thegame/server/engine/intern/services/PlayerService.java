@@ -1,6 +1,6 @@
-package com.thegame.server.engine.services;
+package com.thegame.server.engine.intern.services;
 
-import com.thegame.server.engine.data.PlayerData;
+import com.thegame.server.engine.intern.data.PlayerData;
 import java.util.Collection;
 
 /**

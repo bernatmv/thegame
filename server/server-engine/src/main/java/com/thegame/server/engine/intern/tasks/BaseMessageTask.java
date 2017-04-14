@@ -1,4 +1,4 @@
-package com.thegame.server.engine.tasks;
+package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.common.logging.LogStream;
 import lombok.Getter;

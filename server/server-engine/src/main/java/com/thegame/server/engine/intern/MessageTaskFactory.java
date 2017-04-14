@@ -1,10 +1,12 @@
-package com.thegame.server.engine.tasks;
+package com.thegame.server.engine.intern;
 
 import com.thegame.server.common.functional.LambdaUtils;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
+import com.thegame.server.engine.intern.tasks.BaseMessageTask;
+import com.thegame.server.engine.intern.tasks.Task;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public class MessageTaskFactory {
 	static {
 		try {
 			logger.trace("message-task-factory::initialization::begin");
-			final List<String> explorePackages=Stream.of("com.thegame.server.engine.tasks")
+			final List<String> explorePackages=Stream.of("com.thegame.server.engine.intern.tasks")
 														.collect(Collectors.toList());
 			final List<String> resourcesFilter=Stream.of("*.class")
 														.collect(Collectors.toList());

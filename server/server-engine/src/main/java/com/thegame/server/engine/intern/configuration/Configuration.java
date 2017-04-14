@@ -1,4 +1,4 @@
-package com.thegame.server.engine.configuration;
+package com.thegame.server.engine.intern.configuration;
 
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.utils.EnumProperty;

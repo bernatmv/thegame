@@ -1,4 +1,4 @@
-package com.thegame.server.engine.tasks;
+package com.thegame.server.engine.intern.tasks;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

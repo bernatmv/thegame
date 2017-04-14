@@ -3,7 +3,7 @@ package com.thegame.server.presentation;
 import com.thegame.server.common.IsApplication;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.TheGameMessageProcessor;
-import com.thegame.server.engine.tasks.MessageTaskFactory;
+import com.thegame.server.engine.intern.MessageTaskFactory;
 import com.thegame.server.presentation.endpoints.TheGameEndpoint;
 import com.thegame.server.presentation.messages.support.MessageFactory;
 import java.util.Collection;

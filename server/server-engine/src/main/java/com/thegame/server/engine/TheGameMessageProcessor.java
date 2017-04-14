@@ -2,17 +2,17 @@ package com.thegame.server.engine;
 
 import com.thegame.server.common.concurrent.CustomThreadFactory;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.engine.configuration.Configuration;
-import com.thegame.server.engine.services.BusinessServiceFactory;
-import com.thegame.server.engine.services.ConfigurationService;
+import com.thegame.server.engine.intern.configuration.Configuration;
+import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.services.ConfigurationService;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import com.thegame.server.engine.tasks.BaseMessageTask;
-import com.thegame.server.engine.tasks.MessageTaskFactory;
+import com.thegame.server.engine.intern.tasks.BaseMessageTask;
+import com.thegame.server.engine.intern.MessageTaskFactory;
 import com.thegame.server.engine.messages.IsMessageBean;
 
 /**

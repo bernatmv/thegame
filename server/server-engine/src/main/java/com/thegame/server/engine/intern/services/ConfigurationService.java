@@ -1,4 +1,4 @@
-package com.thegame.server.engine.services;
+package com.thegame.server.engine.intern.services;
 
 import java.util.Map;
 import java.util.function.Consumer;

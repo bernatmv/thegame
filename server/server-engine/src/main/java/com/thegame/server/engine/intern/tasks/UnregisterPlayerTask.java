@@ -1,8 +1,8 @@
-package com.thegame.server.engine.tasks;
+package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
-import com.thegame.server.engine.services.BusinessServiceFactory;
-import com.thegame.server.engine.services.PlayerService;
+import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.services.PlayerService;
 
 /**
  * @author afarre

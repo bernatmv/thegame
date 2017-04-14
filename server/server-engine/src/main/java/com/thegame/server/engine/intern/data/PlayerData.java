@@ -1,4 +1,4 @@
-package com.thegame.server.engine.data;
+package com.thegame.server.engine.intern.data;
 
 import com.thegame.server.engine.messages.IsMessageBean;
 import java.util.function.Consumer;

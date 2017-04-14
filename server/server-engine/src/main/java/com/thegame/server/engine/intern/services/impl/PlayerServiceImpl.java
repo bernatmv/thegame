@@ -1,9 +1,9 @@
-package com.thegame.server.engine.services.impl;
+package com.thegame.server.engine.intern.services.impl;
 
-import com.thegame.server.engine.data.PlayerData;
+import com.thegame.server.engine.intern.data.PlayerData;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
-import com.thegame.server.engine.services.PlayerService;
+import com.thegame.server.engine.intern.services.PlayerService;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
