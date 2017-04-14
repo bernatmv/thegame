@@ -39,3 +39,4 @@ client/.npm
 /server/server-artifact/target/
 /server/server-client/target/
 npm-debug.log
+/server/server-persistence/nbproject/
