@@ -9,6 +9,7 @@ public enum EngineExceptionType implements ExceptionType{
 	
 	MESSAGE_TASK_FACTORY_INITIALIZATION_FAILED("Message task factory initialization failed"),
 	MESSAGE_TASK_FACTORY_INSTANT_TASK_FAILED("Message task factory instance of task {} failed"),
+	MESSAGE_TASK_FACTORY_NOT_PROCESSABLE_TASK("Don't exist any task to process message {}"),
 
 	UNABLE_TO_FIND_SUITABLE_CONSTRUCTOR("Business service factory is unable to find suitable {} constructor with args {} to instantiate {}"),
 	UNABLE_TO_INSTANTIATE_SERVICE("Business service factory is unable to instantiate {} using {} implementation with {} args"),
