@@ -97,9 +97,9 @@ public class TheGameMessageProcessor extends ThreadPoolExecutor.CallerRunsPolicy
 	
 	public void process(final IsMessageBean _task){
 		
-		logger.trace("message-processor::initialization::configure::begin");
+		logger.trace("message-processor::process::begin");
 		threadPool.execute(MessageTaskFactory.getInstance(_task));
-		logger.debug("message-processor::initialization::configure::end");
+		logger.debug("message-processor::process::end");
 	}
 
 	@Override

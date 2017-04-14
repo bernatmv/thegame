@@ -1,4 +1,4 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.presentation.messages.support;
 
 import com.thegame.server.common.functional.LambdaUtils;
 import com.thegame.server.presentation.messages.mappers.Converter;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 import com.thegame.server.engine.messages.IsMessageBean;
+import com.thegame.server.presentation.messages.IsMessage;
 import com.thegame.server.presentation.messages.mappers.MessageMapper;
 import java.util.List;
 import java.util.function.Function;
@@ -130,6 +131,10 @@ public class MessageFactory {
 		}
 	}
 
+	public static void init(){
+		logger.finest("message-factory::initialized");
+	}
+	
 	@SuppressWarnings("element-type-mismatch")
 	public static IsMessage getInstance(final String _json){
 		
@@ -137,6 +142,8 @@ public class MessageFactory {
 		
 		logger.trace("message-factory::get-instance::String::begin::{}",_json);
 		int position=_json.indexOf("\"kind\":");
+		if(position<0)
+			throw new RuntimeException("Wrong message format");
 		final StringBuilder builder=new StringBuilder(50);
 		boolean exit=false;
 		boolean found=false;

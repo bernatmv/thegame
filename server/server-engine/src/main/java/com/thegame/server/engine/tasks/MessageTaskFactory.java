@@ -49,6 +49,9 @@ public class MessageTaskFactory {
 		}
 	}
 	
+	public static void init(){
+		logger.finest("message-task-factory::initialized");
+	}
 	
 	public static <MESSAGE extends IsMessageBean> BaseMessageTask<MESSAGE> getInstance(final MESSAGE _message){
 		
