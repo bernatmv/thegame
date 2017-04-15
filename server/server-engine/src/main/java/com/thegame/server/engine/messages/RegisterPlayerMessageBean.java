@@ -25,5 +25,9 @@ public class RegisterPlayerMessageBean implements IsMessageBean{
 
 	@Setter
 	@Getter
+	private String session;
+
+	@Setter
+	@Getter
 	private Consumer<IsMessageBean> channel;
 }

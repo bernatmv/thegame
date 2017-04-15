@@ -1,5 +1,6 @@
 package com.thegame.server.presentation.messages;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -20,7 +21,11 @@ public class ChatMessage implements IsMessage<ChatMessage>{
 
 	@Setter
 	@Getter
-	public String type="SAY";
+	public LocalDateTime time;	
+	
+	@Setter
+	@Getter
+	public String type;
 	
 	@Setter
 	@Getter

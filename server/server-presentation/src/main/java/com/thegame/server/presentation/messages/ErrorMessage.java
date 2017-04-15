@@ -1,5 +1,6 @@
 package com.thegame.server.presentation.messages;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,10 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString(exclude={"stacktrace"})
 public class ErrorMessage implements IsMessage<ErrorMessage>{
+
+	@Setter
+	@Getter
+	public LocalDateTime time;	
 
 	@Setter
 	@Getter

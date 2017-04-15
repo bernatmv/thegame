@@ -1,20 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.thegame.server</groupId>
-        <artifactId>server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-    <artifactId>server-persistence</artifactId>
-    <packaging>jar</packaging>
-    <name>TheGame Server Persistence</name>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.thegame.server</groupId>
+		<artifactId>server</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>server-persistence</artifactId>
+	<packaging>jar</packaging>
+	<name>TheGame Server Persistence</name>
 	
 	<dependencies>
 		<dependency>
 			<groupId>com.thegame.server</groupId>
 			<artifactId>server-common</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<!-- JPA + Hibernate -->
+		<dependency>
+			<!-- The PreparedStatement.setCharacterStream() method was added to JDBC 4 and according to C3P0 release notes:  As of version 0.9.5, c3p0 fully supports the jdbc4 spec.-->
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>4.3.1.Final</version>
+			<exclusions>
+				<exclusion>
+					<!-- The PreparedStatement.setCharacterStream() method was added to JDBC 4 and according to C3P0 release notes:  As of version 0.9.5, c3p0 fully supports the jdbc4 spec.-->
+					<artifactId>c3p0</artifactId>
+					<groupId>c3p0</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.1.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>4.3.1.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.13.1.1</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>

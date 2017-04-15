@@ -20,5 +20,9 @@ public class UnregisterPlayerMessageBean implements IsMessageBean{
 	
 	@Setter
 	@Getter
+	private String session;
+
+	@Setter
+	@Getter
 	private String name;
 }

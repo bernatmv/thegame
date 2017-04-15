@@ -2,7 +2,10 @@ package com.thegame.server.presentation;
 
 import com.thegame.server.common.IsApplication;
 import com.thegame.server.common.logging.LogStream;
+import com.thegame.server.engine.TheGameMessageProcessor;
+import com.thegame.server.engine.intern.MessageTaskFactory;
 import com.thegame.server.presentation.endpoints.TheGameEndpoint;
+import com.thegame.server.presentation.messages.support.MessageFactory;
 import java.util.Collection;
 import java.util.EventListener;
 import java.util.Set;
@@ -29,6 +32,16 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 	
 	@Override
 	public void contextInitialized(ServletContextEvent _sce) {
+		logger.trace("application::init::begin");
+		MessageFactory.init();
+		logger.trace("application::init::message-factory");
+		MessageTaskFactory.init();
+		logger.trace("application::init::message-task-factory");
+		TheGameMessageProcessor.getInstance();
+		logger.trace("application::init::message-processor");
+		logger.info("Application deployed");
+		logger.trace("application::init::end");
+		logger.info("=================================================================================================================");
 		logger.info("  _________  ___  ___  _______           ________  ________  _____ ______   _______      ");
 		logger.info(" |\\___   ___\\\\  \\|\\  \\|\\  ___ \\         |\\   ____\\|\\   __  \\|\\   _ \\  _   \\|\\  ___ \\     ");
 		logger.info(" \\|___ \\  \\_\\ \\  \\\\\\  \\ \\   __/|        \\ \\  \\___|\\ \\  \\|\\  \\ \\  \\\\\\__\\ \\  \\ \\   __/|    ");
@@ -36,7 +49,7 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 		logger.info("       \\ \\  \\ \\ \\  \\ \\  \\ \\  \\_|\\ \\       \\ \\  \\|\\  \\ \\  \\ \\  \\ \\  \\    \\ \\  \\ \\  \\_|\\ \\ ");
 		logger.info("        \\ \\__\\ \\ \\__\\ \\__\\ \\_______\\       \\ \\_______\\ \\__\\ \\__\\ \\__\\    \\ \\__\\ \\_______\\");
 		logger.info("         \\|__|  \\|__|\\|__|\\|_______|        \\|_______|\\|__|\\|__|\\|__|     \\|__|\\|_______|");
-		logger.info("Application deployed");
+		logger.info("=================================================================================================================");
 	}
 	
 	@Override

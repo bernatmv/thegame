@@ -18,11 +18,11 @@ public class ChatMessageTest extends MessageBaseTest<ChatMessage>{
 	@Override
 	public void testDecode() throws InstantiationException, IllegalAccessException, DecodeException {
 		String message="{\"kind\":\"ChatMessage\",\"message\":\"feww\",\"sender\":\"de\"}";
-		ChatMessage chatMessage=ChatMessage.builder().message("feww").sender("de").build();
+		ChatMessage chatMessage=ChatMessage.builder().type(null).message("feww").sender("de").build();
 		testDecode(message,chatMessage);
 
 		message="{\"kind\": \"ChatMessage\",\"sender\": \"bernatmv\",\"message\": \"Hello world!\"}";
-		chatMessage=ChatMessage.builder().message("Hello world!").sender("bernatmv").build();
+		chatMessage=ChatMessage.builder().type(null).message("Hello world!").sender("bernatmv").build();
 		testDecode(message,chatMessage);
 	}
 
