@@ -1,7 +1,6 @@
 package com.thegame.server.presentation.endpoints;
 
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.common.utils.StringUtils;
 import com.thegame.server.engine.TheGameMessageProcessor;
 import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
 import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
@@ -113,7 +112,6 @@ public class TheGameEndpoint {
 									.time(LocalDateTime.now())
 									.code(_error.getClass().getSimpleName())
 									.message(_error.getMessage())
-									.stacktrace(StringUtils.toString(_error))
 									.build()
 									.encode());
 			log.warning("thegame-endpoint::session::{}::player::{}::error-message::end::{}",_session.getId(),_player,_error);
