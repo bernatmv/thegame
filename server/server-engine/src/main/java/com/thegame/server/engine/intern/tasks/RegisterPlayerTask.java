@@ -36,7 +36,7 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 	public void execute() {
 
 		getMessageBean()
-			.filter(registerPlayerBean -> !playerService.existPlayer(registerPlayerBean.getName()))
+			.filter(registerPlayerBean -> !playerService.existPlayer(registerPlayerBean.getSender()))
 			.map(registerPlayerBean -> mapper.toData(registerPlayerBean))
 			.ifPresent(playerData -> playerService
 											.registerPlayer(playerData)

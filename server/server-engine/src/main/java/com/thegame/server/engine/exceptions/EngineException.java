@@ -6,7 +6,7 @@ import com.thegame.server.common.exceptions.TypifiedException;
 /**
  * @author e103880
  */
-public class EngineException extends RuntimeException implements TypifiedException{
+public class EngineException extends TypifiedException{
 
 	private final EngineExceptionType exceptionType;
 	private final Object[] arguments;

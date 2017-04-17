@@ -11,18 +11,20 @@ import lombok.ToString;
 /**
  * @author afarre
  */
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class UnregisterPlayerMessageBean implements IsMessageBean{
+@ToString(callSuper=true)
+@EqualsAndHashCode(callSuper=true)
+public class UnregisterPlayerMessageBean extends BaseMessageBean<UnregisterPlayerMessageBean>{
 	
 	@Setter
 	@Getter
 	private String session;
 
-	@Setter
-	@Getter
-	private String name;
+	@Builder
+	public UnregisterPlayerMessageBean(final String session,final String sender) {
+		super(sender);
+		this.session=session;
+	}
+
 }

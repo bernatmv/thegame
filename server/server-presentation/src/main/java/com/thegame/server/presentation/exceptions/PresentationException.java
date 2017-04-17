@@ -6,7 +6,7 @@ import com.thegame.server.common.exceptions.TypifiedException;
 /**
  * @author e103880
  */
-public class PresentationException extends RuntimeException implements TypifiedException{
+public class PresentationException extends TypifiedException{
 
 	private final PresentationExceptionType exceptionType;
 	private final Object[] arguments;

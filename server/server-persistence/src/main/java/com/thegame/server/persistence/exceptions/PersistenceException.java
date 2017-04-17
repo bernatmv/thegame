@@ -6,7 +6,7 @@ import com.thegame.server.common.exceptions.TypifiedException;
 /**
  * @author e103880
  */
-public class PersistenceException extends RuntimeException implements TypifiedException{
+public class PersistenceException extends TypifiedException{
 
 	private final PersistenceExceptionType exceptionType;
 	private final Object[] arguments;

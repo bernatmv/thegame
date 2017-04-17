@@ -12,16 +12,11 @@ import lombok.ToString;
 /**
  * @author afarre
  */
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class RegisterPlayerMessageBean implements IsMessageBean{
-	
-	@Setter
-	@Getter
-	private String name;
+@ToString(callSuper=true)
+@EqualsAndHashCode(callSuper=true)
+public class RegisterPlayerMessageBean extends BaseMessageBean<RegisterPlayerMessageBean>{
 
 	@Setter
 	@Getter
@@ -30,4 +25,11 @@ public class RegisterPlayerMessageBean implements IsMessageBean{
 	@Setter
 	@Getter
 	private Consumer<IsMessageBean> channel;
+
+	@Builder
+	public RegisterPlayerMessageBean(final String session,final Consumer<IsMessageBean> channel,final String sender) {
+		super(sender);
+		this.session=session;
+		this.channel=channel;
+	}
 }

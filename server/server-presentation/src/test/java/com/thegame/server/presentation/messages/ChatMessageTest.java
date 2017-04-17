@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * @author afarre
  */
-public class ChatMessageTest extends MessageBaseTest<ChatMessage>{
+public class ChatMessageTest extends IsMessageTest<ChatMessage>{
 
 	@Override
 	public Class<ChatMessage> getMessageClass() {

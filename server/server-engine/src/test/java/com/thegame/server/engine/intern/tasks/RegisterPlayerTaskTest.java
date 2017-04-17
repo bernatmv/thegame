@@ -65,7 +65,7 @@ public class RegisterPlayerTaskTest {
 		
 		RegisterPlayerMessageBean message=RegisterPlayerMessageBean
 			.builder()
-			.name("newPlayer")
+			.sender("newPlayer")
 			.channel(playerChannel).build();
 
 		PlayerData expectedPlayer=createPlayer("newPlayer");

@@ -5,12 +5,25 @@ import com.thegame.server.common.utils.StringUtils;
 /**
  * @author e103880
  */
-public interface TypifiedException {
+public abstract class TypifiedException extends RuntimeException{
 
-	public ExceptionType getExceptionType();
-	public Object[] getArguments();
+	public TypifiedException() {
+	}
+	public TypifiedException(String _message) {
+		super(_message);
+	}
+	public TypifiedException(String _message, Throwable _cause) {
+		super(_message, _cause);
+	}
+	public TypifiedException(Throwable _cause) {
+		super(_cause);
+	}
+
 	
-	public default String getProcessedMessage(){
+	public abstract ExceptionType getExceptionType();
+	public abstract Object[] getArguments();
+	
+	public String getProcessedMessage(){
 		return StringUtils.format(getExceptionType().getDescription(), getArguments());
 	}
 }

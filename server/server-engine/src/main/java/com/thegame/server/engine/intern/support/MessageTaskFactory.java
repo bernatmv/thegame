@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import com.thegame.server.engine.messages.IsMessageBean;
+import com.thegame.server.engine.messages.BaseMessageBean;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -24,7 +24,7 @@ import java.util.function.Function;
 public class MessageTaskFactory {
 	
 	private	static final LogStream logger=LogStream.getLogger(MessageTaskFactory.class);
-	private static final Map<Class<IsMessageBean>,Function<IsMessageBean,BaseMessageTask<IsMessageBean>>> taskMapping=new HashMap<>();
+	private static final Map<Class<BaseMessageBean>,Function<BaseMessageBean,BaseMessageTask<BaseMessageBean>>> taskMapping=new HashMap<>();
 	
 	static {
 		try {
@@ -45,14 +45,14 @@ public class MessageTaskFactory {
 												.map(array -> new Object[]{((Task)array[0]).value(), array[1]})
 												.peek(array -> logger.finest("message-task-factory::initialization::found::message-bean::{}::class::{}",array[0],array[1]))
 												.forEach(array -> MessageTaskFactory.taskMapping.put(
-																			(Class<IsMessageBean>)array[0], 
+																			(Class<BaseMessageBean>)array[0], 
 																			(messageBean) -> {
 																				
-																				BaseMessageTask<IsMessageBean> reply;
+																				BaseMessageTask<BaseMessageBean> reply;
 																				
 																				try {
 																					reply=((Class<BaseMessageTask>)array[1])
-																								.getConstructor((Class<? extends IsMessageBean>)array[0])
+																								.getConstructor((Class<? extends BaseMessageBean>)array[0])
 																								.newInstance(messageBean);
 																				} catch (NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 																					throw new EngineException(e,EngineExceptionType.MESSAGE_TASK_FACTORY_INSTANT_TASK_FAILED,messageBean);
@@ -71,15 +71,15 @@ public class MessageTaskFactory {
 		logger.finest("message-task-factory::initialized");
 	}
 	
-	public static BaseMessageTask<IsMessageBean> getInstance(final IsMessageBean _message){
+	public static BaseMessageTask<BaseMessageBean> getInstance(final BaseMessageBean _message){
 		
-		BaseMessageTask<IsMessageBean> reply;
+		BaseMessageTask<BaseMessageBean> reply;
 		
 		logger.trace("message-task-factory::get-instance::begin");
 		reply=Optional.ofNullable(_message)
-			.map(message -> (Class<IsMessageBean>)message.getClass())
+			.map(message -> (Class<BaseMessageBean>)message.getClass())
 			.map(messageClass -> MessageTaskFactory.taskMapping.get(messageClass))
-			.map(messageTaskBuilder -> (BaseMessageTask<IsMessageBean>)messageTaskBuilder.apply(_message))
+			.map(messageTaskBuilder -> (BaseMessageTask<BaseMessageBean>)messageTaskBuilder.apply(_message))
 			.orElseThrow(() -> new EngineException(EngineExceptionType.MESSAGE_TASK_FACTORY_NOT_PROCESSABLE_TASK,_message));
 		logger.debug("message-task-factory::get-instance::end");
 			

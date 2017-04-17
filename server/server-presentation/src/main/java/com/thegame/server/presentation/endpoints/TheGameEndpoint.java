@@ -3,6 +3,7 @@ package com.thegame.server.presentation.endpoints;
 import com.thegame.server.common.exceptions.TypifiedException;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.TheGameMessageProcessor;
+import com.thegame.server.engine.messages.ErrorMessageBean;
 import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
 import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
 import com.thegame.server.presentation.exceptions.PresentationException;
@@ -40,10 +41,12 @@ public class TheGameEndpoint {
 			_session.getUserProperties().put("user.name",_player);
 			TheGameMessageProcessor.getInstance()
 				.process(RegisterPlayerMessageBean.builder()
-						.name(_player)
+						.sender(_player)
 						.session(_session.getId())
 						.channel(messageBean -> {
 													try {
+														if(messageBean instanceof ErrorMessageBean)
+															throw ((ErrorMessageBean)messageBean).getException();
 														final IsMessage bean=MessageFactory.getInstance(messageBean);
 														bean.setTime(LocalDateTime.now());
 														final String jsonMessage=bean
@@ -52,6 +55,8 @@ public class TheGameEndpoint {
 														_session
 															.getBasicRemote()
 															.sendText(jsonMessage);
+													} catch (TypifiedException e) {
+														onError(_session, _player, e);
 													} catch (Throwable e) {
 														final PresentationException exception=new PresentationException(e,PresentationExceptionType.MESSAGE_TO_CLIENT_CONVERSION_FAIL,messageBean,e.getMessage());
 														onError(_session, _player, exception);
@@ -77,8 +82,9 @@ public class TheGameEndpoint {
 				.map(message -> MessageFactory.getInstance(message))
 				.peek(isMessage -> log.finest("thegame-endpoint::session::{}::player::{}::isMessage::{}",_session.getId(),_player,isMessage))
 				.map(isMessage -> MessageFactory.getInstance(isMessage))
-				.peek(isMessageBean -> log.finest("thegame-endpoint::session::{}::player::{}::isMessageBean::{}",_session.getId(),_player,isMessageBean))
-				.forEach(isMessageBean -> TheGameMessageProcessor.getInstance().process(isMessageBean));
+				.map(baseMessageBean -> baseMessageBean.setSender(_player))
+				.peek(baseMessageBean -> log.finest("thegame-endpoint::session::{}::player::{}::isMessageBean::{}",_session.getId(),_player,baseMessageBean))
+				.forEach(baseMessageBean -> TheGameMessageProcessor.getInstance().process(baseMessageBean));
 			log.trace("thegame-endpoint::session::{}::player::{}::message::end",_session.getId(),_player);
 		}catch(Throwable e){
 			log.error("thegame-endpoint::session::{}::player::{}::message::fail",_session.getId(),_player,e);
@@ -95,7 +101,7 @@ public class TheGameEndpoint {
 				.process(
 					UnregisterPlayerMessageBean.builder()
 						.session(_session.getId())
-						.name(_player)
+						.sender(_player)
 						.build());
 			log.trace("thegame-endpoint::session::{}::player::{}::close::{}-{}::end",_session.getId(),_player,_reason.getCloseCode(),_reason.getReasonPhrase());
 		}catch(Throwable e){

@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import com.thegame.server.engine.intern.tasks.BaseMessageTask;
 import com.thegame.server.engine.intern.support.MessageTaskFactory;
+import com.thegame.server.engine.messages.BaseMessageBean;
 import com.thegame.server.engine.messages.IsMessageBean;
 
 /**
@@ -95,7 +96,7 @@ public class TheGameMessageProcessor extends ThreadPoolExecutor.CallerRunsPolicy
 
 	}
 	
-	public void process(final IsMessageBean _task){
+	public void process(final BaseMessageBean _task){
 		
 		logger.trace("message-processor::process::begin");
 		threadPool.execute(MessageTaskFactory.getInstance(_task));

@@ -20,7 +20,7 @@ public class UnregisterPlayerTask extends BaseMessageTask<UnregisterPlayerMessag
 		final PlayerService playerService=BusinessServiceFactory.PLAYER
 													.getInstance(PlayerService.class);
 		getMessageBean()
-			.map(unregisterPlayerMessage -> unregisterPlayerMessage.getName())
+			.map(unregisterPlayerMessage -> unregisterPlayerMessage.getSender())
 			.ifPresent(playerName -> playerService.unregisterPlayer(playerName));
 	}
 }

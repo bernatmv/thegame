@@ -11,12 +11,11 @@ import lombok.ToString;
 /**
  * @author afarre
  */
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class ChatMessageBean implements IsMessageBean{
+@ToString(callSuper=true)
+@EqualsAndHashCode(callSuper=true)
+public class ChatMessageBean extends BaseMessageBean<ChatMessageBean>{
 
 	public enum MessageType{
 		SAY,WHISPER,YELL;
@@ -32,9 +31,14 @@ public class ChatMessageBean implements IsMessageBean{
 
 	@Setter
 	@Getter
-	private String sender;
-
-	@Setter
-	@Getter
 	private String recipient;
+
+	
+	@Builder
+	public ChatMessageBean(final MessageType type,final String message,final String recipient,final String sender) {
+		super(sender);
+		this.type=type;
+		this.message=message;
+		this.recipient=recipient;
+	}
 }

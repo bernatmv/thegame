@@ -22,7 +22,7 @@ public class MessageMapperTest {
 		ChatMessage _chatMessage=ChatMessage.builder().message("myMessage").sender("sender").recipient("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
 		ChatMessageBean expResult=ChatMessageBean.builder().message("myMessage").sender("sender").recipient("recipient").build();
-		ChatMessageBean result=instance.chatMessateToBean(_chatMessage);
+		ChatMessageBean result=instance.toBean(_chatMessage);
 		Assert.assertEquals(expResult, result);
 	}
 
@@ -35,7 +35,7 @@ public class MessageMapperTest {
 		ChatMessageBean _chatMessage=ChatMessageBean.builder().message("myMessage").sender("sender").recipient("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
 		ChatMessage expResult=ChatMessage.builder().message("myMessage").sender("sender").recipient("recipient").build();
-		ChatMessage result=instance.beanToChatMessateMessage(_chatMessage);
+		ChatMessage result=instance.toMessage(_chatMessage);
 		Assert.assertEquals(expResult, result);
 	}
 
@@ -48,7 +48,7 @@ public class MessageMapperTest {
 		MoveMessage _moveMessage=MoveMessage.builder().sender("sender").direction("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
 		MoveMessageBean expResult=MoveMessageBean.builder().sender("sender").direction("recipient").build();
-		MoveMessageBean result=instance.moveMessateToBean(_moveMessage);
+		MoveMessageBean result=instance.toBean(_moveMessage);
 		Assert.assertEquals(expResult, result);
 	}
 
@@ -61,7 +61,7 @@ public class MessageMapperTest {
 		MoveMessageBean _moveMessage=MoveMessageBean.builder().sender("sender").direction("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
 		MoveMessage expResult=MoveMessage.builder().sender("sender").direction("recipient").build();
-		MoveMessage result=instance.beanToMoveMessateMessage(_moveMessage);
+		MoveMessage result=instance.toMessage(_moveMessage);
 		Assert.assertEquals(expResult, result);
 	}
 }
