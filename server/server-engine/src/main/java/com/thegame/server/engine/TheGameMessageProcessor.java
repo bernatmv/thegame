@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import com.thegame.server.engine.intern.tasks.BaseMessageTask;
-import com.thegame.server.engine.intern.MessageTaskFactory;
+import com.thegame.server.engine.intern.support.MessageTaskFactory;
 import com.thegame.server.engine.messages.IsMessageBean;
 
 /**

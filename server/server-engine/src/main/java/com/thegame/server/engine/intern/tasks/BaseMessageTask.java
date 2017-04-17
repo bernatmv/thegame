@@ -1,8 +1,9 @@
 package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.common.logging.LogStream;
-import lombok.Getter;
+import com.thegame.server.engine.messages.ErrorMessageBean;
 import com.thegame.server.engine.messages.IsMessageBean;
+import java.util.Optional;
 
 /**
  * @author afarre
@@ -10,16 +11,20 @@ import com.thegame.server.engine.messages.IsMessageBean;
  */
 public abstract class BaseMessageTask<T extends IsMessageBean> implements Runnable{
 
-	@Getter
-	private final T messageBean;
+	private final Optional<T> messageBean;
 	
 	
 	public BaseMessageTask(final T _messageBean){
-		this.messageBean=_messageBean;
+		this.messageBean=Optional.ofNullable(_messageBean);
 	}
 
 	
 	public abstract void execute();
+
+	
+	public Optional<T> getMessageBean() {
+		return this.messageBean;
+	}
 	
 	
 	@Override
@@ -32,7 +37,8 @@ public abstract class BaseMessageTask<T extends IsMessageBean> implements Runnab
 			execute();
 			logger.debug("message-task::{}::execution::end",this.getClass().getSimpleName());
 		}catch(Throwable e){
-			logger.error("message-task::{}::execution::fail::{}",this.getClass().getSimpleName(),e.getMessage(),e);
+			logger.debug("message-task::{}::execution::fail",this.getClass().getSimpleName(),e);
+			ErrorMessageBean.builder().exception(e).build();
 		}
 	}
 }

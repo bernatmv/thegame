@@ -1,4 +1,4 @@
-package com.thegame.server.engine.intern;
+package com.thegame.server.engine.intern.support;
 
 import com.thegame.server.common.functional.LambdaUtils;
 import com.thegame.server.common.logging.LogStream;

@@ -37,24 +37,19 @@ public class PackageUtils {
         
         final List<ClassLoader> reply=new ArrayList<>(2);
 
-        log.trace("recover-classloaders::begin");
         if(_classLoaders!=null){
             Arrays.stream(_classLoaders)
                     .distinct()
-                    .peek(classLoader -> log.finest("recover-classloaders::adding-requested-classloader::{}",classLoader.getClass().getName()))
                     .forEach(classLoader -> reply.add(classLoader));
         }
         final ClassLoader contextClassLoader=Thread.currentThread().getContextClassLoader();
         if((contextClassLoader!=null)&&(!reply.contains(contextClassLoader))){
-            log.debug("recover-classloaders::adding-context-classloader::{}",contextClassLoader.getClass().getName());
             reply.add(contextClassLoader);
         }
         final ClassLoader staticClassLoader=PackageUtils.class.getClassLoader();
         if((staticClassLoader!=null)&&(!reply.contains(staticClassLoader))){
-            log.debug("recover-classloaders::adding-static-classloader::{}",staticClassLoader.getClass().getName());
             reply.add(staticClassLoader);
         }
-        log.trace("recover-classloaders::end");
         
         return reply;
     }
@@ -116,35 +111,26 @@ public class PackageUtils {
         
         final Set<String> reply=new HashSet<>();    
 
-        log.trace("find-packages::from::{}::begin",_basePackage);
         final List<ClassLoader> classloaders=getClassLoaders(_classLoaders);
         Set<String> classpathEntries=classloaders.stream()
                 .flatMap(p -> Arrays.asList(((URLClassLoader)p).getURLs()).stream())
                 .map(p -> p.getFile())
                 .collect(Collectors.toCollection(HashSet::new));
-        log.finest("find-packages::from::{}::classloaders-classpath-entries::{}",_basePackage,classpathEntries);
         final String pathSep=System.getProperty("path.separator");
         final String classpath=System.getProperty("java.class.path");
         final String[] systemClasspathEntries = classpath.split(pathSep);
-        log.finest("find-packages::from::{}::system-classpath-entries::{}",_basePackage,systemClasspathEntries);
         classpathEntries.addAll(Arrays.asList(systemClasspathEntries));
-        log.finest("find-packages::from::{}::classpath-entries::{}",_basePackage,classpathEntries);
         for(String classPathResource:classpathEntries){
             final URL url = new File(classPathResource).toURI().toURL();
-            log.trace("find-packages::from::{}::processing::{}",_basePackage,url.toString());
             if(!isJREClasspathResource(url)){
-                log.finest("find-packages::from::{}::processing::{}::accepted",_basePackage,url.toString());
                 final File file=new File(url.getFile());
                 if(file.isFile()){
                     reply.addAll(PackageUtils.getExistentResourcesFromFileFilteredByPattern(file,_basePackage,_patternFilters,classloaders));
                 }else{
                     reply.addAll(PackageUtils.getExistentResourcesFromFolderFilteredByPattern(file,_basePackage,_patternFilters,classloaders));
                 }
-            }else{
-                log.finest("find-packages::from::{}::processing::{}::discarted",_basePackage,url.toString());
             }
         }
-        log.debug("find-packages::from::{}::end",_basePackage);
                 
         return reply;
     }
@@ -199,24 +185,17 @@ public class PackageUtils {
         
         final Set<String> reply=new HashSet<>();    
 
-        log.trace("find-packages::from::{}::at-file::{}::begin",_basePackage,_file);
         final JarFile jarFile=new JarFile(_file);
         final Enumeration<JarEntry> entries=jarFile.entries();
         while(entries.hasMoreElements()){
             final JarEntry entry=entries.nextElement();
-            log.finest("find-packages::from::{}::at-file::{}::entry::{}",_basePackage,_file,entry.getName());
             if(!entry.isDirectory()){
-                log.finest("find-packages::from::{}::at-file::{}::entry::{}::file::processing",_basePackage,_file,entry.getName());
                 final String entryClass=entry.getName().replace('/','.').trim();
                 if(isAcceptedClass(entryClass,_basePackage,_patternFilters)){
-                    log.debug("find-packages::from::{}::at-file::{}::entry::{}::class::{}::accepted",_basePackage,_file,entry.getName(),entryClass);
                     reply.add(entryClass);
                 }
-            }else{
-                log.trace("find-packages::from::{}::at-file::{}::entry::{}::folder::discarded",_basePackage,_file,entry.getName());
             }
         }
-        log.debug("find-packages::from::{}::at-file::{}::end",_basePackage,_file);
         
         return reply;
     }
@@ -274,24 +253,19 @@ public class PackageUtils {
         final Stack<File> fileStack=new Stack<>();
         final int baseFileLength=(int)(_file.getAbsolutePath()).length()+1;
         
-        log.trace("find-packages::from::{}::at-folder::{}::begin",_basePackage,_file);
         fileStack.add(_file);
         while(!fileStack.isEmpty()){
             final File currentFile=fileStack.pop();
             if(currentFile.isDirectory()){
-                log.finest("find-packages::from::{}::at-folder::{}::file-folder::{}::analyze",_basePackage,_file,currentFile.getName());
                 fileStack.addAll(Arrays.asList(currentFile.listFiles()));
             }else{
-                log.finest("find-packages::from::{}::at-folder::{}::file-folder::{}::process",_basePackage,_file,currentFile.getName());
                 final String packagePath=currentFile.getAbsolutePath().substring(baseFileLength);
                 final String entryClass=packagePath.replace(File.separatorChar,'.').trim();
                 if(isAcceptedClass(entryClass,_basePackage,_patternFilters)){
-                    log.debug("find-packages::from::{}::at-folder::{}::file::{}::class::{}::accepted",_basePackage,_file,currentFile.getName(),entryClass);
                     reply.add(entryClass);
                 }
             }
         }
-        log.debug("find-packages::from::{}::at-folder::{}::end",_basePackage,_file);        
         
         return reply;
     }

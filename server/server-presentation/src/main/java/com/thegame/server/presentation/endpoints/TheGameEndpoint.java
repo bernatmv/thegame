@@ -1,17 +1,19 @@
 package com.thegame.server.presentation.endpoints;
 
+import com.thegame.server.common.exceptions.TypifiedException;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.TheGameMessageProcessor;
 import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
 import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
+import com.thegame.server.presentation.exceptions.PresentationException;
+import com.thegame.server.presentation.exceptions.PresentationExceptionType;
 import com.thegame.server.presentation.messages.ErrorMessage;
 import com.thegame.server.presentation.messages.IsMessage;
 import com.thegame.server.presentation.messages.support.MessageFactory;
-import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.stream.Stream;
 import javax.websocket.CloseReason;
-import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -30,6 +32,7 @@ public class TheGameEndpoint {
 
 	
 	@OnOpen
+	@SuppressWarnings("UseSpecificCatch")
 	public void open(final Session _session,@PathParam("player") final String _player) {
 
 		try {
@@ -40,17 +43,18 @@ public class TheGameEndpoint {
 						.name(_player)
 						.session(_session.getId())
 						.channel(messageBean -> {
-													final IsMessage bean=MessageFactory.getInstance(messageBean);
-													bean.setTime(LocalDateTime.now());
 													try {
+														final IsMessage bean=MessageFactory.getInstance(messageBean);
+														bean.setTime(LocalDateTime.now());
 														final String jsonMessage=bean
 																		.encode(bean);
 														log.debug("thegame-endpoint::session::{}::send::{}",_session.getId(),jsonMessage);
 														_session
 															.getBasicRemote()
 															.sendText(jsonMessage);
-													} catch (IOException|EncodeException e) {
-														throw new RuntimeException(e);
+													} catch (Throwable e) {
+														final PresentationException exception=new PresentationException(e,PresentationExceptionType.MESSAGE_TO_CLIENT_CONVERSION_FAIL,messageBean,e.getMessage());
+														onError(_session, _player, exception);
 													}
 												})
 						.build());			
@@ -78,7 +82,7 @@ public class TheGameEndpoint {
 			log.trace("thegame-endpoint::session::{}::player::{}::message::end",_session.getId(),_player);
 		}catch(Throwable e){
 			log.error("thegame-endpoint::session::{}::player::{}::message::fail",_session.getId(),_player,e);
-			throw new RuntimeException(e);
+			throw new PresentationException(e,PresentationExceptionType.MESSAGE_TO_CLIENT_CONVERSION_FAIL,_message,e.getMessage());
 		}
 	}
 
@@ -96,7 +100,7 @@ public class TheGameEndpoint {
 			log.trace("thegame-endpoint::session::{}::player::{}::close::{}-{}::end",_session.getId(),_player,_reason.getCloseCode(),_reason.getReasonPhrase());
 		}catch(Throwable e){
 			log.error("thegame-endpoint::session::{}::player::{}::close::{}-{}::fail",_session.getId(),_player,_reason.getCloseCode(),_reason.getReasonPhrase(),e);
-			throw new RuntimeException(e);
+			throw new PresentationException(e,PresentationExceptionType.MESSAGE_TO_CLIENT_CONVERSION_FAIL,_reason,e.getMessage());
 		}
 	}
 	
@@ -108,12 +112,20 @@ public class TheGameEndpoint {
 			log.finest("thegame-endpoint::session::{}::player::{}::error-message::begin",_session.getId(),_player);
 			_session.getBasicRemote()
 					.sendText(
-						ErrorMessage.builder()
-									.time(LocalDateTime.now())
-									.code(_error.getClass().getSimpleName())
-									.message(_error.getMessage())
-									.build()
-									.encode());
+						Optional.of(_error)
+							.filter(exception -> exception instanceof TypifiedException)
+							.map(exception -> (TypifiedException)exception)
+							.map(exception -> ErrorMessage.builder()
+												.time(LocalDateTime.now())
+												.code(exception.getExceptionType().name())
+												.message(exception.getProcessedMessage())
+												.build())
+							.orElseGet(() -> ErrorMessage.builder()
+												.time(LocalDateTime.now())
+												.code(_error.getClass().getSimpleName())
+												.message(_error.getMessage())
+												.build())
+							.encode());
 			log.warning("thegame-endpoint::session::{}::player::{}::error-message::end::{}",_session.getId(),_player,_error);
 		} catch (Throwable e) {
 			log.error("thegame-endpoint::session::{}::player::{}::error-message::failed",_session.getId(),_player,e);

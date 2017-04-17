@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(schema ="THEGAME",name="ROOMEXIT",indexes={
+@Table(name="ROOMEXIT",indexes={
 	@Index(name = "IDX_FKROOM", columnList ="FKROOM",  unique = false),
 	@Index(name = "IDX_FKTOROOM", columnList ="FKTOROOM",  unique = false),
 })
@@ -26,7 +26,7 @@ public class RoomExit implements Serializable{
 	@EmbeddedId
 	private RoomExitId id;
 	
-	@ManyToOne(optional=false,targetEntity=Room.class) 
+	@ManyToOne(optional=false,targetEntity=Area.class) 
 	@JoinColumn(name="FKTOROOM",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_EXIT_TOROOM"))
-	private Room toRoom;
+	private Area toRoom;
 }

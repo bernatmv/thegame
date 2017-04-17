@@ -5,10 +5,12 @@ import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
 import com.thegame.server.engine.intern.services.impl.ChatServiceImpl;
 import com.thegame.server.engine.intern.services.impl.ConfigurationServiceImpl;
+import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
 import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.stream.Stream;
+import com.thegame.server.engine.intern.services.MapperService;
 
 /**
  * @author e103880
@@ -17,7 +19,9 @@ public enum BusinessServiceFactory {
 	
 	CONFIGURATION(ConfigurationServiceImpl.class,true),
 	PLAYER(PlayerServiceImpl.class,true),
+	LOCATION(LocationServiceImpl.class,true),
 	CHAT(ChatServiceImpl.class,true),
+	MAPPER(MapperService.instance.getClass(),true),
 	;
 	
 	private static final LogStream logger=LogStream.getLogger(BusinessServiceFactory.class);

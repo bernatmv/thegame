@@ -12,7 +12,14 @@ import java.util.stream.Collectors;
  * @author E103880
  */
 public enum Configuration implements EnumProperty {
+
+	//GAME
+	INITIAL_AREA("beta-room-001","Identifier of the starting area"),
 	
+	//DATABASE
+	DATABASE_ASSETS_FOLDER("../../assets","Assets folder to load into database"),
+
+	//MESSAGE PROCESSING
 	MESSAGE_PROCESSOR_CORE_POOL_SIZE(4,"Message processor core pool size (minimum working threads)"),
 	MESSAGE_PROCESSOR_MAX_POOL_SIZE(10,"Message processor maximum pool size (maximum working threads)"),
 	MESSAGE_PROCESSOR_KEEP_ALIVE(10,"Message processor thread keep alive amoun (amount of units to keep core exceded threads alive in order to prevent more work demand)"), 

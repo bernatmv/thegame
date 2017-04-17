@@ -14,11 +14,13 @@ public class UnregisterPlayerTask extends BaseMessageTask<UnregisterPlayerMessag
 		super(_messageBean);
 	}
 
-
 	@Override
 	public void execute() {
-		BusinessServiceFactory.PLAYER
-			.getInstance(PlayerService.class)
-			.unregisterPlayer(getMessageBean().getName());
+
+		final PlayerService playerService=BusinessServiceFactory.PLAYER
+													.getInstance(PlayerService.class);
+		getMessageBean()
+			.map(unregisterPlayerMessage -> unregisterPlayerMessage.getName())
+			.ifPresent(playerName -> playerService.unregisterPlayer(playerName));
 	}
 }

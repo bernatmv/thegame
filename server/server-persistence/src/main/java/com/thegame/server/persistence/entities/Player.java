@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(schema ="THEGAME",name="PLAYER")
+@Table(name="PLAYER")
 public class Player implements Serializable{
 
 	private static final long serialVersionUID = 1L;
