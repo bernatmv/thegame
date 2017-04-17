@@ -1,0 +1,86 @@
+@import '../../../theme/colors.css';
+
+.login {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    background: var(--login-background-color);
+    width: 100%;
+}
+
+.login__menu {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+
+    & .login__logo {
+        position: absolute;
+        margin-top: -100px;
+    }
+
+    & .login__logo__main {
+        position: relative;
+    }
+
+    & .login__logo__before {
+        position: absolute;
+        top: 0;
+        left: 2px;
+        text-shadow: -2px 0 red;
+        width: 100%;
+        height: 100%;
+        background: #333;
+        clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
+        animation: glitch-anim-1 1s infinite linear alternate-reverse;
+    }
+
+    & .login__logo__after {
+        position: absolute;
+        top: 0;
+        left: -2px;
+        text-shadow: -2px 0 blue;
+        width: 100%;
+        height: 100%;
+        background: #333;
+        clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
+        animation: glitch-anim-2 1s infinite linear alternate-reverse;
+    }
+
+    & .login__input {
+        text-align: center;
+        width: 300px;
+        height: 400px;
+        padding-top: 360px;        
+
+        & .login__input__field input {
+            border: 1px solid var(--login-border-color);
+            padding: 0.5em;
+            font-size: 15px;
+            line-height: 1.2em;
+            width: 80%;
+            background: #444;
+            color: var(--login-text-color);
+            font-family: helvetica, sans-serif;
+            background: linear-gradient(to bottom, #222, #444);
+        }
+
+        &:hover {
+
+        }
+    }
+}
+
+@keyframes glitch-anim-1 {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }
+    }
+}
+
+@keyframes glitch-anim-2 {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }
+    }
+}

@@ -1,8 +1,8 @@
 {
     "id": "beta-room-001",
-    "title": "Un claro en el bosque",
-    "shortDescription": "Un tranquilo claro en medio de un frondoso bosque",
-    "description": "Te encuentras en un claro en medio de un frondoso bosque, un pequeño arrollo murmulla en un rincón mientras una suave brisa hace ondular varios tallos de lavanda llenando el aire de un suave aroma.\nAl norte los arboles se abren ligeramente a un sendero que parece poco transitado.",
+    "title": "roomBeta001Title",
+    "shortDescription": "roomBeta001ShortDescription",
+    "description": "roomBeta001Description",
     "exits": {
         "north": "beta-room-002"
     },

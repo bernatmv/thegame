@@ -1,9 +1,10 @@
 {
     "id": "goblin-001",
     "profile": {
-        "race": "Goblin",
-        "singular": "goblin",
-        "plural": "goblins",
+        "name": null,
+        "race": "raceGoblin",
+        "singular": "raceGoblinSingular",
+        "plural": "raceGoblinPlural",
         "level": 1,
         "hp": { "current": 20, "max": 20 }
     },

@@ -1,12 +1,14 @@
+@import '../../../../theme/colors.css';
+
 .tile__move {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    border: 1px solid #333;
+    border: 1px solid var(--room-direction-border-color);
     border-radius: 3px;
-    width: 60%;
+    width: 75%;
     height: 60px;
     cursor: pointer;
 
@@ -16,10 +18,10 @@
         align-items: center;
         justify-content: center;        
         width: 100%;
-        border-bottom: 3px double #333;
+        border-bottom: 3px double var(--room-direction-border-color);
 
         & > div {
-            color: #888 !important;
+            color: var(--room-direction-text-color) !important;
         }        
     }
 
@@ -32,6 +34,6 @@
         font-size: .8em;
         text-align: center;
         line-height: 1em;
-        color: #888;
+        color: var(--room-direction-text-color);
     }
 }

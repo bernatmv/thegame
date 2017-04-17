@@ -7,12 +7,13 @@ import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import * as ChatActions from '../actions/chatActions';
 import * as SystemActions from '../actions/systemActions';
+import * as AuthActions from '../actions/authActions';
 
 const socketMiddleware = (function(){
     // connection
     let _store = null;
-    let chatConnection: Connection = null;
-    let chatStream: Rx.Observable<WebsocketMessage> = null;
+    let connection: Connection = null;
+    let stream: Rx.Observable<WebsocketMessage> = null;
     let me = 'User' + Math.ceil(Math.random() * 1000);
     // map
     let currentRoom = 'beta-room-001';
@@ -20,17 +21,17 @@ const socketMiddleware = (function(){
     let initialize = () => {
         _store.dispatch(SystemActions.loadRoom(currentRoom));
 
-        chatConnection = new Connection(AppConfig.endpoints.chat, () => {
+        connection = new Connection(AppConfig.endpoints.websocket, () => {
             //Websocket open and ready to send/receive
             _store.dispatch(ChatActions.connectedToChat({
                 userId: me
             }));
         });
 
-        chatStream = chatConnection.getStream();
-        chatStream.subscribe(
+        stream = connection.getStream();
+        stream.subscribe(
             (message: WebsocketMessage) => { //new message received
-                debug(`New message from ${AppConfig.endpoints.chat} through websocket`, message);
+                debug(`New message from ${AppConfig.endpoints.websocket} through websocket`, message);
                 if (_store && message.kind === SystemConstants.ChatMessage) {
                     if (message.sender !== me) {
                         _store.dispatch(ChatActions.receiveChat(Object.assign({}, message, { received: Date.now() })));
@@ -59,7 +60,7 @@ const socketMiddleware = (function(){
                         message: action.payload.message,
                         received: ''
                     };
-                    chatConnection.sendMessage(message);
+                    connection.sendMessage(message);
                     action.payload = message;
                     return next(action);
                 default: // All those actions that we don't want to intercept, pass along to the reducer

@@ -57,7 +57,7 @@ let consoleFun = () => {
     `,
     style.warning, 
     `
-    WARNING! "The Game" is in beta, the current state of the game does not reflect it's final shape`,
+WARNING! "The Game" is in beta, the current state of the game does not reflect it's final shape`,
     style.normal,
     `
 

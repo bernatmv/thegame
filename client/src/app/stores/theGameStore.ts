@@ -4,6 +4,7 @@ import websocket from '../middleware/websocketMiddleware';
 import connectionReducer from '../reducers/connectionReducer';
 import chatReducer from '../reducers/chatReducer';
 import roomReducer from '../reducers/roomReducer';
+import playerReducer from '../reducers/playerReducer';
 import RootState from '../reducers/state/rootState';
 
 export function configureStore(initialState?: RootState): Store<RootState> {
@@ -14,7 +15,8 @@ export function configureStore(initialState?: RootState): Store<RootState> {
   let reducers = {
     chats: chatReducer,
     connection: connectionReducer,
-    room: roomReducer
+    room: roomReducer,
+    player: playerReducer
   };
 
   // applyMiddleware

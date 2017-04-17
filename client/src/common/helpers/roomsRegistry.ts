@@ -12,7 +12,6 @@ import * as BetaRoomDto001 from '../../../../assets/rooms/beta_room_001.json';
 import * as BetaRoomDto002 from '../../../../assets/rooms/beta_room_002.json';
 import * as BetaRoomDto003 from '../../../../assets/rooms/beta_room_003.json';
 
-
 export default class RoomsRegistry {
     private _roomMapper: RoomMapper;
 
@@ -30,9 +29,9 @@ export default class RoomsRegistry {
         );
 
         this.map = new Map<string, RoomModel>();
-        this.map.set(BetaRoomDto001.id, BetaRoomDto001);
-        this.map.set(BetaRoomDto002.id, BetaRoomDto002);
-        this.map.set(BetaRoomDto003.id, BetaRoomDto003);
+        this.map.set(BetaRoomDto001.id, this._roomMapper.map(BetaRoomDto001));
+        this.map.set(BetaRoomDto002.id, this._roomMapper.map(BetaRoomDto002));
+        this.map.set(BetaRoomDto003.id, this._roomMapper.map(BetaRoomDto003));
     }
 
     public static get Instance(): RoomsRegistry {
