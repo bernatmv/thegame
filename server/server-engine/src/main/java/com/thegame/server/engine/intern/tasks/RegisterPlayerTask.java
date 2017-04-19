@@ -1,7 +1,7 @@
 package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.LocationService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.intern.services.MapperService;
@@ -20,9 +20,9 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 	
 	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean) {
 		this(_messageBean
-					,BusinessServiceFactory.PLAYER.getInstance(PlayerService.class)
-					,BusinessServiceFactory.LOCATION.getInstance(LocationService.class)
-					,BusinessServiceFactory.MAPPER.getInstance(MapperService.class));
+					,EngineServiceFactory.PLAYER.getInstance(PlayerService.class)
+					,EngineServiceFactory.LOCATION.getInstance(LocationService.class)
+					,EngineServiceFactory.MAPPER.getInstance(MapperService.class));
 	}
 	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean,final PlayerService _playerService,final LocationService _locationService,final MapperService _mapper) {
 		super(_messageBean);

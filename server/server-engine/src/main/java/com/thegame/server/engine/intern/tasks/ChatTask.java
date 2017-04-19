@@ -1,7 +1,7 @@
 package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.engine.messages.ChatMessageBean;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ChatService;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -19,7 +19,7 @@ public class ChatTask extends BaseMessageTask<ChatMessageBean>{
 	
 	private Consumer<ChatMessageBean> getChatMessageConsumer(final Optional<ChatMessageBean.MessageType> _messageType){
 
-		final ChatService chatService=BusinessServiceFactory.CHAT
+		final ChatService chatService=EngineServiceFactory.CHAT
 													.getInstance(ChatService.class);
 		Consumer<ChatMessageBean> reply=null;
 		

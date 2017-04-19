@@ -3,7 +3,7 @@ package com.thegame.server.engine.intern.services.impl;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
 import com.thegame.server.engine.messages.ChatMessageBean;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ChatService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import java.util.stream.Stream;
@@ -16,7 +16,7 @@ public class ChatServiceImpl implements ChatService{
 	private final PlayerService playerService;
 	
 	public ChatServiceImpl(){
-		this(BusinessServiceFactory.PLAYER.getInstance(PlayerService.class));
+		this(EngineServiceFactory.PLAYER.getInstance(PlayerService.class));
 	}
 	public ChatServiceImpl(final PlayerService _playerService){
 		this.playerService=_playerService;

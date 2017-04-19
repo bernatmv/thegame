@@ -1,7 +1,7 @@
 package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.PlayerService;
 
 /**
@@ -17,7 +17,7 @@ public class UnregisterPlayerTask extends BaseMessageTask<UnregisterPlayerMessag
 	@Override
 	public void execute() {
 
-		final PlayerService playerService=BusinessServiceFactory.PLAYER
+		final PlayerService playerService=EngineServiceFactory.PLAYER
 													.getInstance(PlayerService.class);
 		getMessageBean()
 			.map(unregisterPlayerMessage -> unregisterPlayerMessage.getSender())

@@ -3,7 +3,7 @@ package com.thegame.server.engine;
 import com.thegame.server.common.concurrent.CustomThreadFactory;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.intern.configuration.Configuration;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ConfigurationService;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -34,7 +34,7 @@ public class TheGameMessageProcessor extends ThreadPoolExecutor.CallerRunsPolicy
 		
 		logger.trace("message-processor::initialization::begin");
 		this.threadPool=null;
-		ConfigurationService configurationService=BusinessServiceFactory.CONFIGURATION
+		ConfigurationService configurationService=EngineServiceFactory.CONFIGURATION
 								.getInstance(ConfigurationService.class);
 		configure(configurationService.get(),"initialization");
 		configurationService.registerListener((newConfiguration) -> this.configure(newConfiguration,"reconfiguration-event"));

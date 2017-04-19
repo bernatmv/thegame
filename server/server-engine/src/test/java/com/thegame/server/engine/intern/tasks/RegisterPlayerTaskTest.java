@@ -1,6 +1,6 @@
 package com.thegame.server.engine.intern.tasks;
 
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.data.PlayerData;
 import com.thegame.server.engine.intern.services.LocationService;
@@ -75,7 +75,7 @@ public class RegisterPlayerTaskTest {
 		expectedArea.setShortDescription("Initial area - Short description");
 		expectedArea.setDescription("Initial area - Description");
 		
-		RegisterPlayerTask instance=new RegisterPlayerTask(message,this.playerService,this.locationService,BusinessServiceFactory.MAPPER.getInstance(MapperService.class));
+		RegisterPlayerTask instance=new RegisterPlayerTask(message,this.playerService,this.locationService,EngineServiceFactory.MAPPER.getInstance(MapperService.class));
 		instance.execute();
 		Assert.assertTrue(this.playerService.existPlayer("newPlayer"));
 		Assert.assertEquals(expectedPlayer,this.playerService.getPlayer("newPlayer"));
