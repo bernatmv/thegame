@@ -21,12 +21,12 @@
 			<!-- The PreparedStatement.setCharacterStream() method was added to JDBC 4 and according to C3P0 release notes:  As of version 0.9.5, c3p0 fully supports the jdbc4 spec.-->
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5</version>
+			<version>0.9.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.3.1.Final</version>
+			<version>5.2.9.Final</version>
 			<exclusions>
 				<exclusion>
 					<!-- The PreparedStatement.setCharacterStream() method was added to JDBC 4 and according to C3P0 release notes:  As of version 0.9.5, c3p0 fully supports the jdbc4 spec.-->
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.1.Final</version>
+			<version>5.2.9.Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.jboss.logging</groupId>
@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>4.3.1.Final</version>
+			<version>5.2.9.Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.jboss.logging</groupId>
@@ -58,10 +58,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.13.1.1</version>
-			<scope>compile</scope>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
 		</dependency>
 	</dependencies>
 </project>

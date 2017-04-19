@@ -40,3 +40,4 @@ client/.npm
 /server/server-client/target/
 npm-debug.log
 /server/server-persistence/nbproject/
+/server/server-engine/nbproject/

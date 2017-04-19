@@ -52,8 +52,12 @@ public class TheGameServer {
 		System.setProperty("java.util.logging.SimpleFormatter.format","%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %5$s%6$s%n");
 		Stream.of(Logger.getLogger("").getHandlers())
 			.forEach(handler -> handler.setLevel(Level.FINEST));
-		Logger.getLogger("com.thegame").setLevel(Level.FINEST);
+		Logger.getLogger("").setLevel(Level.WARNING);
 		Logger.getLogger("com.thegame.server.common").setLevel(Level.INFO);
+		Logger.getLogger("com.thegame.server").setLevel(Level.FINEST);
+		Logger.getLogger("com.thegame,server.presentation").setLevel(Level.FINEST);
+		Logger.getLogger("com.thegame,server.persistence").setLevel(Level.FINEST);
+		Logger.getLogger("com.thegame,server.engine").setLevel(Level.FINEST);
 	}
 	
 	@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})

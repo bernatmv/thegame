@@ -1,9 +1,11 @@
 package com.thegame.server.presentation.messages.mappers;
 
+import com.thegame.server.engine.messages.AreaMessageBean;
 import com.thegame.server.engine.messages.ChatMessageBean;
 import com.thegame.server.engine.messages.MoveMessageBean;
 import com.thegame.server.presentation.messages.ChatMessage;
 import com.thegame.server.presentation.messages.MoveMessage;
+import com.thegame.server.presentation.messages.RoomMessage;
 import org.mapstruct.Mapper;
 
 /**
@@ -13,12 +15,15 @@ import org.mapstruct.Mapper;
 public interface MessageMapper {
 
 	@Converter
-	public ChatMessageBean chatMessateToBean(final ChatMessage _chatMessage);
+	public ChatMessageBean toBean(final ChatMessage _chatMessage);
 	@Converter
-	public ChatMessage beanToChatMessateMessage(final ChatMessageBean _chatMessage);
+	public ChatMessage toMessage(final ChatMessageBean _chatMessage);
 
 	@Converter
-	public MoveMessageBean moveMessateToBean(final MoveMessage _chatMessage);
+	public MoveMessageBean toBean(final MoveMessage _chatMessage);
 	@Converter
-	public MoveMessage beanToMoveMessateMessage(final MoveMessageBean _chatMessage);
+	public MoveMessage toMessage(final MoveMessageBean _chatMessage);
+
+	@Converter
+	public RoomMessage toMessage(final AreaMessageBean _chatMessage);
 }

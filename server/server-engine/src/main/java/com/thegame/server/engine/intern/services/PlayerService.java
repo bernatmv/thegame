@@ -8,6 +8,7 @@ import java.util.Collection;
  */
 public interface PlayerService {
 
+	public boolean existPlayer(final String _playerName);
 	public PlayerData registerPlayer(final PlayerData _player);
 	public PlayerData getPlayer(final String _playerName);
 	public PlayerData unregisterPlayer(final String _playerName);

@@ -7,16 +7,24 @@ import com.thegame.server.engine.intern.services.PlayerService;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @author afarre
  */
 public class PlayerServiceImpl implements PlayerService{
 
-	public final Map<String,PlayerData> players;
+	protected final Map<String,PlayerData> players;
 
+	
 	public PlayerServiceImpl() {
 		this.players=new ConcurrentHashMap<>();
+	}
+	
+	
+	@Override
+	public boolean existPlayer(final String _playerName){
+		return this.players.containsKey(_playerName);
 	}
 	
 	@Override
@@ -59,6 +67,6 @@ public class PlayerServiceImpl implements PlayerService{
 	}
 	@Override
 	public Collection<PlayerData> listPlayers(){
-		return this.players.values();
+		return this.players.values().stream().collect(Collectors.toSet());
 	}
 }

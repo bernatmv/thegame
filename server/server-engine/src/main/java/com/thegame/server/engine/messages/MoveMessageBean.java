@@ -11,18 +11,19 @@ import lombok.ToString;
 /**
  * @author afarre
  */
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class MoveMessageBean implements IsMessageBean{
+@ToString(callSuper=true)
+@EqualsAndHashCode(callSuper=true)
+public class MoveMessageBean extends BaseMessageBean<MoveMessageBean>{
 	
 	@Setter
 	@Getter
-	private String sender;
-
-	@Setter
-	@Getter
 	private String direction;
+
+	@Builder
+	public MoveMessageBean(String direction, String sender) {
+		super(sender);
+		this.direction=direction;
+	}
 }

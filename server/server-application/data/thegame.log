@@ -1,0 +1,44 @@
+/*C5*/SET SCHEMA PUBLIC
+CONNECT USER SA
+/*C6*/SET SCHEMA PUBLIC
+CONNECT USER SA
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+alter table ROOMEXIT drop constraint FK_EXIT_ROOM
+alter table ROOMEXIT drop constraint FK_EXIT_TOROOM
+drop table NONPLAYER if exists
+drop table PLAYER if exists
+drop table RACE if exists
+drop table ROOM if exists
+drop table ROOMEXIT if exists
+drop sequence NONPLAYER_SEQ if exists
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE
+create sequence NONPLAYER_SEQ start with 1 increment by 1
+create table NONPLAYER (id bigint not null, NAME varchar(64), primary key (id))
+create table PLAYER (ID varchar(16) not null, NAME varchar(64), primary key (ID))
+create table RACE (ID varchar(16) not null, NAME varchar(64), primary key (ID))
+create table ROOM (ID varchar(16) not null, DESCRIPTION varchar(2048), SHORTDESCRIPTION varchar(128), TITLE varchar(64), primary key (ID))
+create table ROOMEXIT (NAME varchar(16) not null, FKROOM varchar(16) not null, FKTOROOM varchar(16) not null, primary key (NAME, FKROOM))
+create index IDX_FKROOM on ROOMEXIT (FKROOM)
+create index IDX_FKTOROOM on ROOMEXIT (FKTOROOM)
+alter table ROOMEXIT add constraint FK_EXIT_ROOM foreign key (FKROOM) references ROOM
+alter table ROOMEXIT add constraint FK_EXIT_TOROOM foreign key (FKTOROOM) references ROOM
+SET AUTOCOMMIT FALSE
+INSERT INTO ROOM VALUES('beta-room-001','Te encuentras en un claro en medio de un frondoso bosque, un peque\u00f1o arrollo murmulla en un rinc\u00f3n mientras una suave brisa hace ondular varios tallos de lavanda llenando el aire de un suave aroma.\u000aAl norte los arboles se abren ligeramente a un sendero que parece poco transitado.','Un tranquilo claro en medio de un frondoso bosque','Un claro en el bosque')
+COMMIT
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+INSERT INTO ROOM VALUES('beta-room-002','El camino lleva hasta un espacio abierto entre el bosque y la pared de una colina.\u000aEn este lugar hay un peque\u00f1o asentamiento rodeado por una empalizada de algo menos de dos metros. Los troncos de la empalizada son peque\u00f1os e irregulares, y est\u00e1n atados con primitivas cuerdas de c\u00e1\u00f1amo.','Entre el bosque y la pared de una colina, hay un peque\u00f1o campamento','Las afueras del campamento')
+COMMIT
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+INSERT INTO ROOM VALUES('beta-room-003','El campamento consiste en cuatro chozas grandes de paja que podr\u00edan alojar a cinco o seis personas cada una.\u000aTodas las chozas son de construcci\u00f3n basta y hechas con materiales de poca calidad. La plaza ocupa una extensi\u00f3n considerable donde cabr\u00edan sin problemas cien personas, pero en vez de eso s\u00f3lo hay varios montones de suciedad y unas cuantas gallinas picoteando en ellos.','La plaza central del campamento empalizado','La plaza del campamento')
+COMMIT
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+SET AUTOCOMMIT TRUE

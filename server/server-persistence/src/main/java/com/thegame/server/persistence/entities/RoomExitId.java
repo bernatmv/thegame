@@ -18,9 +18,9 @@ public class RoomExitId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	@ManyToOne(optional=false,targetEntity=Room.class) 
+	@ManyToOne(optional=false,targetEntity=Area.class) 
 	@JoinColumn(name="FKROOM",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_EXIT_ROOM"))
-	private Room room;
+	private Area room;
 		
 	@Column(name = "NAME",length=16)
 	private String name;

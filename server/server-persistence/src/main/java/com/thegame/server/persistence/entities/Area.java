@@ -14,8 +14,8 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(schema ="THEGAME",name="ROOM")
-public class Room implements Serializable{
+@Table(name="ROOM")
+public class Area implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,10 @@
 	var $message;
 	var $messageWindow;
 	var messages=new Map()
-	messages.set('ChatMessage','{"kind": "ChatMessage","sender": "bernatmv","message": "Hello world!"}');
+	messages.set('ChatMessage (YELL)','{"kind": "ChatMessage","type": "YELL","message": "Hello world!"}');
+	messages.set('ChatMessage (SAY)','{"kind": "ChatMessage","type": "SAY","message": "Hello world!"}');
+	messages.set('ChatMessage (WHISPER)','{"kind": "ChatMessage","type": "WHISPER","recipient": "bernatmv","message": "Hello world!"}');
+	messages.set('ChatMessage (unknown)','{"kind": "ChatMessage","message": "Hello world!"}');
 	messages.set('MoveMessage','{"kind": "MoveMessage","direction": "north"}');
  
 	function onMessageReceived(evt) {
@@ -100,7 +103,10 @@
 					<legend>Enter your message: </legend>
 					<select id="basicMessages" name="messageExample">
 						<option value="" selected="selected"></option>
-						<option value="ChatMessage">ChatMessage</option>
+						<option value="ChatMessage (YELL)">ChatMessage (YELL)</option>
+						<option value="ChatMessage (SAY)">ChatMessage (SAY)</option>
+						<option value="ChatMessage (WHISPER)">ChatMessage (WHISPER)</option>
+						<option value="ChatMessage (unknown)">ChatMessage (unknown)</option>
 						<option value="MoveMessage">MoveMessage</option>
 					</select>
 					<div class="controls">

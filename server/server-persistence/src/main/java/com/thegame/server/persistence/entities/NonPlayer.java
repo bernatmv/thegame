@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(schema ="THEGAME",name="NONPLAYER")
+@Table(name="NONPLAYER")
 public class NonPlayer implements Serializable{
 
 	private static final long serialVersionUID = 1L;

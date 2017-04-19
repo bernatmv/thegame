@@ -15,7 +15,7 @@ import org.junit.Before;
  * @author afarre
  * @param <T>
  */
-public abstract class MessageBaseTest<T extends IsMessage> {
+public abstract class IsMessageTest<T extends IsMessage> {
 	
 	public IsMessage instance;
 	

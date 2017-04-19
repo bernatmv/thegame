@@ -23,4 +23,11 @@
 		<module>server-artifact</module>
 	</modules>
 	
+	<dependencies>
+		<dependency>
+		  <groupId>com.owlike</groupId>
+		  <artifactId>genson</artifactId>
+		  <version>1.4</version>
+		</dependency>
+	</dependencies>
 </project>

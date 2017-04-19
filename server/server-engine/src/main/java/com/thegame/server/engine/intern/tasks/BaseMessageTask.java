@@ -1,25 +1,32 @@
 package com.thegame.server.engine.intern.tasks;
 
 import com.thegame.server.common.logging.LogStream;
-import lombok.Getter;
-import com.thegame.server.engine.messages.IsMessageBean;
+import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.services.PlayerService;
+import com.thegame.server.engine.messages.BaseMessageBean;
+import com.thegame.server.engine.messages.ErrorMessageBean;
+import java.util.Optional;
 
 /**
  * @author afarre
  * @param <T>
  */
-public abstract class BaseMessageTask<T extends IsMessageBean> implements Runnable{
+public abstract class BaseMessageTask<T extends BaseMessageBean> implements Runnable{
 
-	@Getter
-	private final T messageBean;
+	private final Optional<T> messageBean;
 	
 	
 	public BaseMessageTask(final T _messageBean){
-		this.messageBean=_messageBean;
+		this.messageBean=Optional.ofNullable(_messageBean);
 	}
 
 	
 	public abstract void execute();
+
+	
+	public Optional<T> getMessageBean() {
+		return this.messageBean;
+	}
 	
 	
 	@Override
@@ -32,7 +39,18 @@ public abstract class BaseMessageTask<T extends IsMessageBean> implements Runnab
 			execute();
 			logger.debug("message-task::{}::execution::end",this.getClass().getSimpleName());
 		}catch(Throwable e){
-			logger.error("message-task::{}::execution::fail::{}",this.getClass().getSimpleName(),e.getMessage(),e);
+			try{
+				this.messageBean
+					.map(message -> message.getSender())
+					.filter(sender -> BusinessServiceFactory.PLAYER.getInstance(PlayerService.class).existPlayer(sender))
+					.map(sender -> BusinessServiceFactory.PLAYER.getInstance(PlayerService.class).getPlayer(sender))
+					.map(senderPlayer -> senderPlayer.getChannel())
+					.ifPresent(channel -> {
+						channel.accept(ErrorMessageBean.builder().exception(e).build());
+					});
+			}catch(Throwable exception){
+				logger.debug("message-task::{}::execution::fail",this.getClass().getSimpleName(),e);
+			}
 		}
 	}
 }
