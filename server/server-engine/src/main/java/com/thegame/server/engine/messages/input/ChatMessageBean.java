@@ -1,41 +1,33 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author afarre
  */
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class ChatMessageBean extends BaseMessageBean<ChatMessageBean>{
+public class ChatMessageBean extends InputMessageBean<ChatMessageBean>{
 
 	public enum MessageType{
 		SAY,WHISPER,YELL;
 	}
 	
-	@Setter
-	@Getter
 	private MessageType type;
-	
-	@Setter
-	@Getter
 	private String message;
-
-	@Setter
-	@Getter
 	private String recipient;
 
 	
 	@Builder
-	public ChatMessageBean(final MessageType type,final String message,final String recipient,final String sender) {
+	public ChatMessageBean(final MessageType type,final String message,final String sender,final String recipient) {
 		super(sender);
 		this.type=type;
 		this.message=message;

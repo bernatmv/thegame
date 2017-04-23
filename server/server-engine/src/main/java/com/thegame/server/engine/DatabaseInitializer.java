@@ -5,7 +5,7 @@ import com.owlike.genson.GensonBuilder;
 import com.thegame.server.common.functional.LambdaUtils;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.intern.configuration.Configuration;
-import com.thegame.server.engine.messages.AreaMessageBean;
+import com.thegame.server.engine.messages.output.AreaMessageBean;
 import com.thegame.server.persistence.LocationDao;
 import com.thegame.server.persistence.PersistenceServiceFactory;
 import com.thegame.server.persistence.entities.Area;
@@ -15,6 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.persistence.entities.AreaExit;
+import com.thegame.server.persistence.entities.AreaExitId;
 
 /**
  * @author afarre
@@ -40,7 +42,7 @@ public class DatabaseInitializer {
 	}
 	
 	
-	protected Stream<Area> loadAreas() throws IOException{
+	protected Stream<AreaMessageBean> loadAreas() throws IOException{
 		
 		return Files.list(this.assetsFolder.resolve("rooms"))
 			.peek(filePath -> logger.finest("database-initializer::initialize::{}::found::{}",Area.class.getSimpleName(),filePath))
@@ -56,8 +58,7 @@ public class DatabaseInitializer {
 			.peek(bytes -> logger.finest("database-initializer::initialize::{}::content-size::{}",Area.class.getSimpleName(),bytes.length))
 			.map(bytes -> this.genson.deserialize(bytes, AreaMessageBean.class))
 			.peek(areaMessageBean -> logger.finest("database-initializer::initialize::{}::parsed::{}",Area.class.getSimpleName(),areaMessageBean))
-			.filter(areaMessageBean -> areaMessageBean!=null)
-			.map(areaMessageBean -> MapperService.instance.toEntity(areaMessageBean));
+			.filter(areaMessageBean -> areaMessageBean!=null);
 	}
 	
 	public void initialize(){
@@ -65,10 +66,31 @@ public class DatabaseInitializer {
 		try {
 			logger.trace("database-initializer::initialize::begin");
 			this.loadAreas()
+				.map(areaMessageBean -> MapperService.instance.toEntity(areaMessageBean))
 				.peek(areaEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",Area.class.getSimpleName(),areaEntity))
 				.filter(areaEntity -> areaEntity!=null)
 				.forEach(areaEntity -> locationDao.saveArea(areaEntity));
 			logger.info("database-initializer::initialize::{}::done",Area.class.getSimpleName());
+			this.loadAreas()
+				.flatMap(areaMessageBean -> areaMessageBean
+													.getExits()
+													.entrySet()
+													.stream()
+													.map(exitEntry -> AreaExit.builder()
+																			.id(AreaExitId.builder()
+																							.area(Area.builder()
+																											.id(areaMessageBean.getId())
+																											.build())
+																							.name(exitEntry.getKey())
+																							.build())
+																			.toArea(Area.builder()
+																							.id(exitEntry.getValue())
+																							.build())
+																			.build()))
+				.peek(areaExitEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",AreaExit.class.getSimpleName(),areaExitEntity))
+				.filter(areaExitEntity -> areaExitEntity!=null)
+				.forEach(areaExitEntity -> locationDao.saveAreaExit(areaExitEntity));
+			logger.info("database-initializer::initialize::{}::done",AreaExit.class.getSimpleName());
 			logger.debug("database-initializer::initialize::end");
 		} catch (IOException e) {
 			logger.error("database-initializer::initialize::fail::{}",e.getMessage());

@@ -1,6 +1,6 @@
 package com.thegame.server.engine.intern.tasks;
 
-import com.thegame.server.engine.messages.UnregisterPlayerMessageBean;
+import com.thegame.server.engine.messages.input.UnregisterPlayerMessageBean;
 import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.PlayerService;
 

@@ -6,7 +6,7 @@ import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
-import com.thegame.server.engine.messages.BaseMessageBean;
+import com.thegame.server.engine.messages.input.InputMessageBean;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ import org.mapstruct.factory.Mappers;
 public class MessageFactory {
 	
 	private	static final LogStream logger=LogStream.getLogger(MessageFactory.class);
-	private static final Map<Class<IsMessage>,Function<IsMessage,BaseMessageBean>> toBeanMapping=new HashMap<>(20);
+	private static final Map<Class<IsMessage>,Function<IsMessage,InputMessageBean>> toBeanMapping=new HashMap<>(20);
 	private static final Map<Class<IsMessageBean>,Function<IsMessageBean,IsMessage>> fromBeanMapping=new HashMap<>(20);
 	private static final Map<String,Function<String,IsMessage>> fromJsonMapping=new HashMap<>(20);
 	private static final MessageMapper messageMapper=Mappers.getMapper(MessageMapper.class );
@@ -42,16 +42,16 @@ public class MessageFactory {
 					.peek(method -> logger.finest("message-factory::initialization::to-bean-mapping::method::{}::annotated",method))
 					.filter(method -> IsMessage.class.isAssignableFrom(method.getParameters()[0].getType()))
 					.peek(method -> logger.finest("message-factory::initialization::to-bean-mapping::method::{}::correct-param",method))
-					.filter(method -> BaseMessageBean.class.isAssignableFrom(method.getReturnType()))
+					.filter(method -> InputMessageBean.class.isAssignableFrom(method.getReturnType()))
 					.peek(method -> logger.finest("message-factory::initialization::to-bean-mapping::method::{}::correct-return",method))
 					.map(method -> new Object[]{
 												method.getParameters()[0].getType(),
 												(Function)((messageBean) -> {
 															
-															BaseMessageBean reply=null;
+															InputMessageBean reply=null;
 													
 															try {
-																reply=(BaseMessageBean)method.invoke(MessageFactory.messageMapper,messageBean);
+																reply=(InputMessageBean)method.invoke(MessageFactory.messageMapper,messageBean);
 															} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 																throw new RuntimeException(e);
 															}
@@ -60,7 +60,7 @@ public class MessageFactory {
 														})
 												})
 					.peek(array -> logger.finest("message-factory::initialization::to-bean-mapping::method::from::{}::convert-with::{}",array[0],array[1]))
-					.forEach(array -> MessageFactory.toBeanMapping.put((Class<IsMessage>)array[0],(Function<IsMessage,BaseMessageBean>)array[1]));
+					.forEach(array -> MessageFactory.toBeanMapping.put((Class<IsMessage>)array[0],(Function<IsMessage,InputMessageBean>)array[1]));
 			logger.finest("message-factory::initialization::to-bean-mapping::{}",MessageFactory.toBeanMapping);
 			logger.debug("message-factory::initialization::to-bean-mapping::end::{}",MessageFactory.toBeanMapping.size());
 			logger.trace("message-factory::initialization::from-bean-mapping::begin");
@@ -172,12 +172,12 @@ public class MessageFactory {
 	}
 
 	@SuppressWarnings("element-type-mismatch")
-	public static BaseMessageBean getInstance(final IsMessage _message){
+	public static InputMessageBean getInstance(final IsMessage _message){
 		
-		BaseMessageBean reply;
+		InputMessageBean reply;
 		
 		logger.trace("message-factory::get-instance::IsMessage::begin::{}",_message);
-		final Function<IsMessage,BaseMessageBean> mapper=MessageFactory.toBeanMapping.get(_message.getClass());
+		final Function<IsMessage,InputMessageBean> mapper=MessageFactory.toBeanMapping.get(_message.getClass());
 		reply=mapper.apply(_message);
 		logger.debug("message-factory::get-instance::IsMessage::end");
 			

@@ -1,24 +1,22 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author afarre
  */
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class MoveMessageBean extends BaseMessageBean<MoveMessageBean>{
+public class MoveMessageBean extends InputMessageBean<MoveMessageBean>{
 	
-	@Setter
-	@Getter
 	private String direction;
 
 	@Builder

@@ -1,11 +1,13 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.engine.messages.output;
 
-import java.time.LocalDateTime;
+import com.thegame.server.engine.messages.IsMessageBean;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Singular;
 
 /**
  * @author afarre
@@ -14,12 +16,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomMessage implements IsMessage<RoomMessage>{
+public class AreaMessageBean implements IsMessageBean{
 
-	public LocalDateTime time;	
+	@NonNull
 	private String id;
 	private String title;
 	private String shortDescription;
 	private String description;
+	
+	@Singular
 	private Map<String,String> exits;
 }

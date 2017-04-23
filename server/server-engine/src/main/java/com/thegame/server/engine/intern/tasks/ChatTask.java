@@ -1,6 +1,6 @@
 package com.thegame.server.engine.intern.tasks;
 
-import com.thegame.server.engine.messages.ChatMessageBean;
+import com.thegame.server.engine.messages.input.ChatMessageBean;
 import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ChatService;
 import java.util.Optional;

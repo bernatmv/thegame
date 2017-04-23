@@ -7,14 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author afarre
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name="ROOM")
+@Table(name="AREA")
 public class Area implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -32,8 +38,8 @@ public class Area implements Serializable{
 	@Column(name = "DESCRIPTION",length=2048)
 	private String description;
 
-	@OneToMany(mappedBy="id.room",targetEntity=RoomExit.class)
-  	private List<RoomExit> exits;
+	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class)
+  	private List<AreaExit> exits;
 	
 	//private List<String> players;
 	//private List<String> enemies;

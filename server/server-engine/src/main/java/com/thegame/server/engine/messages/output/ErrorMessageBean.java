@@ -1,5 +1,6 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.output;
 
+import com.thegame.server.engine.messages.IsMessageBean;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +14,8 @@ import lombok.NonNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaMessageBean implements IsMessageBean{
+public class ErrorMessageBean implements IsMessageBean{
 
 	@NonNull
-	private String id;
-	private String title;
-	private String shortDescription;
-	private String description;
+	private Throwable exception;
 }

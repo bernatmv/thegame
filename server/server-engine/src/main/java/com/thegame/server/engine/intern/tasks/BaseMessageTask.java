@@ -3,15 +3,15 @@ package com.thegame.server.engine.intern.tasks;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.PlayerService;
-import com.thegame.server.engine.messages.BaseMessageBean;
-import com.thegame.server.engine.messages.ErrorMessageBean;
+import com.thegame.server.engine.messages.input.InputMessageBean;
+import com.thegame.server.engine.messages.output.ErrorMessageBean;
 import java.util.Optional;
 
 /**
  * @author afarre
  * @param <T>
  */
-public abstract class BaseMessageTask<T extends BaseMessageBean> implements Runnable{
+public abstract class BaseMessageTask<T extends InputMessageBean> implements Runnable{
 
 	private final Optional<T> messageBean;
 	

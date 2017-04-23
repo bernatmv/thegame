@@ -1,8 +1,8 @@
 package com.thegame.server.presentation.messages.mappers;
 
-import com.thegame.server.engine.messages.AreaMessageBean;
-import com.thegame.server.engine.messages.ChatMessageBean;
-import com.thegame.server.engine.messages.MoveMessageBean;
+import com.thegame.server.engine.messages.output.AreaMessageBean;
+import com.thegame.server.engine.messages.input.ChatMessageBean;
+import com.thegame.server.engine.messages.input.MoveMessageBean;
 import com.thegame.server.presentation.messages.ChatMessage;
 import com.thegame.server.presentation.messages.MoveMessage;
 import com.thegame.server.presentation.messages.RoomMessage;

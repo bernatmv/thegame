@@ -2,6 +2,7 @@ package com.thegame.server.persistence.impl;
 
 import com.thegame.server.persistence.LocationDao;
 import com.thegame.server.persistence.entities.Area;
+import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.exceptions.PersistenceException;
 import com.thegame.server.persistence.exceptions.PersistenceExceptionType;
 import com.thegame.server.persistence.support.JPASessionManager;
@@ -33,6 +34,28 @@ public class LocationDaoImpl implements LocationDao{
 				if(entityManager.getTransaction().isActive())
 					entityManager.getTransaction().rollback();
 				throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_FAIL,_area);
+			}
+		}
+	}
+	
+	@Override
+	public void saveAreaExit(final AreaExit _areaExit) {
+		
+		try(JPASessionManager entityManager=createEntityManager()){
+			try{
+				entityManager.getTransaction().begin();
+				Optional.ofNullable(entityManager.find(AreaExit.class, _areaExit.getId()))
+					.ifPresent(area -> {throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_ALREADY_EXIST,area.getId());});
+				entityManager.persist(_areaExit);
+				entityManager.getTransaction().commit();
+			}catch(PersistenceException e){
+				if(entityManager.getTransaction().isActive())
+					entityManager.getTransaction().rollback();
+				throw e;
+			}catch(Throwable e){
+				if(entityManager.getTransaction().isActive())
+					entityManager.getTransaction().rollback();
+				throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_FAIL,_areaExit);
 			}
 		}
 	}
