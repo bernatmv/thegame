@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="the-game" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>com.thegame.server.persistence.entities.NonPlayer</class>
-    <class>com.thegame.server.persistence.entities.Player</class>
-    <class>com.thegame.server.persistence.entities.Race</class>
-    <class>com.thegame.server.persistence.entities.Area</class>
-    <class>com.thegame.server.persistence.entities.AreaExit</class>
-    <properties>
-      <!-- Hibernate properties -->
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="hibernate.show_sql" value="false"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-      <!-- Configuring Connection Pool -->
-      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <property name="hibernate.c3p0.min_size" value="2"/>
-      <property name="hibernate.c3p0.max_size" value="20"/>
-      <property name="hibernate.c3p0.timeout" value="100"/>
-      <property name="hibernate.c3p0.max_statements" value="50"/>
-      <property name="hibernate.c3p0.idle_test_period" value="100"/>
-      <!-- Configuring jpa behaviour -->
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
-      <!-- Configuring JDBC properties -->
-      <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:data/thegame;shutdown=true;hsqldb.write_delay=false;set schema THEGAME"/>
-      <property name="javax.persistence.jdbc.user" value="sa"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-      <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-    </properties>
-  </persistence-unit>
+	<persistence-unit name="the-game" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>com.thegame.server.persistence.entities.NonPlayer</class>
+		<class>com.thegame.server.persistence.entities.Player</class>
+		<class>com.thegame.server.persistence.entities.Race</class>
+		<class>com.thegame.server.persistence.entities.Area</class>
+		<class>com.thegame.server.persistence.entities.AreaExit</class>
+		<properties>
+			<!-- Hibernate properties -->
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+			<property name="hibernate.show_sql" value="false"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+			<!-- Configuring Connection Pool -->
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			<property name="hibernate.c3p0.acquire_increment" value="1"/>
+			<property name="hibernate.c3p0.min_size" value="2"/>
+			<property name="hibernate.c3p0.max_size" value="20"/>
+			<property name="hibernate.c3p0.timeout" value="100"/>
+			<property name="hibernate.c3p0.max_statements" value="50"/>
+			<property name="hibernate.c3p0.idle_test_period" value="100"/>
+			<!-- Configuring jpa behaviour -->
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			<property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
+			<!-- Configuring JDBC properties -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:data/thegame;shutdown=true;hsqldb.write_delay=false;set schema THEGAME"/>
+			<property name="javax.persistence.jdbc.user" value="sa"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+		</properties>
+	</persistence-unit>
 </persistence>
