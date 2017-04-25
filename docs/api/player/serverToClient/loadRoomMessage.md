@@ -5,19 +5,19 @@
     kind: string;
     time: number;
     room: {
-        id: string,
+        id: string;
         exits: {
-            north?: string,
-            east?: string,
-            south?: string,
-            west?: string,
-            up?: string,
-            down?: string
+            north?: string;
+            east?: string;
+            south?: string;
+            west?: string;
+            up?: string;
+            down?: string;
         },
-        players: Array<PlayerDto>,
-        enemies: Array<EnemyDto>,
-        npc: Array<NPCDto>,
-        items: Array<ItemDto>
+        players: Array<PlayerDto>;
+        enemies: Array<EnemyDto>;
+        npc: Array<NPCDto>;
+        items: Array<ItemDto>;
     }
 }
 ```

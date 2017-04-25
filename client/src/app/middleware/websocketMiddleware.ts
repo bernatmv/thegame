@@ -14,32 +14,36 @@ const socketMiddleware = (function(){
     let _store = null;
     let connection: Connection = null;
     let stream: Rx.Observable<WebsocketMessage> = null;
-    let me = 'User' + Math.ceil(Math.random() * 1000);
-    // map
+    // user
+    let me = null;
+    //TODO: refactor once we get this information from the server
     let currentRoom = 'beta-room-001';
 
-    let initialize = () => {
+    let initialize = (userId: string) => {
         _store.dispatch(SystemActions.loadRoom(currentRoom));
 
-        connection = new Connection(AppConfig.endpoints.websocket + me, () => {
+        connection = new Connection(AppConfig.endpoints.websocket + userId, () => {
             //Websocket open and ready to send/receive
             _store.dispatch(ChatActions.connectedToChat({
-                userId: me
+                userId: userId
             }));
         });
 
         stream = connection.getStream();
         stream.subscribe(
-            (message: WebsocketMessage) => { //new message received
+            //new message received
+            (message: WebsocketMessage) => {
                 debug(`New message from ${AppConfig.endpoints.websocket} through websocket`, message);
                 if (_store && message.kind === SystemConstants.ChatMessage) {
-                    if (message.sender !== me) {
+                    if (message.sender !== userId) {
                         _store.dispatch(ChatActions.receiveChat(Object.assign({}, message, { received: Date.now() })));
                     }
                 }
             },
-            (error) => {}, //error
-            () => { //completed
+            //error
+            (error) => {},
+            //completed
+            () => {
                 if (_store) {
                     _store.dispatch(ChatActions.disconnectedFromChat());
                 }
@@ -49,24 +53,33 @@ const socketMiddleware = (function(){
 
     return store => {
         _store = store;
-        initialize();
         return next => action => {
             switch(action.type) {
+                // Intercept the login message so we can initialize the connection
+                case ActionsConstants.Login:
+                    console.log(action);//tslint:disable-line
+                    me = action.payload;
+                    initialize(me);
+                    return next(action);
                 // Intercept when we want to send a message
                 case ActionsConstants.SendChat:
-                    let message = {
-                        kind: SystemConstants.ChatMessage,
-                        sender: action.payload.sender ? action.payload.sender : me,
-                        message: action.payload.message,
-                        received: ''
-                    };
-                    connection.sendMessage(message);
-                    action.payload = message;
-                    return next(action);
-                default: // All those actions that we don't want to intercept, pass along to the reducer
+                    if (me) {
+                        let message = {
+                            kind: SystemConstants.ChatMessage,
+                            sender: action.payload.sender ? action.payload.sender : me,
+                            message: action.payload.message,
+                            received: ''
+                        };
+                        connection.sendMessage(message);
+                        action.payload = message;
+                        return next(action);
+                    }
+                    return next();
+                // All those actions that we don't want to intercept, pass along to the reducer
+                default:
                     return next(action);
             }
-        }
+        };
     };
 })();
 export default socketMiddleware;
