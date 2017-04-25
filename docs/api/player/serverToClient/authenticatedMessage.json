@@ -18,5 +18,15 @@
             "actual": 100,
             "max": 100
         }
+    },
+    "room": {
+        "id": "beta-room-001",
+        "exits": {
+            "north": "beta-room-002"
+        },
+        "players": [],
+        "enemies": [],
+        "npc": [],
+        "items": []
     }
 }
