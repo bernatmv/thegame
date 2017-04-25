@@ -1,7 +1,6 @@
 import * as React from 'react';
 import LoginSectionProps from './loginSectionProps';
 import { Input, Image } from 'semantic-ui-react';
-import ConnectionStatus from '../common/connectionStatus/connectionStatus';
 import TranslationConstants from '../../../common/constants/translationConstants';
 import i18nService from '../../../common/service/i18nServiceImpl';
 import * as style from './loginSection.css';
@@ -38,7 +37,6 @@ export default class LoginSection extends React.Component<LoginSectionProps, Log
     render(): JSX.Element {
         return (
             <div className={style.login}>
-                <ConnectionStatus connection={this.props.connection} top right />
                 <div className={style.login__menu}>
                     <div className={style.login__logo}>
                         <Image src={logoImage} size={'medium'} className={style.login__logo__main} />

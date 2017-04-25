@@ -66,7 +66,7 @@ const socketMiddleware = (function(){
                 default: // All those actions that we don't want to intercept, pass along to the reducer
                     return next(action);
             }
-        }
+        };
     };
 })();
 export default socketMiddleware;
