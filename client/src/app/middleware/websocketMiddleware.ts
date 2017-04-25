@@ -21,7 +21,7 @@ const socketMiddleware = (function(){
     let initialize = () => {
         _store.dispatch(SystemActions.loadRoom(currentRoom));
 
-        connection = new Connection(AppConfig.endpoints.websocket, () => {
+        connection = new Connection(AppConfig.endpoints.websocket + me, () => {
             //Websocket open and ready to send/receive
             _store.dispatch(ChatActions.connectedToChat({
                 userId: me

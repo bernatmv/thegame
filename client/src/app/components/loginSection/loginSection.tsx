@@ -11,7 +11,7 @@ interface LoginSectionState {
     text: string;
 }
 
-export default class ChatSection extends React.Component<LoginSectionProps, LoginSectionState> {
+export default class LoginSection extends React.Component<LoginSectionProps, LoginSectionState> {
     static defaultProps = {
         placeholder: i18nService.Instance.translate(TranslationConstants.loginInputPlaceholder)
     };

@@ -52,7 +52,7 @@ daemon::start::begin
 
 Install `Node.js`
 
-> `git clone https://github.com/bernatmv/thegame.git` if you want to b a contributor, fork de repo (avoid this step if you already cloned the repo)
+> `git clone https://github.com/bernatmv/thegame.git` if you want to be a contributor, fork de repo (we work following a Pull Request with rebase philosophy on the develop branch)
 
 > `npm install` on the _client_ folder
 
@@ -63,7 +63,11 @@ Install `Node.js`
 You can also run any of our provided scripts with `npm run _____`
 
 > start => Builds and runs a local server
+
 > build => Rimraf the dist folder and re-build
-> lint => Result from linting all files with tslint    
+
+> lint => Result from linting all files with tslint
+
 > test => Build, and test the library
+
 > docs => Generate HTML API documentation and open it in a browser

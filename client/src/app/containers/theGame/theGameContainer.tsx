@@ -13,6 +13,11 @@ import * as ChatActions from '../../actions/chatActions';
 import * as PlayerActions from '../../actions/playerActions';
 import * as AuthActions from '../../actions/authActions';
 import * as style from './theGameContainer.css';
+import whyDidYouUpdate from 'why-did-you-update';
+
+if (process.env.NODE_ENV !== 'production') {
+  whyDidYouUpdate(React);
+}
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
