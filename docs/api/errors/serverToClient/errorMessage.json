@@ -1,0 +1,6 @@
+{
+    "kind": "ErrorMessage",
+    "time": 0,
+	"code": "UNABLE_TO_PROCESS_MESSAGE",
+    "message": "Server has been unable to process message"
+}

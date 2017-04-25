@@ -13,6 +13,9 @@ public interface LocationService {
 	public static final String LOGON_AREA="logon";
 
 	public AreaMessageBean getInitialArea();
+	public default AreaMessageBean getLogonArea(){
+		return AreaMessageBean.builder().id(LOGON_AREA).build();
+	}
 	public AreaMessageBean getArea(final String _areaId);
 
 	

@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MoveMessage implements IsMessage<MoveMessage>{
+public class PlayerEntersRoomMessage implements IsMessage<PlayerEntersRoomMessage>{
 
 	private LocalDateTime time;	
-	private String direction;
+	private String player;
+	private String from;
 }

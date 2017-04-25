@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString(exclude={"stacktrace"})
 public class ErrorMessage implements IsMessage<ErrorMessage>{
 
-	public LocalDateTime time;	
+	private LocalDateTime time;	
 	private String code;
 	private String message;
 	private String stacktrace;

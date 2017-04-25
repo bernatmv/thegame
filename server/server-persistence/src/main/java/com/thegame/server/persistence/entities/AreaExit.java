@@ -3,6 +3,7 @@ package com.thegame.server.persistence.entities;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -32,7 +33,7 @@ public class AreaExit implements Serializable{
 	@EmbeddedId
 	private AreaExitId id;
 	
-	@ManyToOne(optional=false,targetEntity=Area.class) 
+	@ManyToOne(optional=false,targetEntity=Area.class,fetch=FetchType.LAZY) 
 	@JoinColumn(name="FKTOAREA",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_EXIT_TOAREA"))
 	private Area toArea;
 }

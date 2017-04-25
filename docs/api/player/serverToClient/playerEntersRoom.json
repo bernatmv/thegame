@@ -2,5 +2,5 @@
     "kind": "PlayerEntersRoomMessage",
     "time": 0,
     "player": "bernatmv",
-    "enteringRoom": "beta-room-001"
+    "from": "beta-room-001"
 }

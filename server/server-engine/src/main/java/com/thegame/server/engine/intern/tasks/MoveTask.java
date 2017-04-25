@@ -3,7 +3,6 @@ package com.thegame.server.engine.intern.tasks;
 import com.thegame.server.common.functional.Triple;
 import com.thegame.server.common.functional.Tuple;
 import com.thegame.server.engine.intern.EngineServiceFactory;
-import com.thegame.server.engine.messages.input.ChatMessageBean;
 import com.thegame.server.engine.intern.services.LocationService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.messages.input.MoveMessageBean;
@@ -11,7 +10,7 @@ import com.thegame.server.engine.messages.input.MoveMessageBean;
 /**
  * @author afarre
  */
-@Task(ChatMessageBean.class)
+@Task(MoveMessageBean.class)
 public class MoveTask extends BaseMessageTask<MoveMessageBean>{
 
 	private LocationService locationService;

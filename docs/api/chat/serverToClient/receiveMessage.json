@@ -1,6 +1,7 @@
 {
     "kind": "ChatMessage",
     "time": 0,
+	"type": "SAY",
     "sender": "bernatmv",
     "message": "Hello world!"
 }

@@ -13,7 +13,6 @@ import com.thegame.server.engine.messages.output.AreaMessageBean;
 @Task(RegisterPlayerMessageBean.class)
 public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBean>{
 
-	
 	private final PlayerService playerService;
 	private final LocationService locationService;
 	private final MapperService mapper;
@@ -46,6 +45,7 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 												.registerPlayer(playerMessageBean,area.getId())
 												.getChannel()
 												.accept(area);
+										this.locationService.addPlayer(area, playerMessageBean, this.locationService.getLogonArea());
 									});
 	}
 }
