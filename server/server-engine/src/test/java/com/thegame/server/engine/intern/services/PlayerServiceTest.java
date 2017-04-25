@@ -137,6 +137,7 @@ public class PlayerServiceTest {
 		result=instance.unregisterPlayer("test");
 		Assert.assertEquals(expResult, result);
 		Assert.assertFalse(instance.existPlayer("test"));
+		Assert.assertEquals(0,this.messages.size());
 	}
 
 	/**
@@ -177,4 +178,24 @@ public class PlayerServiceTest {
 		Assert.assertEquals(2,result.size());
 		Assert.assertEquals(expResult, result);
 	}	
+	
+	/**
+	 * Test of movePlayer method, of class PlayerService.
+	 */
+	@Test
+	public void testMovePlayer() {
+		System.out.println("movePlayer");
+		PlayerMessageBean _player=createPlayer("test");
+		PlayerMessageBean result=instance.registerPlayer(_player,"startup-area");
+		Assert.assertEquals(_player, result);
+		Assert.assertEquals(0,this.messages.size());
+		Assert.assertTrue(instance.existPlayer("test"));
+
+		PlayerMessageBean expResult=createPlayer("test");
+		expResult.setArea("go-area");
+		result=instance.movePlayer(_player,"go-area");
+		Assert.assertEquals(expResult, result);
+		Assert.assertTrue(instance.existPlayer("test"));
+		Assert.assertEquals(0,this.messages.size());
+	}
 }

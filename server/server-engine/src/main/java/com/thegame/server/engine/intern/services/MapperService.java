@@ -31,7 +31,7 @@ public interface MapperService {
 																	+ ".stream()"
 																	+ ".collect(java.util.stream.Collectors.toMap("
 																								+ "areaExit -> areaExit.getId().getName(),"
-																								+ "areaExit -> areaExit.getId().getArea().getId())))"),
+																								+ "areaExit -> areaExit.getToArea().getId())))"),
 	})
 	public AreaMessageBean toMessageBean(final Area _messageEntity);
 	public AreaMessageBean toMessageBean(final AreaData _messageBean);
@@ -49,7 +49,7 @@ public interface MapperService {
 																	+ ".stream()"
 																	+ ".collect(java.util.stream.Collectors.toMap("
 																								+ "areaExit -> areaExit.getId().getName(),"
-																								+ "areaExit -> areaExit.getId().getArea().getId())))"),
+																								+ "areaExit -> areaExit.getToArea().getId())))"),
 		@Mapping(target="players",expression="java(new java.util.concurrent.CopyOnWriteArrayList())"),
 		@Mapping(target="listeners",expression="java(new java.util.concurrent.CopyOnWriteArrayList())")
 	})
