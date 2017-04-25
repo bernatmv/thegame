@@ -1,11 +1,3 @@
 # LoginMessage
 
-```
-{
-    kind: string;
-    userId: string;
-}
-```
-
-    `kind` => *required* => The message type
-    `userId` => *required* => The id of the user to login (no authentication yet, later on we will add the password)
+We are not using any specific message to do the login, currently the `userId` is provided as part of the URL for the websocket when stablishing the connection.
