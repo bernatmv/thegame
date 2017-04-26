@@ -17,4 +17,13 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>../../assets</directory>
+				<targetPath>assets</targetPath>
+			</resource>
+		</resources>
+	</build>
 </project>

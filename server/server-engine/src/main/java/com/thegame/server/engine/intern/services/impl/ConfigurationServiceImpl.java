@@ -2,7 +2,7 @@ package com.thegame.server.engine.intern.services.impl;
 
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.intern.configuration.Configuration;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ConfigurationService;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
  */
 public class ConfigurationServiceImpl implements ConfigurationService{
 
-	private static final LogStream logger=LogStream.getLogger(BusinessServiceFactory.class);
+	private static final LogStream logger=LogStream.getLogger(EngineServiceFactory.class);
 	
 	private final Set<Consumer<Map<String, String>>> listeners;
 	private final Map<String, String> configuration;

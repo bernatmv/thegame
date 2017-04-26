@@ -1,7 +1,7 @@
 package com.thegame.server.presentation.messages.mappers;
 
-import com.thegame.server.engine.messages.ChatMessageBean;
-import com.thegame.server.engine.messages.MoveMessageBean;
+import com.thegame.server.engine.messages.input.ChatMessageBean;
+import com.thegame.server.engine.messages.input.MoveMessageBean;
 import com.thegame.server.presentation.messages.ChatMessage;
 import com.thegame.server.presentation.messages.MoveMessage;
 import org.junit.Assert;
@@ -21,7 +21,7 @@ public class MessageMapperTest {
 		System.out.println("chatMessateToBean");
 		ChatMessage _chatMessage=ChatMessage.builder().message("myMessage").sender("sender").recipient("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
-		ChatMessageBean expResult=ChatMessageBean.builder().message("myMessage").sender("sender").recipient("recipient").build();
+		ChatMessageBean expResult=ChatMessageBean.builder().message("myMessage").recipient("recipient").build();
 		ChatMessageBean result=instance.toBean(_chatMessage);
 		Assert.assertEquals(expResult, result);
 	}
@@ -34,7 +34,7 @@ public class MessageMapperTest {
 		System.out.println("beanToChatMessateMessage");
 		ChatMessageBean _chatMessage=ChatMessageBean.builder().message("myMessage").sender("sender").recipient("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
-		ChatMessage expResult=ChatMessage.builder().message("myMessage").sender("sender").recipient("recipient").build();
+		ChatMessage expResult=ChatMessage.builder().message("myMessage").sender("sender").build();
 		ChatMessage result=instance.toMessage(_chatMessage);
 		Assert.assertEquals(expResult, result);
 	}
@@ -45,23 +45,10 @@ public class MessageMapperTest {
 	@Test
 	public void testMoveMessateToBean() {
 		System.out.println("moveMessateToBean");
-		MoveMessage _moveMessage=MoveMessage.builder().sender("sender").direction("recipient").build();
+		MoveMessage _moveMessage=MoveMessage.builder().direction("recipient").build();
 		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
-		MoveMessageBean expResult=MoveMessageBean.builder().sender("sender").direction("recipient").build();
+		MoveMessageBean expResult=MoveMessageBean.builder().direction("recipient").build();
 		MoveMessageBean result=instance.toBean(_moveMessage);
-		Assert.assertEquals(expResult, result);
-	}
-
-	/**
-	 * Test of beanToMoveMessateMessage method, of class MessageMapper.
-	 */
-	@Test
-	public void testBeanToMoveMessateMessage() {
-		System.out.println("beanToMoveMessateMessage");
-		MoveMessageBean _moveMessage=MoveMessageBean.builder().sender("sender").direction("recipient").build();
-		MessageMapper instance=Mappers.getMapper(MessageMapper.class );
-		MoveMessage expResult=MoveMessage.builder().sender("sender").direction("recipient").build();
-		MoveMessage result=instance.toMessage(_moveMessage);
 		Assert.assertEquals(expResult, result);
 	}
 }

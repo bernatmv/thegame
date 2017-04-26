@@ -1,4 +1,4 @@
-package com.thegame.server.engine.intern.data;
+package com.thegame.server.engine.messages.output;
 
 import com.thegame.server.engine.messages.IsMessageBean;
 import java.util.function.Consumer;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerData {
+public class PlayerMessageBean implements IsMessageBean{
 	
 	private String name;
 	private String area;

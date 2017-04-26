@@ -1,10 +1,11 @@
 package com.thegame.server.engine.intern.tasks;
 
-import com.thegame.server.engine.messages.RegisterPlayerMessageBean;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.messages.input.RegisterPlayerMessageBean;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.LocationService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.messages.output.AreaMessageBean;
 
 /**
  * @author afarre
@@ -12,7 +13,6 @@ import com.thegame.server.engine.intern.services.MapperService;
 @Task(RegisterPlayerMessageBean.class)
 public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBean>{
 
-	
 	private final PlayerService playerService;
 	private final LocationService locationService;
 	private final MapperService mapper;
@@ -20,9 +20,9 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 	
 	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean) {
 		this(_messageBean
-					,BusinessServiceFactory.PLAYER.getInstance(PlayerService.class)
-					,BusinessServiceFactory.LOCATION.getInstance(LocationService.class)
-					,BusinessServiceFactory.MAPPER.getInstance(MapperService.class));
+					,EngineServiceFactory.PLAYER.getInstance(PlayerService.class)
+					,EngineServiceFactory.LOCATION.getInstance(LocationService.class)
+					,EngineServiceFactory.MAPPER.getInstance(MapperService.class));
 	}
 	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean,final PlayerService _playerService,final LocationService _locationService,final MapperService _mapper) {
 		super(_messageBean);
@@ -36,12 +36,16 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 	public void execute() {
 
 		getMessageBean()
-			.filter(registerPlayerBean -> !playerService.existPlayer(registerPlayerBean.getSender()))
-			.map(registerPlayerBean -> mapper.toData(registerPlayerBean))
-			.ifPresent(playerData -> playerService
-											.registerPlayer(playerData)
-											.getChannel()
-											.accept(locationService
-														.getInitialArea()));
+			.filter(registerPlayerBean -> !this.playerService.existPlayer(registerPlayerBean.getSender()))
+			.map(registerPlayerBean -> mapper.toMessageBean(registerPlayerBean))
+			.ifPresent(playerMessageBean -> {
+										AreaMessageBean area=this.locationService
+																		.getInitialArea();
+										this.playerService
+												.registerPlayer(playerMessageBean,area.getId())
+												.getChannel()
+												.accept(area);
+										this.locationService.addPlayer(area, playerMessageBean, this.locationService.getLogonArea());
+									});
 	}
 }

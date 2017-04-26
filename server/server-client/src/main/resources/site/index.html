@@ -28,6 +28,9 @@
 		$messageWindow.append($messageLine);
 	}
 	function sendMessage() {
+		var $messageLine = $('<tr><td style="width:3em">&gt;&gt;&gt; </td>'
+								+ '<td style="word-wrap: break-word">' + $message.val()+ '</td></tr>');
+		$messageWindow.append($messageLine);
 		wsocket.send($message.val());
 		$message.val('').focus();
 	}

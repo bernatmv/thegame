@@ -2,6 +2,7 @@ package com.thegame.server.common.functional;
 
 import com.thegame.server.common.logging.LogStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -13,6 +14,20 @@ public class LambdaUtils {
 
 	public static final LogStream logger=LogStream.getLogger(LambdaUtils.class);
 	
+	public static Optional<byte[]> readAllBytesFromResource(final String _resource){
+		
+		Optional reply=Optional.empty();
+
+		try (InputStream istream=Thread.currentThread().getContextClassLoader().getResourceAsStream(_resource)){
+			final byte[] array = new byte[istream.available()];
+			istream.read(array);
+			reply=Optional.of(array);
+		} catch (IOException e) {
+			logger.warning("Unable to read bytes from resource {}",_resource);
+		}
+
+		return reply;
+	}
 	public static Optional<byte[]> readAllBytes(final Path _filePath){
 		
 		Optional reply=Optional.empty();

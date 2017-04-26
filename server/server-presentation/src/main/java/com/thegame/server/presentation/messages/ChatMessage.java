@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChatMessage implements IsMessage<ChatMessage>{
 
-	public LocalDateTime time;	
-	public String type;
-	public String message;
-	public String sender;
-	public String recipient;
+	private LocalDateTime time;	
+	private String type;
+	private String message;
+	private String sender;
+	private String recipient;
 }

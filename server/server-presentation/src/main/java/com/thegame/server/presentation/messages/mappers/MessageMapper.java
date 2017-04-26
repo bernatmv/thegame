@@ -1,12 +1,18 @@
 package com.thegame.server.presentation.messages.mappers;
 
-import com.thegame.server.engine.messages.AreaMessageBean;
-import com.thegame.server.engine.messages.ChatMessageBean;
-import com.thegame.server.engine.messages.MoveMessageBean;
+import com.thegame.server.engine.messages.output.AreaMessageBean;
+import com.thegame.server.engine.messages.input.ChatMessageBean;
+import com.thegame.server.engine.messages.input.MoveMessageBean;
+import com.thegame.server.engine.messages.output.PlayerEnteringAreaMessageBean;
+import com.thegame.server.engine.messages.output.PlayerExitingAreaMessageBean;
 import com.thegame.server.presentation.messages.ChatMessage;
 import com.thegame.server.presentation.messages.MoveMessage;
-import com.thegame.server.presentation.messages.RoomMessage;
+import com.thegame.server.presentation.messages.LoadRoomMessage;
+import com.thegame.server.presentation.messages.PlayerEntersRoomMessage;
+import com.thegame.server.presentation.messages.PlayerLeavesRoomMessage;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 /**
  * @author afarre
@@ -14,16 +20,41 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface MessageMapper {
 
+	//INPUT
 	@Converter
-	public ChatMessageBean toBean(final ChatMessage _chatMessage);
+	@Mappings({
+		@Mapping(target="sender",ignore=true),
+	})
+	public ChatMessageBean toBean(final ChatMessage _message);
 	@Converter
-	public ChatMessage toMessage(final ChatMessageBean _chatMessage);
+	@Mappings({
+		@Mapping(target="sender",ignore=true),
+	})
+	public MoveMessageBean toBean(final MoveMessage _message);
 
+	//OUTPUT
 	@Converter
-	public MoveMessageBean toBean(final MoveMessage _chatMessage);
+	@Mappings({
+		@Mapping(target="time",ignore=true),
+		@Mapping(target="recipient",ignore=true)
+	})
+	public ChatMessage toMessage(final ChatMessageBean _messageBean);
 	@Converter
-	public MoveMessage toMessage(final MoveMessageBean _chatMessage);
-
+	@Mappings({
+		@Mapping(target="time",ignore=true)
+	})
+	public LoadRoomMessage toMessage(final AreaMessageBean _messageBean);
 	@Converter
-	public RoomMessage toMessage(final AreaMessageBean _chatMessage);
+	@Mappings({
+		@Mapping(target="time",ignore=true),
+		@Mapping(target="player",source="player.name"),
+		@Mapping(target="from",source="fromArea")
+	})
+	public PlayerEntersRoomMessage toMessage(final PlayerEnteringAreaMessageBean _messageBean);
+	@Converter
+	@Mappings({
+		@Mapping(target="time",ignore=true),
+		@Mapping(target="player",source="player.name"),
+	})
+	public PlayerLeavesRoomMessage toMessage(final PlayerExitingAreaMessageBean _messageBean);
 }

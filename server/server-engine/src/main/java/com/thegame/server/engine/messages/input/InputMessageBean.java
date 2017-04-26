@@ -1,5 +1,6 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.input;
 
+import com.thegame.server.engine.messages.IsMessageBean;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public abstract class BaseMessageBean<T extends BaseMessageBean> implements IsMessageBean{
+public abstract class InputMessageBean<T extends InputMessageBean> implements IsMessageBean{
 
 	private String sender;
 

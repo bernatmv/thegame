@@ -1,5 +1,6 @@
 {
     "kind": "ChatMessage",
-    "sender": "bernatmv",
+    "recipient": "bernatmv",
+    "type": "WHISPER",
     "message": "Hello world!"
 }

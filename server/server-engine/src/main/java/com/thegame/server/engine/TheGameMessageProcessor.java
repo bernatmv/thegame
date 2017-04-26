@@ -3,7 +3,7 @@ package com.thegame.server.engine;
 import com.thegame.server.common.concurrent.CustomThreadFactory;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.intern.configuration.Configuration;
-import com.thegame.server.engine.intern.BusinessServiceFactory;
+import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.ConfigurationService;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import com.thegame.server.engine.intern.tasks.BaseMessageTask;
 import com.thegame.server.engine.intern.support.MessageTaskFactory;
-import com.thegame.server.engine.messages.BaseMessageBean;
+import com.thegame.server.engine.messages.input.InputMessageBean;
 import com.thegame.server.engine.messages.IsMessageBean;
 
 /**
@@ -34,7 +34,7 @@ public class TheGameMessageProcessor extends ThreadPoolExecutor.CallerRunsPolicy
 		
 		logger.trace("message-processor::initialization::begin");
 		this.threadPool=null;
-		ConfigurationService configurationService=BusinessServiceFactory.CONFIGURATION
+		ConfigurationService configurationService=EngineServiceFactory.CONFIGURATION
 								.getInstance(ConfigurationService.class);
 		configure(configurationService.get(),"initialization");
 		configurationService.registerListener((newConfiguration) -> this.configure(newConfiguration,"reconfiguration-event"));
@@ -96,7 +96,7 @@ public class TheGameMessageProcessor extends ThreadPoolExecutor.CallerRunsPolicy
 
 	}
 	
-	public void process(final BaseMessageBean _task){
+	public void process(final InputMessageBean _task){
 		
 		logger.trace("message-processor::process::begin");
 		threadPool.execute(MessageTaskFactory.getInstance(_task));

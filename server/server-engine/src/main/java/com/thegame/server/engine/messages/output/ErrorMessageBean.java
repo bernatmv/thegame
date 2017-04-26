@@ -1,5 +1,6 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.output;
 
+import com.thegame.server.engine.messages.IsMessageBean;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

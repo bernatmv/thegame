@@ -1,4 +1,4 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.messages.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=true)
-public class UnregisterPlayerMessageBean extends BaseMessageBean<UnregisterPlayerMessageBean>{
+public class UnregisterPlayerMessageBean extends InputMessageBean<UnregisterPlayerMessageBean>{
 	
 	@Setter
 	@Getter
@@ -26,5 +26,4 @@ public class UnregisterPlayerMessageBean extends BaseMessageBean<UnregisterPlaye
 		super(sender);
 		this.session=session;
 	}
-
 }

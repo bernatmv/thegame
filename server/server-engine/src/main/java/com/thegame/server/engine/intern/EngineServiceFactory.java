@@ -15,7 +15,7 @@ import com.thegame.server.engine.intern.services.MapperService;
 /**
  * @author e103880
  */
-public enum BusinessServiceFactory {
+public enum EngineServiceFactory {
 	
 	CONFIGURATION(ConfigurationServiceImpl.class,true),
 	PLAYER(PlayerServiceImpl.class,true),
@@ -24,20 +24,20 @@ public enum BusinessServiceFactory {
 	MAPPER(MapperService.instance.getClass(),true),
 	;
 	
-	private static final LogStream logger=LogStream.getLogger(BusinessServiceFactory.class);
+	private static final LogStream logger=LogStream.getLogger(EngineServiceFactory.class);
 	
 	private Object instance;
 	private final Class<?> implementation;
 	private final boolean singleton;
 	private final boolean crossProcessSingleton;
 	
-	BusinessServiceFactory(final Class<?> _implementation){
+	EngineServiceFactory(final Class<?> _implementation){
 		this(_implementation,false,false);
 	}
-	BusinessServiceFactory(final Class<?> _implementation,final boolean _singleton){
+	EngineServiceFactory(final Class<?> _implementation,final boolean _singleton){
 		this(_implementation,_singleton,false);
 	}
-	BusinessServiceFactory(final Class<?> _implementation,final boolean _singleton,final boolean _crossProcessSingleton){
+	EngineServiceFactory(final Class<?> _implementation,final boolean _singleton,final boolean _crossProcessSingleton){
 		this.implementation=_implementation;
 		this.singleton=_singleton;
 		this.crossProcessSingleton=_crossProcessSingleton;
@@ -89,7 +89,7 @@ public enum BusinessServiceFactory {
 		
 		if(this.singleton){
 			if((reply=this.instance)==null){
-				synchronized(BusinessServiceFactory.class){
+				synchronized(EngineServiceFactory.class){
 					if((reply=this.instance)==null){
 						this.instance=instantiate(_attributes);
 						reply=this.instance;
@@ -104,7 +104,7 @@ public enum BusinessServiceFactory {
 	}
 	
 	public static Stream<Object> getSingletons(){
-		return Arrays.stream(BusinessServiceFactory.values())
+		return Arrays.stream(EngineServiceFactory.values())
 				.filter(service -> service.isSingleton())
 				.filter(service -> service.instance!=null)
 				.map(service -> service.instance);

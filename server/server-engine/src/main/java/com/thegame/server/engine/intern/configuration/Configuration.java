@@ -17,7 +17,7 @@ public enum Configuration implements EnumProperty {
 	INITIAL_AREA("beta-room-001","Identifier of the starting area"),
 	
 	//DATABASE
-	DATABASE_ASSETS_FOLDER("../../assets","Assets folder to load into database"),
+	DATABASE_ASSETS_PACKAGE("assets","Assets package to load into database"),
 
 	//MESSAGE PROCESSING
 	MESSAGE_PROCESSOR_CORE_POOL_SIZE(4,"Message processor core pool size (minimum working threads)"),

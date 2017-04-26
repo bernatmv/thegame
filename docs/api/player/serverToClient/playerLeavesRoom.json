@@ -2,5 +2,5 @@
     "kind": "PlayerLeavesRoomMessage",
     "time": 0,
     "player": "bernatmv",
-    "leavingRoom": "beta-room-001"
+    "exit": "north"
 }
