@@ -32,6 +32,7 @@ public interface MapperService {
 																	+ ".collect(java.util.stream.Collectors.toMap("
 																								+ "areaExit -> areaExit.getId().getName(),"
 																								+ "areaExit -> areaExit.getToArea().getId())))"),
+		@Mapping(target="players",ignore=true)
 	})
 	public AreaMessageBean toMessageBean(final Area _messageEntity);
 	public AreaMessageBean toMessageBean(final AreaData _messageBean);

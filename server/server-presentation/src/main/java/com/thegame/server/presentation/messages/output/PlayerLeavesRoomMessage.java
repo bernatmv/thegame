@@ -1,5 +1,6 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.presentation.messages.output;
 
+import com.thegame.server.presentation.messages.IsMessage;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerEntersRoomMessage implements IsMessage<PlayerEntersRoomMessage>{
+public class PlayerLeavesRoomMessage implements IsMessage<PlayerLeavesRoomMessage>{
 
 	private LocalDateTime time;	
 	private String player;
-	private String from;
+	private String exit;
 }

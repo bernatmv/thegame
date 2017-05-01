@@ -1,15 +1,15 @@
-package com.thegame.server.presentation.messages.mappers;
+package com.thegame.server.presentation.mappers;
 
 import com.thegame.server.engine.messages.output.AreaMessageBean;
 import com.thegame.server.engine.messages.input.ChatMessageBean;
 import com.thegame.server.engine.messages.input.MoveMessageBean;
 import com.thegame.server.engine.messages.output.PlayerEnteringAreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerExitingAreaMessageBean;
-import com.thegame.server.presentation.messages.ChatMessage;
-import com.thegame.server.presentation.messages.MoveMessage;
-import com.thegame.server.presentation.messages.LoadRoomMessage;
-import com.thegame.server.presentation.messages.PlayerEntersRoomMessage;
-import com.thegame.server.presentation.messages.PlayerLeavesRoomMessage;
+import com.thegame.server.presentation.messages.input.ChatMessage;
+import com.thegame.server.presentation.messages.input.MoveMessage;
+import com.thegame.server.presentation.messages.output.LoadRoomMessage;
+import com.thegame.server.presentation.messages.output.PlayerEntersRoomMessage;
+import com.thegame.server.presentation.messages.output.PlayerLeavesRoomMessage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

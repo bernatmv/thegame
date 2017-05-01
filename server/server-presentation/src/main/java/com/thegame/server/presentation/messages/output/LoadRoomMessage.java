@@ -1,6 +1,8 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.presentation.messages.output;
 
+import com.thegame.server.presentation.messages.IsMessage;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +24,5 @@ public class LoadRoomMessage implements IsMessage<LoadRoomMessage>{
 	private String shortDescription;
 	private String description;
 	private Map<String,String> exits;
+	private List<String> players;
 }

@@ -1,4 +1,4 @@
-package com.thegame.server.presentation.messages.support;
+package com.thegame.server.presentation.support;
 
 import com.owlike.genson.Context;
 import com.owlike.genson.Converter;
