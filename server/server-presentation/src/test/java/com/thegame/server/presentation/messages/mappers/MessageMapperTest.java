@@ -1,9 +1,10 @@
 package com.thegame.server.presentation.messages.mappers;
 
+import com.thegame.server.presentation.mappers.MessageMapper;
 import com.thegame.server.engine.messages.input.ChatMessageBean;
 import com.thegame.server.engine.messages.input.MoveMessageBean;
-import com.thegame.server.presentation.messages.ChatMessage;
-import com.thegame.server.presentation.messages.MoveMessage;
+import com.thegame.server.presentation.messages.input.ChatMessage;
+import com.thegame.server.presentation.messages.input.MoveMessage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;

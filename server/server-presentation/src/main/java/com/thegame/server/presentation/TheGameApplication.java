@@ -7,7 +7,7 @@ import com.thegame.server.engine.TheGameMessageProcessor;
 import com.thegame.server.engine.intern.support.MessageTaskFactory;
 import com.thegame.server.persistence.PersistenceServiceFactory;
 import com.thegame.server.presentation.endpoints.TheGameEndpoint;
-import com.thegame.server.presentation.messages.support.MessageFactory;
+import com.thegame.server.presentation.support.MessageFactory;
 import java.util.Collection;
 import java.util.EventListener;
 import java.util.Set;

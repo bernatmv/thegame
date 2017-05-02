@@ -3,7 +3,7 @@ package com.thegame.server.presentation.messages;
 import com.owlike.genson.GensonBuilder;
 import com.owlike.genson.annotation.HandleNull;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.presentation.messages.support.LocalDateTimeJSONConverter;
+import com.thegame.server.presentation.support.LocalDateTimeJSONConverter;
 import java.time.LocalDateTime;
 import javax.websocket.DecodeException;
 import javax.websocket.Decoder;

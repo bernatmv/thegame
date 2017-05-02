@@ -1,11 +1,11 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.presentation.messages.input;
 
+import com.thegame.server.presentation.messages.IsMessage;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * @author afarre
@@ -14,11 +14,11 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude={"stacktrace"})
-public class ErrorMessage implements IsMessage<ErrorMessage>{
+public class ChatMessage implements IsMessage<ChatMessage>{
 
 	private LocalDateTime time;	
-	private String code;
+	private String type;
 	private String message;
-	private String stacktrace;
+	private String sender;
+	private String recipient;
 }

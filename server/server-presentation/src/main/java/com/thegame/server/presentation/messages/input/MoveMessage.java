@@ -1,5 +1,6 @@
-package com.thegame.server.presentation.messages;
+package com.thegame.server.presentation.messages.input;
 
+import com.thegame.server.presentation.messages.IsMessage;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

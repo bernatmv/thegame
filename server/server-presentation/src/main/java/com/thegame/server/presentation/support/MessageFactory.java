@@ -1,7 +1,7 @@
-package com.thegame.server.presentation.messages.support;
+package com.thegame.server.presentation.support;
 
 import com.thegame.server.common.functional.LambdaUtils;
-import com.thegame.server.presentation.messages.mappers.Converter;
+import com.thegame.server.presentation.mappers.Converter;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
 import com.thegame.server.engine.exceptions.EngineException;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 import com.thegame.server.engine.messages.IsMessageBean;
 import com.thegame.server.presentation.messages.IsMessage;
-import com.thegame.server.presentation.messages.mappers.MessageMapper;
+import com.thegame.server.presentation.mappers.MessageMapper;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;

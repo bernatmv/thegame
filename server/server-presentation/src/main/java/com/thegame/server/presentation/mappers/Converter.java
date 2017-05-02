@@ -1,4 +1,4 @@
-package com.thegame.server.presentation.messages.mappers;
+package com.thegame.server.presentation.mappers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

@@ -1,5 +1,6 @@
 package com.thegame.server.presentation.messages;
 
+import com.thegame.server.presentation.messages.input.MoveMessage;
 import javax.websocket.DecodeException;
 import javax.websocket.EncodeException;
 import org.junit.Test;
