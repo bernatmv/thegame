@@ -16,9 +16,9 @@ interface RoomDto {
         up?: string;
         down?: string
     };
-    players: Array<PlayerDto>;
-    enemies: Array<EnemyDto>;
-    npc: Array<NPCDto>;
-    items: Array<ItemDto>;
+    players?: Array<PlayerDto>;
+    enemies?: Array<EnemyDto>;
+    npc?: Array<NPCDto>;
+    items?: Array<ItemDto>;
 }
 export default RoomDto;

@@ -3,17 +3,17 @@ const ReceiveChat = 'ReceiveChat';
 const ConnectingToChat = 'ConnectingToChat';
 const ConnectedToChat = 'ConnectedToChat';
 const DisconnectedFromChat = 'DisconnectedFromChat';
-const Move = 'Move';
+const Move = 'MoveMessage';
 const MoveNorth = 'north';
 const MoveEast = 'east';
 const MoveSouth = 'south';
 const MoveWest = 'west';
 const MoveUp = 'up';
 const MoveDown = 'down';
-const LoadRoom = 'LoadRoom';
+const LoadRoom = 'LoadRoomMessage';
 const Login = 'Login';
-const PlayerEntersRoom = 'PlayerEntersRoom';
-const PlayerLeavesRoom = 'PlayerLeavesRoom';
+const PlayerEntersRoom = 'PlayerEntersRoomMessage';
+const PlayerLeavesRoom = 'PlayerLeavesRoomMessage';
 
 export default class ActionsConstants {
     // CHAT

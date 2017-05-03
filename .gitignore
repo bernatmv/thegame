@@ -42,3 +42,4 @@ npm-debug.log
 /server/server-persistence/nbproject/
 /server/server-engine/nbproject/
 /server/server-application/data/
+/server/server-artifact/data/
