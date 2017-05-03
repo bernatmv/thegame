@@ -1,10 +1,9 @@
 import * as Rx from 'rx';
 import AppConfig from '../../config/appConfig';
 import { debug } from '../../common/service/models/appLogger';
-import {processMessages} from './apiMiddleware';
+import { processMessages, sendChatMessage, sendMoveMessage } from './apiMiddleware';
 import Connection from '../../common/stream/connection/connection';
 import WebsocketMessage from '../../common/stream/models/websocketMessage';
-import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import * as ChatActions from '../actions/chatActions';
 
@@ -18,8 +17,7 @@ const socketMiddleware = (function(){
 
     let initialize = (userId: string) => {
         me = userId;
-        connection = new Connection(AppConfig.endpoints.websocket + userId, () => {
-            //Websocket open and ready to send/receive
+        connection = new Connection(AppConfig.endpoints.websocket + userId, () => {     //Websocket open and ready to send/receive
             _store.dispatch(ChatActions.connectedToChat({userId: userId}));
         });
         stream = connection.getStream();
@@ -30,21 +28,16 @@ const socketMiddleware = (function(){
         _store = store;
         return next => action => {
             switch(action.type) {
-                // Intercept the login message so we can initialize the connection
-                case ActionsConstants.Login:
+                case ActionsConstants.Login:                                //Intercept the login message so we can initialize the connection
                     initialize(action.payload);
                     return next(action);
-                // Intercept when we want to send a message
-                case ActionsConstants.SendChat:
-                    let message = {
-                        kind: SystemConstants.ChatMessage,
-                        message: action.payload.message
-                    };
-                    connection.sendMessage(message);
-                    action.payload = message;
+                case ActionsConstants.SendChat:                             //Intercept when we want to send a message
+                    action.payload = sendChatMessage(connection, action);
                     return next(action);
-                // All those actions that we don't want to intercept, pass along to the reducer
-                default:
+                case ActionsConstants.Move:                                 //Intercept when we want to move to another room
+                    sendMoveMessage(connection, action);
+                    return next();                
+                default:                                                    //All those actions that we don't want to intercept, pass along to the reducer
                     return next(action);
             }
         };

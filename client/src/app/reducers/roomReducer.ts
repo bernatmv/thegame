@@ -15,8 +15,5 @@ export default handleActions<RoomModel, RoomModel>({
     },
     [ActionsConstants.PlayerEntersRoom]: (state: RoomModel, action: ReduxActions.Action<EnterRoomModel>): RoomModel => {
         return _mapService.getRoom(action.payload);
-    },
-    [ActionsConstants.Move]: (state: RoomModel, action: ReduxActions.Action<string>): RoomModel => {
-        return _mapService.moveFrom(state, action.payload);
-    }*/
+    },*/
 }, initialState.room);

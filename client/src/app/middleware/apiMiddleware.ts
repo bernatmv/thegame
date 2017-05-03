@@ -6,12 +6,15 @@ import ActionsConstants from '../../common/constants/actionsConstants';
 import * as ChatActions from '../actions/chatActions';
 import * as SystemActions from '../actions/systemActions';
 import * as AuthActions from '../actions/authActions';
+import Connection from '../../common/stream/connection/connection';
 import MapServiceImpl from '../../common/service/mapServiceImpl';
 import WebsocketMessage from '../../common/stream/models/websocketMessage';
 import ChatMessageDto from '../../common/service/dtos/chatMessageDto';
 import RoomDto from '../../common/service/dtos/roomDto';
 
 const _mapService: MapServiceImpl = new MapServiceImpl();
+
+// PROCESSES MESSAGES FROM THE SERVER
 
 const processReceivedChatMessage = (message: ChatMessageDto, store: any, userId: string): void => {
     if (message.sender !== userId) {
@@ -51,4 +54,21 @@ export const processMessages = (stream: Rx.Observable<WebsocketMessage>, store: 
 
 };
 
-//        _store.dispatch(SystemActions.loadRoom(currentRoom));
+// SENDS MESSAGES TO THE SERVE
+
+export const sendChatMessage = (connection: Connection, action: any): WebsocketMessage => {
+    let message = {
+        kind: SystemConstants.ChatMessage,
+        message: action.payload.message
+    };
+    connection.sendMessage(message);
+    return message;
+};
+
+export const sendMoveMessage = (connection: Connection, action: any): void => {
+    let message = {
+        kind: ActionsConstants.Move,
+        direction: action.payload
+    };
+    connection.sendMessage(message);
+};
