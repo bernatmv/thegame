@@ -5,14 +5,15 @@ import SystemConstants from '../../common/constants/systemConstants';
 import ActionsConstants from '../../common/constants/actionsConstants';
 import * as ChatActions from '../actions/chatActions';
 import * as SystemActions from '../actions/systemActions';
-import * as AuthActions from '../actions/authActions';
 import Connection from '../../common/stream/connection/connection';
 import MapServiceImpl from '../../common/service/mapServiceImpl';
+import AuthServiceImpl from '../../common/service/authServiceImpl';
 import WebsocketMessage from '../../common/stream/models/websocketMessage';
 import ChatMessageDto from '../../common/service/dtos/chatMessageDto';
 import RoomDto from '../../common/service/dtos/roomDto';
 
-const _mapService: MapServiceImpl = new MapServiceImpl();
+const _mapService = new MapServiceImpl();
+const _authService = new AuthServiceImpl();
 
 // PROCESSES MESSAGES FROM THE SERVER
 
@@ -24,6 +25,20 @@ const processReceivedChatMessage = (message: ChatMessageDto, store: any, userId:
 
 const processLoadRoomMessage = (room: RoomDto, store: any): void => {
     store.dispatch(SystemActions.loadRoom(_mapService.loadRoom(room)));
+};
+
+const processPlayerEntersRoomMessage = (userId: string, from: string, store: any): void => {
+    store.dispatch(SystemActions.playerEntersRoom({
+        user: _authService.getUser(userId),
+        from: from
+    }));
+};
+
+const processPlayerLeavesRoomMessage = (userId: string, exit: string, store: any): void => {
+    store.dispatch(SystemActions.playerLeavesRoom({
+        user: _authService.getUser(userId),
+        exit: exit
+    }));
 };
 
 export const processMessages = (stream: Rx.Observable<WebsocketMessage>, store: any, userId: string): void => {
@@ -38,8 +53,10 @@ export const processMessages = (stream: Rx.Observable<WebsocketMessage>, store: 
                 processLoadRoomMessage(message, store);
             }
             if (store && message.kind === ActionsConstants.PlayerEntersRoom) {
+                processPlayerEntersRoomMessage(message.player, message.from, store);
             }
             if (store && message.kind === ActionsConstants.PlayerLeavesRoom) {
+                processPlayerLeavesRoomMessage(message.player, message.exit, store);
             }
         },
         //error

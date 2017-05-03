@@ -9,11 +9,14 @@ import LeaveRoomModel from './models/leaveRoomModel';
 export default handleActions<RoomModel, RoomModel>({
     [ActionsConstants.LoadRoom]: (state: RoomModel, action: ReduxActions.Action<RoomModel>): RoomModel => {
         return action.payload;
-    },/*
+    },
     [ActionsConstants.PlayerLeavesRoom]: (state: RoomModel, action: ReduxActions.Action<LeaveRoomModel>): RoomModel => {
-        return _mapService.getRoom(action.payload);
+        return Object.assign({}, state, { players: state.players.filter(p => p.id !== action.payload.user.id) });
     },
     [ActionsConstants.PlayerEntersRoom]: (state: RoomModel, action: ReduxActions.Action<EnterRoomModel>): RoomModel => {
-        return _mapService.getRoom(action.payload);
-    },*/
+        return Object.assign({}, state, { players: [...state.players, action.payload.user] });
+    },
+    [ActionsConstants.Move]: (state: RoomModel, action: ReduxActions.Action<string>): RoomModel => {
+        return state;
+    }
 }, initialState.room);

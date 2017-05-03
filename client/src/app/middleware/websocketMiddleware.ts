@@ -36,7 +36,7 @@ const socketMiddleware = (function(){
                     return next(action);
                 case ActionsConstants.Move:                                 //Intercept when we want to move to another room
                     sendMoveMessage(connection, action);
-                    return next();                
+                    return next(action);                
                 default:                                                    //All those actions that we don't want to intercept, pass along to the reducer
                     return next(action);
             }
