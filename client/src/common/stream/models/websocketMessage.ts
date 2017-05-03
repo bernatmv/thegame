@@ -1,7 +1,5 @@
 interface WebsocketMessage {
     kind: string;
-    sender: string;
-    message: string;
-    received?: string;
+    time?: number;
 }
 export default WebsocketMessage;

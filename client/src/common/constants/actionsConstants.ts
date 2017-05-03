@@ -3,15 +3,17 @@ const ReceiveChat = 'ReceiveChat';
 const ConnectingToChat = 'ConnectingToChat';
 const ConnectedToChat = 'ConnectedToChat';
 const DisconnectedFromChat = 'DisconnectedFromChat';
-const Move = 'Move';
+const Move = 'MoveMessage';
 const MoveNorth = 'north';
 const MoveEast = 'east';
 const MoveSouth = 'south';
 const MoveWest = 'west';
 const MoveUp = 'up';
 const MoveDown = 'down';
-const LoadRoom = 'LoadRoom';
+const LoadRoom = 'LoadRoomMessage';
 const Login = 'Login';
+const PlayerEntersRoom = 'PlayerEntersRoomMessage';
+const PlayerLeavesRoom = 'PlayerLeavesRoomMessage';
 
 export default class ActionsConstants {
     // CHAT
@@ -30,6 +32,8 @@ export default class ActionsConstants {
     public static MoveDown: string = MoveDown;
     // SYSTEM
     public static LoadRoom: string = LoadRoom;
+    public static PlayerEntersRoom: string = PlayerEntersRoom;
+    public static PlayerLeavesRoom: string = PlayerLeavesRoom;    
     // AUTH
     public static Login: string = Login;
 }

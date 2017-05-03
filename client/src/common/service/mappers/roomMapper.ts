@@ -8,6 +8,10 @@ import i18nService from '../i18nServiceImpl';
 import EnemiesRegistry from '../../helpers/enemiesRegistry';
 import ItemsRegistry from '../../helpers/itemsRegistry';
 import { nullable } from '../../helpers/functions';
+import AuthServiceImpl from '../authServiceImpl';
+
+//this has to go once we provide players information on the server message
+const _authService = new AuthServiceImpl();
 
 export default class RoomMapper {
     constructor(
@@ -31,15 +35,16 @@ export default class RoomMapper {
                 up: nullable(dto.exits.up),
                 down: nullable(dto.exits.down)
             },
-            dto.players.map(player => this._playerMapper.map(player)),
-            dto.enemies.map(enemy => {
+//            dto.players ? dto.players.map(player => this._playerMapper.map(player)) : [],
+            dto.players ? dto.players.map((player: any) => _authService.getUser(player)) : [],
+            dto.enemies ? dto.enemies.map(enemy => {
                 let baseEnemy = EnemiesRegistry.Instance.map.get(enemy.id);
                 let mergedDto = Object.assign({}, baseEnemy, enemy);
                 mergedDto.profile = Object.assign({}, baseEnemy.profile, enemy.profile);
                 return this._enemyMapper.map(mergedDto);
-            }),
-            dto.npc.map(npc => this._npcMapper.map(npc)),
-            dto.items.map(item => this._itemMapper.map(Object.assign({}, ItemsRegistry.Instance.map.get(item.id), item)))
+            }) : [],
+            dto.npc ? dto.npc.map(npc => this._npcMapper.map(npc)) : [],
+            dto.items ? dto.items.map(item => this._itemMapper.map(Object.assign({}, ItemsRegistry.Instance.map.get(item.id), item))) : []
         );
     }
 }

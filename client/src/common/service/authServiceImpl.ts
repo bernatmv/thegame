@@ -22,4 +22,22 @@ export default class AuthServiceImpl implements AuthService {
             )
         );
     }
+
+    getUser(id: string): PlayerModel {
+        //TODO: retrieve it from the server
+        return new PlayerModel(
+            id,
+            new ProfileModel(
+                id,
+                'Humano',
+                'humano',
+                'humanos',
+                null,
+                1,
+                new StatusPropertyModel(50, 50),
+                new StatusPropertyModel(50, 50),
+                new StatusPropertyModel(50, 50)
+            )
+        );
+    }
 }

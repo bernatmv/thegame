@@ -13,11 +13,13 @@ import * as ChatActions from '../../actions/chatActions';
 import * as PlayerActions from '../../actions/playerActions';
 import * as AuthActions from '../../actions/authActions';
 import * as style from './theGameContainer.css';
+/*
 import whyDidYouUpdate from 'why-did-you-update';
 
 if (process.env.NODE_ENV !== 'production') {
   whyDidYouUpdate(React);
 }
+*/
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
@@ -48,7 +50,7 @@ export class TheGame extends React.Component<TheGameProps, {}> {
 
   render() {
     const { chats, connection, room, player, actions } = this.props;
-    if (player) {
+    if (player && room) {
       return (
         <div className={style.container}>
           {this._getBody(room, player, actions)}

@@ -1,5 +1,5 @@
 interface ChatMessage {
-    sender: string;
+    sender?: string;
     message: string;
     received?: number;
 }
