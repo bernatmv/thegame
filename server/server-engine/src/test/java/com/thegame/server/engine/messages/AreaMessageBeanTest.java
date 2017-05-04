@@ -28,11 +28,10 @@ public class AreaMessageBeanTest {
 	@Test
 	public void testJSONSerialize() {
 		System.out.println("json-serialize");
-		String expResult="{\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\"},\"id\":\"beta-room-001\",\"shortDescription\":\"roomBeta001ShortDescription\",\"title\":\"roomBeta001Title\"}";
+		String expResult="{\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\"},\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\"}";
 
 		AreaMessageBean instance=AreaMessageBean.builder()
 												.id("beta-room-001")
-												.shortDescription("roomBeta001ShortDescription")
 												.description("roomBeta001Description")
 												.title("roomBeta001Title")
 												.exit("north","beta-room-002")
@@ -40,10 +39,9 @@ public class AreaMessageBeanTest {
 		String result=this.genson.serialize(instance);
 		Assert.assertEquals(expResult,result);
 
-		expResult="{\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\",\"south\":\"beta-room-002\"},\"id\":\"beta-room-001\",\"shortDescription\":\"roomBeta001ShortDescription\",\"title\":\"roomBeta001Title\"}";
+		expResult="{\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\",\"south\":\"beta-room-002\"},\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\"}";
 		instance=AreaMessageBean.builder()
 								.id("beta-room-001")
-								.shortDescription("roomBeta001ShortDescription")
 								.description("roomBeta001Description")
 								.title("roomBeta001Title")
 								.exit("north","beta-room-002")
@@ -59,10 +57,9 @@ public class AreaMessageBeanTest {
 	@Test
 	public void testJSONDeserialize() {
 		System.out.println("json-deserialize");
-		String instance="{\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\",\"shortDescription\":\"roomBeta001ShortDescription\",\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\"}}";
+		String instance="{\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\",\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\"}}";
 		AreaMessageBean expResult=AreaMessageBean.builder()
 												.id("beta-room-001")
-												.shortDescription("roomBeta001ShortDescription")
 												.description("roomBeta001Description")
 												.title("roomBeta001Title")
 												.exit("north","beta-room-002")
@@ -70,10 +67,9 @@ public class AreaMessageBeanTest {
 		AreaMessageBean result=this.genson.deserialize(instance,AreaMessageBean.class);
 		Assert.assertEquals(expResult,result);
 
-		instance="{\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\",\"shortDescription\":\"roomBeta001ShortDescription\",\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\",\"south\":\"beta-room-002\"}}";
+		instance="{\"id\":\"beta-room-001\",\"title\":\"roomBeta001Title\",\"description\":\"roomBeta001Description\",\"exits\":{\"north\":\"beta-room-002\",\"south\":\"beta-room-002\"}}";
 		expResult=AreaMessageBean.builder()
 								.id("beta-room-001")
-								.shortDescription("roomBeta001ShortDescription")
 								.description("roomBeta001Description")
 								.title("roomBeta001Title")
 								.exit("north","beta-room-002")

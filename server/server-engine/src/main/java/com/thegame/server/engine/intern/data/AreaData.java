@@ -22,7 +22,6 @@ public class AreaData {
 	
 	private String id;
 	private String title;
-	private String shortDescription;
 	private String description;
 	@Builder.Default
 	private Map<String,String> exits=new HashMap<>();

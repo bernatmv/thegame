@@ -42,7 +42,7 @@ public class LocationServiceImpl implements LocationService{
 										.map(area -> MapperService.instance.toData(area))
 										.collect(Collectors
 											.toMap(area -> area.getId(),area -> area));
-		this.areas.put(LOGON_AREA,new AreaData(LOGON_AREA, "login-area","login-area", "login-area", Collections.emptyMap(),Collections.emptyList(),Collections.emptyList()));
+		this.areas.put(LOGON_AREA,new AreaData(LOGON_AREA, "login-area", "login-area", Collections.emptyMap(),Collections.emptyList(),Collections.emptyList()));
 		this.initialArea=Configuration.INITIAL_AREA.getValue();
 		this.mapperService=_mapperService;
 		this.playerService=_playerService;

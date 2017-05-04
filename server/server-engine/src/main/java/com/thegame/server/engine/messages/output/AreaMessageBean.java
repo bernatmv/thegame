@@ -24,7 +24,6 @@ public class AreaMessageBean implements IsMessageBean{
 	@NonNull
 	private String id;
 	private String title;
-	private String shortDescription;
 	private String description;
 	
 	@Singular

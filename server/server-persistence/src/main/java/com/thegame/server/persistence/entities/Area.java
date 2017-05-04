@@ -33,9 +33,6 @@ public class Area implements Serializable{
 	@Column(name = "TITLE",length=64)
 	private String title;
 
-	@Column(name = "SHORTDESCRIPTION",length=128)
-	private String shortDescription;
-
 	@Column(name = "DESCRIPTION",length=2048)
 	private String description;
 
