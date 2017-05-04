@@ -25,7 +25,6 @@ export default class RoomMapper {
         return new RoomModel(
             dto.id,
             i18nService.Instance.translate(dto.title),
-            i18nService.Instance.translate(dto.shortDescription),
             i18nService.Instance.translate(dto.description),
             {
                 north: nullable(dto.exits.north),

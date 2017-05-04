@@ -6,7 +6,6 @@ import ItemDto from './itemDto';
 interface RoomDto {
     id: string;
     title: string;
-    shortDescription: string;
     description: string;
     exits: {
         north?: string;

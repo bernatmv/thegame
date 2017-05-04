@@ -18,3 +18,26 @@
     font-size: 16px;
     margin-bottom: 10px;
 }
+
+.hidden {
+    opacity: 0;
+}
+
+.fadein {
+    animation: fadein 2.5s;
+}
+
+.fadeout {
+    opacity: 0;
+    animation: fadeout 1.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}

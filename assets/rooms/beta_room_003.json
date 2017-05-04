@@ -1,7 +1,6 @@
 {
     "id": "beta-room-003",
     "title": "roomBeta003Title",
-    "shortDescription": "roomBeta003ShortDescription",
     "description": "roomBeta003Description",
     "exits": {
         "south": "beta-room-002"
