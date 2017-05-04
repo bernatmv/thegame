@@ -33,10 +33,10 @@ export default class AuthServiceImpl implements AuthService {
                 'humano',
                 'humanos',
                 null,
-                1,
-                new StatusPropertyModel(50, 50),
-                new StatusPropertyModel(50, 50),
-                new StatusPropertyModel(50, 50)
+                2,
+                new StatusPropertyModel(75, 100),
+                new StatusPropertyModel(50, 100),
+                new StatusPropertyModel(25, 100)
             )
         );
     }

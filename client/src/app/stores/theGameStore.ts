@@ -5,6 +5,7 @@ import connectionReducer from '../reducers/connectionReducer';
 import chatReducer from '../reducers/chatReducer';
 import roomReducer from '../reducers/roomReducer';
 import playerReducer from '../reducers/playerReducer';
+import systemReducer from '../reducers/systemReducer';
 import RootState from '../reducers/state/rootState';
 
 export function configureStore(initialState?: RootState): Store<RootState> {
@@ -16,7 +17,8 @@ export function configureStore(initialState?: RootState): Store<RootState> {
     chats: chatReducer,
     connection: connectionReducer,
     room: roomReducer,
-    player: playerReducer
+    player: playerReducer,
+    system: systemReducer
   };
 
   // applyMiddleware

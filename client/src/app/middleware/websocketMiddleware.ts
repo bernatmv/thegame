@@ -32,7 +32,7 @@ const socketMiddleware = (function(){
                     initialize(action.payload);
                     return next(action);
                 case ActionsConstants.SendChat:                             //Intercept when we want to send a message
-                    action.payload = sendChatMessage(connection, action);
+                    action.payload = sendChatMessage(connection, action, me);
                     return next(action);
                 case ActionsConstants.Move:                                 //Intercept when we want to move to another room
                     sendMoveMessage(connection, action);

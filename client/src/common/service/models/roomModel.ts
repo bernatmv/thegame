@@ -8,7 +8,6 @@ export default class RoomModel {
     constructor(
         public id: string,
         public title: string,
-        public shortDescription: string,
         public description: string,
         public exits: {
             north: string,

@@ -21,7 +21,6 @@ public class LoadRoomMessage implements IsMessage<LoadRoomMessage>{
 	private LocalDateTime time;	
 	private String id;
 	private String title;
-	private String shortDescription;
 	private String description;
 	private Map<String,String> exits;
 	private List<String> players;

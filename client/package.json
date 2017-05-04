@@ -51,7 +51,7 @@
     "why-did-you-update": "^0.0.8"
   },
   "scripts": {
-    "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000 --open",
+    "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
     "build": "webpack -p --progress --colors",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
     "test": "jest --watchAll --no-cache",

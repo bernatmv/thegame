@@ -73,10 +73,11 @@ export const processMessages = (stream: Rx.Observable<WebsocketMessage>, store: 
 
 // SENDS MESSAGES TO THE SERVE
 
-export const sendChatMessage = (connection: Connection, action: any): WebsocketMessage => {
+export const sendChatMessage = (connection: Connection, action: any, userId: string): WebsocketMessage => {
     let message = {
         kind: SystemConstants.ChatMessage,
-        message: action.payload.message
+        message: action.payload.message,
+        sender: userId
     };
     connection.sendMessage(message);
     return message;

@@ -1,0 +1,13 @@
+{
+    "id": "sista_hem__last_inn_002",
+    "title": "sistaHemLastInn002Title",
+    "description": "sistaHemLastInn002Description",
+    "exits": {
+        "north": "sista_hem__last_inn_001",
+        "east": "sista_hem__last_inn_003"
+    },
+    "players": [],
+    "enemies": [],
+    "npc": [],
+    "items": []
+}

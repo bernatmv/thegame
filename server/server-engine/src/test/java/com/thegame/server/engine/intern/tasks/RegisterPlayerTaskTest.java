@@ -40,7 +40,6 @@ public class RegisterPlayerTaskTest {
 		Area area=new Area();
 		area.setId(Configuration.INITIAL_AREA.getValue());
 		area.setTitle("Initial area");
-		area.setShortDescription("Initial area - Short description");
 		area.setDescription("Initial area - Description");
 		area.setExits(Collections.emptyList());
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area).collect(Collectors.toList()));
@@ -75,7 +74,6 @@ public class RegisterPlayerTaskTest {
 		AreaMessageBean expectedArea=AreaMessageBean.builder()
 													.id(Configuration.INITIAL_AREA.getValue())
 													.title("Initial area")
-													.shortDescription("Initial area - Short description")
 													.description("Initial area - Description")
 													.build();
 		

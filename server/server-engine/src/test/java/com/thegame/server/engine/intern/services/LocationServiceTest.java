@@ -44,21 +44,18 @@ public class LocationServiceTest {
 						.id(Configuration.INITIAL_AREA.getValue())
 						.title("Room-001 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-001 area - Short description")
 						.description("Room-001 area - Description")
 						.build();
 		Area area2=Area.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-002 area - Short description")
 						.description("Room-002 area - Description")
 						.build();
 		Area area3=Area.builder()
 						.id("beta-room-003")
 						.title("Room-003 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-003 area - Short description")
 						.description("Room-003 area - Description")
 						.build();
 		AreaExit areaExit1=AreaExit.builder()
@@ -103,7 +100,6 @@ public class LocationServiceTest {
 		AreaMessageBean expected=AreaMessageBean.builder()
 												.id(Configuration.INITIAL_AREA.getValue())
 												.title("Room-001 area")
-												.shortDescription("Room-001 area - Short description")
 												.description("Room-001 area - Description")
 												.exit("north", "beta-room-002")
 												.exit("south", "beta-room-003")
@@ -121,7 +117,6 @@ public class LocationServiceTest {
 		AreaMessageBean expected=AreaMessageBean.builder()
 												.id("beta-room-003")
 												.title("Room-003 area")
-												.shortDescription("Room-003 area - Short description")
 												.description("Room-003 area - Description")
 												.build();
 		AreaMessageBean result=instance.getArea("beta-room-003");
@@ -151,7 +146,6 @@ public class LocationServiceTest {
 		AreaMessageBean expected=AreaMessageBean.builder()
 												.id("beta-room-003")
 												.title("Room-003 area")
-												.shortDescription("Room-003 area - Short description")
 												.description("Room-003 area - Description")
 												.build();
 		
@@ -171,7 +165,6 @@ public class LocationServiceTest {
 		AreaMessageBean expected=AreaMessageBean.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
-						.shortDescription("Room-002 area - Short description")
 						.description("Room-002 area - Description")
 						.build();
 		AreaMessageBean result=this.instance.getExit(this.instance.getArea("beta-room-001"), "north");

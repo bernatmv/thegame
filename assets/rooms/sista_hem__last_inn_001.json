@@ -1,0 +1,12 @@
+{
+    "id": "sista_hem__last_inn_001",
+    "title": "sistaHemLastInn001Title",
+    "description": "sistaHemLastInn001Description",
+    "exits": {
+        "south": "sista_hem__last_inn_002"
+    },
+    "players": [],
+    "enemies": [],
+    "npc": [],
+    "items": []
+}

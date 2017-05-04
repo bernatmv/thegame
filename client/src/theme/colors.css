@@ -5,6 +5,10 @@
     --login-border-color: #111;
     --login-shadow-color: #777;
 
+    /* INTRO */
+    --intro-background-color: #000;
+    --intro-text-color: #fff;
+
     /* MAIN */
     --main-background-color: #000; /* #333 */
     --main-text-color: #fff;

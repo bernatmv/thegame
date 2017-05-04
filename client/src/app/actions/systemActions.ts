@@ -7,3 +7,4 @@ import LeaveRoomModel from '../reducers/models/leaveRoomModel';
 export const loadRoom = createAction<RoomModel>(ActionsConstants.LoadRoom);
 export const playerEntersRoom = createAction<EnterRoomModel>(ActionsConstants.PlayerEntersRoom);
 export const playerLeavesRoom = createAction<LeaveRoomModel>(ActionsConstants.PlayerLeavesRoom);
+export const endIntro = createAction<void>(ActionsConstants.EndIntro);

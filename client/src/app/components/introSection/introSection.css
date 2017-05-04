@@ -1,0 +1,43 @@
+@import '../../../theme/colors.css';
+
+.intro {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--intro-background-color);
+    color: var(--intro-text-color);
+}
+
+.intro__line {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.fadein {
+    animation: fadein 2.5s;
+}
+
+.fadeout {
+    opacity: 0;
+    animation: fadeout 1.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}

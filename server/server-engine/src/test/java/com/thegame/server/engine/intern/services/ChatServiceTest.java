@@ -45,21 +45,18 @@ public class ChatServiceTest {
 						.id(Configuration.INITIAL_AREA.getValue())
 						.title("Room-001 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-001 area - Short description")
 						.description("Room-001 area - Description")
 						.build();
 		Area area2=Area.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-002 area - Short description")
 						.description("Room-002 area - Description")
 						.build();
 		Area area3=Area.builder()
 						.id("beta-room-003")
 						.title("Room-003 area")
 						.exits(new ArrayList<>())
-						.shortDescription("Room-003 area - Short description")
 						.description("Room-003 area - Description")
 						.build();
 		AreaExit areaExit1=AreaExit.builder()
