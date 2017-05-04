@@ -14,6 +14,7 @@ const LoadRoom = 'LoadRoomMessage';
 const Login = 'Login';
 const PlayerEntersRoom = 'PlayerEntersRoomMessage';
 const PlayerLeavesRoom = 'PlayerLeavesRoomMessage';
+const EndIntro = 'EndIntro';
 
 export default class ActionsConstants {
     // CHAT
@@ -33,7 +34,8 @@ export default class ActionsConstants {
     // SYSTEM
     public static LoadRoom: string = LoadRoom;
     public static PlayerEntersRoom: string = PlayerEntersRoom;
-    public static PlayerLeavesRoom: string = PlayerLeavesRoom;    
+    public static PlayerLeavesRoom: string = PlayerLeavesRoom;
+    public static EndIntro: string = EndIntro;
     // AUTH
     public static Login: string = Login;
 }

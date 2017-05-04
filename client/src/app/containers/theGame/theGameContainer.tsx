@@ -8,10 +8,12 @@ import RoomSection from '../../components/roomSection/roomSection';
 import EnemySection from '../../components/enemySection/enemySection';
 import ChatSection from '../../components/chatSection/chatSection';
 import SystemSection from '../../components/systemSection/systemSection';
+import IntroSection from '../../components/introSection/introSection';
 import TheGameProps from './theGameProps';
 import * as ChatActions from '../../actions/chatActions';
 import * as PlayerActions from '../../actions/playerActions';
 import * as AuthActions from '../../actions/authActions';
+import * as SystemActions from '../../actions/systemActions';
 import * as style from './theGameContainer.css';
 /*
 import whyDidYouUpdate from 'why-did-you-update';
@@ -24,8 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 @connect(mapStateToProps, mapDispatchToProps)
 export class TheGame extends React.Component<TheGameProps, {}> {
   private _getLogin(connection, actions): JSX.Element {
-    return <LoginSection connection={connection}
-                        login={actions.auth.login} />;
+    return <LoginSection login={actions.auth.login} />;
   }
 
   private _getBody(room, player, actions): JSX.Element {
@@ -49,14 +50,18 @@ export class TheGame extends React.Component<TheGameProps, {}> {
   }
 
   render() {
-    const { chats, connection, room, player, actions } = this.props;
+    const { chats, connection, room, player, system, actions } = this.props;
     if (player && room) {
-      return (
-        <div className={style.container}>
-          {this._getBody(room, player, actions)}
-          {this._getFooter(chats, connection, actions)}
-        </div>
-      );
+      if (system.playedIntro) {
+        return (
+          <div className={style.container}>
+            {this._getBody(room, player, actions)}
+            {this._getFooter(chats, connection, actions)}
+          </div>
+        );
+      } else {
+        return <IntroSection endIntro={actions.system.endIntro} />;
+      }
     } else {
       return (
         <div className={style.container}>
@@ -72,7 +77,8 @@ function mapStateToProps(state: RootState) {
     chats: state.chats,
     connection: state.connection,
     room: state.room,
-    player: state.player
+    player: state.player,
+    system: state.system
   };
 }
 
@@ -81,7 +87,8 @@ function mapDispatchToProps(dispatch) {
     actions: {
       chat: bindActionCreators(ChatActions as any, dispatch),
       player: bindActionCreators(PlayerActions as any, dispatch),
-      auth: bindActionCreators(AuthActions as any, dispatch)
+      auth: bindActionCreators(AuthActions as any, dispatch),
+      system: bindActionCreators(SystemActions as any, dispatch)
     }
   };
 }

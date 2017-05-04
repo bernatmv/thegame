@@ -3,6 +3,7 @@ import SystemConstants from '../../../common/constants/systemConstants';
 import ConnectionStatus from '../../../common/stream/models/connectionStatus';
 import TranslationConstants from '../../../common/constants/translationConstants';
 import i18nService from '../../../common/service/i18nServiceImpl';
+import SystemModel from '../../../common/service/models/systemModel';
 
 let initialState: RootState = {
     chats: [{
@@ -15,6 +16,7 @@ let initialState: RootState = {
         userId: ''
     },
     room: null,
-    player: null
+    player: null,
+    system: new SystemModel(false)
 };
 export default initialState;

@@ -100,4 +100,16 @@ export default class TranslationConstants {
     static get isHere() {
         return `${keyPrefix}isHere`;
     }
+
+    static get introLine1() {
+        return `${keyPrefix}introLine1`;
+    }
+
+    static get introLine2() {
+        return `${keyPrefix}introLine2`;
+    }
+
+    static get introLine3() {
+        return `${keyPrefix}introLine3`;
+    }
 }

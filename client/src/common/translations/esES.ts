@@ -35,6 +35,9 @@ export const esES: {locale: string, translations: Translations} = {
         [TranslationConstants.youSee]: 'Ves ',
         [TranslationConstants.isHere]: ' está aquí',
         [TranslationConstants.welcomeToTheGame]: 'Bienvenido a... ¡TheGame!',
+        [TranslationConstants.introLine1]: 'En un tiempo remoto, cuando los altos hombres edificaban ciudadelas en los páramos de Svart Hal,',
+        [TranslationConstants.introLine2]: 'El mundo ya era viejo y los hombres apenas unos niños vagando en busca de un destino.',
+        [TranslationConstants.introLine3]: 'Eran una raza despreciada, pocos un número y sin aliados o amigos...',
 
         /********************** ASSETS **********************/
 
