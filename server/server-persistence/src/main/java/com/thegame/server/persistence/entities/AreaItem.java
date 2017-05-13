@@ -22,18 +22,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="AREAEXIT",indexes={
-	@Index(name = "IDX_EXIT_FKAREA", columnList ="FKAREA",  unique = false),
-	@Index(name = "IDX_EXIT_FKTOAREA", columnList ="FKTOAREA",  unique = false),
+@Table(name="AREAITEM",indexes={
+	@Index(name = "IDX_ITEM_FKAREA", columnList ="FKAREA",  unique = false),
+	@Index(name = "IDX_ITEM_FKITEM", columnList ="FKITEM",  unique = false),
 })
-public class AreaExit implements Serializable{
+public class AreaItem implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private AreaExitId id;
+	private AreaItemId id;
 	
-	@ManyToOne(optional=false,targetEntity=Area.class,fetch=FetchType.LAZY) 
-	@JoinColumn(name="FKTOAREA",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_EXIT_TOAREA"))
-	private Area toArea;
+	@ManyToOne(optional=false,targetEntity=Item.class,fetch=FetchType.LAZY) 
+	@JoinColumn(name="FKITEM",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_ITEM_AREA"))
+	private Item item;
 }

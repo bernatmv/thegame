@@ -16,6 +16,7 @@ import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.entities.AreaExitId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -103,6 +104,7 @@ public class LocationServiceTest {
 												.description("Room-001 area - Description")
 												.exit("north", "beta-room-002")
 												.exit("south", "beta-room-003")
+												.players(Collections.emptyList())
 												.build();
 		AreaMessageBean result=instance.getInitialArea();
 		Assert.assertEquals(expected, result);
@@ -118,6 +120,7 @@ public class LocationServiceTest {
 												.id("beta-room-003")
 												.title("Room-003 area")
 												.description("Room-003 area - Description")
+												.players(Collections.emptyList())
 												.build();
 		AreaMessageBean result=instance.getArea("beta-room-003");
 		Assert.assertEquals(expected, result);
@@ -166,6 +169,7 @@ public class LocationServiceTest {
 						.id("beta-room-002")
 						.title("Room-002 area")
 						.description("Room-002 area - Description")
+						.players(Collections.emptyList())
 						.build();
 		AreaMessageBean result=this.instance.getExit(this.instance.getArea("beta-room-001"), "north");
 		Assert.assertEquals(expected,result);

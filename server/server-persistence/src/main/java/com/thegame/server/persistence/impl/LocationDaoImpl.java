@@ -9,6 +9,7 @@ import com.thegame.server.persistence.support.JPASessionManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.persistence.TypedQuery;
 
 /**
@@ -33,7 +34,7 @@ public class LocationDaoImpl implements LocationDao{
 			}catch(Throwable e){
 				if(entityManager.getTransaction().isActive())
 					entityManager.getTransaction().rollback();
-				throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_FAIL,_area);
+				throw new PersistenceException(e,PersistenceExceptionType.AREA_CREATION_FAIL,_area);
 			}
 		}
 	}
@@ -55,7 +56,7 @@ public class LocationDaoImpl implements LocationDao{
 			}catch(Throwable e){
 				if(entityManager.getTransaction().isActive())
 					entityManager.getTransaction().rollback();
-				throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_FAIL,_areaExit);
+				throw new PersistenceException(e,PersistenceExceptionType.AREA_CREATION_FAIL,_areaExit);
 			}
 		}
 	}
@@ -70,7 +71,12 @@ public class LocationDaoImpl implements LocationDao{
 				entityManager.getTransaction().begin();
 				final TypedQuery<Area> query=entityManager.createQuery("select selected from Area as selected",Area.class);
 				reply=Optional.ofNullable(query.getResultList())
-						.orElse(Collections.emptyList());
+						.orElse(Collections.emptyList())
+						//Hibernate can not recover eagerly more than one bag, we perform the recovery manuallly
+						.stream()
+						.peek(area -> area.getExits().stream().forEach(exit -> exit.getToArea())) 
+						.peek(area -> area.getItems().stream().forEach(item -> item.getItem()))
+						.collect(Collectors.toList());
 				entityManager.getTransaction().commit();
 			}catch(PersistenceException e){
 				if(entityManager.getTransaction().isActive())
@@ -79,7 +85,7 @@ public class LocationDaoImpl implements LocationDao{
 			}catch(Throwable e){
 				if(entityManager.getTransaction().isActive())
 					entityManager.getTransaction().rollback();
-				throw new PersistenceException(PersistenceExceptionType.AREA_LOAD_FAIL);
+				throw new PersistenceException(e,PersistenceExceptionType.AREA_LOAD_FAIL);
 			}
 		}
 		

@@ -3,6 +3,7 @@ package com.thegame.server.persistence;
 import com.thegame.server.persistence.support.PersistenceUnitsFactory;
 import com.thegame.server.persistence.support.JPAPersistenceDao;
 import com.thegame.server.persistence.impl.LocationDaoImpl;
+import com.thegame.server.persistence.impl.ResourceDaoImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 public enum PersistenceServiceFactory {
 	
 	LOCATIONDAO(PersistenceUnitsFactory.THEGAME,LocationDaoImpl.class),
+	RESOURCEDAO(PersistenceUnitsFactory.THEGAME,ResourceDaoImpl.class),
 	;
 	
 	private final Optional<PersistenceUnitsFactory> persistenceUnit;
