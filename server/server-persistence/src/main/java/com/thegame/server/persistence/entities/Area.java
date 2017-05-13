@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,11 +35,13 @@ public class Area implements Serializable{
 	@Column(name = "DESCRIPTION",length=2048)
 	private String description;
 
-	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class)
   	private List<AreaExit> exits;
+
+	@OneToMany(mappedBy="id.area",targetEntity=AreaItem.class)
+  	private List<AreaItem> items;
 	
 	//private List<String> players;
 	//private List<String> enemies;
 	//private List<String> npcs;
-	//private List<String> items;				
 }

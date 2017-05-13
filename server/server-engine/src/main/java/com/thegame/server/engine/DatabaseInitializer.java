@@ -14,8 +14,11 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.messages.output.ItemMessageBean;
+import com.thegame.server.persistence.ResourceDao;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.entities.AreaExitId;
+import com.thegame.server.persistence.entities.Item;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,12 +32,14 @@ public class DatabaseInitializer {
 	private final String assetsPackage;
 	private final Genson genson;
 	private final LocationDao locationDao;
+	private final ResourceDao resourceDao;
 	
 	
 	protected DatabaseInitializer(final String _assetsPackage){
 		this.assetsPackage=_assetsPackage;
 		this.genson=new GensonBuilder().useRuntimeType(true).create();
 		this.locationDao=PersistenceServiceFactory.LOCATIONDAO.getInstance(LocationDao.class);
+		this.resourceDao=PersistenceServiceFactory.RESOURCEDAO.getInstance(ResourceDao.class);
 		logger.info("Current path: {}",Paths.get(".").toAbsolutePath().toString());
 	}
 	
@@ -50,19 +55,29 @@ public class DatabaseInitializer {
 		return PackageUtils.getExistentResources(explorePackages,resourcesFilter)
 													.stream();
 	} 
-	
-	protected Stream<AreaMessageBean> loadAreas() throws IOException{
-		
-		return getPackageResources(this.assetsPackage+".rooms")
-			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}",Area.class.getSimpleName(),resource))
+
+	protected Stream<byte[]> loadResources(final String _package,final String _resourceType) throws IOException{
+		return getPackageResources(this.assetsPackage+"."+_package)
+			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}",_resourceType,resource))
 			.filter(resource -> resource.endsWith(".json"))
-			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}::json",Area.class.getSimpleName(),resource))
+			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}::json",_resourceType,resource))
 			.map(resource -> resource.substring(0, resource.length()-5).replaceAll("\\.","/")+".json")
-			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}::json",Area.class.getSimpleName(),resource))
+			.peek(resource -> logger.finest("database-initializer::initialize::{}::found::{}::json",_resourceType,resource))
 			.map(resource -> LambdaUtils.readAllBytesFromResource(resource))
 			.filter(optionalBytes -> optionalBytes.isPresent())
 			.map(optionalBytes -> optionalBytes.get())
-			.peek(bytes -> logger.finest("database-initializer::initialize::{}::content-size::{}",Area.class.getSimpleName(),bytes.length))
+			.peek(bytes -> logger.finest("database-initializer::initialize::{}::content-size::{}",_resourceType,bytes.length));
+	}
+
+	protected Stream<ItemMessageBean> loadItems() throws IOException{
+		return loadResources("items",Item.class.getSimpleName())
+			.map(bytes -> this.genson.deserialize(bytes, ItemMessageBean.class))
+			.peek(itemMessageBean -> logger.finest("database-initializer::initialize::{}::parsed::{}",Item.class.getSimpleName(),itemMessageBean))
+			.filter(itemMessageBean -> itemMessageBean!=null);
+	}
+	
+	protected Stream<AreaMessageBean> loadAreas() throws IOException{
+		return loadResources("rooms",Area.class.getSimpleName())
 			.map(bytes -> this.genson.deserialize(bytes, AreaMessageBean.class))
 			.peek(areaMessageBean -> logger.finest("database-initializer::initialize::{}::parsed::{}",Area.class.getSimpleName(),areaMessageBean))
 			.filter(areaMessageBean -> areaMessageBean!=null);
@@ -72,13 +87,19 @@ public class DatabaseInitializer {
 
 		try {
 			logger.trace("database-initializer::initialize::begin");
-			this.loadAreas()
+			loadItems()
+				.map(itemMessageBean -> MapperService.instance.toEntity(itemMessageBean))
+				.peek(itemEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",Item.class.getSimpleName(),itemEntity))
+				.filter(itemEntity -> itemEntity!=null)
+				.forEach(itemEntity -> resourceDao.saveItem(itemEntity));
+			logger.info("database-initializer::initialize::{}::done",Item.class.getSimpleName());
+			loadAreas()
 				.map(areaMessageBean -> MapperService.instance.toEntity(areaMessageBean))
 				.peek(areaEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",Area.class.getSimpleName(),areaEntity))
 				.filter(areaEntity -> areaEntity!=null)
 				.forEach(areaEntity -> locationDao.saveArea(areaEntity));
 			logger.info("database-initializer::initialize::{}::done",Area.class.getSimpleName());
-			this.loadAreas()
+			loadAreas()
 				.flatMap(areaMessageBean -> areaMessageBean
 													.getExits()
 													.entrySet()

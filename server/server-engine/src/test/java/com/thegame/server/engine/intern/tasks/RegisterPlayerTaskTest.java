@@ -75,6 +75,7 @@ public class RegisterPlayerTaskTest {
 													.id(Configuration.INITIAL_AREA.getValue())
 													.title("Initial area")
 													.description("Initial area - Description")
+													.players(Collections.emptyList())
 													.build();
 		
 		RegisterPlayerTask instance=new RegisterPlayerTask(message,this.playerService,this.locationService,EngineServiceFactory.MAPPER.getInstance(MapperService.class));

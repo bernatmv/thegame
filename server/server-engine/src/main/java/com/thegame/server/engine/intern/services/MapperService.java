@@ -5,7 +5,9 @@ import com.thegame.server.engine.intern.data.PlayerData;
 import com.thegame.server.engine.messages.output.AreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerMessageBean;
 import com.thegame.server.engine.messages.input.RegisterPlayerMessageBean;
+import com.thegame.server.engine.messages.output.ItemMessageBean;
 import com.thegame.server.persistence.entities.Area;
+import com.thegame.server.persistence.entities.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -21,9 +23,15 @@ public interface MapperService {
 
 	//TO ENTITY
 	@Mappings({
-		@Mapping(target="exits",ignore=true)
+		@Mapping(target="exits",ignore=true),
+		@Mapping(target="items",ignore=true),
 	})
 	public Area toEntity(final AreaMessageBean _messageBean);
+	@Mappings({
+		@Mapping(target="gender",expression="java( _messageBean.getGender().getCode())"),
+		@Mapping(target="areas",ignore=true),
+	})
+	public Item toEntity(final ItemMessageBean _messageBean);
 
 	//TO MESSAGEBEAN
 	@Mappings({
