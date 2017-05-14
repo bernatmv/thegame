@@ -43,3 +43,4 @@ client/.npm
 /server/server-application/data/
 /server/server-artifact/data/
 /client/nbproject/private/
+/server/server-client-dummie/target/
