@@ -1,25 +1,25 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.intern.load.beans;
 
-import com.thegame.server.engine.messages.enums.Gender;
-import com.thegame.server.engine.messages.output.ItemMessageBean;
+import com.thegame.server.engine.intern.load.beans.ItemImport;
+import com.thegame.server.engine.messages.common.Gender;
 import java.util.Optional;
 
 /**
  *
  * @author afarre
  */
-public class ItemMessageBeanTest extends BaseMessageBeanTest{
+public class ItemImportTest extends BaseImportTest{
 	
-	public ItemMessageBeanTest() {
+	public ItemImportTest() {
 		super("item");
 	}
 	@Override
-	public Optional<IsMessageBean> getBean(String _jsonFile) {
+	public Optional<Object> getBean(String _jsonFile) {
 		
-		Optional<IsMessageBean> reply=Optional.empty();
+		Optional<Object> reply=Optional.empty();
 		
 		if("item.json".equals(_jsonFile)){
-			reply=Optional.of(ItemMessageBean.builder()
+			reply=Optional.of(ItemImport.builder()
 									.id("chicken-001")
 									.description("itemChickenDescription")
 									.alive(true)

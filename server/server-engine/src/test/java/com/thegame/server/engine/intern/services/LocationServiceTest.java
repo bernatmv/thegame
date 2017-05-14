@@ -2,12 +2,13 @@ package com.thegame.server.engine.intern.services;
 
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
-import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
 import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import com.thegame.server.engine.messages.IsMessageBean;
+import com.thegame.server.engine.messages.common.Gender;
 import com.thegame.server.engine.messages.output.AreaMessageBean;
+import com.thegame.server.engine.messages.common.ItemBean;
 import com.thegame.server.engine.messages.output.PlayerEnteringAreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerExitingAreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerMessageBean;
@@ -15,6 +16,9 @@ import com.thegame.server.persistence.LocationDao;
 import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.entities.AreaExitId;
+import com.thegame.server.persistence.entities.AreaItem;
+import com.thegame.server.persistence.entities.AreaItemId;
+import com.thegame.server.persistence.entities.Item;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -47,17 +51,36 @@ public class LocationServiceTest {
 						.exits(new ArrayList<>())
 						.description("Room-001 area - Description")
 						.build();
+		area1.setItems(
+			Stream.of(AreaItem.builder()
+								.id(AreaItemId.builder()
+									.area(area1)
+									.name("area-item-name")
+									.item(Item.builder()
+												.id("area-item-id")
+												.alive(true)
+												.description("area-item-description")
+												.gender('F')
+												.plural("area-item-id-plural")
+												.singular("area-item-id-singular")
+												.chatters(Stream.of("Choooo!").collect(Collectors.toSet()))
+												.build())
+									.build())
+								.build())
+			.collect(Collectors.toList()));
 		Area area2=Area.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
 						.exits(new ArrayList<>())
 						.description("Room-002 area - Description")
+						.items(Collections.emptyList())
 						.build();
 		Area area3=Area.builder()
 						.id("beta-room-003")
 						.title("Room-003 area")
 						.exits(new ArrayList<>())
 						.description("Room-003 area - Description")
+						.items(Collections.emptyList())
 						.build();
 		AreaExit areaExit1=AreaExit.builder()
 						.id(AreaExitId.builder()
@@ -77,7 +100,7 @@ public class LocationServiceTest {
 		area1.getExits().add(areaExit2);
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area1,area2,area3).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		instance=new LocationServiceImpl(mocketLocationDao,EngineServiceFactory.MAPPER.getInstance(MapperService.class),playerService);
+		instance=new LocationServiceImpl(mocketLocationDao,playerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 	}
@@ -104,6 +127,16 @@ public class LocationServiceTest {
 												.description("Room-001 area - Description")
 												.exit("north", "beta-room-002")
 												.exit("south", "beta-room-003")
+												.item(ItemBean.builder()
+																		.id("area-item-id")
+																		.name("area-item-name")
+																		.alive(true)
+																		.description("area-item-description")
+																		.gender(Gender.female)
+																		.plural("area-item-id-plural")
+																		.singular("area-item-id-singular")
+																		.chatters(Stream.of("Choooo!").collect(Collectors.toSet()))
+																		.build())
 												.players(Collections.emptyList())
 												.build();
 		AreaMessageBean result=instance.getInitialArea();

@@ -2,7 +2,6 @@ package com.thegame.server.engine.intern.services;
 
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
-import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.services.impl.ChatServiceImpl;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
@@ -16,6 +15,7 @@ import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.entities.AreaExitId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -46,18 +46,21 @@ public class ChatServiceTest {
 						.title("Room-001 area")
 						.exits(new ArrayList<>())
 						.description("Room-001 area - Description")
+						.items(Collections.emptyList())
 						.build();
 		Area area2=Area.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
 						.exits(new ArrayList<>())
 						.description("Room-002 area - Description")
+						.items(Collections.emptyList())
 						.build();
 		Area area3=Area.builder()
 						.id("beta-room-003")
 						.title("Room-003 area")
 						.exits(new ArrayList<>())
 						.description("Room-003 area - Description")
+						.items(Collections.emptyList())
 						.build();
 		AreaExit areaExit1=AreaExit.builder()
 						.id(AreaExitId.builder()
@@ -77,7 +80,7 @@ public class ChatServiceTest {
 		area1.getExits().add(areaExit2);
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area1,area2,area3).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		this.locationService=new LocationServiceImpl(mocketLocationDao,EngineServiceFactory.MAPPER.getInstance(MapperService.class),this.playerService);
+		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 		instance=new ChatServiceImpl(playerService,locationService);

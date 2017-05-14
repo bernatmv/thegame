@@ -1,32 +1,32 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.intern.load.beans;
 
-import com.thegame.server.engine.messages.output.AreaMessageBean;
 import java.util.Optional;
 
 /**
  *
  * @author afarre
  */
-public class AreaMessageBeanTest extends BaseMessageBeanTest{
+public class AreaImportTest extends BaseImportTest{
 
-	public AreaMessageBeanTest() {
+	public AreaImportTest() {
 		super("area");
 	}
 	@Override
-	public Optional<IsMessageBean> getBean(String _jsonFile) {
+	public Optional<Object> getBean(String _jsonFile) {
 		
-		Optional<IsMessageBean> reply=Optional.empty();
+		Optional<Object> reply=Optional.empty();
 		
 		if("area1.json".equals(_jsonFile)){
-			reply=Optional.of(AreaMessageBean.builder()
+			reply=Optional.of(AreaImport.builder()
 									.id("beta-room-001")
 									.description("roomBeta001Description")
 									.title("roomBeta001Title")
 									.exit("north","beta-room-002")
+									.item(ItemInstanceImport.builder().id("chicken-001").name("Pascual").build())
 									.build());
 		}else if("area2.json".equals(_jsonFile)){
-			reply=Optional.of(AreaMessageBean.builder()
-								.id("beta-room-001")
+			reply=Optional.of(AreaImport.builder()
+								.id("beta-room-002")
 								.description("roomBeta001Description")
 								.title("roomBeta001Title")
 								.exit("north","beta-room-002")

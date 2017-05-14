@@ -1,4 +1,4 @@
-package com.thegame.server.engine.messages;
+package com.thegame.server.engine.intern.load.beans;
 
 import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;
@@ -21,19 +21,20 @@ import org.skyscreamer.jsonassert.JSONAssert;
  *
  * @author afarre
  */
-public abstract class BaseMessageBeanTest {
+public abstract class BaseImportTest {
 	
 	private final Path messagesPath;
 	private final Genson genson;
 
-	public BaseMessageBeanTest(final String _folder){
-		this.messagesPath=Paths.get("./src/test/resources/messages",_folder);
+	public BaseImportTest(final String _folder){
+		this.messagesPath=Paths.get("./src/test/resources/load",_folder);
 		this.genson=new GensonBuilder()
+						//.setSkipNull(true)
 						//.useRuntimeType(true)
 						.create();				
 	}
 	
-	public abstract Optional<IsMessageBean> getBean(final String _json);
+	public abstract Optional<Object> getBean(final String _json);
 	
 	
 	/**
@@ -61,16 +62,12 @@ public abstract class BaseMessageBeanTest {
 				try {
 					System.out.println(testCase.toString("File {0} against bean {1}"));
 					final String expResult=testCase.getObject2();
-					final IsMessageBean instance=testCase.getObject1();
+					final Object instance=testCase.getObject1();
 					String result=this.genson.serialize(instance);
 					JSONAssert.assertEquals(expResult,result,false);
 					System.out.println(testCase.toString("Test passed"));
 				} catch (JSONException e) {
-					e.printStackTrace();
 					throw new AssertionError("JSON parse has failed",e);
-				}catch(Throwable e){
-					e.printStackTrace();
-					throw new AssertionError("Assertion failed",e);
 				}
 			});
 	}
@@ -99,8 +96,8 @@ public abstract class BaseMessageBeanTest {
 			.forEach(testCase -> {
 				System.out.println(testCase.toString("File {0} against bean {1}"));
 				final String instance=testCase.getObject2();
-				final IsMessageBean expected=testCase.getObject1();
-				IsMessageBean result=this.genson.deserialize(instance,expected.getClass());
+				final Object expected=testCase.getObject1();
+				Object result=this.genson.deserialize(instance,expected.getClass());
 				Assert.assertEquals(expected, result);
 				System.out.println(testCase.toString("Test passed"));
 			});

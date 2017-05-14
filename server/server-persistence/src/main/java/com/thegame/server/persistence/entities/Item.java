@@ -33,9 +33,6 @@ public class Item implements Serializable{
 	private String id;
 
 	
-	@Column(name = "NAME",length=64)
-	private String name;
-
 	@Column(name = "DESCRIPTION",length=2048)
 	private String description;
 
@@ -55,6 +52,6 @@ public class Item implements Serializable{
 	@Column(name = "CHATTER",length=64)
 	private Set<String> chatters;
 
-	@OneToMany(mappedBy="item",targetEntity=AreaItem.class,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="id.item",targetEntity=AreaItem.class,fetch=FetchType.LAZY)
   	private List<AreaItem> areas;
 }
