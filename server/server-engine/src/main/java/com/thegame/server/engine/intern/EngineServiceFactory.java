@@ -3,6 +3,7 @@ package com.thegame.server.engine.intern;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
+import com.thegame.server.engine.intern.services.DataMapperService;
 import com.thegame.server.engine.intern.services.impl.ChatServiceImpl;
 import com.thegame.server.engine.intern.services.impl.ConfigurationServiceImpl;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
@@ -10,7 +11,7 @@ import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.stream.Stream;
-import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.intern.services.MessageMapperService;
 
 /**
  * @author e103880
@@ -21,7 +22,8 @@ public enum EngineServiceFactory {
 	PLAYER(PlayerServiceImpl.class,true),
 	LOCATION(LocationServiceImpl.class,true),
 	CHAT(ChatServiceImpl.class,true),
-	MAPPER(MapperService.instance.getClass(),true),
+	DATAMAPPER(DataMapperService.instance.getClass(),true),
+	MESSAGEMAPPER(MessageMapperService.instance.getClass(),true),
 	;
 	
 	private static final LogStream logger=LogStream.getLogger(EngineServiceFactory.class);

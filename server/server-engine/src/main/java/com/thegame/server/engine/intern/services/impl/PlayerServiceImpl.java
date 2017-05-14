@@ -4,7 +4,7 @@ import com.thegame.server.engine.intern.data.PlayerData;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
 import com.thegame.server.engine.intern.EngineServiceFactory;
-import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.intern.services.MessageMapperService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.messages.output.PlayerMessageBean;
 import java.util.Collection;
@@ -19,16 +19,14 @@ import java.util.stream.Collectors;
 public class PlayerServiceImpl implements PlayerService{
 
 	protected final Map<String,PlayerData> players;
-	protected final MapperService mapper;
+	protected final MessageMapperService mapper;
 
 	
-	public PlayerServiceImpl(final MapperService _mapperService) {
-		this.players=new ConcurrentHashMap<>();
-		this.mapper=_mapperService;
-	}
 	public PlayerServiceImpl() {
-		this(EngineServiceFactory.MAPPER.getInstance(MapperService.class));
+		this.players=new ConcurrentHashMap<>();
+		this.mapper=EngineServiceFactory.MESSAGEMAPPER.getInstance(MessageMapperService.class);
 	}
+	
 	
 	protected Optional<PlayerData> getPlayerData(final String _playerId){
 		

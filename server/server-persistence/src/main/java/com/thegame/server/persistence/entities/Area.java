@@ -2,6 +2,7 @@ package com.thegame.server.persistence.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class Area implements Serializable{
 	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class)
   	private List<AreaExit> exits;
 
-	@OneToMany(mappedBy="id.area",targetEntity=AreaItem.class)
+	@OneToMany(mappedBy="id.area",targetEntity=AreaItem.class,cascade=CascadeType.PERSIST)
   	private List<AreaItem> items;
 	
 	//private List<String> players;

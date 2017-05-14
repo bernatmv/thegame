@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 /**
  * @author afarre
@@ -23,12 +24,18 @@ public class AreaData {
 	private String id;
 	private String title;
 	private String description;
+
 	@Builder.Default
 	private Map<String,String> exits=new HashMap<>();
+	@Singular
+	private List<ItemData> items;
+	
 	@Builder.Default
 	private List<String> players=new CopyOnWriteArrayList<>();
+
 	@Builder.Default
 	private List<Consumer<IsMessageBean>> listeners=new CopyOnWriteArrayList<>();
+
 	
 	public AreaData addPlayer(final String _player){
 		this.players.add(_player);

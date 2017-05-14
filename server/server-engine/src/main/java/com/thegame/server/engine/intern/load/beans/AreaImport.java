@@ -1,6 +1,5 @@
-package com.thegame.server.engine.messages.output;
+package com.thegame.server.engine.intern.load.beans;
 
-import com.thegame.server.engine.messages.common.ItemBean;
 import com.thegame.server.engine.messages.IsMessageBean;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ import lombok.Singular;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaMessageBean implements IsMessageBean{
+public class AreaImport implements IsMessageBean{
 
 	@NonNull
 	private String id;
@@ -28,7 +27,5 @@ public class AreaMessageBean implements IsMessageBean{
 	@Singular
 	private Map<String,String> exits;
 	@Singular
-	private List<String> players;
-	@Singular
-	private List<ItemBean> items;
+	private List<ItemInstanceImport> items;
 }

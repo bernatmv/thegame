@@ -12,13 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 import com.thegame.server.engine.messages.IsMessageBean;
+import com.thegame.server.presentation.mappers.InputMessageMapper;
 import com.thegame.server.presentation.messages.IsMessage;
-import com.thegame.server.presentation.mappers.MessageMapper;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.websocket.DecodeException;
 import org.mapstruct.factory.Mappers;
+import com.thegame.server.presentation.mappers.OutputMessageMapper;
 
 /**
  * @author afarre
@@ -30,13 +31,14 @@ public class MessageFactory {
 	private static final Map<Class<IsMessage>,Function<IsMessage,InputMessageBean>> toBeanMapping=new HashMap<>(20);
 	private static final Map<Class<IsMessageBean>,Function<IsMessageBean,IsMessage>> fromBeanMapping=new HashMap<>(20);
 	private static final Map<String,Function<String,IsMessage>> fromJsonMapping=new HashMap<>(20);
-	private static final MessageMapper messageMapper=Mappers.getMapper(MessageMapper.class );
+	private static final OutputMessageMapper outputMessageMapper=Mappers.getMapper(OutputMessageMapper.class );
+	private static final InputMessageMapper inputMessageMapper=Mappers.getMapper(InputMessageMapper.class );
 	
 	static {
 		try {
 			logger.trace("message-factory::initialization::begin");
 			logger.trace("message-factory::initialization::to-bean-mapping::begin");
-			Stream.of(MessageMapper.class.getDeclaredMethods())
+			Stream.of(InputMessageMapper.class.getDeclaredMethods())
 					.peek(method -> logger.finest("message-factory::initialization::to-bean-mapping::method::{}",method))
 					.filter(method -> method.isAnnotationPresent(Converter.class))
 					.peek(method -> logger.finest("message-factory::initialization::to-bean-mapping::method::{}::annotated",method))
@@ -51,7 +53,7 @@ public class MessageFactory {
 															InputMessageBean reply=null;
 													
 															try {
-																reply=(InputMessageBean)method.invoke(MessageFactory.messageMapper,messageBean);
+																reply=(InputMessageBean)method.invoke(MessageFactory.inputMessageMapper,messageBean);
 															} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 																throw new RuntimeException(e);
 															}
@@ -64,7 +66,7 @@ public class MessageFactory {
 			logger.finest("message-factory::initialization::to-bean-mapping::{}",MessageFactory.toBeanMapping);
 			logger.debug("message-factory::initialization::to-bean-mapping::end::{}",MessageFactory.toBeanMapping.size());
 			logger.trace("message-factory::initialization::from-bean-mapping::begin");
-			Stream.of(MessageMapper.class.getDeclaredMethods())
+			Stream.of(OutputMessageMapper.class.getDeclaredMethods())
 					.peek(method -> logger.finest("message-factory::initialization::from-bean-mapping::method::{}",method))
 					.filter(method -> method.isAnnotationPresent(Converter.class))
 					.peek(method -> logger.finest("message-factory::initialization::from-bean-mapping::method::{}::annotated",method))
@@ -79,7 +81,7 @@ public class MessageFactory {
 															IsMessage reply=null;
 													
 															try {
-																reply=(IsMessage)method.invoke(MessageFactory.messageMapper,messageBean);
+																reply=(IsMessage)method.invoke(MessageFactory.outputMessageMapper,messageBean);
 															} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 																throw new RuntimeException(e);
 															}

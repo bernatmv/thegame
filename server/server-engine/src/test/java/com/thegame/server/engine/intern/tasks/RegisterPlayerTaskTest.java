@@ -3,7 +3,7 @@ package com.thegame.server.engine.intern.tasks;
 import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.services.LocationService;
-import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.intern.services.MessageMapperService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
 import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
@@ -42,9 +42,10 @@ public class RegisterPlayerTaskTest {
 		area.setTitle("Initial area");
 		area.setDescription("Initial area - Description");
 		area.setExits(Collections.emptyList());
+		area.setItems(Collections.emptyList());
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		this.locationService=new LocationServiceImpl(mocketLocationDao,EngineServiceFactory.MAPPER.getInstance(MapperService.class),this.playerService);
+		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 	}
@@ -78,7 +79,7 @@ public class RegisterPlayerTaskTest {
 													.players(Collections.emptyList())
 													.build();
 		
-		RegisterPlayerTask instance=new RegisterPlayerTask(message,this.playerService,this.locationService,EngineServiceFactory.MAPPER.getInstance(MapperService.class));
+		RegisterPlayerTask instance=new RegisterPlayerTask(message,this.playerService,this.locationService,EngineServiceFactory.MESSAGEMAPPER.getInstance(MessageMapperService.class));
 		instance.execute();
 		Assert.assertTrue(this.playerService.existPlayer("newPlayer"));
 		Assert.assertEquals(expectedPlayer,this.playerService.getPlayer("newPlayer"));

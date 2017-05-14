@@ -1,7 +1,7 @@
-package com.thegame.server.engine.messages.output;
+package com.thegame.server.engine.intern.load.beans;
 
 import com.thegame.server.engine.messages.IsMessageBean;
-import com.thegame.server.engine.messages.enums.Gender;
+import com.thegame.server.engine.messages.common.Gender;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,12 +17,10 @@ import lombok.Singular;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemMessageBean implements IsMessageBean{
+public class ItemImport implements IsMessageBean{
 
 	@NonNull
 	private String id;
-	
-	private String name;
 	private String description;
 	private boolean alive;
 	private Gender gender;

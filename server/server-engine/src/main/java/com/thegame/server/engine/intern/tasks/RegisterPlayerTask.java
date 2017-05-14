@@ -4,7 +4,7 @@ import com.thegame.server.engine.messages.input.RegisterPlayerMessageBean;
 import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.services.LocationService;
 import com.thegame.server.engine.intern.services.PlayerService;
-import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.intern.services.MessageMapperService;
 import com.thegame.server.engine.messages.output.AreaMessageBean;
 
 /**
@@ -15,16 +15,16 @@ public class RegisterPlayerTask extends BaseMessageTask<RegisterPlayerMessageBea
 
 	private final PlayerService playerService;
 	private final LocationService locationService;
-	private final MapperService mapper;
+	private final MessageMapperService mapper;
 	
 	
 	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean) {
 		this(_messageBean
 					,EngineServiceFactory.PLAYER.getInstance(PlayerService.class)
 					,EngineServiceFactory.LOCATION.getInstance(LocationService.class)
-					,EngineServiceFactory.MAPPER.getInstance(MapperService.class));
+					,EngineServiceFactory.MESSAGEMAPPER.getInstance(MessageMapperService.class));
 	}
-	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean,final PlayerService _playerService,final LocationService _locationService,final MapperService _mapper) {
+	public RegisterPlayerTask(final RegisterPlayerMessageBean _messageBean,final PlayerService _playerService,final LocationService _locationService,final MessageMapperService _mapper) {
 		super(_messageBean);
 		this.playerService=_playerService;
 		this.locationService=_locationService;

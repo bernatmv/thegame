@@ -75,7 +75,7 @@ public class LocationDaoImpl implements LocationDao{
 						//Hibernate can not recover eagerly more than one bag, we perform the recovery manuallly
 						.stream()
 						.peek(area -> area.getExits().stream().forEach(exit -> exit.getToArea())) 
-						.peek(area -> area.getItems().stream().forEach(item -> item.getItem()))
+						.peek(area -> area.getItems().stream().forEach(item -> item.getId().getItem()))
 						.collect(Collectors.toList());
 				entityManager.getTransaction().commit();
 			}catch(PersistenceException e){

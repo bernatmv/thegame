@@ -3,11 +3,7 @@ package com.thegame.server.persistence.entities;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +29,4 @@ public class AreaItem implements Serializable{
 	@EmbeddedId
 	private AreaItemId id;
 	
-	@ManyToOne(optional=false,targetEntity=Item.class,fetch=FetchType.LAZY) 
-	@JoinColumn(name="FKITEM",referencedColumnName ="ID", nullable = false,foreignKey=@ForeignKey(name="FK_ITEM_AREA"))
-	private Item item;
 }
