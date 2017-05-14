@@ -1,11 +1,9 @@
 package com.thegame.server.engine.intern.data;
 
 import com.thegame.server.engine.messages.IsMessageBean;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,16 +23,14 @@ public class AreaData {
 	private String title;
 	private String description;
 
-	@Builder.Default
-	private Map<String,String> exits=new HashMap<>();
+	@Singular
+	private Map<String,String> exits;
 	@Singular
 	private List<ItemData> items;
-	
-	@Builder.Default
-	private List<String> players=new CopyOnWriteArrayList<>();
-
-	@Builder.Default
-	private List<Consumer<IsMessageBean>> listeners=new CopyOnWriteArrayList<>();
+	@Singular
+	private List<String> players;
+	@Singular
+	private List<Consumer<IsMessageBean>> listeners;
 
 	
 	public AreaData addPlayer(final String _player){
