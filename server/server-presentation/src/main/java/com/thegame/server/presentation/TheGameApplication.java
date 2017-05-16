@@ -2,7 +2,7 @@ package com.thegame.server.presentation;
 
 import com.thegame.server.common.IsApplication;
 import com.thegame.server.common.logging.LogStream;
-import com.thegame.server.engine.DatabaseInitializer;
+import com.thegame.server.data.loader.DataLoader;
 import com.thegame.server.engine.TheGameMessageProcessor;
 import com.thegame.server.engine.intern.support.MessageTaskFactory;
 import com.thegame.server.persistence.PersistenceServiceFactory;
@@ -38,7 +38,7 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 		logger.trace("application::init::begin");
 		PersistenceServiceFactory.init();
 		logger.trace("application::init::database-connection");
-		DatabaseInitializer.getInstance().initialize();
+		DataLoader.getInstance().initialize();
 		logger.trace("application::init::database");
 		MessageFactory.init();
 		logger.trace("application::init::message-factory");

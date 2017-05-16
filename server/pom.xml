@@ -17,10 +17,11 @@
 		<module>server-common</module>
 		<module>server-persistence</module>
 		<module>server-engine</module>
+		<module>server-data-loader</module>
 		<module>server-presentation</module>
 		<module>server-application</module>
 		<module>server-artifact</module>
-	 <module>server-client-dummie</module>
+		<module>server-client-dummie</module>
 	</modules>
 	
 	<dependencies>
