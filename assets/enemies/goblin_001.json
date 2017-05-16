@@ -1,7 +1,6 @@
 {
     "id": "goblin-001",
     "profile": {
-        "name": null,
         "race": "raceGoblin",
         "singular": "raceGoblinSingular",
         "plural": "raceGoblinPlural",

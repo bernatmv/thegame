@@ -3,9 +3,11 @@ package com.thegame.server.data.loader.services;
 import com.thegame.server.data.loader.beans.AreaImport;
 import com.thegame.server.data.loader.beans.ItemImport;
 import com.thegame.server.data.loader.beans.ItemInstanceImport;
+import com.thegame.server.data.loader.beans.RaceImport;
 import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaItem;
 import com.thegame.server.persistence.entities.Item;
+import com.thegame.server.persistence.entities.Race;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -18,6 +20,8 @@ import org.mapstruct.factory.Mappers;
 public interface ImportMapperService {
 	
 	public static final ImportMapperService instance=Mappers.getMapper(ImportMapperService.class);
+
+	public Race toEntity(final RaceImport _import);
 
 	@Mappings({
 		@Mapping(target="areas",ignore=true),

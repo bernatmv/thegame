@@ -7,6 +7,7 @@ import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
 import com.thegame.server.data.loader.beans.AreaImport;
 import com.thegame.server.data.loader.beans.ItemImport;
+import com.thegame.server.data.loader.beans.RaceImport;
 import com.thegame.server.data.loader.services.ImportMapperService;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.persistence.LocationDao;
@@ -19,8 +20,10 @@ import com.thegame.server.persistence.ResourceDao;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.entities.AreaExitId;
 import com.thegame.server.persistence.entities.Item;
+import com.thegame.server.persistence.entities.Race;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.thegame.server.persistence.CharacterDao;
 
 /**
  * @author afarre
@@ -33,6 +36,7 @@ public class DataLoader {
 	private final Genson genson;
 	private final LocationDao locationDao;
 	private final ResourceDao resourceDao;
+	private final CharacterDao playersDao;
 	
 	
 	protected DataLoader(final String _assetsPackage){
@@ -40,6 +44,7 @@ public class DataLoader {
 		this.genson=new GensonBuilder().useRuntimeType(true).create();
 		this.locationDao=PersistenceServiceFactory.LOCATIONDAO.getInstance(LocationDao.class);
 		this.resourceDao=PersistenceServiceFactory.RESOURCEDAO.getInstance(ResourceDao.class);
+		this.playersDao=PersistenceServiceFactory.CHARACTERDAO.getInstance(CharacterDao.class);
 		logger.info("Current path: {}",Paths.get(".").toAbsolutePath().toString());
 	}
 	
@@ -72,21 +77,33 @@ public class DataLoader {
 	protected Stream<ItemImport> loadItems() throws IOException{
 		return loadResources("items",Item.class.getSimpleName())
 			.map(bytes -> this.genson.deserialize(bytes, ItemImport.class))
-			.peek(itemMessageBean -> logger.finest("database-initializer::initialize::{}::parsed::{}",Item.class.getSimpleName(),itemMessageBean))
-			.filter(itemMessageBean -> itemMessageBean!=null);
+			.peek(itemImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Item.class.getSimpleName(),itemImport))
+			.filter(itemImport -> itemImport!=null);
+	}
+	protected Stream<RaceImport> loadRaces() throws IOException{
+		return loadResources("races",Item.class.getSimpleName())
+			.map(bytes -> this.genson.deserialize(bytes, RaceImport.class))
+			.peek(raceImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Race.class.getSimpleName(),raceImport))
+			.filter(raceImport -> raceImport!=null);
 	}
 	
 	protected Stream<AreaImport> loadAreas() throws IOException{
 		return loadResources("rooms",Area.class.getSimpleName())
 			.map(bytes -> this.genson.deserialize(bytes, AreaImport.class))
-			.peek(areaMessageBean -> logger.finest("database-initializer::initialize::{}::parsed::{}",Area.class.getSimpleName(),areaMessageBean))
-			.filter(areaMessageBean -> areaMessageBean!=null);
+			.peek(areaImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Area.class.getSimpleName(),areaImport))
+			.filter(areaImport -> areaImport!=null);
 	}
 	
 	public void initialize(){
 
 		try {
 			logger.trace("database-initializer::initialize::begin");
+			loadRaces()
+				.map(raceImport -> ImportMapperService.instance.toEntity(raceImport))
+				.peek(raceImport -> logger.finest("database-initializer::initialize::{}::entity::{}",Race.class.getSimpleName(),raceImport))
+				.filter(raceEntity -> raceEntity!=null)
+				.forEach(raceEntity -> playersDao.saveRace(raceEntity));
+			logger.info("database-initializer::initialize::{}::done",Race.class.getSimpleName());
 			loadItems()
 				.map(itemImport -> ImportMapperService.instance.toEntity(itemImport))
 				.peek(itemEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",Item.class.getSimpleName(),itemEntity))

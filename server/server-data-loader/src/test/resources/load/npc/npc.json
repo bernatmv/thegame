@@ -1,0 +1,17 @@
+{
+	"id": "goblin-01",
+	"name": "manolo",
+	"race": "goblin",
+	"level": 3,
+	"health": 20,
+	"currentHealth": 15,
+	"magic": 5,
+	"currentMagic": 2,
+    "chatters": [
+        "Vicavorausan or deaavh!",
+        "Inavruderuk, drepa avhem!",
+        "Proavecav avhe milambak!",
+        "Nalkroro ayh lat doaumn avhiuk avo uuk?",
+        "Senav avhem avo avheir goddeukuk"
+    ]	
+}

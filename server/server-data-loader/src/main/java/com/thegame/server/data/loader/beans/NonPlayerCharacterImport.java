@@ -1,7 +1,6 @@
 package com.thegame.server.data.loader.beans;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +15,19 @@ import lombok.Singular;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AreaImport{
+public class NonPlayerCharacterImport{
 
 	@NonNull
 	private String id;
-	private String title;
-	private String description;
-	
+	private String name;
+	@NonNull
+	private String race;
+	@NonNull
+	private int level;
+	private int health;
+	private int currentHealth;
+	private int magic;
+	private int currentMagic;
 	@Singular
-	private Map<String,String> exits;
-	@Singular
-	private List<ItemInstanceImport> items;
+	private Set<String> chatters;
 }
