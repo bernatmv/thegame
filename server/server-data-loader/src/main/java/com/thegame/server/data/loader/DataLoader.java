@@ -1,14 +1,14 @@
-package com.thegame.server.engine;
+package com.thegame.server.data.loader;
 
 import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;
 import com.thegame.server.common.functional.LambdaUtils;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
+import com.thegame.server.data.loader.beans.AreaImport;
+import com.thegame.server.data.loader.beans.ItemImport;
+import com.thegame.server.data.loader.services.ImportMapperService;
 import com.thegame.server.engine.intern.configuration.Configuration;
-import com.thegame.server.engine.intern.load.ImportMapperService;
-import com.thegame.server.engine.intern.load.beans.AreaImport;
-import com.thegame.server.engine.intern.load.beans.ItemImport;
 import com.thegame.server.persistence.LocationDao;
 import com.thegame.server.persistence.PersistenceServiceFactory;
 import com.thegame.server.persistence.entities.Area;
@@ -25,9 +25,9 @@ import java.util.stream.Collectors;
 /**
  * @author afarre
  */
-public class DatabaseInitializer {
+public class DataLoader {
 	
-	private static final LogStream logger=LogStream.getLogger(DatabaseInitializer.class);
+	private static final LogStream logger=LogStream.getLogger(DataLoader.class);
 	
 	private final String assetsPackage;
 	private final Genson genson;
@@ -35,7 +35,7 @@ public class DatabaseInitializer {
 	private final ResourceDao resourceDao;
 	
 	
-	protected DatabaseInitializer(final String _assetsPackage){
+	protected DataLoader(final String _assetsPackage){
 		this.assetsPackage=_assetsPackage;
 		this.genson=new GensonBuilder().useRuntimeType(true).create();
 		this.locationDao=PersistenceServiceFactory.LOCATIONDAO.getInstance(LocationDao.class);
@@ -43,8 +43,8 @@ public class DatabaseInitializer {
 		logger.info("Current path: {}",Paths.get(".").toAbsolutePath().toString());
 	}
 	
-	public static DatabaseInitializer getInstance(){
-		return new DatabaseInitializer(Configuration.DATABASE_ASSETS_PACKAGE.getValue());
+	public static DataLoader getInstance(){
+		return new DataLoader(Configuration.DATABASE_ASSETS_PACKAGE.getValue());
 	}
 	
 	protected Stream<String> getPackageResources(final String _package) throws IOException{

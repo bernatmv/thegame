@@ -1,4 +1,4 @@
-package com.thegame.server.engine;
+package com.thegame.server.data.loader;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class DatabaseInitializerTest {
 	@Test
 	public void testInitialize() {
 		System.out.println("initialize");
-		DatabaseInitializer instance=DatabaseInitializer.getInstance();
+		DataLoader instance=DataLoader.getInstance();
 		instance.initialize();
 	}
 	

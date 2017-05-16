@@ -19,6 +19,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.thegame.server</groupId>
+			<artifactId>server-data-loader</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thegame.server</groupId>
 			<artifactId>server-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>

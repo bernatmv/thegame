@@ -1,0 +1,14 @@
+{
+	"id": "beta-room-001",
+	"title": "roomBeta001Title",
+	"description": "roomBeta001Description",
+	"exits": {
+		"north": "beta-room-002"
+	},
+	"items": [
+        {
+            "id": "chicken-001",
+            "name": "Pascual"
+        }
+    ]
+}

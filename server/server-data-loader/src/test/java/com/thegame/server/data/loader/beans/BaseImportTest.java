@@ -1,4 +1,4 @@
-package com.thegame.server.engine.intern.load.beans;
+package com.thegame.server.data.loader.beans;
 
 import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;

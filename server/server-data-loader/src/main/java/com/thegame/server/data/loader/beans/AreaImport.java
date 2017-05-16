@@ -1,8 +1,8 @@
-package com.thegame.server.engine.intern.load.beans;
+package com.thegame.server.data.loader.beans;
 
 import com.thegame.server.engine.messages.IsMessageBean;
-import com.thegame.server.engine.messages.common.Gender;
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,15 +17,15 @@ import lombok.Singular;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemImport implements IsMessageBean{
+public class AreaImport implements IsMessageBean{
 
 	@NonNull
 	private String id;
+	private String title;
 	private String description;
-	private boolean alive;
-	private Gender gender;
-	private String singular;
-	private String plural;
+	
 	@Singular
-	private Set<String> chatters;
+	private Map<String,String> exits;
+	@Singular
+	private List<ItemInstanceImport> items;
 }

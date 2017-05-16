@@ -1,6 +1,5 @@
-package com.thegame.server.engine.intern.load.beans;
+package com.thegame.server.data.loader.beans;
 
-import com.thegame.server.engine.intern.load.beans.ItemImport;
 import com.thegame.server.engine.messages.common.Gender;
 import java.util.Optional;
 

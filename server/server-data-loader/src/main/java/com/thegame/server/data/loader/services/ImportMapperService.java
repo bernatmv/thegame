@@ -1,8 +1,8 @@
-package com.thegame.server.engine.intern.load;
+package com.thegame.server.data.loader.services;
 
-import com.thegame.server.engine.intern.load.beans.AreaImport;
-import com.thegame.server.engine.intern.load.beans.ItemImport;
-import com.thegame.server.engine.intern.load.beans.ItemInstanceImport;
+import com.thegame.server.data.loader.beans.AreaImport;
+import com.thegame.server.data.loader.beans.ItemImport;
+import com.thegame.server.data.loader.beans.ItemInstanceImport;
 import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaItem;
 import com.thegame.server.persistence.entities.Item;
