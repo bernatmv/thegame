@@ -7,11 +7,15 @@ const OVERFLOW_MESSAGES = 110;
 describe('chat reducer', () => {
 
     describe('if we send a chat message', () => {
+        const currentState = reducer(undefined, ChatActions.sendChat({message: 'testing'}));
 
-        it('should have one more message', () => {
-            const currentState = reducer(undefined, ChatActions.sendChat({message: 'testing'}));
+        it('should have one additional message', () => {
             expect(currentState.length).toEqual(2);
             expect(currentState[1].message).toEqual('testing');
+        });
+
+        it('message should have a received value', () => {
+            expect(currentState[1].received).not.toBeNull();
         });
     });
 
@@ -24,6 +28,20 @@ describe('chat reducer', () => {
         it(`should have ${MAX_MESSAGES} message`, () => {
             expect(currentState.length).toEqual(MAX_MESSAGES);
             expect(currentState[0].message).toEqual(`testing ${OVERFLOW_MESSAGES - MAX_MESSAGES}`);
+        });
+    });
+
+    describe(`if we receive a new message`, () => {
+        const received = Date.now();
+        const currentState = reducer(undefined, ChatActions.sendChat({message: 'received', received: received}));
+
+        it('should have one additional message', () => {
+            expect(currentState.length).toEqual(2);
+            expect(currentState[1].message).toEqual('received');
+        });
+
+        it('message should have the provided received value', () => {
+            expect(currentState[1].received).toBe(received);
         });
     });
 });
