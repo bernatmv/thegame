@@ -43,6 +43,7 @@
     "awesome-typescript-loader": "^3.1.2",
     "classnames": "^2.2.5",
     "css-loader": "^0.27.3",
+    "enzyme": "^2.8.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-loader": "^0.4.5",
