@@ -53,9 +53,10 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             {
-              loader: 'css-loader',
-              query: {
+              loader: 'typings-for-css-modules-loader',
+              options: {
                 modules: true,
+                namedExport: true,
                 sourceMap: !isProduction,
                 importLoaders: 1,
                 localIdentName: '[local]__[hash:base64:5]'
