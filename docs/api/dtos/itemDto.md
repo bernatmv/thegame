@@ -5,7 +5,7 @@ interface ItemDto {
     id: string;
     name: string;
     decription: string;
-    isAlive: boolean;
+    alive: boolean;
     gender: string;
     singular: string;
     plural: string;

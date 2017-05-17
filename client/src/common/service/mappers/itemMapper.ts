@@ -8,7 +8,7 @@ export default class ItemMapper {
             dto.id,
             i18nService.Instance.translate(dto.name),
             i18nService.Instance.translate(dto.description),
-            dto.isAlive,
+            dto.alive,
             dto.gender,
             i18nService.Instance.translate(dto.singular),
             i18nService.Instance.translate(dto.plural),

@@ -10,7 +10,7 @@ export default class ItemModel {
 //        public speed: number,
 //        public quality: number,
 //        public rarity: number,        
-        public isAlive: boolean,
+        public alive: boolean,
         public gender: string,
         public singular: string,
         public plural: string,
