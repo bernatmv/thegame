@@ -25,6 +25,6 @@ public class RaceImport{
 	private double healthPerLevel;
 	private int magicBase;
 	private double magicPerLevel;
-	@Singular
-	private Set<String> chatters;
+	@Singular("chat")
+	private Set<String> chatter;
 }

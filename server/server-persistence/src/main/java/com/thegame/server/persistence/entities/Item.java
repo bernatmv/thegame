@@ -50,7 +50,7 @@ public class Item implements Serializable{
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@Column(name = "CHATTER",length=64)
-	private Set<String> chatters;
+	private Set<String> chatter;
 
 	@OneToMany(mappedBy="id.item",targetEntity=AreaItem.class,fetch=FetchType.LAZY)
   	private List<AreaItem> areas;

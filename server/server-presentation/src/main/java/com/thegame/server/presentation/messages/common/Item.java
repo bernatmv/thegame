@@ -28,6 +28,6 @@ public class Item implements IsMessageBean{
 	private Gender gender;
 	private String singular;
 	private String plural;
-	@Singular
-	private Set<String> chatters;
+	@Singular("chat")
+	private Set<String> chatter;
 }

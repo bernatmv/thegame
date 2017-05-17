@@ -63,7 +63,7 @@ public class LocationServiceTest {
 												.gender('F')
 												.plural("area-item-id-plural")
 												.singular("area-item-id-singular")
-												.chatters(Stream.of("Choooo!").collect(Collectors.toSet()))
+												.chatter(Stream.of("Choooo!").collect(Collectors.toSet()))
 												.build())
 									.build())
 								.build())
@@ -135,7 +135,7 @@ public class LocationServiceTest {
 																		.gender(Gender.female)
 																		.plural("area-item-id-plural")
 																		.singular("area-item-id-singular")
-																		.chatters(Stream.of("Choooo!").collect(Collectors.toSet()))
+																		.chatter(Stream.of("Choooo!").collect(Collectors.toSet()))
 																		.build())
 												.players(Collections.emptyList())
 												.build();

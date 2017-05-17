@@ -49,5 +49,5 @@ public class NonPlayerCharacter implements Serializable{
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@Column(name = "CHATTER",length=64)
-	private Set<String> chatters;
+	private Set<String> chatter;
 }

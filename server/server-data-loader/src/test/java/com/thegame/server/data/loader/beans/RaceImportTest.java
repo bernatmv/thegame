@@ -25,11 +25,11 @@ public class RaceImportTest extends BaseImportTest{
 									.healthPerLevel(3)
 									.magicBase(0)
 									.magicPerLevel(0.5)
-									.chatter("Vicavorausan or deaavh!")
-									.chatter("Inavruderuk, drepa avhem!")
-									.chatter("Proavecav avhe milambak!")
-									.chatter("Nalkroro ayh lat doaumn avhiuk avo uuk?")
-									.chatter("Senav avhem avo avheir goddeukuk")
+									.chat("Vicavorausan or deaavh!")
+									.chat("Inavruderuk, drepa avhem!")
+									.chat("Proavecav avhe milambak!")
+									.chat("Nalkroro ayh lat doaumn avhiuk avo uuk?")
+									.chat("Senav avhem avo avheir goddeukuk")
 									.build());
 		} 
  

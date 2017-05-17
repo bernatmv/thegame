@@ -1,7 +1,6 @@
 package com.thegame.server.engine.messages.common;
 
 import com.thegame.server.engine.messages.IsMessageBean;
-import com.thegame.server.engine.messages.common.Gender;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +27,6 @@ public class ItemBean implements IsMessageBean{
 	private Gender gender;
 	private String singular;
 	private String plural;
-	@Singular
-	private Set<String> chatters;
+	@Singular("chat")
+	private Set<String> chatter;
 }

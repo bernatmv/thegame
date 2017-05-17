@@ -24,6 +24,6 @@ public class ItemData {
 	private Gender gender;
 	private String singular;
 	private String plural;
-	@Singular
-	private List<String> chatters;
+	@Singular("chat")
+	private List<String> chatter;
 }

@@ -28,6 +28,6 @@ public class NonPlayerCharacterImport{
 	private int currentHealth;
 	private int magic;
 	private int currentMagic;
-	@Singular
-	private Set<String> chatters;
+	@Singular("chat")
+	private Set<String> chatter;
 }

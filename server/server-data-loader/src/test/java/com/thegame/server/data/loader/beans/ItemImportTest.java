@@ -25,7 +25,7 @@ public class ItemImportTest extends BaseImportTest{
 									.gender(Gender.male)
 									.singular("itemChickenSingular")
 									.plural("itemChickenPlural")
-									.chatter("cooooo!")
+									.chat("cooooo!")
 									.build());
 		} 
  
