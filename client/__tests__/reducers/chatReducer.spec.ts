@@ -4,7 +4,7 @@ import * as ChatActions from '../../src/app/actions/chatActions';
 const MAX_MESSAGES = 100;
 const OVERFLOW_MESSAGES = 110;
 
-describe('chat reducer', () => {
+describe('reducer >> chat', () => {
 
     describe('if we send a chat message', () => {
         const currentState = reducer(undefined, ChatActions.sendChat({message: 'testing'}));
@@ -40,8 +40,8 @@ describe('chat reducer', () => {
             expect(currentState[1].message).toEqual('received');
         });
 
-        it('message should have the provided received value', () => {
-            expect(currentState[1].received).toBe(received);
+        it('message should have a received value', () => {
+            expect(currentState[1].received).not.toBeNull();
         });
     });
 });

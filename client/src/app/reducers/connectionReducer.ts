@@ -7,7 +7,7 @@ import ConnectionStatus from '../../common/stream/models/connectionStatus';
 import ConnectionData from '../../common/stream/models/connectionData';
 import initialState from './state/initialState';
 
-export default handleActions<ConnectionData, ChatMessage | ConnectedModel>({
+export default handleActions<ConnectionData, ConnectedModel | void>({
     [ActionsConstants.ConnectingToChat]: (state: ConnectionData, action: ReduxActions.Action<void>): ConnectionData => {
         return Object.assign({}, state, { connectionStatus: ConnectionStatus.Connecting});
     },
