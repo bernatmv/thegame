@@ -1,5 +1,4 @@
 import reducer from '../../src/app/reducers/systemReducer';
-import SystemModel from '../../src/common/service/models/systemModel';
 import * as SystemActions from '../../src/app/actions/systemActions';
 
 describe('reducer >> system', () => {

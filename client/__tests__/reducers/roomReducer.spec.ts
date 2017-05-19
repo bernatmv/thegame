@@ -1,8 +1,7 @@
 import reducer from '../../src/app/reducers/roomReducer';
-import PlayerModel from '../../src/common/service/models/playerModel';
 import RoomModel from '../../src/common/service/models/roomModel';
 import {playerStubFactory} from '../stubs/playerStub';
-import roomStub, {roomStubFactory} from '../stubs/roomStub';
+import roomStub from '../stubs/roomStub';
 import * as SystemActions from '../../src/app/actions/systemActions';
 import * as PlayerActions from '../../src/app/actions/playerActions';
 
