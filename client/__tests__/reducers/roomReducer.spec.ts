@@ -2,7 +2,7 @@ import reducer from '../../src/app/reducers/roomReducer';
 import PlayerModel from '../../src/common/service/models/playerModel';
 import RoomModel from '../../src/common/service/models/roomModel';
 import {playerStubFactory} from '../stubs/playerStub';
-import roomStub from '../stubs/roomStub';
+import roomStub, {roomStubFactory} from '../stubs/roomStub';
 import * as SystemActions from '../../src/app/actions/systemActions';
 import * as PlayerActions from '../../src/app/actions/playerActions';
 
@@ -150,11 +150,16 @@ describe('reducer >> room', () => {
                 expect(currentState.players[0].id).toBe(testUser1.id);
             });
         });
-    });});
-/*
-export default handleActions<RoomModel, RoomModel | LeaveRoomModel | EnterRoomModel | string>({
-    [ActionsConstants.Move]: (state: RoomModel, action: ReduxActions.Action<string>): RoomModel => {
-        return state;
-    }
-}, initialState.room);
-*/
+    });
+
+    /**
+     * THIS ACTION IS INTERCEPTED AND PROCESSED BY THE MIDDLEWARE SO IT DOES NOTHING
+     */
+    describe('if we give action to move to another room', () => {
+        const currentState = reducer(roomStub, PlayerActions.move('north'));
+
+        it('everything should be the same (!!INTERCEPTED BY MIDDLEWARE!!)', () => {
+            expect(currentState).toBe(roomStub);
+        });
+    });
+});
