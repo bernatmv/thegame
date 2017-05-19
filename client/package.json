@@ -10,6 +10,7 @@
     "build": "webpack -p --progress --colors",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
     "test": "jest --watchAll --no-cache",
+    "coverage": "jest --no-cache --coverage",
     "docs": "npm run docs-html && opn dist/docs/index.html",
     "docs-html": "typedoc src/index.ts --excludePrivate --mode file --theme minimal --out dist/docs"
   },

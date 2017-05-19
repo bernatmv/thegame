@@ -68,6 +68,8 @@ You can also run any of our provided scripts with `npm run _____`
 
 > lint => Result from linting all files with tslint
 
-> test => Build, and test the library
+> test => Build, and test the library in watch mode
+
+> coverage => Test the library and create a code coverage report
 
 > docs => Generate HTML API documentation and open it in a browser

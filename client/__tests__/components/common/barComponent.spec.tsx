@@ -19,6 +19,12 @@ const setup = () => {
 };
 
 describe('component >> Bar', () => {
+    it('should render', () => {
+        const { enzymeWrapper } = setup();
+
+        expect(enzymeWrapper.length).toBe(1);
+    });
+
     it('should render self and subcomponents', () => {
         const { enzymeWrapper } = setup();
 
