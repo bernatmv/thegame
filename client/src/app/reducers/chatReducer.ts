@@ -7,7 +7,7 @@ import initialState from './state/initialState';
 
 const MAX_MESSAGES = 100;
 
-export default handleActions<ChatMessage[], ChatMessage | ConnectedModel>({
+export default handleActions<ChatMessage[], ChatMessage>({
     [ActionsConstants.ReceiveChat]: (state: ChatMessage[], action: ReduxActions.Action<ChatMessage>): ChatMessage[] => {
         return addMessageToChat(state, action.payload);
     },

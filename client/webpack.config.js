@@ -22,6 +22,9 @@ module.exports = {
       'redux'
     ]
   },
+  externals: {
+    'react/addons': true
+  },
   output: {
     path: outPath,
     publicPath: '/',

@@ -1,7 +1,9 @@
+type BarColor = 'red' | 'yellow' | 'blue' | 'green';
+
 interface BarProps {
     title: string;
     actual: number;
     max: number;
-    color: 'red' | 'yellow' | 'blue' | 'green';
+    color: BarColor;
 }
 export default BarProps;

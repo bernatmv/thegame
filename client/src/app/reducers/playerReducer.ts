@@ -7,7 +7,7 @@ import initialState from './state/initialState';
 
 let _authService = new AuthServiceImpl();
 
-export default handleActions<PlayerModel, PlayerModel>({
+export default handleActions<PlayerModel, string>({
     [ActionsConstants.Login]: (state: PlayerModel, action: ReduxActions.Action<string>): PlayerModel => {
         return _authService.login(action.payload);
     }
