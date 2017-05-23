@@ -1,5 +1,5 @@
 import MapServiceImpl from '../../src/common/service/mapServiceImpl';
-import roomDto from '../stubs/roomDto';
+import roomDto from '../stubs/dtos/roomDto';
 import RoomDto from '../../src/common/service/dtos/roomDto';
 import RoomModel from '../../src/common/service/models/roomModel';
 import EnemyModel from '../../src/common/service/models/enemyModel';
