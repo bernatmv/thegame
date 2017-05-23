@@ -5,7 +5,7 @@ import * as style from './bar.css';
 
 /* tslint:disable */
 export default class Bar extends React.Component<BarProps, {}> {
-    _getBarColor(color: 'red' | 'yellow' | 'blue' | 'green'): string {
+    private _getBarColor(color: 'red' | 'yellow' | 'blue' | 'green'): string {
         if (color === 'red') {
             return style.red;
         } else if (color === 'yellow') {
