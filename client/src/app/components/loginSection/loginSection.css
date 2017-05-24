@@ -73,6 +73,53 @@
     }
 }
 
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+}
+
+.signup__logo {
+    position: absolute;
+    top: 20px;
+}
+
+.signup__logo__main {
+    position: relative;
+}
+
+.signup__logo__before {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    text-shadow: -2px 0 red;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
+    animation: glitch-anim-1 1s infinite linear alternate-reverse;
+}
+
+.signup__logo__after {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    text-shadow: -2px 0 blue;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
+    animation: glitch-anim-2 1s infinite linear alternate-reverse;
+}
+
+.signup__body {
+    text-align: center;
+    width: 600px;
+    height: 500px;
+    padding-top: 200px;
+}
+
 @keyframes glitch-anim-1 {
     @for $i from 0 to 100 by 10 {
         $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }

@@ -11,6 +11,8 @@ export const esES: {locale: string, translations: Translations} = {
     translations: {
         // SYSTEM
         [TranslationConstants.loginInputPlaceholder]: '¿Cómo te llamas?',
+        [TranslationConstants.loginDivider]: 'Si no tienes nombre',
+        [TranslationConstants.signUpButton]: 'Crear nuevo personaje',
         [TranslationConstants.saySomething]: 'Di algo...',
         [TranslationConstants.online]: 'Conectado',
         [TranslationConstants.connecting]: 'Conectando...',

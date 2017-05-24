@@ -1,18 +1,18 @@
 import * as React from 'react';
-import CreateCharacterSectionProps from './createCharacterSectionProps';
+import CreateCharacterProps from './createCharacterProps';
 import {Rating, Popup, Dropdown, Step, Segment, Input, Icon, Divider, Button, Header} from 'semantic-ui-react';
-import PlayerDto from '../../../common/service/dtos/playerDto';
-import TranslationConstants from '../../../common/constants/translationConstants';
-import i18nService from '../../../common/service/i18nServiceImpl';
-import * as style from './createCharacterSection.css';
+import PlayerDto from '../../../../common/service/dtos/playerDto';
+import TranslationConstants from '../../../../common/constants/translationConstants';
+import i18nService from '../../../../common/service/i18nServiceImpl';
+import * as style from './createCharacter.css';
 
-interface CreateCharacterSectionState {
+interface CreateCharacterState {
     model: PlayerDto;
 }
 
-export default class LoginSection extends React.Component<CreateCharacterSectionProps, CreateCharacterSectionState> {
+export default class Login extends React.Component<CreateCharacterProps, CreateCharacterState> {
 
-    constructor(props?: CreateCharacterSectionProps, context?: any) {
+    constructor(props?: CreateCharacterProps, context?: any) {
         super(props, context);
         this.state = {
             model: null

@@ -5,6 +5,14 @@ export default class TranslationConstants {
         return `${keyPrefix}loginInputPlaceholder`;
     }
 
+    static get loginDivider() {
+        return `${keyPrefix}loginDivider`;
+    }
+
+    static get signUpButton() {
+        return `${keyPrefix}signUpButton`;
+    }
+
     static get saySomething() {
         return `${keyPrefix}saySomething`;
     }
