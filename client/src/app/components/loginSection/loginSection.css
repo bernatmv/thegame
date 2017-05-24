@@ -8,6 +8,20 @@
     justify-content: center;
     background: var(--login-background-color);
     width: 100%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 1em;
+    }
+    
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
 }
 
 .login__menu {
@@ -32,7 +46,7 @@
         text-shadow: -2px 0 red;
         width: 100%;
         height: 100%;
-        background: #333;
+        background: var(--login-background-color);
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
         animation: glitch-anim-1 1s infinite linear alternate-reverse;
     }
@@ -44,7 +58,7 @@
         text-shadow: -2px 0 blue;
         width: 100%;
         height: 100%;
-        background: #333;
+        background: var(--login-background-color);
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
         animation: glitch-anim-2 1s infinite linear alternate-reverse;
     }
@@ -61,10 +75,10 @@
             font-size: 15px;
             line-height: 1.2em;
             width: 80%;
-            background: #444;
+            background: var(--login-input-background-color);
             color: var(--login-text-color);
             font-family: helvetica, sans-serif;
-            background: linear-gradient(to bottom, #222, #444);
+            background: linear-gradient(to bottom, #222, var(--login-input-background-color));
         }
 
         &:hover {
