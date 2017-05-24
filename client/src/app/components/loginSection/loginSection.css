@@ -76,11 +76,13 @@
 .signup {
     display: flex;
     flex-direction: column;
-    align-self: center;
-    justify-content: center;
+    align-self: flex-start;
+    align-content: center;
 }
 
 .signup__logo {
+    display: flex;
+    align-self: center;
     position: absolute;
     top: 20px;
 }
@@ -90,33 +92,32 @@
 }
 
 .signup__logo__before {
-    position: absolute;
+    position: absolute !important; /* Overwriting Semantic UI */
     top: 0;
-    left: 2px;
-    text-shadow: -2px 0 red;
-    width: 100%;
-    height: 100%;
+    left: 1px;
+    text-shadow: -1px 0 red;
+    width: 100% !important; /* Overwriting Semantic UI */
+    height: 100% !important; /* Overwriting Semantic UI */
     background: #333;
-    clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-    animation: glitch-anim-1 1s infinite linear alternate-reverse;
+    clip: rect(22px, 150px, 28px, 0); /* A box from (0, 22) to (150, 28) => top, right, bottom, left */
+    animation: glitch-anim-1-small 1.5s infinite linear alternate-reverse;
 }
 
 .signup__logo__after {
-    position: absolute;
+    position: absolute !important; /* Overwriting Semantic UI */
     top: 0;
-    left: -2px;
-    text-shadow: -2px 0 blue;
-    width: 100%;
-    height: 100%;
+    left: -1px;
+    text-shadow: -1px 0 blue;
+    width: 100% !important; /* Overwriting Semantic UI */
+    height: 100% !important; /* Overwriting Semantic UI */
     background: #333;
-    clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-    animation: glitch-anim-2 1s infinite linear alternate-reverse;
+    clip: rect(22px, 150px, 28px, 0); /* A box from (0, 22) to (150, 28) => top, right, bottom, left */
+    animation: glitch-anim-2-small 1.5s infinite linear alternate-reverse;
 }
 
 .signup__body {
     text-align: center;
-    width: 600px;
-    height: 500px;
+    display: flex;
     padding-top: 200px;
 }
 
@@ -129,5 +130,17 @@
 @keyframes glitch-anim-2 {
     @for $i from 0 to 100 by 10 {
         $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }
+    }
+}
+
+@keyframes glitch-anim-1-small {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,150,{round: true})px, 150px, random(0,150,{round: true})px, 0); }
+    }
+}
+
+@keyframes glitch-anim-2-small {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,150,{round: true})px, 150px, random(0,150,{round: true})px, 0); }
     }
 }
