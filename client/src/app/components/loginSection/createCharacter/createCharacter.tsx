@@ -20,11 +20,11 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
 
     render(): JSX.Element {
         return <div className={styles.signup}>
-            <Divider horizontal inverted section style={{fontSize: 11}}>Estás a punto de renacer</Divider>
+            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpTitle)}</Divider>
             <Header as='h4' inverted>
                 <Icon name='users' inverted circular />
                 <Header.Content>
-                    En esta iteración de tu vida serás un 
+                    {i18nService.Instance.translate(TranslationConstants.signUpRaceLabel)}
                     {' '}
                     <Dropdown inline options={races} defaultValue={races[0].value} style={{borderBottom: 'dashed 1px white'}} />
                 </Header.Content>
@@ -34,30 +34,30 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
                 {' '}
                 <Rating icon='star' defaultRating={3} maxRating={5} disabled />
             </div>
-            <Divider horizontal inverted section style={{fontSize: 11}}>Te conocerán cómo</Divider>
+            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpNameLabel)}</Divider>
             <Input
                 icon={<Icon name='heart' inverted />}
                 iconPosition='left'
                 label={{icon: 'check', color: 'green'}}
                 labelPosition='right corner'
-                placeholder='¿Cómo te llamarás?' />
-            <Divider horizontal inverted section style={{fontSize: 11}}>El legendario</Divider>
+                placeholder={i18nService.Instance.translate(TranslationConstants.signUpNamePlaceholder)} />
+            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpProfessionTitle)}</Divider>
             <Dropdown options={professions} defaultValue={professions[0].value} style={{borderBottom: 'dashed 1px white'}} />
-            <Divider horizontal inverted section style={{fontSize: 11}}>Serás mucho más que tu género</Divider>
+            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpGenderTitle)}</Divider>
             <div>
                 <Button.Group labeled inverted vertical color='green'>
-                    <Button icon='man' content='Hombre' />
-                    <Button icon='woman' content='Mujer' />
-                    <Button icon='intergender' content='Hermafrodita' />
+                    <Button icon='man' content={i18nService.Instance.translate(TranslationConstants.genderMale)} />
+                    <Button icon='woman' content={i18nService.Instance.translate(TranslationConstants.genderFemale)} />
+                    <Button icon='intergender' content={i18nService.Instance.translate(TranslationConstants.genderIntergender)} />
                 </Button.Group>
                 {' '}
                 <Button.Group labeled inverted vertical color='green'>
-                    <Button icon='neuter' content='Neutro' />
-                    <Button icon='genderless' content='Sin género' />
-                    <Button icon='other gender' content='Otro' />
+                    <Button icon='neuter' content={i18nService.Instance.translate(TranslationConstants.genderNeuter)} />
+                    <Button icon='genderless' content={i18nService.Instance.translate(TranslationConstants.genderGenderless)} />
+                    <Button icon='other gender' content={i18nService.Instance.translate(TranslationConstants.genderOther)} />
                 </Button.Group>
             </div>
-            <Divider horizontal inverted section style={{fontSize: 11}}>¡RESPIRA!</Divider>
+            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpFinishTitle)}</Divider>
             <Button inverted circular icon='heart' size='massive' color='green' className={animations.beat} />
         </div>;
     }
@@ -67,20 +67,58 @@ interface CreateCharacterState {
     model: PlayerDto;
 }
 
+// TODO: we have to get race and profession from each dto in the assets once we have it defined
 const races = [
     {
         key: 'human',
-        text: 'humano',
+        text: i18nService.Instance.translate(TranslationConstants.raceHuman).toLocaleLowerCase(),
         value: 'human',
-        content: <Segment inverted><Header inverted size='small' color='grey'><Image src={humanImage} size='mini' color />{' '}Humano</Header></Segment>
+        // TODO: CHANGE IMAGE
+        content: <Segment inverted>
+                    <Header inverted size='small' color='grey'>
+                        <Image src={humanImage} size='mini' color />
+                        {' '}{i18nService.Instance.translate(TranslationConstants.raceHuman)}
+                    </Header>
+                </Segment>
+    },
+    {
+        key: 'goblin',
+        text: i18nService.Instance.translate(TranslationConstants.raceGoblin).toLocaleLowerCase(),
+        value: 'goblin',
+        // TODO: CHANGE IMAGE
+        content: <Segment inverted>
+                    <Header inverted size='small' color='grey'>
+                        <Image src={humanImage} size='mini' color />
+                        {' '}{i18nService.Instance.translate(TranslationConstants.raceGoblin)}
+                    </Header>
+                </Segment>
     }
 ];
 
+// TODO: we have to get race and profession from each dto in the assets once we have it defined
 const professions = [
     {
         key: 'warrior',
-        text: 'Guerrero',
+        text: i18nService.Instance.translate(TranslationConstants.professionWarrior).toLocaleLowerCase(),
         value: 'warrior',
-        content: <Segment inverted><Header inverted size='small' color='grey'><Image src={warriorImage} size='mini' color />{' '}Guerrero</Header></Segment>
+        // TODO: CHANGE IMAGE
+        content: <Segment inverted>
+                    <Header inverted size='small' color='grey'>
+                        <Image src={warriorImage} size='mini' color />
+                        {' '}{i18nService.Instance.translate(TranslationConstants.professionWarrior)}
+                    </Header>
+                </Segment>
+    },
+    {
+        key: 'wizard',
+        text: i18nService.Instance.translate(TranslationConstants.professionWizard).toLocaleLowerCase(),
+        value: 'wizard',
+        // TODO: CHANGE IMAGE
+        content: <Segment inverted>
+                    <Header inverted size='small' color='grey'>
+                        <Image src={warriorImage} size='mini' color />
+                        {' '}{i18nService.Instance.translate(TranslationConstants.professionWizard)}
+                    </Header>
+                </Segment>
     }
 ];
