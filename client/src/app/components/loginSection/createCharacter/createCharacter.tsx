@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CreateCharacterProps from './createCharacterProps';
-import {Rating, Dropdown, Segment, Input, Icon, Divider, Button, Header, Image} from 'semantic-ui-react';
+import {Dropdown, Segment, Input, Icon, Divider, Button, Header, Image} from 'semantic-ui-react';
 import PlayerDto from '../../../../common/service/dtos/playerDto';
 import TranslationConstants from '../../../../common/constants/translationConstants';
 import i18nService from '../../../../common/service/i18nServiceImpl';
@@ -20,45 +20,70 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
 
     render(): JSX.Element {
         return <div className={styles.signup}>
-            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpTitle)}</Divider>
+            
+            <Divider horizontal inverted section style={{fontSize: 11}}>
+                {i18nService.Instance.translate(TranslationConstants.signUpTitle)}
+            </Divider>
             <Header as='h4' inverted>
-                <Icon name='users' inverted circular />
+                <Icon 
+                    name='users' 
+                    inverted circular />
                 <Header.Content>
                     {i18nService.Instance.translate(TranslationConstants.signUpRaceLabel)}
                     {' '}
-                    <Dropdown inline options={races} defaultValue={races[0].value} style={{borderBottom: 'dashed 1px white'}} />
+                    <Dropdown 
+                        inline 
+                        options={races} 
+                        defaultValue={races[0].value} 
+                        style={inlineDropdownStyle} />
                 </Header.Content>
             </Header>
-            <div>
-                <Rating icon='heart' defaultRating={3} maxRating={5} disabled />
-                {' '}
-                <Rating icon='star' defaultRating={3} maxRating={5} disabled />
-            </div>
-            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpNameLabel)}</Divider>
+
+            <Divider horizontal inverted section style={{fontSize: 11}}>
+                {i18nService.Instance.translate(TranslationConstants.signUpNameLabel)}
+            </Divider>
             <Input
                 icon={<Icon name='heart' inverted />}
                 iconPosition='left'
                 label={{icon: 'check', color: 'green'}}
                 labelPosition='right corner'
                 placeholder={i18nService.Instance.translate(TranslationConstants.signUpNamePlaceholder)} />
-            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpProfessionTitle)}</Divider>
-            <Dropdown options={professions} defaultValue={professions[0].value} style={{borderBottom: 'dashed 1px white'}} />
-            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpGenderTitle)}</Divider>
+
+            <Divider horizontal inverted section style={{fontSize: 11}}>
+                {i18nService.Instance.translate(TranslationConstants.signUpProfessionTitle)}
+            </Divider>
+            <Dropdown 
+                options={professions} 
+                defaultValue={professions[0].value} 
+                style={inlineDropdownStyle} />
+
+            <Divider horizontal inverted section style={{fontSize: 11}}>
+                {i18nService.Instance.translate(TranslationConstants.signUpGenderTitle)}
+            </Divider>
             <div>
                 <Button.Group labeled inverted vertical color='green'>
-                    <Button icon='man' content={i18nService.Instance.translate(TranslationConstants.genderMale)} />
-                    <Button icon='woman' content={i18nService.Instance.translate(TranslationConstants.genderFemale)} />
-                    <Button icon='intergender' content={i18nService.Instance.translate(TranslationConstants.genderIntergender)} />
+                    <Button icon='man'          content={i18nService.Instance.translate(TranslationConstants.genderMale)} />
+                    <Button icon='woman'        content={i18nService.Instance.translate(TranslationConstants.genderFemale)} />
+                    <Button icon='intergender'  content={i18nService.Instance.translate(TranslationConstants.genderIntergender)} />
                 </Button.Group>
                 {' '}
                 <Button.Group labeled inverted vertical color='green'>
-                    <Button icon='neuter' content={i18nService.Instance.translate(TranslationConstants.genderNeuter)} />
-                    <Button icon='genderless' content={i18nService.Instance.translate(TranslationConstants.genderGenderless)} />
+                    <Button icon='neuter'       content={i18nService.Instance.translate(TranslationConstants.genderNeuter)} />
+                    <Button icon='genderless'   content={i18nService.Instance.translate(TranslationConstants.genderGenderless)} />
                     <Button icon='other gender' content={i18nService.Instance.translate(TranslationConstants.genderOther)} />
                 </Button.Group>
             </div>
-            <Divider horizontal inverted section style={{fontSize: 11}}>{i18nService.Instance.translate(TranslationConstants.signUpFinishTitle)}</Divider>
-            <Button inverted circular icon='heart' size='massive' color='green' className={animations.beat} />
+
+            <Divider horizontal inverted section style={{fontSize: 11}}>
+                {i18nService.Instance.translate(TranslationConstants.signUpFinishTitle)}
+            </Divider>
+            <Button 
+                inverted 
+                circular 
+                icon='heart' 
+                size='massive' 
+                color='green' 
+                className={animations.beat} />
         </div>;
     }
 }
@@ -66,6 +91,8 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
 interface CreateCharacterState {
     model: PlayerDto;
 }
+
+const inlineDropdownStyle = {borderBottom: 'dashed 1px white'};
 
 // TODO: we have to get race and profession from each dto in the assets once we have it defined
 const races = [
