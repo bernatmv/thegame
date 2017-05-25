@@ -36,7 +36,7 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
                         inline 
                         options={races} 
                         defaultValue={races[0].value} 
-                        style={inlineDropdownStyle} />
+                        className={styles.signup__dropdown} />
                 </Header.Content>
             </Header>
 
@@ -56,7 +56,8 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
             <Dropdown 
                 options={professions} 
                 defaultValue={professions[0].value} 
-                style={inlineDropdownStyle} />
+                style={inlineDropdownStyle} 
+                className={styles.signup__dropdown} />
 
             <Divider horizontal inverted section style={{fontSize: 11}}>
                 {i18nService.Instance.translate(TranslationConstants.signUpGenderTitle)}
@@ -101,7 +102,7 @@ const races = [
         key: 'human',
         text: i18nService.Instance.translate(TranslationConstants.raceHuman).toLocaleLowerCase(),
         value: 'human',
-        content: <Segment inverted>
+        content: <Segment inverted className={styles.signup__dropdown__segment}>
                     <Header inverted size='small' color='grey'>
                         <Image src={humanImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.raceHuman)}
@@ -112,7 +113,7 @@ const races = [
         key: 'goblin',
         text: i18nService.Instance.translate(TranslationConstants.raceGoblin).toLocaleLowerCase(),
         value: 'goblin',
-        content: <Segment inverted>
+        content: <Segment inverted className={styles.signup__dropdown__segment}>
                     <Header inverted size='small' color='grey'>
                         <Image src={goblinImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.raceGoblin)}
@@ -127,7 +128,7 @@ const professions = [
         key: 'warrior',
         text: i18nService.Instance.translate(TranslationConstants.professionWarrior).toLocaleLowerCase(),
         value: 'warrior',
-        content: <Segment inverted>
+        content: <Segment inverted className={styles.signup__dropdown__segment}>
                     <Header inverted size='small' color='grey'>
                         <Image src={warriorImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.professionWarrior)}
@@ -138,7 +139,7 @@ const professions = [
         key: 'wizard',
         text: i18nService.Instance.translate(TranslationConstants.professionWizard).toLocaleLowerCase(),
         value: 'wizard',
-        content: <Segment inverted>
+        content: <Segment inverted className={styles.signup__dropdown__segment}>
                     <Header inverted size='small' color='grey'>
                         <Image src={wizardImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.professionWizard)}
