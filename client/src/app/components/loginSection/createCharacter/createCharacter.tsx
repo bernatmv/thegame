@@ -27,9 +27,8 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
                 {i18nService.Instance.translate(TranslationConstants.signUpTitle)}
             </Divider>
             <Header as='h4' inverted>
-                <Icon 
-                    name='pencil' 
-                    inverted circular />
+                <Image src={humanImage} size='mini' shape='circular' />
+                {' '}
                 <Header.Content>
                     {i18nService.Instance.translate(TranslationConstants.signUpRaceLabel)}
                     {' '}
@@ -45,7 +44,7 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
                 {i18nService.Instance.translate(TranslationConstants.signUpNameLabel)}
             </Divider>
             <Input
-                icon={<Icon name='heart' inverted />}
+                icon={<Icon name='pencil' inverted />}
                 iconPosition='left'
                 label={{icon: 'check', color: 'green'}}
                 labelPosition='right corner'
@@ -104,7 +103,7 @@ const races = [
         value: 'human',
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={humanImage} size='mini' color />
+                        <Image src={humanImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.raceHuman)}
                     </Header>
                 </Segment>
@@ -115,7 +114,7 @@ const races = [
         value: 'goblin',
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={goblinImage} size='mini' color />
+                        <Image src={goblinImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.raceGoblin)}
                     </Header>
                 </Segment>
@@ -130,7 +129,7 @@ const professions = [
         value: 'warrior',
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={warriorImage} size='mini' color />
+                        <Image src={warriorImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.professionWarrior)}
                     </Header>
                 </Segment>
@@ -141,7 +140,7 @@ const professions = [
         value: 'wizard',
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={wizardImage} size='mini' color />
+                        <Image src={wizardImage} size='mini' shape='circular' />
                         {' '}{i18nService.Instance.translate(TranslationConstants.professionWizard)}
                     </Header>
                 </Segment>
