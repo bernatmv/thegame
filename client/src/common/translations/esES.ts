@@ -17,7 +17,7 @@ export const esES: {locale: string, translations: Translations} = {
         [TranslationConstants.signUpTitle]: 'Estás a punto de renacer',
         [TranslationConstants.signUpRaceLabel]: 'En esta iteración de tu vida serás un',
         [TranslationConstants.signUpNameLabel]: 'Te conocerán cómo',
-        [TranslationConstants.signUpNamePlaceholder]: '...',
+        [TranslationConstants.signUpNamePlaceholder]: '',
         [TranslationConstants.signUpProfessionTitle]: 'El legendario',
         [TranslationConstants.signUpGenderTitle]: 'Serás mucho más que tu género',
         [TranslationConstants.signUpFinishTitle]: '¡RESPIRA!',

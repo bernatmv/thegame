@@ -6,8 +6,10 @@ import TranslationConstants from '../../../../common/constants/translationConsta
 import i18nService from '../../../../common/service/i18nServiceImpl';
 import * as styles from './createCharacter.css';
 import * as animations from '../../../../css/animations.css';
-import * as humanImage from '../../../../../assets/images/goblin-head.svg';
-import * as warriorImage from '../../../../../assets/images/chicken.svg';
+import * as humanImage from '../../../../../assets/images/human-head.svg';
+import * as goblinImage from '../../../../../assets/images/goblin-head.svg';
+import * as wizardImage from '../../../../../assets/images/wizard.svg';
+import * as warriorImage from '../../../../../assets/images/warrior.svg';
 
 export default class Login extends React.Component<CreateCharacterProps, CreateCharacterState> {
 
@@ -26,7 +28,7 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
             </Divider>
             <Header as='h4' inverted>
                 <Icon 
-                    name='users' 
+                    name='pencil' 
                     inverted circular />
                 <Header.Content>
                     {i18nService.Instance.translate(TranslationConstants.signUpRaceLabel)}
@@ -100,7 +102,6 @@ const races = [
         key: 'human',
         text: i18nService.Instance.translate(TranslationConstants.raceHuman).toLocaleLowerCase(),
         value: 'human',
-        // TODO: CHANGE IMAGE
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
                         <Image src={humanImage} size='mini' color />
@@ -112,10 +113,9 @@ const races = [
         key: 'goblin',
         text: i18nService.Instance.translate(TranslationConstants.raceGoblin).toLocaleLowerCase(),
         value: 'goblin',
-        // TODO: CHANGE IMAGE
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={humanImage} size='mini' color />
+                        <Image src={goblinImage} size='mini' color />
                         {' '}{i18nService.Instance.translate(TranslationConstants.raceGoblin)}
                     </Header>
                 </Segment>
@@ -128,7 +128,6 @@ const professions = [
         key: 'warrior',
         text: i18nService.Instance.translate(TranslationConstants.professionWarrior).toLocaleLowerCase(),
         value: 'warrior',
-        // TODO: CHANGE IMAGE
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
                         <Image src={warriorImage} size='mini' color />
@@ -140,10 +139,9 @@ const professions = [
         key: 'wizard',
         text: i18nService.Instance.translate(TranslationConstants.professionWizard).toLocaleLowerCase(),
         value: 'wizard',
-        // TODO: CHANGE IMAGE
         content: <Segment inverted>
                     <Header inverted size='small' color='grey'>
-                        <Image src={warriorImage} size='mini' color />
+                        <Image src={wizardImage} size='mini' color />
                         {' '}{i18nService.Instance.translate(TranslationConstants.professionWizard)}
                     </Header>
                 </Segment>
