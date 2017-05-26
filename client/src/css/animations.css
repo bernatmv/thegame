@@ -92,7 +92,7 @@
 
 .beat {
   animation-name: beatanim;
-  animation-duration: 1.5s; 
+  animation-duration: 1.2s; 
   animation-timing-function: ease-out; 
   animation-delay: 0;
   animation-direction: alternate;
@@ -103,9 +103,9 @@
 
 @keyframes beatanim {
   0% {
-    transform: scale(.8);
+    transform: scale(.9);
   }
   100% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }

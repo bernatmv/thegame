@@ -25,15 +25,30 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
     }
 
     private _onChangeRace = (event, data) => this.setState({race: data.value});
+    private _onChangeProfession = (event, data) => this.setState({profession: data.value});
+    private _onChangeGender = (event, data) => this.setState({gender: data.value});
     private _onChangeName = (event, data) => {
         this.setState({name: data.value});
         // TODO: checlk with server name availability
-        if (!!data.value) {
-            this.setState({validName: true});
-        }
+        this.setState({validName: !!data.value});
     };
-    private _onChangeProfession = (event, data) => this.setState({profession: data.value});
-    private _onChangeGender = (event, data) => this.setState({gender: data.value});
+
+    private _getFinishSection = () => {
+        return (this.state.race && this.state.validName && this.state.profession && this.state.gender)
+                ? <div>
+                    <Divider horizontal inverted section style={{fontSize: 11}}>
+                        {i18nService.Instance.translate(TranslationConstants.signUpFinishTitle)}
+                    </Divider>
+                    <Button 
+                        inverted 
+                        circular 
+                        icon='heart' 
+                        size='huge' 
+                        color='green' 
+                        className={animations.beat} />
+                </div>
+                : null;
+    };
 
     render(): JSX.Element {
         let raceImage = (this.state.race === GameConstants.Goblin) ? goblinImage : humanImage;
@@ -124,16 +139,7 @@ export default class Login extends React.Component<CreateCharacterProps, CreateC
                 </Button.Group>
             </div>
 
-            <Divider horizontal inverted section style={{fontSize: 11}}>
-                {i18nService.Instance.translate(TranslationConstants.signUpFinishTitle)}
-            </Divider>
-            <Button 
-                inverted 
-                circular 
-                icon='heart' 
-                size='huge' 
-                color='green' 
-                className={animations.beat} />
+            {this._getFinishSection()}
         </div>;
     }
 }

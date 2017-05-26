@@ -15,7 +15,7 @@ export default class TranslationConstants {
     static get signUpFinishTitle() {return `${keyPrefix}signUpFinishTitle`;}
     /* GENDER */
     static get genderMale() {return `${keyPrefix}genderMale`;}
-    static get genderFemale() {return `${keyPrefix}genderMale`;}
+    static get genderFemale() {return `${keyPrefix}genderFemale`;}
     static get genderIntergender() {return `${keyPrefix}genderIntergender`;}
     static get genderNeuter() {return `${keyPrefix}genderNeuter`;}
     static get genderGenderless() {return `${keyPrefix}genderGenderless`;}
