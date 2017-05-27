@@ -1,7 +1,8 @@
 const SystemUser = 'SystemUser';
 const ChatMessage = 'ChatMessage';
 const Locales = {
-    esES: 'esES'
+    esES: 'esES',
+    enGB: 'enGB'
 };
 
 interface ILocales {

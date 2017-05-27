@@ -12,7 +12,7 @@ describe('helper >> i18n', () => {
     });
 
     it('should return id for a wrong locale', () => {
-        expect(I18N.translate(translationConstant, SystemConstants.Locales.enGB)).toBe(translationConstant);
+        expect(I18N.translate(translationConstant, SystemConstants.Locales.caCA)).toBe(translationConstant);
     });
 
     it('should return id for a wrong translation constant', () => {
