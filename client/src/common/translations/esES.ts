@@ -9,18 +9,45 @@ interface Translations {
 export const esES: {locale: string, translations: Translations} = {
     locale: SystemConstants.Locales.esES,
     translations: {
-        // SYSTEM
+        /* LOGIN */
         [TranslationConstants.loginInputPlaceholder]: '¿Cómo te llamas?',
-        [TranslationConstants.saySomething]: 'Di algo...',
+        [TranslationConstants.loginDivider]: 'Si no tienes nombre',
+        [TranslationConstants.signUpButton]: 'Crear nuevo personaje',
+        /* SIGNUP */
+        [TranslationConstants.signUpTitle]: 'Estás a punto de renacer',
+        [TranslationConstants.signUpRaceLabel]: 'En esta iteración de tu vida serás un',
+        [TranslationConstants.signUpNameLabel]: 'Te conocerán cómo',
+        [TranslationConstants.signUpNamePlaceholder]: ' ',
+        [TranslationConstants.signUpProfessionTitle]: 'El legendario',
+        [TranslationConstants.signUpGenderTitle]: 'Serás mucho más que tu género',
+        [TranslationConstants.signUpFinishTitle]: '¡RESPIRA!',
+        /* GENDER */
+        [TranslationConstants.genderMale]: 'Hombre',
+        [TranslationConstants.genderFemale]: 'Mujer',
+        [TranslationConstants.genderIntergender]: 'Hermafrodita',
+        [TranslationConstants.genderNeuter]: 'Neutro',
+        [TranslationConstants.genderGenderless]: 'Sin género',
+        [TranslationConstants.genderOther]: 'Otro',
+        /* RACE */
+        [TranslationConstants.raceHuman]: 'Humano',
+        [TranslationConstants.raceGoblin]: 'Goblin',
+        /* PROFESSION */
+        [TranslationConstants.professionWarrior]: 'Guerrero',
+        [TranslationConstants.professionWizard]: 'Mago',
+        /* CONNECTION */
+        [TranslationConstants.server]: 'Servidor',
         [TranslationConstants.online]: 'Conectado',
         [TranslationConstants.connecting]: 'Conectando...',
         [TranslationConstants.offline]: 'Desconectado',
+        /* CHAT */
+        [TranslationConstants.saySomething]: 'Di algo...',
+        [TranslationConstants.welcomeToTheGame]: 'Bienvenido a... ¡TheGame!',
         [TranslationConstants.aMomentAgo]: 'hace un momento',
         [TranslationConstants.secondsAgo]: ' segundos antes',
         [TranslationConstants.minute]: ' minuto',
         [TranslationConstants.hour]: ' hora',
         [TranslationConstants.ago]: ' antes',
-        [TranslationConstants.server]: 'Servidor',
+        /* DIRECTION */
         [TranslationConstants.north]: 'Norte',
         [TranslationConstants.east]: 'Este',
         [TranslationConstants.south]: 'Sur',
@@ -29,12 +56,13 @@ export const esES: {locale: string, translations: Translations} = {
         [TranslationConstants.down]: 'Abajo',
         [TranslationConstants.unvisitedLocation]: 'Aún no has visitado esta ubicación',
         [TranslationConstants.unvisitedDirection]: '? ? ?',
+        /* ROOM FOOTER */
         [TranslationConstants.noObjectsCloseBy]: 'No hay objetos cerca',
         [TranslationConstants.noEnemiesCloseBy]: 'No ves enemigos',
         [TranslationConstants.thereIs]: 'Hay ',
         [TranslationConstants.youSee]: 'Ves ',
         [TranslationConstants.isHere]: ' está aquí',
-        [TranslationConstants.welcomeToTheGame]: 'Bienvenido a... ¡TheGame!',
+        /* INTRO */
         [TranslationConstants.introLine1]: 'En un tiempo remoto, cuando los altos hombres edificaban ciudadelas en los páramos de Svart Hal,',
         [TranslationConstants.introLine2]: 'El mundo ya era viejo y los hombres apenas unos niños vagando en busca de un destino',
         [TranslationConstants.introLine3]: 'Eran una raza despreciada, pocos en número y sin aliados o amigos...',

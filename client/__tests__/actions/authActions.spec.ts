@@ -1,4 +1,4 @@
-import {login} from '../../src/app/actions/authActions';
+import {login, signup} from '../../src/app/actions/authActions';
 import ActionsConstants from '../../src/common/constants/actionsConstants';
 
 describe('auth actions', () => {
@@ -22,6 +22,14 @@ describe('auth actions', () => {
                 type: ActionsConstants.Login,
                 payload: error,
                 error: true
+            });
+        });
+    });
+
+    describe('if we create a signup action', () => {
+        it('should generate action with payload', () => {
+            expect(signup()).toEqual({
+                type: ActionsConstants.SignUp
             });
         });
     });

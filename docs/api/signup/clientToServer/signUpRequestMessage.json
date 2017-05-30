@@ -1,0 +1,7 @@
+{
+    "kind": "SignUpRequestMessage",
+    "race": "human",
+    "name": "Watahru",
+    "profession": "wizard",
+    "gender": "male"
+}
