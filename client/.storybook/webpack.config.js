@@ -7,17 +7,14 @@ var webpack = require('webpack');
 var path = require('path');
 
 // variables
+var contextPath = path.resolve(__dirname, '../');
 var sourcePath = path.resolve(__dirname, '../src');
 var storiesPath = path.resolve(__dirname, '../stories');
-
-// plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function (config, env) {
   var config = genDefaultConfig(config, env);
 
-//  config.context = sourcePath;
+  config.context = contextPath;
 
   config.resolve = {
     extensions: ['.ts', '.js', '.tsx'],
@@ -29,7 +26,7 @@ module.exports = function (config, env) {
 
   config.module.rules.push({
       test: /\.tsx?$/,
-      use: require.resolve('awesome-typescript-loader'),
+      use: 'awesome-typescript-loader',
       include: [
         sourcePath,
         storiesPath
@@ -38,14 +35,28 @@ module.exports = function (config, env) {
   
   config.module.rules.push({
       test: /\.css$/,
-      use: require.resolve('postcss-loader'),
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            namedExport: true,
+            sourceMap: true,
+            importLoaders: 1,
+            localIdentName: '[local]__[hash:base64:5]'
+          }
+        },
+        {
+          loader: 'postcss-loader'
+        }
+      ],
       include: path.resolve(__dirname, '../')
   })
 
-  config.module.rules.push({test: /\.json$/, use: require.resolve('json-loader')})
-  config.module.rules.push({test: /\.html$/, use: require.resolve('html-loader')})
-  config.module.rules.push({test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, use: require.resolve('url-loader')})
-  config.module.rules.push({test: /\.jpg$/, use: require.resolve('file-loader')})
+  config.module.rules.push({test: /\.json$/, use: 'json-loader'})
+  config.module.rules.push({test: /\.html$/, use: 'html-loader'})
+  config.module.rules.push({test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, use: 'url-loader'})
+  config.module.rules.push({test: /\.jpg$/, use: 'file-loader'})
   
   config.resolve.extensions.push(".tsx");
   config.resolve.extensions.push(".ts");
@@ -60,11 +71,18 @@ module.exports = function (config, env) {
         require('postcss-for')(),
         require('postcss-random')(),
         require('postcss-cssnext')(),
-        require('postcss-reporter')(),
-        require('postcss-browser-reporter')({ disabled: false }),
+        require('postcss-reporter')()
       ]
     }
   }));
+
+  config.devServer = {
+    contentBase: sourcePath,
+    hot: true,
+    stats: {
+      warnings: false
+    },
+  };
 
   return config;
 };
