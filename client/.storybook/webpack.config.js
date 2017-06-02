@@ -24,6 +24,7 @@ module.exports = function (config, env) {
     ]
   }
 
+  config.module.rules = [];
   config.module.rules.push({
       test: /\.tsx?$/,
       use: 'awesome-typescript-loader',
