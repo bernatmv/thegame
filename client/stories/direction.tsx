@@ -8,10 +8,12 @@ storiesOf('Direction', module)
     getComponent()
   );
 
-function getComponent(props?: any) {//TODO: PROPS type
+function getComponent(props?: any) {
   let defaultProps = {
     title: 'North',
-    move: () => action('move')
+    move: () => action('move')()
   };
-  return <Direction {...Object.assign({}, defaultProps, props)} />;
+  return <div style={{width: 300}}>
+    <Direction {...Object.assign({}, defaultProps, props)} />
+  </div>;
 }

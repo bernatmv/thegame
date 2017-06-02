@@ -57,6 +57,7 @@
     -webkit-border-radius: 16px;
     border-radius: 16px;
     overflow: hidden;
+    transition: all 0.6s ease;
 
     &.gold {
         background: rgb(212, 175, 55);

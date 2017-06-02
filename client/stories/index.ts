@@ -1,17 +1,16 @@
 import './storybook.css';
 
-import './direction';
 
 //->General styles in storybook to look like the game
 
 //*INPUT
 //*BUTTON
-//BAR
+import './bar';
 //CHATITEM
 //CONNECTIONSTATUS
 //PROFILE
 //ROOMSECTION
-//->Direction
+import './direction';
 //->Footer
 //CHATSECTION
 //AVATARSECTION
