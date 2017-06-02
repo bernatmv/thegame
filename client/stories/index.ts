@@ -1,13 +1,15 @@
+import 'semantic-ui-css/semantic.min.css';
 import './storybook.css';
 
 
 //->General styles in storybook to look like the game
 
-//*INPUT
-//*BUTTON
+//***INPUT
+//***BUTTON
+
 import './bar';
 //CHATITEM
-//CONNECTIONSTATUS
+import './connectionStatus';
 //PROFILE
 //ROOMSECTION
 import './direction';

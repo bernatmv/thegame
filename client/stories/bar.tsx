@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import Bar from '../src/app/components/common/bar/bar';
 
 storiesOf('Bar', module)

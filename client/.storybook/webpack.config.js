@@ -62,7 +62,21 @@ module.exports = function (config, env) {
             ]
           }
         }
-      ]
+      ],
+      exclude: /node_modules/
+  })
+  
+  config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        {
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+        }
+      ],
+      include: /node_modules/
   })
 
   config.module.rules.push({test: /\.json$/, use: 'json-loader'})
@@ -91,9 +105,8 @@ module.exports = function (config, env) {
   config.devServer = {
     contentBase: sourcePath,
     hot: true,
-    stats: {
-      warnings: false
-    },
+    clientLogLevel: "info",
+    noInfo: true
   };
 
   return config;
