@@ -26,7 +26,7 @@ function getComponent(props?: any) {
         max: 100,
         color: 'red'
     };
-    return <div style={{width: 300}}>
+    return <div style={{width: 300, marginLeft: 20, marginTop: 20}}>
             <Bar {...Object.assign({}, defaultProps, props)} />
         </div>;
 }
