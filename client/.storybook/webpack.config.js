@@ -37,20 +37,31 @@ module.exports = function (config, env) {
       test: /\.css$/,
       use: [
         {
+          loader: 'style-loader',
+          options: {
+            singleton: true
+          }
+        },
+        {
           loader: 'css-loader',
           options: {
             modules: true,
             namedExport: true,
             sourceMap: true,
-            importLoaders: 1,
+            importLoaders: 2,
             localIdentName: '[local]__[hash:base64:5]'
           }
         },
         {
-          loader: 'postcss-loader'
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: true,
+            includePaths: [
+              path.resolve(__dirname, '../')
+            ]
+          }
         }
-      ],
-      include: path.resolve(__dirname, '../')
+      ]
   })
 
   config.module.rules.push({test: /\.json$/, use: 'json-loader'})
