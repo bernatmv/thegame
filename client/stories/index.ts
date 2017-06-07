@@ -18,6 +18,6 @@ import './direction';
 //AVATARSECTION
 //ENEMYSECTION
 //INTROSECTION
-//LOGINSECTION
+import './loginSection';
 //->CREATECHARACTER
 import './systemSection';
