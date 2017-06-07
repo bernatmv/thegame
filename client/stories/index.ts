@@ -17,7 +17,7 @@ import './direction';
 //CHATSECTION
 //AVATARSECTION
 //ENEMYSECTION
-//INTROSECTION
+import './intro';
 import './loginSection';
 import './createCharacter';
 import './systemSection';
