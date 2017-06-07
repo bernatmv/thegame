@@ -10,7 +10,7 @@ import './storybook.css';
 import './bar';
 //CHATITEM
 import './connectionStatus';
-//PROFILE
+import './profile';
 //ROOMSECTION
 import './direction';
 //->Footer
