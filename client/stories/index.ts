@@ -19,5 +19,5 @@ import './direction';
 //ENEMYSECTION
 //INTROSECTION
 import './loginSection';
-//->CREATECHARACTER
+import './createCharacter';
 import './systemSection';
