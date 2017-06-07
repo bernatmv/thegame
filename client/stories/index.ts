@@ -16,7 +16,7 @@ import './direction';
 //->Footer
 //CHATSECTION
 //AVATARSECTION
-//ENEMYSECTION
+import './enemySection';
 import './intro';
 import './loginSection';
 import './createCharacter';
