@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Direction from '../src/app/components/roomSection/components/direction';
 
-storiesOf('Direction', module)
+storiesOf('[COMPONENT] Direction', module)
   .add('Normal', () => 
     getComponent()
   );

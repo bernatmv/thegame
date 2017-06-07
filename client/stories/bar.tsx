@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Bar from '../src/app/components/common/bar/bar';
 
-storiesOf('Bar', module)
+storiesOf('[COMPONENT] Bar', module)
     .add('Full red', () => 
         getComponent()
     )

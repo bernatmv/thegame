@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Profile from '../src/app/components/common/profile/profile';
 
-storiesOf('Profile', module)
+storiesOf('[COMPONENT] Profile', module)
     .add('Normal', () => 
         getComponent()
     )

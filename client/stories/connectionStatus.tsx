@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import ConnectionStatus from '../src/app/components/common/connectionStatus/connectionStatus';
 import ConnectionStatusType from '../src/common/stream/models/connectionStatus';
 
-storiesOf('Connection status', module)
+storiesOf('[COMPONENT] Connection status', module)
     .add('Inline', () => 
         getComponent()
     )
