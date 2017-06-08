@@ -13,7 +13,7 @@ import './connectionStatus';
 import './profile';
 //ROOMSECTION
 import './direction';
-//->Footer
+import './footer';
 //CHATSECTION
 import './avatarSection';
 import './enemySection';

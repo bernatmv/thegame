@@ -13,7 +13,7 @@ function getComponent(props?: any) {
     title: 'North',
     move: () => action('move')()
   };
-  return <div style={{width: 300}}>
+  return <div style={{width: 300, marginLeft: 20, marginTop: 20}}>
     <Direction {...Object.assign({}, defaultProps, props)} />
   </div>;
 }
