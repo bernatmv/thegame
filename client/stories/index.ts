@@ -11,7 +11,7 @@ import './bar';
 //CHATITEM
 import './connectionStatus';
 import './profile';
-//ROOMSECTION
+import './roomSection';
 import './direction';
 import './footer';
 //CHATSECTION
