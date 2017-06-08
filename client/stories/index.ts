@@ -21,3 +21,5 @@ import './intro';
 import './loginSection';
 import './createCharacter';
 import './systemSection';
+
+//=>Game on different states (room, fight, enemies, chat, party...)
