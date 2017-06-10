@@ -8,6 +8,8 @@ import { TheGame } from './app/containers/theGame/theGameContainer';
 import initialState from './app/reducers/state/initialState';
 import consoleFun from './config/consoleFun';
 
+import 'semantic-ui-css/semantic.min.css';
+
 const store = configureStore(initialState);
 const history = createHistory();
 

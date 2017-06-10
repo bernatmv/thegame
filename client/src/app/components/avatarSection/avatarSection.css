@@ -9,7 +9,7 @@
     width: 200px;
     height: 100%;
     overflow-y: scroll;
-    font-size: 16px;
+    font-size: 14px;
 
     &::-webkit-scrollbar {
         width: 1em;

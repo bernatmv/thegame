@@ -47,7 +47,8 @@ module.exports = {
           : [
             'react-hot-loader',
             'awesome-typescript-loader'
-          ]
+          ],
+        exclude: /node_modules/
       },
       // css
       {
@@ -69,7 +70,20 @@ module.exports = {
               loader: 'postcss-loader'
             }
           ]
-        })
+        }),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ],
+        include: /node_modules/
       },
       // static assets
       { test: /\.json$/, use: 'json-loader' },
@@ -100,19 +114,20 @@ module.exports = {
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new ExtractTextPlugin({
-      filename: 'styles.css',
-      disable: !isProduction
+      filename: 'styles.css'
     }),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    })
+    }),
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/
+    ])
   ],
   devServer: {
     contentBase: sourcePath,
     hot: true,
-    stats: {
-      warnings: false
-    },
+    clientLogLevel: "info",
+    noInfo: true
   },
   node: {
     // workaround for webpack-dev-server issue

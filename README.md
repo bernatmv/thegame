@@ -58,6 +58,11 @@ Install `Node.js`
 
 > `npm start` on the _client_ folder
 
+If you want to test the components install Storybook:
+
+> `npm i -g @storybook/cli` will install a global dependency for storybook (*it's important that it's the 3.0+*)
+
+
 ## Other scripts
 
 You can also run any of our provided scripts with `npm run _____`
@@ -69,6 +74,8 @@ You can also run any of our provided scripts with `npm run _____`
 > lint => Result from linting all files with tslint
 
 > test => Build, and test the library in watch mode
+
+> storybook => Test the presentational components of the library (port: 9009)
 
 > coverage => Test the library and create a code coverage report
 
