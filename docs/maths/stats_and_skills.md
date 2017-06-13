@@ -43,3 +43,30 @@ On character can have multiple skills, those skills can be binded to the charact
     - Skills almost never fail but improve on each level 
 
     - Each skill can have a different difficulty, that means a different price in skill points to buy and a different number of skill points needed to level up
+
+
+## Combat
+
+### Rules
+
+    - Turn based
+
+    - Order of action based on reaction time (line on top specifies order)
+
+### IA
+
+    - If enemy in front: attack
+
+    - If enemy on side: attack
+
+    - If enemy on back: attack
+
+    - If enemy in LOS, move to closer (front preferred if equal)
+
+    - If empty in front and no enemy in LOS on side/back: move front
+
+### Alternate
+
+    - More like hearthstone mix: to attack second line melee you have to first clear first line
+
+    - Second line can only attack distance
