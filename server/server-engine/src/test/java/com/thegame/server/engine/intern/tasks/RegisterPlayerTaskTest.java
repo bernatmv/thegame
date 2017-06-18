@@ -49,8 +49,6 @@ public class RegisterPlayerTaskTest{
 				.build();
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		this.nonPlayerService=new NonPlayerServiceImpl();
-		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService,this.nonPlayerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 	}
@@ -93,3 +91,5 @@ public class RegisterPlayerTaskTest{
 	}
 	
 }
+		this.nonPlayerService=new NonPlayerServiceImpl();
+		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService,this.nonPlayerService);
