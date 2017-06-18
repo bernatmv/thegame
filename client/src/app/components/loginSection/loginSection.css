@@ -8,6 +8,20 @@
     justify-content: center;
     background: var(--login-background-color);
     width: 100%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 1em;
+    }
+    
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
 }
 
 .login__menu {
@@ -26,27 +40,27 @@
     }
 
     & .login__logo__before {
-        position: absolute;
+        position: absolute !important; /* Overwriting Semantic UI */
         top: 0;
         left: 2px;
         text-shadow: -2px 0 red;
-        width: 100%;
-        height: 100%;
-        background: #333;
+        width: 100% !important; /* Overwriting Semantic UI */
+        height: 100% !important; /* Overwriting Semantic UI */
+        background: var(--login-background-color);
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-        animation: glitch-anim-1 1s infinite linear alternate-reverse;
+        animation: glitchAnim1 1s infinite linear alternate-reverse;
     }
 
     & .login__logo__after {
-        position: absolute;
+        position: absolute !important; /* Overwriting Semantic UI */
         top: 0;
         left: -2px;
         text-shadow: -2px 0 blue;
-        width: 100%;
-        height: 100%;
-        background: #333;
+        width: 100% !important; /* Overwriting Semantic UI */
+        height: 100% !important; /* Overwriting Semantic UI */
+        background: var(--login-background-color);
         clip: rect(44px, 300px, 56px, 0); /* A box from (0, 44) to (300, 56) => top, right, bottom, left */
-        animation: glitch-anim-2 1s infinite linear alternate-reverse;
+        animation: glitchAnim2 1s infinite linear alternate-reverse;
     }
 
     & .login__input {
@@ -56,15 +70,15 @@
         padding-top: 360px;        
 
         & .login__input__field input {
-            border: 1px solid var(--login-border-color);
-            padding: 0.5em;
-            font-size: 15px;
-            line-height: 1.2em;
-            width: 80%;
-            background: #444;
-            color: var(--login-text-color);
-            font-family: helvetica, sans-serif;
-            background: linear-gradient(to bottom, #222, #444);
+            border: 1px solid var(--login-border-color) !important; /* Overwriting Semantic UI */
+            padding: 0.5em !important; /* Overwriting Semantic UI */
+            font-size: 15px !important; /* Overwriting Semantic UI */
+            line-height: 1.2em !important; /* Overwriting Semantic UI */
+            width: 80% !important; /* Overwriting Semantic UI */
+            background: var(--login-input-background-color) !important; /* Overwriting Semantic UI */
+            color: var(--login-text-color) !important; /* Overwriting Semantic UI */
+            font-family: helvetica, sans-serif !important; /* Overwriting Semantic UI */
+            background: linear-gradient(to bottom, #222, var(--login-input-background-color)) !important; /* Overwriting Semantic UI */
         }
 
         &:hover {
@@ -73,14 +87,74 @@
     }
 }
 
-@keyframes glitch-anim-1 {
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-content: center;
+}
+
+.signup__logo {
+    display: flex;
+    align-self: center;
+    position: absolute;
+    top: 20px;
+}
+
+.signup__logo__main {
+    position: relative;
+}
+
+.signup__logo__before {
+    position: absolute !important; /* Overwriting Semantic UI */
+    top: 0;
+    left: 1px;
+    text-shadow: -1px 0 red;
+    width: 100% !important; /* Overwriting Semantic UI */
+    height: 100% !important; /* Overwriting Semantic UI */
+    background: #333;
+    clip: rect(22px, 150px, 28px, 0); /* A box from (0, 22) to (150, 28) => top, right, bottom, left */
+    animation: glitchAnim1Small 1.5s infinite linear alternate-reverse;
+}
+
+.signup__logo__after {
+    position: absolute !important; /* Overwriting Semantic UI */
+    top: 0;
+    left: -1px;
+    text-shadow: -1px 0 blue;
+    width: 100% !important; /* Overwriting Semantic UI */
+    height: 100% !important; /* Overwriting Semantic UI */
+    background: #333;
+    clip: rect(22px, 150px, 28px, 0); /* A box from (0, 22) to (150, 28) => top, right, bottom, left */
+    animation: glitchAnim2Small 1.5s infinite linear alternate-reverse;
+}
+
+.signup__body {
+    text-align: center;
+    display: flex;
+    padding-top: 170px;
+}
+
+@keyframes glitchAnim1 {
     @for $i from 0 to 100 by 10 {
         $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }
     }
 }
 
-@keyframes glitch-anim-2 {
+@keyframes glitchAnim2 {
     @for $i from 0 to 100 by 10 {
         $(i)% { clip: rect(random(0,300,{round: true})px, 300px, random(0,300,{round: true})px, 0); }
+    }
+}
+
+@keyframes glitchAnim1Small {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,150,{round: true})px, 150px, random(0,150,{round: true})px, 0); }
+    }
+}
+
+@keyframes glitchAnim2Small {
+    @for $i from 0 to 100 by 10 {
+        $(i)% { clip: rect(random(0,150,{round: true})px, 150px, random(0,150,{round: true})px, 0); }
     }
 }

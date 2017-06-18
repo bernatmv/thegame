@@ -1,0 +1,47 @@
+@import '../../../../theme/colors.css';
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+
+    & h4 {
+        margin: 0 !important; /* Overwriting Semantic UI */
+    }
+}
+
+.signup input {
+    height: 40px !important; /* Overwriting Semantic UI */
+    border: 1px solid var(--login-border-color) !important; /* Overwriting Semantic UI */
+    padding: 0.5em !important; /* Overwriting Semantic UI */
+    font-size: 15px !important; /* Overwriting Semantic UI */
+    line-height: 1.2em !important; /* Overwriting Semantic UI */
+    width: 80% !important; /* Overwriting Semantic UI */
+    background: var(--login-input-background-color) !important; /* Overwriting Semantic UI */
+    color: var(--login-text-color) !important; /* Overwriting Semantic UI */
+    font-family: helvetica, sans-serif !important; /* Overwriting Semantic UI */
+    background: linear-gradient(to bottom, #222, var(--login-input-background-color)) !important; /* Overwriting Semantic UI */
+}
+
+.signup__dropdown:global.ui.dropdown {
+    border-bottom: dashed 1px white !important; /* Overwriting Semantic UI */
+
+    & :global .menu {
+        background: none !important; /* Overwriting Semantic UI */
+        border: none !important; /* Overwriting Semantic UI */
+
+        &:hover {
+            background: none !important; /* Overwriting Semantic UI */
+            border: none !important; /* Overwriting Semantic UI */
+        }
+
+        & :global .item {
+            padding: 0 !important; /* Overwriting Semantic UI */
+        }
+    }
+}
+
+.signup__dropdown__segment {
+    padding: 7px !important; /* Overwriting Semantic UI */
+}

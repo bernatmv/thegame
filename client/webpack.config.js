@@ -22,6 +22,9 @@ module.exports = {
       'redux'
     ]
   },
+  externals: {
+    'react/addons': true
+  },
   output: {
     path: outPath,
     publicPath: '/',
@@ -44,7 +47,8 @@ module.exports = {
           : [
             'react-hot-loader',
             'awesome-typescript-loader'
-          ]
+          ],
+        exclude: /node_modules/
       },
       // css
       {
@@ -53,9 +57,10 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             {
-              loader: 'css-loader',
-              query: {
+              loader: 'typings-for-css-modules-loader',
+              options: {
                 modules: true,
+                namedExport: true,
                 sourceMap: !isProduction,
                 importLoaders: 1,
                 localIdentName: '[local]__[hash:base64:5]'
@@ -65,7 +70,20 @@ module.exports = {
               loader: 'postcss-loader'
             }
           ]
-        })
+        }),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ],
+        include: /node_modules/
       },
       // static assets
       { test: /\.json$/, use: 'json-loader' },
@@ -96,19 +114,20 @@ module.exports = {
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new ExtractTextPlugin({
-      filename: 'styles.css',
-      disable: !isProduction
+      filename: 'styles.css'
     }),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    })
+    }),
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/
+    ])
   ],
   devServer: {
     contentBase: sourcePath,
     hot: true,
-    stats: {
-      warnings: false
-    },
+    clientLogLevel: "info",
+    noInfo: true
   },
   node: {
     // workaround for webpack-dev-server issue

@@ -1,3 +1,6 @@
 export let nullable = (value: any) => {
-    return value ? value : null;
+    if (value === undefined) {
+        return null;
+    }
+    return value;
 };

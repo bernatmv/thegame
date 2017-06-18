@@ -12,6 +12,7 @@ const MoveUp = 'up';
 const MoveDown = 'down';
 const LoadRoom = 'LoadRoomMessage';
 const Login = 'Login';
+const SignUp = 'SignUp';
 const PlayerEntersRoom = 'PlayerEntersRoomMessage';
 const PlayerLeavesRoom = 'PlayerLeavesRoomMessage';
 const EndIntro = 'EndIntro';
@@ -38,4 +39,5 @@ export default class ActionsConstants {
     public static EndIntro: string = EndIntro;
     // AUTH
     public static Login: string = Login;
+    public static SignUp: string = SignUp;
 }

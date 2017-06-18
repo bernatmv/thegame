@@ -1,0 +1,3 @@
+export const container__system__chat__messages__item_system: string;
+export const container__system__chat__messages__item_me: string;
+export const container__system__chat__messages__item_received: string;
