@@ -38,7 +38,7 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 		logger.trace("application::init::begin");
 		PersistenceServiceFactory.init();
 		logger.trace("application::init::database-connection");
-		DataLoader.getInstance().initialize();
+		DataLoader.getInstance().load();
 		logger.trace("application::init::database");
 		MessageFactory.init();
 		logger.trace("application::init::message-factory");

@@ -30,5 +30,7 @@ public class AreaMessageBean implements IsMessageBean{
 	@Singular
 	private List<String> players;
 	@Singular
+	private List<NonPlayerMessageBean> enemies;
+	@Singular
 	private List<ItemBean> items;
 }

@@ -6,5 +6,6 @@
 		"north": "beta-room-002",
 		"south": "beta-room-002"
 	},
-    "items": []	
+    "items": [],
+	"enemies": []	
 }

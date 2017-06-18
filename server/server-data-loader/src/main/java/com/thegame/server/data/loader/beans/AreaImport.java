@@ -27,4 +27,6 @@ public class AreaImport{
 	private Map<String,String> exits;
 	@Singular
 	private List<ItemInstanceImport> items;
+	@Singular
+	private List<NonPlayerCharacterImport> enemies;
 }

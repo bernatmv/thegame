@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * @author afarre
  */
-public class MoveMessageTest  extends IsMessageTest<MoveMessage>{
+public class MoveMessageTest extends IsMessageTest<MoveMessage>{
 
 	@Override
 	public Class<MoveMessage> getMessageClass() {

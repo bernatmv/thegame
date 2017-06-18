@@ -21,7 +21,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
  *
  * @author afarre
  */
-public abstract class BaseImportTest {
+public abstract class BaseImportTest{
 	
 	private final Path messagesPath;
 	private final Genson genson;

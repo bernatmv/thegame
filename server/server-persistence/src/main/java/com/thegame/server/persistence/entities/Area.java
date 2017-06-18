@@ -41,8 +41,7 @@ public class Area implements Serializable{
 
 	@OneToMany(mappedBy="id.area",targetEntity=AreaItem.class,cascade=CascadeType.PERSIST)
   	private List<AreaItem> items;
-	
-	//private List<String> players;
-	//private List<String> enemies;
-	//private List<String> npcs;
+
+	@OneToMany(mappedBy="area",targetEntity=NonPlayerCharacter.class)
+  	private List<NonPlayerCharacter> enemies;
 }

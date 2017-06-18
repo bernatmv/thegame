@@ -17,6 +17,11 @@ public enum EngineExceptionType implements ExceptionType{
 	PLAYER_ALREADY_REGISTERED("Player {} is already registered"),
 	PLAYER_NOT_REGISTERED("Player {} not registered"),
 
+	RACE_NOT_EXIST("Race {} not exist"),
+	
+	NONPLAYER_NOT_EXIST("Non-player {} not exist"),
+	NONPLAYER_UNCONSOLIDABLE("Non-player {} unable to be consolidated"),
+
 	AREA_NOT_EXIST("Area {} not exist"),
 	NO_AREA_EXIT("Area {} hasn't any {} exit"),
 

@@ -4,15 +4,17 @@ import com.thegame.server.engine.intern.EngineServiceFactory;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.services.LocationService;
 import com.thegame.server.engine.intern.services.MessageMapperService;
+import com.thegame.server.engine.intern.services.NonPlayerService;
 import com.thegame.server.engine.intern.services.PlayerService;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
+import com.thegame.server.engine.intern.services.impl.NonPlayerServiceImpl;
 import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import com.thegame.server.engine.messages.output.AreaMessageBean;
 import com.thegame.server.engine.messages.IsMessageBean;
 import com.thegame.server.engine.messages.output.PlayerMessageBean;
 import com.thegame.server.engine.messages.input.RegisterPlayerMessageBean;
 import com.thegame.server.persistence.LocationDao;
-import com.thegame.server.persistence.entities.Area;
+import com.thegame.server.persistence.dtos.LocationArea;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -27,9 +29,10 @@ import org.mockito.Mockito;
 /**
  * @author afarre
  */
-public class RegisterPlayerTaskTest {
+public class RegisterPlayerTaskTest{
 	
 	private PlayerService playerService;
+	private NonPlayerService nonPlayerService;
 	private LocationService locationService;
 	private Queue<IsMessageBean> messages;
 	private Consumer<IsMessageBean> playerChannel;
@@ -37,15 +40,17 @@ public class RegisterPlayerTaskTest {
 	@Before
 	public void setUp(){
 		LocationDao mocketLocationDao=Mockito.mock(LocationDao.class);
-		Area area=new Area();
-		area.setId(Configuration.INITIAL_AREA.getValue());
-		area.setTitle("Initial area");
-		area.setDescription("Initial area - Description");
-		area.setExits(Collections.emptyList());
-		area.setItems(Collections.emptyList());
+		LocationArea area=LocationArea.builder()
+				.id(Configuration.INITIAL_AREA.getValue())
+				.title("Initial area")
+				.description("Initial area - Description")
+				.exits(Collections.emptyMap())
+				.items(Collections.emptyList())
+				.build();
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService);
+		this.nonPlayerService=new NonPlayerServiceImpl();
+		this.locationService=new LocationServiceImpl(mocketLocationDao,this.playerService,this.nonPlayerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 	}

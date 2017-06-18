@@ -2,8 +2,14 @@ package com.thegame.server.engine.intern.services;
 
 import com.thegame.server.engine.intern.data.AreaData;
 import com.thegame.server.engine.intern.data.ItemData;
-import com.thegame.server.persistence.entities.Area;
-import com.thegame.server.persistence.entities.Item;
+import com.thegame.server.engine.intern.data.NonPlayerData;
+import com.thegame.server.engine.intern.data.RaceData;
+import com.thegame.server.engine.messages.common.Gender;
+import com.thegame.server.persistence.entities.NonPlayerCharacter;
+import com.thegame.server.persistence.entities.Race;
+import com.thegame.server.persistence.dtos.LocationArea;
+import com.thegame.server.persistence.dtos.LocationItem;
+import java.util.Optional;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -17,26 +23,29 @@ public interface DataMapperService {
 	
 	public static final DataMapperService instance=Mappers.getMapper(DataMapperService.class);
 
-	@Mappings({
-		@Mapping(target="gender",expression="java(com.thegame.server.engine.messages.common.Gender.valueOf(_entity.getGender()))"),
-		@Mapping(target="name",source="_name"),
-	})
-	public ItemData toData(final Item _entity,final String _name);
+	
+	public default Gender convertGender(final char _entity){
+		return Optional.ofNullable(_entity)
+							.map(entity -> Gender.valueOf(entity))
+							.orElse(Gender.none);
+	}
+	
+	
+	public RaceData toData(final Race _entity);
 	
 	@Mappings({
-		@Mapping(target="exits",expression="java( _entity.getExits()"
-															+ ".stream()"
-															+ ".filter(areaExit -> areaExit!=null)"
-															+ ".collect(java.util.stream.Collectors.toMap("
-																	+ "areaExit -> areaExit.getId().getName(),"
-																	+ "areaExit -> areaExit.getToArea().getId())))"),
-		@Mapping(target="items",expression="java( _entity.getItems()"
-															+ ".stream()"
-															+ ".filter(areaItem -> areaItem!=null)"
-															+ ".map(areaItem -> toData(areaItem.getId().getItem(),areaItem.getId().getName()))"
-															+ ".collect(java.util.stream.Collectors.toList()))"),
-		@Mapping(target="players",expression="java(new java.util.concurrent.CopyOnWriteArrayList())"),
-		@Mapping(target="listeners",expression="java(new java.util.concurrent.CopyOnWriteArrayList())")
+		@Mapping(target="gender",expression="java(convertGender(_entity.getGender()))"),
 	})
-	public AreaData toData(final Area _entity);
+	public ItemData toData(final LocationItem _entity);
+	@Mappings({
+		@Mapping(target="players",expression="java(new java.util.concurrent.CopyOnWriteArrayList())"),
+		@Mapping(target="listeners",expression="java(new java.util.concurrent.CopyOnWriteArrayList())"),
+	})
+	public AreaData toData(final LocationArea _entity);
+	
+	@Mappings({
+		@Mapping(target="gender",expression="java(convertGender(_entity.getGender()))"),
+		@Mapping(target="race",expression="java(_entity.getRace().getId())"),
+	})
+	public NonPlayerData toData(final NonPlayerCharacter _entity);
 }

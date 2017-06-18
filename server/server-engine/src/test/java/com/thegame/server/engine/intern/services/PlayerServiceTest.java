@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * @author afarre
  */
-public class PlayerServiceTest {
+public class PlayerServiceTest{
 	
 	private PlayerService instance;
 	private Queue<IsMessageBean> messages;

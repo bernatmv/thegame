@@ -32,7 +32,6 @@
 								+ '<td style="word-wrap: break-word">' + $message.val()+ '</td></tr>');
 		$messageWindow.append($messageLine);
 		wsocket.send($message.val());
-		$message.val('').focus();
 	}
  
 	function connect() {

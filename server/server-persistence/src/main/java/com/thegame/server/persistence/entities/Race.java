@@ -2,18 +2,26 @@ package com.thegame.server.persistence.entities;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author afarre
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="RACE")
 public class Race implements Serializable{
@@ -30,15 +38,23 @@ public class Race implements Serializable{
 	@Column(name = "PLURAL",length=64)
 	private String plural;
 	
-	@Column(name = "HEALTHBASE")
-	private int healthBase;
-	@Column(name = "HEALTHPERLEVEL")
-	private double healthPerLevel;
+	@AttributeOverrides({
+		@AttributeOverride(name="base",column=@Column(name="HEALTHBASE")),
+		@AttributeOverride(name="incrementPerLevel",column=@Column(name="HEALTHPERLEVEL")),
+    })
+	private RaceStat health;
 
-	@Column(name = "MAGICBASE",length=64)
-	private int magicBase;
-	@Column(name = "MAGICPERLEVEL",length=64)
-	private double magicPerLevel;
+	@AttributeOverrides({
+		@AttributeOverride(name="base",column=@Column(name="MAGICBASE")),
+		@AttributeOverride(name="incrementPerLevel",column=@Column(name="MAGICPERLEVEL")),
+    })
+	private RaceStat magic;
+	
+	@AttributeOverrides({
+		@AttributeOverride(name="base",column=@Column(name="STAMINABASE")),
+		@AttributeOverride(name="incrementPerLevel",column=@Column(name="STAMINAPERLEVEL")),
+    })
+	private RaceStat stamina;
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@Column(name = "CHATTER",length=64)

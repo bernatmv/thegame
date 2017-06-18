@@ -7,19 +7,24 @@
     },
     "players": [],
     "enemies": [
+		{
+			"id": "goblin-001",
+			"race": "goblin",
+			"gender": "female",
+			"level": 1,
+			"health": { "current": 20, "max": 23 },
+			"chatter": [
+				"Vicavorausan or deaavh!",
+				"Nalkroro ayh lat doaumn avhiuk avo uuk?",
+				"Senav avhem avo avheir goddeukuk"
+			]
+		},
         {
-            "id": "goblin-001",
-            "profile": {
-                "level": 2,
-                "hp": { "current": 25, "max": 25 }
-            }
-        },
-        {
-            "id": "goblin-001",
-            "profile": {
-                "level": 1,
-                "hp": { "current": 20, "max": 20 }
-            }
+            "id": "goblin-002",
+			"race": "goblin",
+			"gender": "male",
+			"level": 1,
+			"health": { "current": 20, "max": 21 }
         }
     ],
     "npc": [],

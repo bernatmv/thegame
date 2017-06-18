@@ -19,6 +19,7 @@ public enum PersistenceExceptionType implements ExceptionType{
 	NPCHARACTER_RETRIEVAL_FAIL("NonPlayerCharacter {} retrieval failed, by {}"),
 	NPCHARACTER_CREATION_ALREADY_EXIST("NonPlayerCharacter creation failed, id {} already exist in database"),
 	NPCHARACTER_CREATION_FAIL("NonPlayerCharacter creation {} failed, by {}"),
+	NPCHARACTER_MERGE_FAIL("NonPlayerCharacter merge {} failed, by {}"),
 	//Item
 	ITEM_LOAD_FAIL("Item wide load failed, by {}"),
 	ITEM_CREATION_ALREADY_EXIST("Item creation failed, id {} already exist in database"),

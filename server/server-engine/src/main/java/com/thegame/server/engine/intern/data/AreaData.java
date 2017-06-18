@@ -30,6 +30,8 @@ public class AreaData {
 	@Singular
 	private List<String> players;
 	@Singular
+	private List<String> enemies;
+	@Singular
 	private List<Consumer<IsMessageBean>> listeners;
 
 	

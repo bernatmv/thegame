@@ -7,6 +7,10 @@ public enum Gender {
 
 	male('M'),
 	female('F'),
+	herm('H'),
+	neutral('T'),
+	none('N'),
+	other('X'),
 	;
 
 	private final char code;

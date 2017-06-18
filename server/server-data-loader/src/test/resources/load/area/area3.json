@@ -1,0 +1,30 @@
+{
+	"id": "beta-room-002",
+	"title": "roomBeta001Title",
+	"description": "roomBeta001Description",
+	"exits": {
+		"north": "beta-room-002",
+		"south": "beta-room-002"
+	},
+    "items": [],
+    "enemies": [
+        {
+            "id": "goblin-001",
+			"name": "Big G",
+			"gender": "female",
+			"race" : "goblin",
+			"level": 2,
+			"health": { "current": 25, "max": 25 },
+			"chatter": []
+        },
+        {
+            "id": "goblin-002",
+			"name": "Little G",
+			"gender": "male",
+			"race" : "goblin",
+			"level": 1,
+			"health": { "current": 20, "max": 20 },
+			"chatter": []
+        }
+    ]
+}

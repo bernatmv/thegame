@@ -10,5 +10,6 @@
             "id": "chicken-001",
             "name": "Pascual"
         }
-    ]
+    ],
+	"enemies": []
 }

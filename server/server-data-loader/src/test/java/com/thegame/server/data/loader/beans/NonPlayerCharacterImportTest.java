@@ -1,5 +1,6 @@
 package com.thegame.server.data.loader.beans;
 
+import com.thegame.server.engine.messages.common.Gender;
 import java.util.Optional;
 
 /**
@@ -21,11 +22,16 @@ public class NonPlayerCharacterImportTest extends BaseImportTest{
 									.id("goblin-01")
 									.name("manolo")
 									.race("goblin")
+									.gender(Gender.herm)
 									.level(3)
-									.health(20)
-									.currentHealth(15)
-									.magic(5)
-									.currentMagic(2)
+									.health(CharacterStatImport.builder()
+														.max(20)
+														.current(15)
+														.build())
+									.magic(CharacterStatImport.builder()
+														.max(5)
+														.current(2)
+														.build())
 									.chat("Vicavorausan or deaavh!")
 									.chat("Inavruderuk, drepa avhem!")
 									.chat("Proavecav avhe milambak!")

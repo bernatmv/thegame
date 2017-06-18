@@ -1,6 +1,5 @@
 package com.thegame.server.engine.messages.common;
 
-import com.thegame.server.engine.messages.IsMessageBean;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +15,7 @@ import lombok.Singular;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemBean implements IsMessageBean{
+public class ItemBean{
 
 	@NonNull
 	private String id;

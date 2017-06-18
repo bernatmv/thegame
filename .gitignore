@@ -47,3 +47,6 @@ client/.npm
 /server/server-client-dummie/target/
 /server/server-data-loader/target/
 /server/server-data-loader/data/
+/server/server-data-loader/nbproject/
+/server/target/
+/target/

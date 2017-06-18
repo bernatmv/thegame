@@ -16,6 +16,7 @@ public interface CharacterDao extends JPAPersistenceDao{
 	public List<Race> loadRaces();
 
 	public void saveCharacter(final NonPlayerCharacter _character);
+	public void mergeCharacter(final NonPlayerCharacter _character);
 	public NonPlayerCharacter getCharacter(final String _characterId);
 	public List<NonPlayerCharacter> loadCharacters();
 }

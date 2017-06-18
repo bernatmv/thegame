@@ -3,10 +3,12 @@ package com.thegame.server.data.loader;
 import com.owlike.genson.Genson;
 import com.owlike.genson.GensonBuilder;
 import com.thegame.server.common.functional.LambdaUtils;
+import com.thegame.server.common.functional.Tuple;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.common.reflection.PackageUtils;
 import com.thegame.server.data.loader.beans.AreaImport;
 import com.thegame.server.data.loader.beans.ItemImport;
+import com.thegame.server.data.loader.beans.NonPlayerCharacterImport;
 import com.thegame.server.data.loader.beans.RaceImport;
 import com.thegame.server.data.loader.services.ImportMapperService;
 import com.thegame.server.engine.intern.configuration.Configuration;
@@ -24,6 +26,7 @@ import com.thegame.server.persistence.entities.Race;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.thegame.server.persistence.CharacterDao;
+import com.thegame.server.persistence.entities.NonPlayerCharacter;
 
 /**
  * @author afarre
@@ -74,19 +77,27 @@ public class DataLoader {
 			.peek(bytes -> logger.finest("database-initializer::initialize::{}::content-size::{}",_resourceType,bytes.length));
 	}
 
+	protected Stream<RaceImport> loadRaces() throws IOException{
+		return loadResources("races",Race.class.getSimpleName())
+			.map(bytes -> this.genson.deserialize(bytes, RaceImport.class))
+			.peek(raceImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Race.class.getSimpleName(),raceImport))
+			.filter(raceImport -> raceImport!=null);
+	}
+	protected Stream<NonPlayerCharacterImport> loadNPCs() throws IOException{
+		return loadResources("rooms",Area.class.getSimpleName())
+			.map(bytes -> this.genson.deserialize(bytes, AreaImport.class))
+			.filter(areaImport -> areaImport!=null)
+			.flatMap(areaImport -> areaImport.getEnemies()
+													.stream()
+													.peek(nonPlayerCharacterImport -> nonPlayerCharacterImport.setArea(areaImport.getId())))
+			.peek(nonPlayerCharacterImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",AreaImport.class.getSimpleName(),nonPlayerCharacterImport));
+	}
 	protected Stream<ItemImport> loadItems() throws IOException{
 		return loadResources("items",Item.class.getSimpleName())
 			.map(bytes -> this.genson.deserialize(bytes, ItemImport.class))
 			.peek(itemImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Item.class.getSimpleName(),itemImport))
 			.filter(itemImport -> itemImport!=null);
 	}
-	protected Stream<RaceImport> loadRaces() throws IOException{
-		return loadResources("races",Item.class.getSimpleName())
-			.map(bytes -> this.genson.deserialize(bytes, RaceImport.class))
-			.peek(raceImport -> logger.finest("database-initializer::initialize::{}::parsed::{}",Race.class.getSimpleName(),raceImport))
-			.filter(raceImport -> raceImport!=null);
-	}
-	
 	protected Stream<AreaImport> loadAreas() throws IOException{
 		return loadResources("rooms",Area.class.getSimpleName())
 			.map(bytes -> this.genson.deserialize(bytes, AreaImport.class))
@@ -94,7 +105,7 @@ public class DataLoader {
 			.filter(areaImport -> areaImport!=null);
 	}
 	
-	public void initialize(){
+	public void load(){
 
 		try {
 			logger.trace("database-initializer::initialize::begin");
@@ -111,11 +122,17 @@ public class DataLoader {
 				.forEach(itemEntity -> resourceDao.saveItem(itemEntity));
 			logger.info("database-initializer::initialize::{}::done",Item.class.getSimpleName());
 			loadAreas()
-				.map(areaImport -> ImportMapperService.instance.toEntity(areaImport))
-				.peek(areaEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",Area.class.getSimpleName(),areaEntity))
-				.filter(areaEntity -> areaEntity!=null)
-				.forEach(areaEntity -> locationDao.saveArea(areaEntity));
+				.map(areaImport -> new Tuple<>(areaImport,ImportMapperService.instance.toEntity(areaImport)))
+				.peek(areaTuple -> logger.finest("database-initializer::initialize::{}::entity::{}",Area.class.getSimpleName(),areaTuple.getObject2()))
+				.filter(areaTuple -> areaTuple.getObject2()!=null)
+				.forEach(areaTuple -> locationDao.saveArea(areaTuple.getObject2()));
 			logger.info("database-initializer::initialize::{}::done",Area.class.getSimpleName());
+			loadNPCs()
+				.map(NonPlayerCharacterImport -> ImportMapperService.instance.toEntity(NonPlayerCharacterImport))
+				.peek(npcEntity -> logger.finest("database-initializer::initialize::{}::entity::{}",NonPlayerCharacter.class.getSimpleName(),npcEntity))
+				.filter(npcEntity -> npcEntity!=null)
+				.forEach(npcEntity -> playersDao.saveCharacter(npcEntity));
+			logger.info("database-initializer::initialize::{}::done",NonPlayerCharacter.class.getSimpleName());
 			loadAreas()
 				.flatMap(areaImport -> areaImport
 										.getExits()

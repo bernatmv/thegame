@@ -21,10 +21,9 @@ public class RaceImport{
 	private String id;
 	private String singular;
 	private String plural;
-	private int healthBase;
-	private double healthPerLevel;
-	private int magicBase;
-	private double magicPerLevel;
+	private RaceStatImport health;
+	private RaceStatImport magic;
+	private RaceStatImport stamina;
 	@Singular("chat")
 	private Set<String> chatter;
 }

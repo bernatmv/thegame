@@ -4,6 +4,7 @@ import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
 import com.thegame.server.engine.intern.configuration.Configuration;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
+import com.thegame.server.engine.intern.services.impl.NonPlayerServiceImpl;
 import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import com.thegame.server.engine.messages.IsMessageBean;
 import com.thegame.server.engine.messages.common.Gender;
@@ -13,13 +14,8 @@ import com.thegame.server.engine.messages.output.PlayerEnteringAreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerExitingAreaMessageBean;
 import com.thegame.server.engine.messages.output.PlayerMessageBean;
 import com.thegame.server.persistence.LocationDao;
-import com.thegame.server.persistence.entities.Area;
-import com.thegame.server.persistence.entities.AreaExit;
-import com.thegame.server.persistence.entities.AreaExitId;
-import com.thegame.server.persistence.entities.AreaItem;
-import com.thegame.server.persistence.entities.AreaItemId;
-import com.thegame.server.persistence.entities.Item;
-import java.util.ArrayList;
+import com.thegame.server.persistence.dtos.LocationArea;
+import com.thegame.server.persistence.dtos.LocationItem;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -35,72 +31,52 @@ import org.mockito.Mockito;
 /**
  * @author afarre
  */
-public class LocationServiceTest {
+public class LocationServiceTest{
 	
 	private LocationService instance;
 	private PlayerService playerService;
+	private NonPlayerService nonPlayerService;
 	private Queue<IsMessageBean> messages;
 	private Consumer<IsMessageBean> playerChannel;
 	
 	@Before
 	public void setup(){
 		LocationDao mocketLocationDao=Mockito.mock(LocationDao.class);
-		Area area1=Area.builder()
+		LocationArea area1=LocationArea.builder()
 						.id(Configuration.INITIAL_AREA.getValue())
 						.title("Room-001 area")
-						.exits(new ArrayList<>())
+						.exit("north","beta-room-002")
+						.exit("south","beta-room-003")
 						.description("Room-001 area - Description")
-						.build();
-		area1.setItems(
-			Stream.of(AreaItem.builder()
-								.id(AreaItemId.builder()
-									.area(area1)
+						.item(LocationItem.builder()
+									.id("area-item-id")
 									.name("area-item-name")
-									.item(Item.builder()
-												.id("area-item-id")
-												.alive(true)
-												.description("area-item-description")
-												.gender('F')
-												.plural("area-item-id-plural")
-												.singular("area-item-id-singular")
-												.chatter(Stream.of("Choooo!").collect(Collectors.toSet()))
-												.build())
+									.alive(true)
+									.description("area-item-description")
+									.gender('F')
+									.plural("area-item-id-plural")
+									.singular("area-item-id-singular")
+									.chatter(Stream.of("Choooo!").collect(Collectors.toSet()))
 									.build())
-								.build())
-			.collect(Collectors.toList()));
-		Area area2=Area.builder()
+						.build();
+		LocationArea area2=LocationArea.builder()
 						.id("beta-room-002")
 						.title("Room-002 area")
-						.exits(new ArrayList<>())
+						.exits(Collections.emptyMap())
 						.description("Room-002 area - Description")
 						.items(Collections.emptyList())
 						.build();
-		Area area3=Area.builder()
+		LocationArea area3=LocationArea.builder()
 						.id("beta-room-003")
 						.title("Room-003 area")
-						.exits(new ArrayList<>())
+						.exits(Collections.emptyMap())
 						.description("Room-003 area - Description")
 						.items(Collections.emptyList())
 						.build();
-		AreaExit areaExit1=AreaExit.builder()
-						.id(AreaExitId.builder()
-										.area(area1)
-										.name("north")
-										.build())
-						.toArea(area2)
-						.build();
-		AreaExit areaExit2=AreaExit.builder()
-						.id(AreaExitId.builder()
-										.area(area1)
-										.name("south")
-										.build())
-						.toArea(area3)
-						.build();
-		area1.getExits().add(areaExit1);
-		area1.getExits().add(areaExit2);
 		Mockito.when(mocketLocationDao.loadAreas()).thenReturn(Stream.of(area1,area2,area3).collect(Collectors.toList()));
 		this.playerService=new PlayerServiceImpl();
-		instance=new LocationServiceImpl(mocketLocationDao,playerService);
+		this.nonPlayerService=new NonPlayerServiceImpl();
+		instance=new LocationServiceImpl(mocketLocationDao,playerService,nonPlayerService);
 		this.messages=new LinkedList<>();
 		this.playerChannel=messageBean -> this.messages.add(messageBean);
 	}
