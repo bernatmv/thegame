@@ -13,7 +13,7 @@ import com.thegame.server.presentation.mappers.OutputMessageMapper;
 /**
  * @author afarre
  */
-public class MessageMapperTest {
+public class MessageMapperTest2 {
 	
 	/**
 	 * Test of chatMessateToBean method, of class ChatMessageMapper.
