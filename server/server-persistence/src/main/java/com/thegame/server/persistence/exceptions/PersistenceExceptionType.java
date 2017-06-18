@@ -25,10 +25,6 @@ public enum PersistenceExceptionType implements ExceptionType{
 	ITEM_CREATION_ALREADY_EXIST("Item creation failed, id {} already exist in database"),
 	ITEM_CREATION_FAIL("Item creation {} failed, by {}"),
 	//Area
-	ITEM_LOAD_FAIL("Item wide load failed, by {}"),
-	ITEM_CREATION_ALREADY_EXIST("Item creation failed, id {} already exist in database"),
-	ITEM_CREATION_FAIL("Item creation {} failed, by {}"),
-	//Area
 	AREA_LOAD_FAIL("Area wide load failed, by {}"),
 	AREA_CREATION_ALREADY_EXIST("Area creation failed, id {} already exist in database"),
 	AREA_CREATION_FAIL("Area creation {} failed, by {}"),
