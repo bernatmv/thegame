@@ -2,11 +2,11 @@
     "id": "chicken-001",
     "name": null,
     "description": "itemChickenDescription",
-    "isAlive": true,
+    "alive": true,
     "gender": "male",
     "singular": "itemChickenSingular",
     "plural": "itemChickenPlural",
-    "chatter": [
+    "chatters": [
         "cooooo!"
     ]
 }

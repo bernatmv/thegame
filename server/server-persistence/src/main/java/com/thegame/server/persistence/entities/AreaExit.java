@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="AREAEXIT",indexes={
-	@Index(name = "IDX_FKAREA", columnList ="FKAREA",  unique = false),
-	@Index(name = "IDX_FKTOAREA", columnList ="FKTOAREA",  unique = false),
+	@Index(name = "IDX_EXIT_FKAREA", columnList ="FKAREA",  unique = false),
+	@Index(name = "IDX_EXIT_FKTOAREA", columnList ="FKTOAREA",  unique = false),
 })
 public class AreaExit implements Serializable{
 

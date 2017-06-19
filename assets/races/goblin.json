@@ -1,0 +1,15 @@
+{
+	"id": "goblin",
+	"singular": "goblin",
+	"plural": "goblins",
+	"health": { "base":15, "incrementPerLevel": 3.0},
+	"magic": { "base":0, "incrementPerLevel": 0.4},
+	"stamina": { "base":10, "incrementPerLevel": 1},
+    "chatter": [
+        "Vicavorausan or deaavh!",
+        "Inavruderuk, drepa avhem!",
+        "Proavecav avhe milambak!",
+        "Nalkroro ayh lat doaumn avhiuk avo uuk?",
+        "Senav avhem avo avheir goddeukuk"
+    ]	
+}

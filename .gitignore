@@ -38,9 +38,15 @@ client/.npm
 /server/server-persistence/target/
 /server/server-presentation/target/
 /server/server-artifact/target/
-/server/server-client/target/
-npm-debug.log
+/server/server-client/target/npm-debug.log
 /server/server-persistence/nbproject/
 /server/server-engine/nbproject/
 /server/server-application/data/
 /server/server-artifact/data/
+/client/nbproject/private/
+/server/server-client-dummie/target/
+/server/server-data-loader/target/
+/server/server-data-loader/data/
+/server/server-data-loader/nbproject/
+/server/target/
+/target/

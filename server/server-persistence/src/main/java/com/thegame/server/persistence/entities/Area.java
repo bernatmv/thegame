@@ -2,9 +2,9 @@ package com.thegame.server.persistence.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,11 +36,12 @@ public class Area implements Serializable{
 	@Column(name = "DESCRIPTION",length=2048)
 	private String description;
 
-	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="id.area",targetEntity=AreaExit.class)
   	private List<AreaExit> exits;
-	
-	//private List<String> players;
-	//private List<String> enemies;
-	//private List<String> npcs;
-	//private List<String> items;				
+
+	@OneToMany(mappedBy="id.area",targetEntity=AreaItem.class,cascade=CascadeType.PERSIST)
+  	private List<AreaItem> items;
+
+	@OneToMany(mappedBy="area",targetEntity=NonPlayerCharacter.class)
+  	private List<NonPlayerCharacter> enemies;
 }

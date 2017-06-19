@@ -19,10 +19,23 @@
 		</dependency>
 		<dependency>
 			<groupId>com.thegame.server</groupId>
+			<artifactId>server-data-loader</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thegame.server</groupId>
 			<artifactId>server-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+		<!-- project test dependencies -->
+		<dependency>
+			<groupId>com.thegame.server</groupId>
+			<artifactId>server-common</artifactId>
+			<version>${project.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- external dependencies -->
 		<dependency>
 			<groupId>io.undertow</groupId>

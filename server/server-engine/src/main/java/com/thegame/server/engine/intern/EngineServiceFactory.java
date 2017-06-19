@@ -3,6 +3,8 @@ package com.thegame.server.engine.intern;
 import com.thegame.server.common.logging.LogStream;
 import com.thegame.server.engine.exceptions.EngineException;
 import com.thegame.server.engine.exceptions.EngineExceptionType;
+import com.thegame.server.engine.intern.services.DataClonerService;
+import com.thegame.server.engine.intern.services.DataMapperService;
 import com.thegame.server.engine.intern.services.impl.ChatServiceImpl;
 import com.thegame.server.engine.intern.services.impl.ConfigurationServiceImpl;
 import com.thegame.server.engine.intern.services.impl.LocationServiceImpl;
@@ -10,7 +12,9 @@ import com.thegame.server.engine.intern.services.impl.PlayerServiceImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.stream.Stream;
-import com.thegame.server.engine.intern.services.MapperService;
+import com.thegame.server.engine.intern.services.MessageMapperService;
+import com.thegame.server.engine.intern.services.impl.CharacterServiceImpl;
+import com.thegame.server.engine.intern.services.impl.NonPlayerServiceImpl;
 
 /**
  * @author e103880
@@ -21,7 +25,11 @@ public enum EngineServiceFactory {
 	PLAYER(PlayerServiceImpl.class,true),
 	LOCATION(LocationServiceImpl.class,true),
 	CHAT(ChatServiceImpl.class,true),
-	MAPPER(MapperService.instance.getClass(),true),
+	CHARACTER(CharacterServiceImpl.class,true),
+	DATAMAPPER(DataMapperService.instance.getClass(),true),
+	DATACLONER(DataClonerService.instance.getClass(),true),
+	MESSAGEMAPPER(MessageMapperService.instance.getClass(),true),
+	NONPLAYER(NonPlayerServiceImpl.class,true),
 	;
 	
 	private static final LogStream logger=LogStream.getLogger(EngineServiceFactory.class);
@@ -29,18 +37,13 @@ public enum EngineServiceFactory {
 	private Object instance;
 	private final Class<?> implementation;
 	private final boolean singleton;
-	private final boolean crossProcessSingleton;
 	
 	EngineServiceFactory(final Class<?> _implementation){
-		this(_implementation,false,false);
+		this(_implementation,false);
 	}
 	EngineServiceFactory(final Class<?> _implementation,final boolean _singleton){
-		this(_implementation,_singleton,false);
-	}
-	EngineServiceFactory(final Class<?> _implementation,final boolean _singleton,final boolean _crossProcessSingleton){
 		this.implementation=_implementation;
 		this.singleton=_singleton;
-		this.crossProcessSingleton=_crossProcessSingleton;
 		this.instance=null;
 	}
 	
