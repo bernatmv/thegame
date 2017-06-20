@@ -6,7 +6,7 @@
     "gender": "male",
     "singular": "itemChickenSingular",
     "plural": "itemChickenPlural",
-    "chatters": [
+    "chatter": [
         "cooooo!"
     ]
 }

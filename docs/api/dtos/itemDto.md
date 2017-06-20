@@ -9,7 +9,7 @@ interface ItemDto {
     gender: string;
     singular: string;
     plural: string;
-    chatters: Array<string>;
+    chatter: Array<string>;
 }
 ```
 

@@ -3,14 +3,12 @@ package com.thegame.server.persistence.impl;
 import com.thegame.server.persistence.entities.Race;
 import com.thegame.server.persistence.exceptions.PersistenceException;
 import com.thegame.server.persistence.exceptions.PersistenceExceptionType;
-import com.thegame.server.persistence.support.JPASessionManager;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import javax.persistence.TypedQuery;
 import com.thegame.server.persistence.CharacterDao;
 import com.thegame.server.persistence.entities.NonPlayerCharacter;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author afarre
@@ -20,23 +18,11 @@ public class CharacterDaoImpl implements CharacterDao{
 	@Override
 	public void saveRace(final Race _race) {
 		
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
+		transactional(entityManager -> {
 				Optional.ofNullable(entityManager.find(Race.class, _race.getId()))
-					.ifPresent(area -> {throw new PersistenceException(PersistenceExceptionType.RACE_CREATION_ALREADY_EXIST,area.getId());});
+					.ifPresent(race -> {throw new PersistenceException(PersistenceExceptionType.RACE_CREATION_ALREADY_EXIST,race.getId());});
 				entityManager.persist(_race);
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.RACE_CREATION_FAIL,_race);
-			}
-		}
+			});
 	}
 	
 	@Override
@@ -44,22 +30,8 @@ public class CharacterDaoImpl implements CharacterDao{
 
 		Race reply;
 		
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
-				reply=Optional.ofNullable(entityManager.find(Race.class, _raceId))
-					.orElseThrow(() -> {throw new PersistenceException(PersistenceExceptionType.RACE_NOT_EXIST,_raceId);});
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.RACE_RETRIEVAL_FAIL,_raceId);
-			}
-		}
+		reply=transactional(entityManager -> entityManager.find(Race.class, _raceId),Race.class)
+			.orElseThrow(() -> new PersistenceException(PersistenceExceptionType.RACE_NOT_EXIST,_raceId));
 		
 		return reply;
 	}
@@ -69,26 +41,16 @@ public class CharacterDaoImpl implements CharacterDao{
 
 		List<Race> reply;
 		
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
-				final TypedQuery<Race> query=entityManager.createQuery("select selected from Race as selected",Race.class);
-				reply=Optional.ofNullable(query.getResultList())
+		reply=transactional(
+					entityManager -> Optional.ofNullable(
+								entityManager.createQuery("select selected from Race as selected",Race.class)
+												.getResultList())
 						.orElse(Collections.emptyList())
 						//Hibernate can not recover eagerly more than one bag, we perform the recovery manuallly
 						.stream()
-						.collect(Collectors.toList());
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.RACE_LOAD_FAIL);
-			}
-		}
+													.collect(Collectors.toList())
+					,List.class)
+				.orElse(Collections.emptyList());
 		
 		return reply;
 	}
@@ -96,65 +58,26 @@ public class CharacterDaoImpl implements CharacterDao{
 	@Override
 	public void saveCharacter(final NonPlayerCharacter _character){
 
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
+		transactional(entityManager -> {
 				Optional.ofNullable(entityManager.find(NonPlayerCharacter.class, _character.getId()))
 					.ifPresent(nonPlayerCharacter -> {throw new PersistenceException(PersistenceExceptionType.NPCHARACTER_CREATION_ALREADY_EXIST,nonPlayerCharacter.getId());});
 				entityManager.persist(_character);
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.NPCHARACTER_CREATION_FAIL,_character);
+				});
 			}
-		}
-	}
 
 	@Override
 	public void mergeCharacter(final NonPlayerCharacter _character){
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
-				entityManager.merge(_character);
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.NPCHARACTER_MERGE_FAIL,_character);
+
+		transactional(entityManager -> entityManager.merge(_character));
 			}
-		}
-	}
 
 	@Override
 	public NonPlayerCharacter getCharacter(final String _characterId){
 
 		NonPlayerCharacter reply;
 		
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
-				reply=Optional.ofNullable(entityManager.find(NonPlayerCharacter.class, _characterId))
-					.orElseThrow(() -> {throw new PersistenceException(PersistenceExceptionType.NPCHARACTER_NOT_EXIST,_characterId);});
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.NPCHARACTER_RETRIEVAL_FAIL,_characterId);
-			}
-		}
+		reply=transactional(entityManager -> entityManager.find(NonPlayerCharacter.class, _characterId),NonPlayerCharacter.class)
+					.orElseThrow(() -> new PersistenceException(PersistenceExceptionType.NPCHARACTER_NOT_EXIST,_characterId));
 		
 		return reply;
 	}
@@ -164,27 +87,17 @@ public class CharacterDaoImpl implements CharacterDao{
 
 		List<NonPlayerCharacter> reply;
 		
-		try(JPASessionManager entityManager=createEntityManager()){
-			try{
-				entityManager.getTransaction().begin();
-				final TypedQuery<NonPlayerCharacter> query=entityManager.createQuery("select selected from NonPlayerCharacter as selected",NonPlayerCharacter.class);
-				reply=Optional.ofNullable(query.getResultList())
+		reply=transactional(entityManager -> 
+					Optional.ofNullable(
+						entityManager.createQuery("select selected from NonPlayerCharacter as selected",NonPlayerCharacter.class)
+							.getResultList())
 						.orElse(Collections.emptyList())
 						.stream()
 						//When session is closed all lazy relations raises an exception when accessed, also the id
 						.peek(character -> character.setRace(Race.builder().id(character.getRace().getId()).build()))
-						.collect(Collectors.toList());
-				entityManager.getTransaction().commit();
-			}catch(PersistenceException e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw e;
-			}catch(Throwable e){
-				if(entityManager.getTransaction().isActive())
-					entityManager.getTransaction().rollback();
-				throw new PersistenceException(e,PersistenceExceptionType.NPCHARACTER_LOAD_FAIL);
-			}
-		}
+								.collect(Collectors.toList())
+					,List.class)
+					.orElse(Collections.emptyList());
 		
 		return reply;
 	}

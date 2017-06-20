@@ -7,6 +7,7 @@ import com.thegame.server.common.exceptions.ExceptionType;
  */
 public enum PersistenceExceptionType implements ExceptionType{
 
+	UNEXPECTED("Unexpected exceptions"),
 	//Item
 	RACE_LOAD_FAIL("Race wide load failed, by {}"),
 	RACE_NOT_EXIST("Race {} not exist in database"),
