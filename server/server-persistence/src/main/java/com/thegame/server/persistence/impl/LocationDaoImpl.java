@@ -1,7 +1,9 @@
 package com.thegame.server.persistence.impl;
 
 import com.thegame.server.common.logging.LogStream;
+import com.thegame.server.common.persistence.PersistenceSessionFactory;
 import com.thegame.server.persistence.LocationDao;
+import com.thegame.server.persistence.PersistenceUnit;
 import com.thegame.server.persistence.entities.Area;
 import com.thegame.server.persistence.entities.AreaExit;
 import com.thegame.server.persistence.exceptions.PersistenceException;
@@ -23,28 +25,33 @@ public class LocationDaoImpl implements LocationDao{
 	private static final LogStream logger=LogStream.getLogger(LocationDaoImpl.class);
 
 	@Override
+	public PersistenceSessionFactory getSessionFactory() {
+		return PersistenceUnit.THEGAME;
+	}
+
+	@Override
 	public void saveArea(final Area _area) {
 
-		transactional(entityManager -> {
-				Optional.ofNullable(entityManager.find(Area.class, _area.getId()))
-					.ifPresent(area -> {throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_ALREADY_EXIST,area.getId());});
-				entityManager.persist(_area);
-				});
+		transactional(sessionManager -> {
+			Optional.ofNullable(sessionManager.find(Area.class, _area.getId()))
+				.ifPresent(area -> {throw new PersistenceException(PersistenceExceptionType.AREA_CREATION_ALREADY_EXIST,area.getId());});
+			sessionManager.persist(_area);
+		});
 	}
 	
 	@Override
 	public void saveAreaExit(final AreaExit _areaExit) {
 		
-		transactional(entityManager -> {
-				Optional.ofNullable(entityManager.find(AreaExit.class, _areaExit.getId()))
-					.ifPresent(areaExit -> {throw new PersistenceException(PersistenceExceptionType.AREAEXIT_CREATION_ALREADY_EXIST,areaExit.getId());});
-				entityManager.persist(_areaExit);
-				});
+		transactional(sessionManager -> {
+			Optional.ofNullable(sessionManager.find(AreaExit.class, _areaExit.getId()))
+				.ifPresent(areaExit -> {throw new PersistenceException(PersistenceExceptionType.AREAEXIT_CREATION_ALREADY_EXIST,areaExit.getId());});
+			sessionManager.persist(_areaExit);
+		});
 	}
 
 	protected BiFunction<EntityManager,String,List<String>> enemiesRetrieval(){
 
-		return (entityManager,areaId) -> entityManager
+		return (sessionManager,areaId) -> sessionManager
 			.createQuery("select selected.id from NonPlayerCharacter as selected where selected.area.id=:areaId",String.class)
 			.setParameter("areaId", areaId)
 			.getResultList()
@@ -58,9 +65,9 @@ public class LocationDaoImpl implements LocationDao{
 
 		List<LocationArea> reply;
 		
-		reply=transactional(
-			entityManager -> Optional.ofNullable(
-				entityManager.createQuery("select selected from Area as selected",Area.class)
+		reply=transactional(List.class,
+			sessionManager -> Optional.ofNullable(
+				sessionManager.createQuery("select selected from Area as selected",Area.class)
 					.getResultList())
 						.orElse(Collections.emptyList())
 						//Hibernate can not recover eagerly more than one bag, we perform the recovery manuallly
@@ -92,10 +99,9 @@ public class LocationDaoImpl implements LocationDao{
 											.collect(Collectors.toMap(
 												areaExit -> areaExit.getId().getName(),
 												areaExit -> areaExit.getToArea().getId())))
-								.enemies(this.enemiesRetrieval().apply(entityManager, area.getId()))
+								.enemies(this.enemiesRetrieval().apply(sessionManager, area.getId()))
 								.build())
-						.collect(Collectors.toList())
-				,List.class)
+						.collect(Collectors.toList()))
 			.orElse(Collections.emptyList());
 		
 		return reply;

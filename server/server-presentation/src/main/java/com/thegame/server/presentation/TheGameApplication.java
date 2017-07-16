@@ -61,6 +61,11 @@ public class TheGameApplication implements IsApplication,ServletContextListener 
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent _sce) {
+		logger.trace("application::close::begin");
+		PersistenceServiceFactory.close();
+		logger.trace("application::close::database-connection");
+		logger.info("=================================================================================================================");
 		logger.info("Application undeployed");
+		logger.trace("application::close::end");
 	}
 }

@@ -24,6 +24,7 @@ public class HTTPDaemon {
 	private final Undertow server;
 	private final ServletContainer container;
 	private final PathHandler path;
+	private DeploymentInfo deployment;
 	
 	public HTTPDaemon(final String _host,final int _port,final String _name){
 		this.name=_name;
@@ -42,6 +43,8 @@ public class HTTPDaemon {
 		return this;
 	}
 	public HTTPDaemon stop(){
+		System.out.println("daemon::stop::begin");
+		this.container.removeDeployment(this.deployment);
         this.server.stop();
 		return this;
 	}
@@ -53,7 +56,7 @@ public class HTTPDaemon {
 					.setBuffers(new DefaultByteBufferPool(true, 100));
 			_application.getEndpoints().stream().forEach(endpointClass -> deploymentInfo.addEndpoint(endpointClass));
 
-			final DeploymentInfo builder = new DeploymentInfo()
+			this.deployment = new DeploymentInfo()
 					.setClassLoader(TheGameServer.class.getClassLoader())
 					.setContextPath(_application.getContext())
 					.addWelcomePage(_application.getWelcomePage())
@@ -63,7 +66,7 @@ public class HTTPDaemon {
 					.setResourceManager(new ClassPathResourceManager(TheGameServer.class.getClassLoader(), _application.getResources()))
 					.addServletContextAttribute(WebSocketDeploymentInfo.ATTRIBUTE_NAME,deploymentInfo)
 					.setDeploymentName(_application.getName()+".war");
-			final DeploymentManager manager = this.container.addDeployment(builder);
+			final DeploymentManager manager = this.container.addDeployment(this.deployment);
 			manager.deploy();
             this.path.addPrefixPath("/", manager.start());                                                                                        
 		} catch (ServletException e) {
