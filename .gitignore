@@ -50,3 +50,4 @@ client/.npm
 /server/server-data-loader/nbproject/
 /server/target/
 /target/
+/server/server-common-persistence/target/

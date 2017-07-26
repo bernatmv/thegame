@@ -1,52 +1,27 @@
 package com.thegame.server.persistence;
 
-import com.thegame.server.persistence.support.PersistenceUnitsFactory;
-import com.thegame.server.persistence.support.JPAPersistenceDao;
 import com.thegame.server.persistence.impl.LocationDaoImpl;
 import com.thegame.server.persistence.impl.CharacterDaoImpl;
 import com.thegame.server.persistence.impl.ResourceDaoImpl;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
-import javax.persistence.EntityManagerFactory;
 
 /**
  * @author e103880
  */
 public enum PersistenceServiceFactory {
 	
-	LOCATIONDAO(PersistenceUnitsFactory.THEGAME,LocationDaoImpl.class),
-	CHARACTERDAO(PersistenceUnitsFactory.THEGAME,CharacterDaoImpl.class),
-	RESOURCEDAO(PersistenceUnitsFactory.THEGAME,ResourceDaoImpl.class),
+	LOCATIONDAO(LocationDaoImpl.class),
+	CHARACTERDAO(CharacterDaoImpl.class),
+	RESOURCEDAO(ResourceDaoImpl.class),
 	;
 	
-	private final Optional<PersistenceUnitsFactory> persistenceUnit;
 	private final Class<?> implementation;
 	
 	
-	PersistenceServiceFactory(final PersistenceUnitsFactory _persistenceUnit,final Class<?> _implementation){
-		this.persistenceUnit=Optional.ofNullable(_persistenceUnit);
+	PersistenceServiceFactory(final Class<?> _implementation){
 		this.implementation=_implementation;
 	}
 	
-	
-	public String getPersistenceUnit() {
-		return this.persistenceUnit
-				.map(unit -> unit.getPersistenceUnit())
-				.orElse(null);
-	}
-
-	public EntityManagerFactory createEntityManagerFactory(final Map<String,String> _properties){
-		return this.persistenceUnit
-				.map(unit -> unit.createEntityManagerFactory(_properties))
-				.orElse(null);
-	}
-	public EntityManagerFactory getEntityManagerFactory(){
-		return this.persistenceUnit
-				.map(unit -> unit.getEntityManagerFactory())
-				.orElse(null);
-	}
 
 	public <T> T getInstance(final Class<T> _class){
 		return (T)getInstance();
@@ -63,22 +38,17 @@ public enum PersistenceServiceFactory {
 				
 		return reply;
 	}
+	
+	public static final void init(){
 
-	public static void init(){
-		for(PersistenceServiceFactory persistenceFactory:PersistenceServiceFactory.values()){
-			persistenceFactory.persistenceUnit
-					.ifPresent(unit -> unit.init());
+		for(PersistenceUnit persistenceUnit:PersistenceUnit.values()){
+			persistenceUnit.init();
 		}
 	}
-	public static void close(){
-		for(PersistenceServiceFactory persistenceFactory:PersistenceServiceFactory.values()){
-			persistenceFactory.persistenceUnit
-					.ifPresent(unit -> unit.close());
+	public static final void close(){
+		
+		for(PersistenceUnit persistenceUnit:PersistenceUnit.values()){
+			persistenceUnit.close();
 		}
-	}
-	public static Optional<PersistenceServiceFactory> forImplementation(final JPAPersistenceDao _persistenceDao){
-		return Stream.of(PersistenceServiceFactory.values())
-				.filter(serviceFactory -> serviceFactory.implementation.equals(_persistenceDao.getClass()))
-				.findFirst();
 	}
 }
