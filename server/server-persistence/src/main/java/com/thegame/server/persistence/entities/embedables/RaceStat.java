@@ -1,4 +1,4 @@
-package com.thegame.server.persistence.entities;
+package com.thegame.server.persistence.entities.embedables;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class CharacterStat implements Serializable{
+public class RaceStat implements Serializable{
 	
-	@Column(name = "MAXSTAT")
-	private int max;
-	@Column(name = "CURRENTSTAT")
-	private int current;
+	@Column(name = "BASE")
+	private int base;
+	@Column(name = "INCREMENTPERLEVEL")
+	private float incrementPerLevel;
 }

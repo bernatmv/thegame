@@ -1,5 +1,6 @@
 package com.thegame.server.persistence.entities;
 
+import com.thegame.server.persistence.entities.ids.AreaExitId;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

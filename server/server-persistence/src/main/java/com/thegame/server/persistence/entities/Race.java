@@ -1,5 +1,6 @@
 package com.thegame.server.persistence.entities;
 
+import com.thegame.server.persistence.entities.embedables.RaceStat;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.AttributeOverride;

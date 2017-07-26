@@ -2,11 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="the-game" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>com.thegame.server.persistence.entities.Player</class>
+    <class>com.thegame.server.persistence.entities.User</class>
     <class>com.thegame.server.persistence.entities.Race</class>
+    <class>com.thegame.server.persistence.entities.Item</class>
     <class>com.thegame.server.persistence.entities.Area</class>
     <class>com.thegame.server.persistence.entities.AreaExit</class>
+    <class>com.thegame.server.persistence.entities.AreaItem</class>
     <class>com.thegame.server.persistence.entities.Character</class>
+    <class>com.thegame.server.persistence.entities.Player</class>
+    <class>com.thegame.server.persistence.entities.PlayerCharacter</class>
+    <class>com.thegame.server.persistence.entities.NonPlayerCharacter</class>
     <properties>
       <!-- Hibernate properties -->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

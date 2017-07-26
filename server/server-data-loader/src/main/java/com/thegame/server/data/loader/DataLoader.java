@@ -20,13 +20,13 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 import com.thegame.server.persistence.ResourceDao;
 import com.thegame.server.persistence.entities.AreaExit;
-import com.thegame.server.persistence.entities.AreaExitId;
 import com.thegame.server.persistence.entities.Item;
 import com.thegame.server.persistence.entities.Race;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.thegame.server.persistence.CharacterDao;
 import com.thegame.server.persistence.entities.NonPlayerCharacter;
+import com.thegame.server.persistence.entities.ids.AreaExitId;
 
 /**
  * @author afarre

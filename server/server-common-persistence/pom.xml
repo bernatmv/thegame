@@ -9,7 +9,7 @@
 	<groupId>com.thegame.server</groupId>
 	<artifactId>common-persistence</artifactId>
 	<packaging>jar</packaging>
-	<name>The Game Server Common Persistence</name>
+	<name>TheGame Server Common Persistence</name>
 
 	<dependencies>
 		<dependency>

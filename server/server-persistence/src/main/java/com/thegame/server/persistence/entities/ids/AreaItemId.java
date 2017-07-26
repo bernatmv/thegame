@@ -1,5 +1,7 @@
-package com.thegame.server.persistence.entities;
+package com.thegame.server.persistence.entities.ids;
 
+import com.thegame.server.persistence.entities.Area;
+import com.thegame.server.persistence.entities.Item;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
