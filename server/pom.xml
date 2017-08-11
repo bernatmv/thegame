@@ -14,8 +14,6 @@
 	<description>Experimental rpg multiplayer game</description>
 	
 	<modules>
-		<module>server-common</module>
-		<module>server-common-persistence</module>
 		<module>server-persistence</module>
 		<module>server-engine</module>
 		<module>server-data-loader</module>
@@ -23,6 +21,8 @@
 		<module>server-application</module>
 		<module>server-artifact</module>
 		<module>server-client-dummie</module>
+		<module>server-game-service</module>
+		<module>server-account-service</module>
 	</modules>
 	
 	<dependencies>
